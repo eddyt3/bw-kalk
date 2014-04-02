@@ -13,7 +13,6 @@ Attribute VB_Exposed = True
 Option Explicit
 Sub draws_delete()
     'alle Zeichnungen löschen
-    On Error Resume Next
     Worksheets("Verpacken").Unprotect "bw"
     Dim shpShape As Shape
         For Each shpShape In ActiveSheet.Shapes
@@ -25,7 +24,6 @@ End Sub
 Sub draw_all()
     'Alles zeichnen
     '20090820
-    On Error Resume Next
     Call draws_delete
     Call VE_erstellen
     Call VE_einschweissen
@@ -274,4 +272,5 @@ Sub VE_einschweissen()
             shpShape.Fill.ForeColor.RGB = RGB(0, 0, 0)
     End If
 End Sub
+
 

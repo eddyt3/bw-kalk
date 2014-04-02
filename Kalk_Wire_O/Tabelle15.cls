@@ -28,6 +28,7 @@ Sub draw_all()
     Call VE_erstellen
     Call VE_einschweissen
     Call Palettenlage_erstellen
+    Worksheets("Verpacken").Protect "bw"
 End Sub
 Sub Palettenlage_erstellen()
     'Zeichnen der optimalen Exemplarverteilung auf d. Palette
@@ -271,4 +272,5 @@ Sub VE_einschweissen()
             shpShape.Fill.ForeColor.RGB = RGB(0, 0, 0)
     End If
 End Sub
+
 

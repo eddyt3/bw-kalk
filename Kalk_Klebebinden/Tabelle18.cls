@@ -7,7 +7,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
@@ -18,7 +17,7 @@ Private Sub Worksheet_Activate()
     Call Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
-'    Call Kommentar
+    Call Kommentar
 '    Call lkw
 End Sub
 Private Sub ToggleButton1_Click()
@@ -70,6 +69,8 @@ Private Sub CheckBox4_Click()
         Call Worksheets("SVerpacken").draws_delete
         Call Worksheets("SVerpacken").VE_erstellen
     End If
+    MsgBox "Hinweis: Format A4 = 12 VE/Lage."
+    Call Kommentar
 End Sub
 Private Sub ComboBox1_DropButtonClick()
     'Palettenauswahl
@@ -89,6 +90,7 @@ Private Sub ComboBox2_Change()
     On Error Resume Next
     Call Verpackungseinheit
     Call Worksheets("SVerpacken").draw_all
+    Call Kommentar
 End Sub
 Private Sub ComboBox3_Change()
     'Palettendeckelauswahl
@@ -110,9 +112,11 @@ Private Sub ComboBox7_Change()
 End Sub
 Private Sub ComboBox8_Change()
     'Auswahl Kantenschutz
+    Call Kommentar
 End Sub
 Private Sub ComboBox9_Change()
     'Auswahl Umreifung
+    Call Kommentar
 End Sub
 Private Sub ComboBox13_Change()
     'Banderole zeichnen
@@ -143,6 +147,7 @@ Private Sub CommandButton1_Click()
     If Worksheets("Material").Range("C121") < 14 Then
         Worksheets("Verpacken").Range("D6").FormulaLocal = "=WENN(ODER(Material!C121=14;Material!C121=13;Material!C121=12);1;ABRUNDEN(SVerpacken!D8/(SVerpacken!D122*10);0))"
     End If
+    Call Kommentar
 End Sub
 Private Sub CommandButton2_Click()
     'Materialseite einblenden
@@ -217,6 +222,7 @@ Sub Verpackungseinheit()
     End If
     ActiveSheet.Range("D6").Select
     Worksheets("Verpacken").Protect "bw"
+    Call Kommentar
 End Sub
 Sub lkw()
     'Berechnung der benötigten Lkws
@@ -289,22 +295,17 @@ Sub Palettencheck()
         End With
     End If
     Cells(intRow, intCol).Select
+    Call Kommentar
 End Sub
 Sub Kommentar()
-    ' Kommentar Palettengewicht u. Exp. je volle Palette
+    'Anzeigen d. Palettendaten
+    '20140401
     On Error Resume Next
     Dim VPalette, VExemplare As String
-    Worksheets("Verpacken").Unprotect "bw"
+    'Worksheets("Verpacken").Unprotect "bw"
     VPalette = Worksheets("SVerpacken").Range("I39")
     VExemplare = Worksheets("SVerpacken").Range("I45")
-    Range("C32").ClearComments
-    Range("C32").AddComment
-    Range("C32").Comment.Visible = False
-    Range("C32").Comment.Shape.ConnectorFormat = 2
-    Range("C32").Comment.Text Text:="Gewicht Einzelpalette: " & VPalette & " kg" & vbLf _
-    & "==================" & vbLf & "Ex./volle Palette: " & VExemplare & " Ex."
-    Range("C32").Comment.Shape.TextFrame.AutoSize = True
+    Worksheets("Verpacken").Label2.Caption = "Gewicht volle Einzelpalette:" & Chr(10) & Chr(10) & VPalette & " kg"
 End Sub
-
 
 
