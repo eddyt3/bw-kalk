@@ -7,17 +7,16 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+'
+'Copyright by E.Dargel ed@dissenter.de
+'
 Private Sub ComboBox2_Change()
 'Bindeseite
     Run Worksheets("SKleben").kleben
 End Sub
-
-'
-'Copyright by E.Dargel ed@dissenter.de
-'
 Private Sub ComboBox3_DropButtonClick()
     '8seitiger Umschlag
-    If Worksheets("SEingabe").Range("L5") > "1" Then
+    If Worksheets("SEingabe").Range("L5") > 1 Then
         MsgBox ("Bitte das Falzen der Umschläge nicht vergessen.")
     End If
 End Sub

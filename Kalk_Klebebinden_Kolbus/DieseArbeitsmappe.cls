@@ -10,8 +10,16 @@ Attribute VB_Exposed = True
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
-
-Private Sub Workbook_BeforeClose(Cancel As Boolean)
+Private Sub Workbook_BeforePrint(Cancel As Boolean)
+    'Druckbereich festlegen
+    '14.01.2009
+    Dim Letzte As Long 'Letzte Zeile
+    Dim a As Integer
+    Letzte = Cells(Rows.Count, 1).End(xlUp).Row
+    If Worksheets("Eingabe").TextBox1.Visible = True Then
+        Letzte = Letzte + 10
+    End If
+    Worksheets("Eingabe").PageSetup.PrintArea = "A1:L" & Letzte
     'Tabellen formatieren u. Doku-Eigenschaften setzen
     '25.03.2014
     Application.ScreenUpdating = False
@@ -31,17 +39,5 @@ Private Sub Workbook_BeforeClose(Cancel As Boolean)
     Next wks
     Call Dokumenteigenschaften_Soll
     Application.ScreenUpdating = True
-
-End Sub
-Private Sub Workbook_BeforePrint(Cancel As Boolean)
-    'Druckbereich festlegen
-    '14.01.2009
-    Dim Letzte As Long 'Letzte Zeile
-    Dim a As Integer
-    Letzte = Cells(Rows.Count, 1).End(xlUp).Row
-    If Worksheets("Eingabe").TextBox1.Visible = True Then
-        Letzte = Letzte + 10
-    End If
-    Worksheets("Eingabe").PageSetup.PrintArea = "A1:L" & Letzte
 End Sub
 

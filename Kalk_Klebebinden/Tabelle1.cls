@@ -113,7 +113,7 @@ Sub ComboBox10_DropButtonClick()
 End Sub
 Private Sub ComboBox11_Change()
     '8seitiger Umschlag
-    If Worksheets("SEingabe").Range("L5") > "1" Then
+    If Worksheets("SEingabe").Range("L5") > 1 Then
         MsgBox ("Bitte das Falzen der Umschläge nicht vergessen." & vbCrLf & vbCrLf & "Automatisch voreingestellt" _
         & " bei 8seitigen Umschlag:" & vbCrLf & "2 x 3 Seitenbeschnitt" & vbCrLf & "2 x Kleben & Grundeinrichten (Binden)")
         Worksheets("3Seitenbeschnitt").Range("D6") = Worksheets("3Seitenbeschnitt").Range("D5")
