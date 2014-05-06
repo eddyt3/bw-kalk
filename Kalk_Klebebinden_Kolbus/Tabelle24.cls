@@ -97,14 +97,6 @@ Private Sub ComboBox1_DropButtonClick()
         End If
     Worksheets("Kleben").Protect "bw"
 End Sub
-Sub VNFormat()
-    '
-    'Berechnung Vor-, Nachsatzformat für Nutzenauswertung (Papierbestellung)
-    '
-    On Error Resume Next
-    VNFormatN = Worksheets("SKleben").Range("B52") & " cm x " & Worksheets("SKleben").Range("C52") & " cm"
-    VNFormatB = Worksheets("SKleben").Range("B53") & " cm x " & Worksheets("SKleben").Range("C53") & " cm"
-End Sub
 Private Sub TextBox1_Change()
     On Error Resume Next
     If Worksheets("SKleben").Range("C33") = 1 Then
@@ -127,6 +119,14 @@ Private Sub TextBox1_Change()
             End With
         Worksheets("Kleben").Protect "bw"
     End If
+End Sub
+Sub VNFormat()
+    '
+    'Berechnung Vor-, Nachsatzformat für Nutzenauswertung (Papierbestellung)
+    '
+    On Error Resume Next
+    VNFormatN = Worksheets("SKleben").Range("B52") & " cm x " & Worksheets("SKleben").Range("C52") & " cm"
+    VNFormatB = Worksheets("SKleben").Range("B53") & " cm x " & Worksheets("SKleben").Range("C53") & " cm"
 End Sub
 Sub Maschinendaten()
     'MinMax Format Prüfen

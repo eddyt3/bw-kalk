@@ -7,6 +7,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+
+
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
@@ -25,7 +27,7 @@ Private Sub ComboBox4_Change()
     'Run Worksheets("Falzen").Falzen
 End Sub
 Private Sub ComboBox5_DropButtonClick()
-    Call Worksheets("SZusammentragen").Zusammentragen
+    Run Worksheets("SZusammentragen").Zusammentragen
 End Sub
 Private Sub ComboBox9_Change()
 'Bogen B, Art
@@ -62,13 +64,11 @@ Private Sub CommandButton4_Click()
     Worksheets("Material").Activate
     Worksheets("Material").Range("C5").Select
 End Sub
-
-
 Private Sub Worksheet_Change(ByVal Target As Excel.Range)
     Application.ScreenUpdating = False
         On Error Resume Next
         Call Fehlermeldung
-        Call Worksheets("SZusammentragen").Zusammentragen
+        Run Worksheets("SZusammentragen").Zusammentragen
         'Run Worksheets("Falzen").Falzen
     Application.ScreenUpdating = True
 End Sub
@@ -269,4 +269,46 @@ Private Sub CheckBox10_Click()
         End If
     Application.ScreenUpdating = True
 End Sub
+Private Sub ComboBox13_Change()
+'Auswahl Leimart über Eingabeseite
+'20140422
+    On Error Resume Next
+    Run Worksheets("Binden").Leimart
+End Sub
+Private Sub ComboBox14_Change()
+'Auswahl Produktart (Broschüre, Buchblock, Ableimen)
+'20140424
+    'On Error Resume Next
+    Dim intArt As Integer
+    intArt = Worksheets("SBinden").Range("B34")
+    Select Case intArt
+    Case 1
+        'Broschüre
+        Worksheets("Kleben").Visible = False
+        CheckBox9.Value = False 'Kalk. Kleben deaktiviert
+        Worksheets("Eingabe").Range("G67") = "0"
+        CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
+        Worksheets("Eingabe").Range("G69") = "0"
+        Application.Run Worksheets("Binden").Produktart
+    Case 2
+        'Buchblock
+        Worksheets("Kleben").Visible = True
+        CheckBox9.Value = True 'Kalk. Kleben aktiviert
+        Worksheets("Eingabe").Range("G67") = "1"
+        CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
+        Worksheets("Eingabe").Range("G69") = "1"
+        Application.Run Worksheets("Binden").Produktart
+    Case 3
+        'Ableimen
+        Worksheets("Kleben").Visible = False
+        CheckBox9.Value = False 'Kalk. Kleben deaktiviert
+        Worksheets("Eingabe").Range("G67") = "0"
+        CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
+        Worksheets("Eingabe").Range("G69") = "0"
+        Application.Run Worksheets("Binden").Produktart
+    End Select
 
+End Sub
+Sub test()
+    Run Worksheets("Binden").Produktart
+End Sub

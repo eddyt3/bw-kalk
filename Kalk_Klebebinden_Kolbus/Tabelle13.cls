@@ -11,9 +11,9 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Private Sub ComboBox1_DropButtonClick()
-Call Worksheets("SZusammentragen").Zusammentragen
+    Run Worksheets("SZusammentragen").Zusammentragen
 End Sub
 
 Private Sub Worksheet_Activate()
-Call Worksheets("SZusammentragen").Zusammentragen
+    Run Worksheets("SZusammentragen").Zusammentragen
 End Sub

@@ -14,7 +14,7 @@ Private Sub Worksheet_Activate()
     On Error Resume Next
     Call produkt
     Call Kommentar
-    Call Worksheets("SVerpacken").draw_all
+    Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
     Call Kommentar
@@ -35,7 +35,7 @@ Private Sub CheckBox1_Click()
     'Paletten ja/nein
     On Error Resume Next
     Call Kommentar
-    Call Worksheets("SVerpacken").draw_all
+    Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub CheckBox4_Click()
     'Eingabe manuelle Lagen ja/nein
@@ -64,10 +64,10 @@ Private Sub CheckBox4_Click()
         End With
         Selection.Locked = True
         Worksheets("Verpacken").Protect "bw"
-        Call Worksheets("SVerpacken").VE_einschweissen
-        Call Worksheets("SVerpacken").Palettenlage_erstellen
-        Call Worksheets("SVerpacken").draws_delete
-        Call Worksheets("SVerpacken").VE_erstellen
+        Run Worksheets("SVerpacken").VE_einschweissen
+        Run Worksheets("SVerpacken").Palettenlage_erstellen
+        Run Worksheets("SVerpacken").draws_delete
+        Run Worksheets("SVerpacken").VE_erstellen
     End If
     MsgBox "Hinweis: Format A4 = 12 VE/Lage."
     Call Kommentar
@@ -83,13 +83,13 @@ Private Sub ComboBox1_DropButtonClick()
     End With
     Call Kommentar
     Call Palettencheck
-    Call Worksheets("SVerpacken").draw_all
+    Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub ComboBox2_Change()
     'Verpackungsart
     On Error Resume Next
     Call Verpackungseinheit
-    Call Worksheets("SVerpacken").draw_all
+    Run Worksheets("SVerpacken").draw_all
     Call Kommentar
 End Sub
 Private Sub ComboBox3_Change()
@@ -106,7 +106,7 @@ Private Sub ComboBox7_Change()
         Worksheets("Verpacken").Unprotect "bw"
         Worksheets("Verpacken").Range("D65").FormulaLocal = "=SVERWEIS(SVerpacken!B71;SVerpacken!A72:I75;9)"
         'MsgBox "Achtung, die Maschinengeschwindigkeit wurde zurückgesetzt!"
-        Call Worksheets("SVerpacken").draw_all
+        Run Worksheets("SVerpacken").draw_all
         Worksheets("Verpacken").Protect "bw"
     End If
 End Sub
@@ -121,24 +121,24 @@ End Sub
 Private Sub ComboBox13_Change()
     'Banderole zeichnen
     On Error Resume Next
-    Call Worksheets("SVerpacken").draw_all
+    Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub ComboBox14_Change()
     'Banderole zeichnen
     On Error Resume Next
-    Call Worksheets("SVerpacken").draw_all
+    Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub ComboBox16_Change()
     'VE Lage Einschweißen
     '20090820
     On Error Resume Next
-    Call Worksheets("SVerpacken").draw_all
+    Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub ComboBox17_Change()
     'VE Lage Einschweißen
     '20090820
     On Error Resume Next
-    Call Worksheets("SVerpacken").draw_all
+    Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub CommandButton1_Click()
     'Reset Ex./VE auf Standard
