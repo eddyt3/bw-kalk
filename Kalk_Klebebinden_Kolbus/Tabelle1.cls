@@ -27,7 +27,8 @@ Private Sub ComboBox4_Change()
     'Run Worksheets("Falzen").Falzen
 End Sub
 Private Sub ComboBox5_DropButtonClick()
-    Run Worksheets("SZusammentragen").Zusammentragen
+'Zusammentragen Autom./Hand
+    Run Worksheets("Zusammentragen").Zusammentragen
 End Sub
 Private Sub ComboBox9_Change()
 'Bogen B, Art
@@ -68,7 +69,7 @@ Private Sub Worksheet_Change(ByVal Target As Excel.Range)
     Application.ScreenUpdating = False
         On Error Resume Next
         Call Fehlermeldung
-        Run Worksheets("SZusammentragen").Zusammentragen
+        Run Worksheets("Zusammentragen").Zusammentragen
         'Run Worksheets("Falzen").Falzen
     Application.ScreenUpdating = True
 End Sub
@@ -264,10 +265,18 @@ Private Sub CheckBox10_Click()
     On Error Resume Next
     Application.ScreenUpdating = False
         If CheckBox10.Value = True Then
-            Worksheets("Eingabe").Range("G69") = "1"
-        Else: Worksheets("Eingabe").Range("G69") = "0"
+            Worksheets("Eingabe").Range("G71") = "1"
+        Else: Worksheets("Eingabe").Range("G71") = "0"
         End If
     Application.ScreenUpdating = True
+End Sub
+Private Sub CheckBox11_Click()
+'Auswahl Zusammentragen
+'20140516
+    If CheckBox11.Value = True Then
+        Worksheets("Eingabe").Range("G69") = "1"
+    Else: Worksheets("Eingabe").Range("G69") = "0"
+    End If
 End Sub
 Private Sub ComboBox13_Change()
 'Auswahl Leimart über Eingabeseite
@@ -288,24 +297,30 @@ Private Sub ComboBox14_Change()
         CheckBox9.Value = False 'Kalk. Kleben deaktiviert
         Worksheets("Eingabe").Range("G67") = "0"
         CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
-        Worksheets("Eingabe").Range("G69") = "0"
+        Worksheets("Eingabe").Range("G71") = "1"
         Application.Run Worksheets("Binden").Produktart
+        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
+        Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
     Case 2
         'Buchblock
         Worksheets("Kleben").Visible = True
         CheckBox9.Value = True 'Kalk. Kleben aktiviert
         Worksheets("Eingabe").Range("G67") = "1"
         CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
-        Worksheets("Eingabe").Range("G69") = "1"
+        Worksheets("Eingabe").Range("G71") = "1"
         Application.Run Worksheets("Binden").Produktart
+        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
+        Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
     Case 3
         'Ableimen
         Worksheets("Kleben").Visible = False
         CheckBox9.Value = False 'Kalk. Kleben deaktiviert
         Worksheets("Eingabe").Range("G67") = "0"
         CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
-        Worksheets("Eingabe").Range("G69") = "0"
+        Worksheets("Eingabe").Range("G71") = "0"
         Application.Run Worksheets("Binden").Produktart
+        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
+        Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     End Select
 
 End Sub
