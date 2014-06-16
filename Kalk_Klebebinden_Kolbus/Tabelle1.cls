@@ -13,7 +13,7 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Private Sub ComboBox2_Change()
-'Bindeseite
+    'Bindeseite
     Run Worksheets("SKleben").kleben
 End Sub
 Private Sub ComboBox3_DropButtonClick()
@@ -23,19 +23,19 @@ Private Sub ComboBox3_DropButtonClick()
     End If
 End Sub
 Private Sub ComboBox4_Change()
-'Bogen A, Art
+    'Bogen A, Art
     'Run Worksheets("Falzen").Falzen
 End Sub
 Private Sub ComboBox5_DropButtonClick()
-'Zusammentragen Autom./Hand
+    'Zusammentragen Autom./Hand
     Run Worksheets("Zusammentragen").Zusammentragen
 End Sub
 Private Sub ComboBox9_Change()
-'Bogen B, Art
+    'Bogen B, Art
     'Run Worksheets("Falzen").Falzen
 End Sub
 Private Sub ComboBox10_Change()
-'Bogen C, Art
+    'Bogen C, Art
     'Run Worksheets("Falzen").Falzen
 End Sub
 Private Sub ComboBox11_Change()
@@ -54,7 +54,7 @@ Private Sub CommandButton2_Click()
     Application.ScreenUpdating = True
 End Sub
 Private Sub CommandButton3_Click()
-'Eingabe Produktformat
+    'Eingabe Produktformat
     Run Worksheets("SEingabe").Formatinput
 End Sub
 
@@ -220,8 +220,8 @@ Attribute CheckBox6_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     On Error Resume Next
     Application.ScreenUpdating = False
         If CheckBox6.Value = True Then
-            Worksheets("Eingabe").Range("G71") = "1"
-        Else: Worksheets("Eingabe").Range("G71") = "0"
+            Worksheets("Eingabe").Range("G73") = "1"
+        Else: Worksheets("Eingabe").Range("G73") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -231,8 +231,8 @@ Attribute CheckBox7_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     On Error Resume Next
     Application.ScreenUpdating = False
         If CheckBox7.Value = True Then
-            Worksheets("Eingabe").Range("G75") = "1"
-        Else: Worksheets("Eingabe").Range("G75") = "0"
+            Worksheets("Eingabe").Range("G77") = "1"
+        Else: Worksheets("Eingabe").Range("G77") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -241,10 +241,10 @@ Sub CheckBox8_Click()
     On Error Resume Next
     Application.ScreenUpdating = False
         If CheckBox8.Value = True Then
-            Worksheets("Eingabe").Range("G73") = "1"
+            Worksheets("Eingabe").Range("G75") = "1"
             Worksheets("Bohren").Visible = True
         Else
-            Worksheets("Eingabe").Range("G73") = "0"
+            Worksheets("Eingabe").Range("G75") = "0"
             Worksheets("Bohren").Visible = False
         End If
     Application.ScreenUpdating = True
@@ -266,7 +266,10 @@ Private Sub CheckBox10_Click()
     Application.ScreenUpdating = False
         If CheckBox10.Value = True Then
             Worksheets("Eingabe").Range("G71") = "1"
-        Else: Worksheets("Eingabe").Range("G71") = "0"
+            Worksheets("Fadenheften").Visible = True
+        Else
+            Worksheets("Eingabe").Range("G71") = "0"
+            Worksheets("Fadenheften").Visible = False
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -296,11 +299,11 @@ Private Sub ComboBox14_Change()
         Worksheets("Kleben").Visible = False
         CheckBox9.Value = False 'Kalk. Kleben deaktiviert
         Worksheets("Eingabe").Range("G67") = "0"
-        CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
-        Worksheets("Eingabe").Range("G71") = "1"
+        CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
+        Worksheets("Eingabe").Range("G71") = "0"
         Application.Run Worksheets("Binden").Produktart
-        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
-        Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
+        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
+        Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     Case 2
         'Buchblock
         Worksheets("Kleben").Visible = True
@@ -308,6 +311,7 @@ Private Sub ComboBox14_Change()
         Worksheets("Eingabe").Range("G67") = "1"
         CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
         Worksheets("Eingabe").Range("G71") = "1"
+        Worksheets("Fadenheften").Visible = True
         Application.Run Worksheets("Binden").Produktart
         Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
         Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
@@ -318,8 +322,9 @@ Private Sub ComboBox14_Change()
         Worksheets("Eingabe").Range("G67") = "0"
         CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("Eingabe").Range("G71") = "0"
+        Worksheets("Fadenheften").Visible = False
         Application.Run Worksheets("Binden").Produktart
-        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
+        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     End Select
 

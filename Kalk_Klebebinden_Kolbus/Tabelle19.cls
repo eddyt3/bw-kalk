@@ -13,8 +13,7 @@ Attribute VB_Exposed = True
 Private Sub CheckBox1_Click()
     If CheckBox1.Value = True Then
         Worksheets("SFalzen").Range("N4") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bogen A in Bogen/Stunde eingeben:", "Eingabe", , Type:=1)
-        Else:
-        Worksheets("SFalzen").Range("N4").FormulaLocal = "=WENN(Falzen!A4<>5;SVERWEIS(B106/B104;Falzen!M4:O10;3);F7)"
+        Else: Worksheets("SFalzen").Range("N4").FormulaLocal = "=WENN(Falzen!A4<>5;SVERWEIS(B106/B104;Falzen!M4:O10;3);F7)"
     End If
 End Sub
 Private Sub CheckBox2_Click()
@@ -36,7 +35,7 @@ Private Sub CheckBox4_Click()
     End If
 End Sub
 Private Sub ComboBox5_DropButtonClick()
-'Falznutzen
+    'Falznutzen
     'Hilfskräfte
     Worksheets("Falzen").Range("D7").FormulaLocal = "=SVERWEIS(SFalzen!J4;SFalzen!G11:L13;6)"
     Worksheets("Falzen").Range("D16").FormulaLocal = "=SVERWEIS(SFalzen!J4;SFalzen!G11:L13;6)"
@@ -45,7 +44,7 @@ Private Sub ComboBox5_DropButtonClick()
     Worksheets("Falzen").Range("D17").FormulaLocal = "=SVERWEIS(SFalzen!J4;SFalzen!G11:L13;5)"
 End Sub
 Private Sub ComboBox6_DropButtonClick()
-'Falznutzen
+    'Falznutzen
     'Hilfskräfte
     Worksheets("Falzen").Range("D26").FormulaLocal = "=SVERWEIS(SFalzen!J5;SFalzen!G11:L13;6)"
     Worksheets("Falzen").Range("D35").FormulaLocal = "=SVERWEIS(SFalzen!J5;SFalzen!G11:L13;6)"
@@ -54,7 +53,7 @@ Private Sub ComboBox6_DropButtonClick()
     Worksheets("Falzen").Range("D36").FormulaLocal = "=SVERWEIS(SFalzen!J5;SFalzen!G11:L13;5)"
 End Sub
 Private Sub ComboBox7_DropButtonClick()
-'Falznutzen
+    'Falznutzen
     'Hilfskräfte
     Worksheets("Falzen").Range("D45").FormulaLocal = "=SVERWEIS(SFalzen!J6;SFalzen!G11:L13;6)"
     Worksheets("Falzen").Range("D54").FormulaLocal = "=SVERWEIS(SFalzen!J6;SFalzen!G11:L13;6)"
@@ -63,7 +62,7 @@ Private Sub ComboBox7_DropButtonClick()
     Worksheets("Falzen").Range("D55").FormulaLocal = "=SVERWEIS(SFalzen!J6;SFalzen!G11:L13;5)"
 End Sub
 Private Sub ComboBox8_DropButtonClick()
-'Falznutzen
+    'Falznutzen
     'Hilfskräfte
     Worksheets("Falzen").Range("D64").FormulaLocal = "=SVERWEIS(SFalzen!J7;SFalzen!G11:L13;6)"
     Worksheets("Falzen").Range("D73").FormulaLocal = "=SVERWEIS(SFalzen!J7;SFalzen!G11:L13;6)"
@@ -137,21 +136,21 @@ End Sub
 'End Sub
 Sub Falzbogen()
 'unused
-' Loeschen d. vorhandenen Eingaben u. Ausblendung, wenn d. Bg. nicht ausgewaehlt wurde
-'
-On Error Resume Next
-Worksheets("Falzen").Unprotect "bw"
-If Worksheets("Eingabe").Range("A17") < 1 Then
-    Worksheets("Falzen").Rows("23:41").Hidden = True
-    Else: Worksheets("Falzen").Rows("23:41").Hidden = False
-End If
-If Worksheets("Eingabe").Range("A26") < 1 Then
-    Worksheets("Falzen").Rows("42:60").Hidden = True
-    Else: Worksheets("Falzen").Rows("42:60").Hidden = False
-End If
-If Worksheets("Eingabe").Range("A35") < 1 Then
-    Worksheets("Falzen").Rows("61:79").Hidden = True
-    Else: Worksheets("Falzen").Rows("61:79").Hidden = False
-End If
-Worksheets("Falzen").Protect "bw"
+    ' Loeschen d. vorhandenen Eingaben u. Ausblendung, wenn d. Bg. nicht ausgewaehlt wurde
+    '
+    On Error Resume Next
+    Worksheets("Falzen").Unprotect "bw"
+    If Worksheets("Eingabe").Range("A17") < 1 Then
+        Worksheets("Falzen").Rows("23:41").Hidden = True
+        Else: Worksheets("Falzen").Rows("23:41").Hidden = False
+    End If
+    If Worksheets("Eingabe").Range("A26") < 1 Then
+        Worksheets("Falzen").Rows("42:60").Hidden = True
+        Else: Worksheets("Falzen").Rows("42:60").Hidden = False
+    End If
+    If Worksheets("Eingabe").Range("A35") < 1 Then
+        Worksheets("Falzen").Rows("61:79").Hidden = True
+        Else: Worksheets("Falzen").Rows("61:79").Hidden = False
+    End If
+    Worksheets("Falzen").Protect "bw"
 End Sub
