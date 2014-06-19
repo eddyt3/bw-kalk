@@ -28,7 +28,7 @@ Sub kleben()
     Application.ScreenUpdating = False
     If Worksheets("SEingabe").Range("B34") > 0 Then
         Worksheets("Kleben").Visible = True
-        Worksheets("Kleben").CheckBox2.Value = True
+        Worksheets("Kleben").CheckBox1.Value = True
         Else
         Worksheets("Kleben").Visible = False
         Worksheets("Kleben").CheckBox1.Value = False
