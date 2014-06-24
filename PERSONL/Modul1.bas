@@ -39,7 +39,7 @@ Sub KopfFusszeile_eintragen()
         .RightFooter = "&""Verdana""&06" & Format("&D", "dd.mm.yy") & "&T"
     End With
     Next wks
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Sub Autoformen_loeschen_Alle()
     Dim shpShape As Shape
@@ -48,7 +48,7 @@ Sub Autoformen_loeschen_Alle()
             shpShape.Delete
         End If
     Next shpShape
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Sub Autoformen_loeschen_Bereich()
     'Autoformen in einem bestimmten Bereich löschen
@@ -66,7 +66,7 @@ Sub Autoformen_loeschen_Bereich()
          End If
       End If
    Next
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Sub Anzahl_Markierte_Zellen()
     FRow = Range(Selection.Address).Row
@@ -76,7 +76,7 @@ Sub Anzahl_Markierte_Zellen()
     xRow = LRow - FRow + 1
     xColumn = LColumn - FColumn + 1
     xZellen = xRow * xColumn
-    Msgbox (xRow & " Zeilen und " & xColumn & " Spalten mit " & xZellen & " Zellen sind ausgewählt.")
+    MsgBox (xRow & " Zeilen und " & xColumn & " Spalten mit " & xZellen & " Zellen sind ausgewählt.")
     'Debug.Print FRow & "/" & LRow & "/" & FColumn & "/" & LColumn
     'Debug.Print xRow & "/" & xColumn & "/" & xZellen
 End Sub
@@ -102,7 +102,7 @@ Public Sub Zellen_Aufrunden_Ganzzahl()
         FRow = FRow + 1
         FColumn = Range(Selection.Address).Column
     Next
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Public Sub Topix_SollHaben2Minus_umwandeln()
     Dim rngC As Range
@@ -135,7 +135,7 @@ Public Sub Topix_SollHaben2Minus_umwandeln()
     Next
     'Selection.NumberFormat = "#.##0,00 ;[Red]-#.##0,00"
     Selection.NumberFormat = "0,00 ;[Red]-0,00"
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Public Sub Topix_Vorzeichen_umkehren()
 ' alle markierte Zellen negieren
@@ -161,7 +161,7 @@ Public Sub Topix_Vorzeichen_umkehren()
     'Selection.NumberFormat = "#.##0,00 ;[Red]-#.##0,00"
     Selection.NumberFormatLocal = "#.##0 ;[Rot]-#.##0"
     'Selection.NumberFormat = "0,00 ;[Red]-0,00"
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 
 Public Sub Punkt2Komma()
@@ -189,7 +189,7 @@ Public Sub Punkt2Komma()
         FColumn = Range(Selection.Address).Column
     Next
     ActiveSheet.Cells(FRow, FColumn).Select
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Public Sub Komma2Punkt()
     Dim rngC As Range
@@ -215,7 +215,7 @@ Public Sub Komma2Punkt()
         FColumn = Range(Selection.Address).Column
     Next
     ActiveSheet.Cells(FRow, FColumn).Select
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Public Sub Zellen_mit_0_leeren()
     Dim rngC As Range
@@ -237,7 +237,7 @@ Public Sub Zellen_mit_0_leeren()
         FColumn = Range(Selection.Address).Column
     Next
     ActiveSheet.Cells(FRow, FColumn).Select
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Sub Sheet_Nach_CSVDatei()
     'hierbei bleibt die Formatierung der Zellen so wie sie angezeigt wird.
@@ -253,7 +253,7 @@ Sub Sheet_Nach_CSVDatei()
     Dim rngColumn As Excel.Range
     Dim wksQuelle As Excel.Worksheet
     strDelimiter = ";" 'deutsches CSV-Format: ";", Englishes CSV-Format: ","
-    vntFileName = Application.GetSaveAsFilename("Test.csv", FileFilter:="CSV-File (*.csv),*.csv")
+    vntFileName = Application.GetSaveAsFilename("Test.csv", fileFilter:="CSV-File (*.csv),*.csv")
     If vntFileName = False Then Exit Sub
     Set wksQuelle = ActiveSheet  'Beispiel oder: = ActiveWorkbook.Worksheets("Tabelle1")
     lngFn = FreeFile
@@ -277,7 +277,7 @@ Sub Sheet_Nach_CSVDatei()
       Print #lngFn, strText
      Next
     Close lngFn
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Sub Wbk_save_all()
     'Alle Arbeitsmappen sichern
@@ -293,6 +293,15 @@ Sub Wbk_save_close_other()
     For Each wbkWorkbook In Application.Workbooks
         If wbkWorkbook.Name <> ThisWorkbook.Name Then
             wbkWorkbook.Close SaveChanges:=True
+        End If
+    Next wbkWorkbook
+End Sub
+Sub Wbk_close_other()
+    'Alle anderen Arbeitsmappen schließen
+    Dim wbkWorkbook As Workbook
+    For Each wbkWorkbook In Application.Workbooks
+        If wbkWorkbook.Name <> ThisWorkbook.Name Then
+            wbkWorkbook.Close SaveChanges:=False
         End If
     Next wbkWorkbook
 End Sub
@@ -326,9 +335,9 @@ Sub Inhalt_Cutten()
            End If
         Next rng
     Else
-        Msgbox ("Bitte nur Werte größer 0 eingeben!")
+        MsgBox ("Bitte nur Werte größer 0 eingeben!")
     End If
-    Msgbox (count & " Zellen waren länger als " & Anzahl & " Zeichen.")
+    MsgBox (count & " Zellen waren länger als " & Anzahl & " Zeichen.")
 End Sub
 Sub Zeichen_einfuegen()
     'Zahl in String umwandeln und ein bestimmtes Zeichen an bestimmter Stelle einfügen
@@ -344,11 +353,11 @@ Sub Zeichen_einfuegen()
         For b = FColumn To LColumn
             strOrg = CStr(ActiveSheet.Cells(FRow, FColumn))
             If leftPos > Len(strOrg) Or leftPos < 0 Then
-                Msgbox ("Achtung! Zeichenkette ist kürzer (" & Len(strOrg) & " Zeichen) als einzufügende Position (nach " & leftPos & " Zeichen).")
+                MsgBox ("Achtung! Zeichenkette ist kürzer (" & Len(strOrg) & " Zeichen) als einzufügende Position (nach " & leftPos & " Zeichen).")
                 Exit Sub
             End If
             If leftPos < 0 Then
-                Msgbox ("Achtung! Bitte nur Werte zwischen 0 und " & Len(strOrg) & " eingeben.")
+                MsgBox ("Achtung! Bitte nur Werte zwischen 0 und " & Len(strOrg) & " eingeben.")
                 Exit Sub
             End If
             'mit zeichen auffüllen
@@ -366,7 +375,7 @@ Sub Zeichen_einfuegen()
     '    NumAsString = CStr(Nummer)
     '    NumAsString = String(6 - Len(NumAsString), "0") & NumAsString
     '    Me!TXTlbImplantat = Mid(NumAsString, 1, 3) & "-" & Mid(NumAsString, 4, 6)
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Sub Blattschutz_loeschen()
     On Error Resume Next
@@ -396,7 +405,7 @@ Sub Blattschutz_loeschen()
     Next k
     Next j
     Next i
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Sub ShapesUmbenennen()
     Dim ws As Worksheet, i As Integer, NeuerName As String
@@ -447,7 +456,7 @@ Sub color_trend()
         toleranz = toleranz / 100
     End If
     If toleranz < 0.01 And toleranz > 1 Then
-        Msgbox "Bitte nur Werte zwischen 1 und 100 eingeben."
+        MsgBox "Bitte nur Werte zwischen 1 und 100 eingeben."
     End If
     For a = FRow To LRow
         For b = FColumn To LColumn
@@ -477,7 +486,7 @@ Sub color_trend()
         FRow = FRow + 1
         FColumn = Range(Selection.Address).Column
     Next
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 
 

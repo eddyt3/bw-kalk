@@ -11,7 +11,7 @@ ReDim intBlätter(0)
 intZähler = 0
 For intI = 1 To Worksheets.count
     If Sheets(intI).ProtectContents Then
-        Msgbox "Das Blatt " & Sheets(intI).Name & " ist geschützt." & Chr(10) & "Entfernen Sie bitte zuerst den Blattschutz.", vbOKOnly + vbInformation, "Blatt geschützt!"
+        MsgBox "Das Blatt " & Sheets(intI).Name & " ist geschützt." & Chr(10) & "Entfernen Sie bitte zuerst den Blattschutz.", vbOKOnly + vbInformation, "Blatt geschützt!"
         GoTo nächstesBlatt
     End If
     Set rngGefundeneZelle = Worksheets(intI).Cells.Find(strSuchbegriff, lookat:=xlPart, LookIn:=xlFormulas)
@@ -45,7 +45,7 @@ intLöschZähler = 0
 For intN = 0 To intZähler - 1
     Sheets(intBlätter(intN)).Select
     Range(strBereiche(intN)).Select
-    intAbfrage = Msgbox("Auf dem Blatt " & Sheets(intBlätter(intN)).Name & " wurde in der Zelle " & strBereiche(intN) & " eine Verknüpfung gefunden." & Chr(10) & "Die Formel lautet:" & Chr(10) & Chr(10) & ActiveCell.Formula & Chr(10) & Chr(10) & "Soll sie gelöscht werden?", vbYesNo + vbQuestion, "Verknüpfung gefunden")
+    intAbfrage = MsgBox("Auf dem Blatt " & Sheets(intBlätter(intN)).Name & " wurde in der Zelle " & strBereiche(intN) & " eine Verknüpfung gefunden." & Chr(10) & "Die Formel lautet:" & Chr(10) & Chr(10) & ActiveCell.Formula & Chr(10) & Chr(10) & "Soll sie gelöscht werden?", vbYesNo + vbQuestion, "Verknüpfung gefunden")
     If intAbfrage = vbYes Then
         Range(strBereiche(intN)).ClearContents
         intLöschZähler = intLöschZähler + 1
@@ -54,7 +54,7 @@ Next
 For Each objName In ActiveWorkbook.Names
     If InStr(1, objName.Value, strSuchbegriff) > 1 Then
         intZähler = intZähler + 1
-        intNamenAbfrage = Msgbox("In einem Namen besteht eine Verknüpfung." & Chr(10) & "Bezieht sich auf: " & objName.Value & Chr(10) & "Name: " & objName.Name, vbYesNo + vbQuestion, "Soll der Name gelöscht werden?")
+        intNamenAbfrage = MsgBox("In einem Namen besteht eine Verknüpfung." & Chr(10) & "Bezieht sich auf: " & objName.Value & Chr(10) & "Name: " & objName.Name, vbYesNo + vbQuestion, "Soll der Name gelöscht werden?")
         If intNamenAbfrage = vbYes Then
             objName.Delete
             intLöschZähler = intLöschZähler + 1
@@ -62,9 +62,9 @@ For Each objName In ActiveWorkbook.Names
     End If
 Next
 If intZähler = 0 Then
-    Msgbox "Keine Verknüpfung gefunden oder die Blätter sind geschützt.", vbOKOnly + vbInformation, "Fertig!"
+    MsgBox "Keine Verknüpfung gefunden oder die Blätter sind geschützt.", vbOKOnly + vbInformation, "Fertig!"
 Else
-    Msgbox "Es wurden insgesamt " & intZähler & " Verknüpfung(en) gefunden und davon " & intLöschZähler & " gelöscht.", vbOKOnly + vbInformation, "Fertig!"
+    MsgBox "Es wurden insgesamt " & intZähler & " Verknüpfung(en) gefunden und davon " & intLöschZähler & " gelöscht.", vbOKOnly + vbInformation, "Fertig!"
 End If
 End Sub
 Sub Verknuepfungen_aendern()
@@ -93,7 +93,7 @@ Sub Verknuepfungen_aendern()
             ThisWorkbook.ChangeLink varVLink(i), strPath & "\" & strRefFile, xlLinkTypeExcelLinks
         Next i
     End If
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Sub datum_splitten()
     'Datum in Tag, Monat und Jahr aufsplitten
@@ -101,7 +101,7 @@ Sub datum_splitten()
     Dim lZeile As Long
     Dim vDatArr As Variant
     Dim vSplArr() As Variant
-    result = Msgbox("Achtung, neben der Datumsspalte müssen 3 Leerspalten vorhanden sein!", 1, "Hinweis")
+    result = MsgBox("Achtung, neben der Datumsspalte müssen 3 Leerspalten vorhanden sein!", 1, "Hinweis")
     If result = 2 Then
         Exit Sub
     End If
@@ -113,7 +113,7 @@ Sub datum_splitten()
         vSplArr(lZeile, 2) = Year(vDatArr(lZeile, 1))
     Next lZeile
     Range("E1:G" & Range("D65536").End(xlUp).Row) = vSplArr
-    Msgbox "Fertig Master!"
+    MsgBox "Fertig Master!"
 End Sub
 Sub Loesche_DoppleteZeilen()
     'doppelte Zeilen löschen
@@ -143,7 +143,7 @@ Sub Loesche_DoppleteZeilen()
     tSumSec = Timer - t
     tMin = CInt(tSumSec / 60)
     tSec = tSumSec - Fix(tSumSec)
-    Msgbox "Fertig Master!" & vbLf & vbLf & counter & " dopplete Zeilen gelöscht." & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
+    MsgBox "Fertig Master!" & vbLf & vbLf & counter & " dopplete Zeilen gelöscht." & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
 End Sub
 Sub Loesche_Zeile_wenn_best_String()
     'Löscht alle Untergruppen Zeilen
@@ -166,7 +166,7 @@ Sub Loesche_Zeile_wenn_best_String()
     tSumSec = Timer - t
     tMin = CInt(tSumSec / 60)
     tSec = tSumSec - Fix(tSumSec)
-    Msgbox "Fertig Master!" & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
+    MsgBox "Fertig Master!" & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
 End Sub
 
 Sub Loesche_LeereZeilen()
@@ -190,7 +190,7 @@ Sub Loesche_LeereZeilen()
     tSumSec = Timer - t
     tMin = CInt(tSumSec / 60)
     tSec = tSumSec - Fix(tSumSec)
-    Msgbox "Fertig Master!" & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
+    MsgBox "Fertig Master!" & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
 End Sub
-
+Option Explicit
 
