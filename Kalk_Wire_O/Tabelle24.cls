@@ -11,11 +11,8 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Sub Standardwerte_3Seitenbeschnitt()
-'20111212
+'20140623
     Application.ScreenUpdating = False
-    Worksheets("S3Seitenbeschnitt").Select
     Worksheets("S3Seitenbeschnitt").Range("C4:C18").Copy Destination:=Worksheets("3Seitenbeschnitt").Range("K3")
-    Worksheets("3Seitenbeschnitt").Select
-    Worksheets("3Seitenbeschnitt").Range("D3").Select
     Application.ScreenUpdating = True
 End Sub

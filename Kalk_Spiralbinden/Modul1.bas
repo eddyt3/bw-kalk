@@ -13,34 +13,6 @@ Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X
         'MsgBox "Tabellenwerte X1 und X2 dürfen nicht übereinstimmen", vbCritical, "Achtung"
     End If
 End Function
-Sub Schlaufe()
-Attribute Schlaufe.VB_Description = "Makro am 27.07.2005 von Enrico Dargel aufgezeichnet"
-Attribute Schlaufe.VB_ProcData.VB_Invoke_Func = " \r14"
-    '
-    ' Schlaufenpruefung
-    '
-    On Error Resume Next
-    Dim Teilung As String
-    Dim Schlaufe As String
-    Teilung = Range("Steuerung!B37")
-    Schlaufe = Range("Steuerung!B38")
-    Range("Material_Binden!D104").FormulaLocal = "=SVERWEIS(Eingabe!C22;Material_Binden!A105:B117;2;FALSCH)"
-    If Range("Material_Binden!D104") = 0 Then
-        MsgBox ("Die Schlaufengroeße " & Schlaufe & " ist nicht moeglich." & vbCrLf & vbCrLf & "Das entsprechende Werkzeug fehlt!")
-        FSchlaufe = "Hinweis: Die Schlaufengröße " & Schlaufe & " kann nicht verarbeitet werden!"
-        Else
-            If Range("Material_Binden!D104") = 1 Then
-            FSchlaufe = ""
-                If Range("Eingabe!E22") = 0 Then
-                    MsgBox ("Fuer die Teilung " & Teilung & " gibt es keine Schlaufe " & Schlaufe & " !" _
-                     & vbCrLf & vbCrLf & "Bitte waehlen Sie eine andere Teilung oder Schlaufengroeße.")
-                    FTeilung = "Hinweis: Die gewaehlte Schlaufengröße oder Teilung ist falsch!"
-                Else
-                    FTeilung = ""
-                End If
-            End If
-    End If
-End Sub
 Sub Bogenformat_Pappe() 'CommandButton1
     'ok 7.5.08
     'Bogenformat d. alternativen Pappe
@@ -71,27 +43,27 @@ Sub Bogenformat_Folie() 'CommandButton5
     'ok 7.5.08
     'Bogenformat d. Folie
     '
-        If Worksheets("Steuerung").Range("D49").Value = 1 Or Worksheets("Steuerung").Range("D49").Value = 3 Then
-            If Worksheets("Steuerung").Range("D70").Value = 1 Then
-                Dim strBgLa, strBgLb As String 'Bogen Länge a, b
-                    Do
-                    strBgLa = InputBox("Bitte Bogenlänge in cm eingeben:")
-                    Worksheets("SBinden").Range("C20") = strBgLa
-                    strBgLb = InputBox("Bitte Bogenbreite in cm eingeben:")
-                    Worksheets("SBinden").Range("D20") = strBgLb
-                    If Worksheets("SBinden").Range("E20") = 0 Then
-                        Answer = MsgBox("Ist Ihre Eingabe richtig?" & vbLf & vbLf & strBgLb & " cm x " & strBgLa & " cm", vbYesNo + 256 + vbQuestion, "Nachfrage")
-                        Worksheets("SBinden").Range("G20") = "(" & strBgLb & " x " & strBgLa & "cm)"
-                        Else
-                        MsgBox ("Achtung! Bitte nur Ganze Zahlen eingeben!")
-                        Worksheets("SBinden").Range("G20") = "Formatfehler!"
-                    End If
-                    Loop Until Answer = 6
-                    Worksheets("Eingabe").CommandButton5.Visible = True
-            End If
-        Else: Worksheets("Eingabe").CommandButton5.Visible = False
+    If Worksheets("Steuerung").Range("D49").Value = 1 Or Worksheets("Steuerung").Range("D49").Value = 3 Then
+        If Worksheets("Steuerung").Range("D70").Value = 1 Then
+            Dim strBgLa, strBgLb As String 'Bogen Länge a, b
+                Do
+                strBgLa = InputBox("Bitte Bogenlänge in cm eingeben:")
+                Worksheets("SBinden").Range("C20") = strBgLa
+                strBgLb = InputBox("Bitte Bogenbreite in cm eingeben:")
+                Worksheets("SBinden").Range("D20") = strBgLb
+                If Worksheets("SBinden").Range("E20") = 0 Then
+                    Answer = MsgBox("Ist Ihre Eingabe richtig?" & vbLf & vbLf & strBgLb & " cm x " & strBgLa & " cm", vbYesNo + 256 + vbQuestion, "Nachfrage")
+                    Worksheets("SBinden").Range("G20") = "(" & strBgLb & " x " & strBgLa & "cm)"
+                    Else
+                    MsgBox ("Achtung! Bitte nur Ganze Zahlen eingeben!")
+                    Worksheets("SBinden").Range("G20") = "Formatfehler!"
+                End If
+                Loop Until Answer = 6
+                Worksheets("Eingabe").CommandButton5.Visible = True
         End If
-        Call NutzenCheck_Folie
+    Else: Worksheets("Eingabe").CommandButton5.Visible = False
+    End If
+    Call NutzenCheck_Folie
 End Sub
 Sub Rueckpappe()
     'Rückpappenvarianten
@@ -134,7 +106,7 @@ Sub Rueckpappe()
     End If
 End Sub
 Sub Alternativfolie()
-    ' ok 7.5.08
+    'Alternativfolie
     'On Error Resume Next
     Dim auswahl As Integer
     
@@ -175,7 +147,6 @@ Sub Alternativfolie()
     End If
 End Sub
 Sub Mindestmenge_Folie()
-    '
     'Prüfung der Mindestmenge f. Einkauf
     '
     Dim intGewichtA, intGewichtB, intGewichtC, intGewichtMin As Integer
@@ -191,30 +162,12 @@ Sub Mindestmenge_Folie()
         End If
     End If
 End Sub
-Sub Bindemaschine()
-    ' ok 6.5.08
-    ' Maschinenpruefung
-    ' Alle Schlaufen >1" koennen nur auf CLS verarbeitet werden
-    '
-    On Error Resume Next
-    Dim Schlaufe As String
-    
-    Schlaufe = Range("Steuerung!B38")
-    If Range("Eingabe!C22") > 11 And Range("SBinden!B4") < 4 Then
-            MsgBox ("Achtung! " & vbCrLf & vbCrLf & "Die Schlaufe " & Schlaufe & _
-            " kann nur auf der CLS verarbeitet werden." & vbCrLf & vbCrLf & _
-            "Bitte beim Binden richtige Maschine auswählen.")
-    End If
-End Sub
 Sub Produkt()
-    '
     ' Anzeigen d. Produktangaben bei "Verpacken"
     '
     On Error Resume Next
     Dim format, Gewicht, Dicke As String
-    
     Worksheets("Verpacken").Unprotect "bw"
-    
         format = Worksheets("Eingabe").CommandButton2.Caption
         Dicke = Range("Eingabe!C32")
         Gewicht = Range("Eingabe!C34")
@@ -223,7 +176,6 @@ Sub Produkt()
     Worksheets("Verpacken").Protect "bw"
 End Sub
 Sub NutzenCheck_Folie()
-    ' ok 7.5.08
     ' Überprüfung der Nutzenanzahl
     '
     If Worksheets("Steuerung").Range("D49").Value = 1 Or Worksheets("Steuerung").Range("D49").Value = 3 Then

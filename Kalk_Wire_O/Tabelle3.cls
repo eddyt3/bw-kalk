@@ -75,7 +75,7 @@ Sub Zusammentragen()
         Worksheets("Zusammentragen").Range("D14") = intAnzahlBgVors
         Worksheets("Zusammentragen").Range("D15") = intAnzahlVors
     End If
-    Run Worksheets("Binden").Inline750
+    Run Worksheets("Binden").Inline
     Application.ScreenUpdating = True
 End Sub
 Sub Formatfehler()

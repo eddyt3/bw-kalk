@@ -118,7 +118,7 @@ Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Ve
 If Worksheets("Kleben").CheckBox1.Value = True And Worksheets("SKleben").Range("C33") = 1 Then
     Worksheets("Kleben").Unprotect "bw"
     Dim shpShape As Shape
-        For Each shpShape In ActiveSheet.Shapes
+        For Each shpShape In Worksheets("Kleben").Shapes
             If shpShape.Type = msoAutoShape Then
                 shpShape.Delete
             End If
@@ -187,7 +187,7 @@ If Worksheets("Kleben").CheckBox1.Value = True And Worksheets("SKleben").Range("
     End If
     'Auswahl aller Shapes im Bereich u. Gruppierung
     '   Set rngBereich = Range("H14:L27")
-    '   For Each shpBogen In ActiveSheet.Shapes
+    '   For Each shpBogen In Worksheets("Kleben").Shapes
     '      If shpBogen.Top > rngBereich.Top And shpBogen.Height < rngBereich.Height Then
     '         If shpBogen.Left > rngBereich.Left And shpBogen.Width < rngBereich.Width Then
     '            shpBogen.Group

@@ -83,33 +83,34 @@ Sub Leimart()
 End Sub
 Sub Produktart()
 ' Broschüre, Buchblock, Ableimen
-' 20140423
+' 20140623
+    Worksheets("Binden").Unprotect "bw"
     Dim intArt As Integer
     intArt = Worksheets("SBinden").Range("B34")
     Select Case intArt
     Case 1
         'Broschüre
-        'Hotmelt (Standardleim), mit Seitenleim, ohne Fälzel, ohne Vorsatz, mit Fadenheften
-        Worksheets("Binden").ComboBox5.ListIndex = 1 'Hotmelt auswählen
+        'PUR (Standardleim), mit Seitenleim, ohne Fälzel, ohne Vorsatz, ohne Fadenheften
+        Worksheets("Binden").ComboBox5.ListIndex = 0 'PUR auswählen
         Worksheets("Binden").Range("D3") = ComboBox5.ListIndex + 1
-        Worksheets("Binden").ComboBox1.ListFillRange = "Material!D14:D18" 'Leimsorte
+        Worksheets("Binden").ComboBox1.ListFillRange = "Material!D9:D13" 'PUR Leimsorte
         Worksheets("Binden").ComboBox1.LinkedCell = "Material!B8"
-        Worksheets("Binden").ComboBox1.ListIndex = 0 'Topmelt
+        Worksheets("Binden").ComboBox1.ListIndex = 0 'PURmelt QR3315
         Worksheets("Binden").ComboBox2.ListFillRange = "Material!D26:D36" 'Seitenleim
         Worksheets("Binden").ComboBox2.ListIndex = 0 'mit Seitenleim
         Worksheets("Binden").ComboBox2.LinkedCell = "Material!B25"
         Worksheets("Binden").ComboBox3.ListFillRange = "Material!D52:D55" 'Rückenstoff
         Worksheets("Binden").ComboBox3.LinkedCell = "Material!B51"
         Worksheets("Binden").ComboBox3.ListIndex = 0 'Rücken ohne Stoff
-        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D43" 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'kein Reiniger
         Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
-        Worksheets("Binden").ComboBox4.ListIndex = 0 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListIndex = 5 'kein Reiniger
     Case 2
         'Buchblock
         'Hotmelt (Standardleim), mit Seitenleim, mit Fälzel, mit Vorsatz und Fadenheften
         Worksheets("Binden").ComboBox5.ListIndex = 1 'Hotmelt auswählen
         Worksheets("Binden").Range("D3") = ComboBox5.ListIndex + 1
-        Worksheets("Binden").ComboBox1.ListFillRange = "Material!D14:D18" 'Leimsorte
+        Worksheets("Binden").ComboBox1.ListFillRange = "Material!D14:D18" 'Hotmelt Leimsorte
         Worksheets("Binden").ComboBox1.LinkedCell = "Material!B8"
         Worksheets("Binden").ComboBox1.ListIndex = 0 'Topmelt
         Worksheets("Binden").ComboBox2.ListFillRange = "Material!D26:D36" 'Seitenleim
@@ -140,6 +141,7 @@ Sub Produktart()
         Worksheets("Binden").ComboBox4.ListIndex = 0 'kein Reiniger
     End Select
     Call Stoff
+    Worksheets("Binden").Protect "bw"
 End Sub
 Sub Stoff()
 ' Auswahl Scharnierstoff, Fälzel, Krepp

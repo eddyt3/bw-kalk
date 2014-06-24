@@ -13,5 +13,5 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Private Sub Worksheet_Activate()
-Call Farbe_zuweisen
+    Call Farbe_zuweisen
 End Sub

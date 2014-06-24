@@ -35,7 +35,6 @@ Private Sub CheckBox4_Click()
     Else: Worksheets("SFalzen").Range("N7").FormulaLocal = "=WENN(Falzen!A62<>5;SVERWEIS(E106/E104;Falzen!M4:O10;3);F7)"
     End If
 End Sub
-
 Private Sub ComboBox5_DropButtonClick()
 'Falznutzen
     'Hilfskräfte

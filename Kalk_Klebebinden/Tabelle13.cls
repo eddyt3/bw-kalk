@@ -23,8 +23,7 @@ Sub Zusammentragen()
     Dim a, intM, BgAnzahl, AnzahlBgZus, AnzahlBgVors, AnzahlVors, intMa, intStatMa, intBg As Integer
     intStatMa = Worksheets("SZusammentragen").Range("E11") 'max Stationen
     intBg = Worksheets("SZusammentragen").Range("B8") 'Bogensumme
-    intMa = Worksheets("Zusammentragen").Range("A4") 'Maschine
-    
+    intMa = Worksheets("SZusammentragen").Range("C11") 'Maschine
     If intBg > intStatMa Then
         a = 1
         Do

@@ -18,6 +18,7 @@ Private Sub Worksheet_Deactivate()
     Run Worksheets("SSchneiden").Schneidbogen
     Run Worksheets("SSchneiden").SchneidenAnzeige
     Run Worksheets("Zusammentragen").Formatfehler
+    Run Worksheets("Binden").Spirale
     Application.ScreenUpdating = True
 End Sub
 Private Sub Worksheet_Activate()
@@ -26,6 +27,7 @@ Private Sub Worksheet_Activate()
     Run Worksheets("SSchneiden").Schneidbogen
     Run Worksheets("SSchneiden").SchneidenAnzeige
     Run Worksheets("Zusammentragen").Formatfehler
+    Run Worksheets("Binden").Spirale
     Application.ScreenUpdating = True
 End Sub
 

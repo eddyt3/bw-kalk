@@ -86,11 +86,9 @@ Sub Formatfehler()
     Fh = Worksheets("SZusammentragen").Range("O11") 'Fehlerwert Höhe
     Worksheets("Eingabe").Unprotect "bw"
     Worksheets("Eingabe").Range("J60") = ""
-    Worksheets("Eingabe").Cells(60, 10).Interior.ColorIndex = xlNone
     If Z > 0 Then
         If F = 1 Or F = 2 Then
             Worksheets("Eingabe").Range("J60") = "Fehler"
-            Worksheets("Eingabe").Cells(60, 10).Interior.ColorIndex = 3
             If Fb = 1 Then
                MsgBox "Fehler Zusammentragen!" & vbCrLf & vbCrLf & "Die Produktbreite über-/unterschreitet das Maschinenmaß."
             End If

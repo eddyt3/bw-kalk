@@ -1,9 +1,8 @@
 Attribute VB_Name = "Modul2"
 Option Explicit
 Sub Speichern()
-    '
     'Dateiname vorschlagen u. speichern
-    '
+    '19.06.2014
     Dim knd, format, F, D, i, RB, RP, auflage As String
     Dim strVerzeichnis, strDateiname As String
     knd = Worksheets("Steuerung").Range("B181")
@@ -14,16 +13,16 @@ Sub Speichern()
     RB = Worksheets("Steuerung").Range("E184")
     RP = Worksheets("Steuerung").Range("E185")
     auflage = Worksheets("Steuerung").Range("B184")
-    strVerzeichnis = "\\nasbw0\daten\Kalkulationen\"
+    strVerzeichnis = "\\192.168.200.101\daten\Kalkulationen\"
     strDateiname = Application.GetSaveAsFilename(InitialFileName:=strVerzeichnis & _
     knd & "_" & format & "_" & " F" & F & " I" & i & " RB" & RB & " RP" & RP & "_" & _
     auflage & ".xls", FileFilter:="Microsoft Excel-Arbeitsmappe (*.xls), *.xls")
-      Select Case strDateiname
-        Case False
-          Exit Sub
-        Case Else
-          ThisWorkbook.SaveAs Filename:=strDateiname
-      End Select
+    Select Case strDateiname
+      Case False
+        Exit Sub
+      Case Else
+        ThisWorkbook.SaveAs Filename:=strDateiname
+    End Select
 End Sub
 Sub Druck_Form()
     On Error Resume Next

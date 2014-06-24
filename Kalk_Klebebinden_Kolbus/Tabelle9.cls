@@ -15,7 +15,7 @@ Sub draws_delete()
     'alle Zeichnungen löschen
     Worksheets("Verpacken").Unprotect "bw"
     Dim shpShape As Shape
-        For Each shpShape In ActiveSheet.Shapes
+        For Each shpShape In Worksheets("Verpacken").Shapes
             If shpShape.Type = msoAutoShape Then
                 shpShape.Delete
             End If
@@ -126,7 +126,7 @@ Sub Palettenlage_erstellen()
         End If
         'Auswahl aller Shapes im Bereich u. Gruppierung
         '   Set rngBereich = Range("H14:L27")
-        '   For Each shpBogen In ActiveSheet.Shapes
+        '   For Each shpBogen In Worksheets("Verpacken").Shapes
         '      If shpBogen.Top > rngBereich.Top And shpBogen.Height < rngBereich.Height Then
         '         If shpBogen.Left > rngBereich.Left And shpBogen.Width < rngBereich.Width Then
         '            shpBogen.Group
@@ -185,7 +185,7 @@ Sub VE_erstellen()
     End If
     'Auswahl aller Shapes im Bereich u. Gruppierung
     '   Set rngBereich = Range("H14:L27")
-    '   For Each shpBogen In ActiveSheet.Shapes
+    '   For Each shpBogen In Worksheets("Verpacken").Shapes
     '      If shpBogen.Top > rngBereich.Top And shpBogen.Height < rngBereich.Height Then
     '         If shpBogen.Left > rngBereich.Left And shpBogen.Width < rngBereich.Width Then
     '            shpBogen.Group

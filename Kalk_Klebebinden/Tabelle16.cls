@@ -11,12 +11,10 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Sub Standardwerte_Schneiden()
+    '20140623
     Application.ScreenUpdating = False
-    Worksheets("SSchneiden").Select
     Worksheets("SSchneiden").Range("G5:G10").Copy Destination:=Worksheets("Schneiden").Range("N3")
     Worksheets("SSchneiden").Range("F4").Copy Destination:=Worksheets("Schneiden").Range("M2")
-    Worksheets("Schneiden").Select
-    Worksheets("Schneiden").Range("D3").Select
     Application.ScreenUpdating = True
 End Sub
 Sub Schneidbogen()

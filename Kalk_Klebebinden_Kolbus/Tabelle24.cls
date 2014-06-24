@@ -88,7 +88,7 @@ Private Sub ComboBox1_DropButtonClick()
             Worksheets("Kleben").Range("D10:G10") = "0"
             TextBox1.Visible = False
             CheckBox3.Visible = False
-            For Each shpShape In ActiveSheet.Shapes
+            For Each shpShape In Worksheets("Kleben").Shapes
                 If shpShape.Type = msoAutoShape Then
                     Worksheets("Kleben").Unprotect "bw"
                     shpShape.Delete

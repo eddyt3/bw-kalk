@@ -57,7 +57,6 @@ Attribute Farbpalette_ausgeben.VB_ProcData.VB_Invoke_Func = " \n14"
         Next bytIndex
     Next bytColumn
 End Sub
-
 Sub Farbe_entfernen()
 Attribute Farbe_entfernen.VB_ProcData.VB_Invoke_Func = " \n14"
     ActiveSheet.Range("A1:H25").Interior.ColorIndex = xlColorIndexNone

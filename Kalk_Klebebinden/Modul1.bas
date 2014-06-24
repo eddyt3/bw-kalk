@@ -2,7 +2,7 @@ Attribute VB_Name = "Modul1"
 'all rights by E.Dargel ed@dissenter.de
 Public FNutzen, FFormat, FDicke As String 'Fehlervariabeln
 Public FBindenS, FBindenB, FBindenG As String 'Fehlervariabeln Binden
-Private Function Aufrunden(Zahl) As Long
+Public Function Aufrunden(Zahl) As Long
     If IsNumeric(Zahl) Then
         If Zahl - Int(Zahl) < 0.5 Then
             Aufrunden = Int(Zahl)
@@ -11,7 +11,7 @@ Private Function Aufrunden(Zahl) As Long
         End If
     End If
 End Function
-Private Function Abrunden(Zahl) As Long
+Public Function Abrunden(Zahl) As Long
     If IsNumeric(Zahl) Then
         If Zahl - Int(Zahl) < 0.5 Then
             Abrunden = Int(Zahl)
@@ -20,7 +20,7 @@ Private Function Abrunden(Zahl) As Long
         End If
     End If
 End Function
-Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X0 As Double) As Variant
+Public Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X0 As Double) As Variant
     Dim Y0 As Double
     If X1 <> X2 Then
         Y0 = (Y2 - Y1) / (X2 - X1) * (X0 - X1) + Y1

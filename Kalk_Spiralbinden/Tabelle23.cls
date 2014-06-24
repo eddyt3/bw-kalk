@@ -11,11 +11,8 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Sub Standardwerte_Stanzen()
-'20111209
+    '20140623
     Application.ScreenUpdating = False
-    Worksheets("SStanzen").Select
     Worksheets("SStanzen").Range("B4:G9").Copy Destination:=Worksheets("Stanzen").Range("K5")
-    Worksheets("Stanzen").Select
-    Worksheets("Stanzen").Range("D6").Select
     Application.ScreenUpdating = True
 End Sub

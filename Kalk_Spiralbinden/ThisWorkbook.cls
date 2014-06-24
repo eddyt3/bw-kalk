@@ -16,9 +16,6 @@ Private Sub Workbook_BeforePrint(Cancel As Boolean)
     Dim Letzte As Long 'Letzte Zeile
     Dim a As Integer
     Letzte = Cells(Rows.Count, 1).End(xlUp).Row
-    If Worksheets("Eingabe").TextBox1.Visible = True Then
-        Letzte = Letzte + 10
-    End If
     Worksheets("Eingabe").PageSetup.PrintArea = "A1:L" & Letzte
     'Tabellen formatieren u. Doku-Eigenschaften setzen
     '25.03.2014

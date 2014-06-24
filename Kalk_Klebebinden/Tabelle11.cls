@@ -10,9 +10,6 @@ Attribute VB_Exposed = True
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
-Private Sub Worksheet_Activate()
-
-End Sub
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Leimart PUR
@@ -75,7 +72,7 @@ On Error Resume Next
         Worksheets("Steuerung").Range("C35") = "0"
     End If
 End Sub
-Private Sub ComboBox3_DropButtonClick()
+Sub ComboBox3_DropButtonClick()
 ' Auswahl Scharnierstoff od. Faelzel
 On Error Resume Next
 With ComboBox3

@@ -81,14 +81,15 @@ Private Sub ComboBox1_DropButtonClick()
     If Worksheets("Steuerung").Range("I3") = "1" Then 'Buchblock
         Worksheets("Kleben").Visible = True
         CheckBox7.Value = True 'Kalk. Kleben aktiviert
-        Worksheets("Eingabe").Range("G66") = "1"
-        CheckBox8.Value = True 'Kalk. Fadenheften aktiviert
         Worksheets("Eingabe").Range("G68") = "1"
-        Else: Worksheets("Kleben").Visible = False
+        CheckBox8.Value = True 'Kalk. Fadenheften aktiviert
+        Worksheets("Eingabe").Range("G70") = "1"
+    Else
+        Worksheets("Kleben").Visible = False
         CheckBox7.Value = False 'Kalk. Kleben deaktiviert
-        Worksheets("Eingabe").Range("G66") = "0"
-        CheckBox8.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("Eingabe").Range("G68") = "0"
+        CheckBox8.Value = False 'Kalk. Fadenheften deaktiviert
+        Worksheets("Eingabe").Range("G70") = "0"
     End If
 End Sub
 Sub ComboBox7_DropButtonClick()

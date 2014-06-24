@@ -2,30 +2,31 @@ Attribute VB_Name = "Modul2"
 Option Explicit
 Sub Speichern()
 Attribute Speichern.VB_ProcData.VB_Invoke_Func = " \n14"
-Dim knd, format, BgA, BgB, BgC, BgD, auflage As String
-Dim strVerzeichnis, strDateiname As String
-knd = Worksheets("Steuerung").Range("B46")
-format = Worksheets("Steuerung").Range("B47")
-BgA = Worksheets("Steuerung").Range("B48")
-BgB = Worksheets("Steuerung").Range("B49")
-BgC = Worksheets("Steuerung").Range("B50")
-BgD = Worksheets("Steuerung").Range("B51")
-auflage = Worksheets("Steuerung").Range("B52")
-strVerzeichnis = "\\serverneu\daten\Kalkulationen\"
-strDateiname = Application.GetSaveAsFilename(InitialFileName:=strVerzeichnis & _
-knd & "_" & format & "_" & "BgA" & BgA & "B" & BgB & "C" & BgC & "D" & BgD & "_" & _
-auflage & ".xls", FileFilter:="Microsoft Excel-Arbeitsmappe (*.xls), *.xls")
-  Select Case strDateiname
-    Case False
-      Exit Sub
-    Case Else
-      ThisWorkbook.SaveAs Filename:=strDateiname
-  End Select
+    '19.06.2014
+    Dim knd, format, BgA, BgB, BgC, BgD, auflage As String
+    Dim strVerzeichnis, strDateiname As String
+    knd = Worksheets("Steuerung").Range("B46")
+    format = Worksheets("Steuerung").Range("B47")
+    BgA = Worksheets("Steuerung").Range("B48")
+    BgB = Worksheets("Steuerung").Range("B49")
+    BgC = Worksheets("Steuerung").Range("B50")
+    BgD = Worksheets("Steuerung").Range("B51")
+    auflage = Worksheets("Steuerung").Range("B52")
+    strVerzeichnis = "\\192.168.200.101\daten\Kalkulationen\"
+    strDateiname = Application.GetSaveAsFilename(InitialFileName:=strVerzeichnis & _
+    knd & "_" & format & "_" & "BgA" & BgA & "B" & BgB & "C" & BgC & "D" & BgD & "_" & _
+    auflage & ".xls", FileFilter:="Microsoft Excel-Arbeitsmappe (*.xls), *.xls")
+    Select Case strDateiname
+      Case False
+        Exit Sub
+      Case Else
+        ThisWorkbook.SaveAs Filename:=strDateiname
+    End Select
 End Sub
 Sub Druck_Form()
 Attribute Druck_Form.VB_ProcData.VB_Invoke_Func = " \n14"
-On Error Resume Next
-UFDrucken.Show
+    On Error Resume Next
+    UFDrucken.Show
 End Sub
 Sub version()
     ' Versionsnummer um 1 erhöhen
@@ -37,8 +38,8 @@ Sub version()
     Worksheets("Steuerung").Range("A178") = Date & "/" & Time
 End Sub
 Sub checkdate()
-'Datum d. Fehlerprüfung
-'14.01.2009
+    'Datum d. Fehlerprüfung
+    '14.01.2009
     Worksheets("Steuerung").Range("B179") = Now
 End Sub
 Sub Farbpalette_ausgeben()
@@ -56,7 +57,6 @@ Attribute Farbpalette_ausgeben.VB_ProcData.VB_Invoke_Func = " \n14"
         Next bytIndex
     Next bytColumn
 End Sub
-
 Sub Farbe_entfernen()
 Attribute Farbe_entfernen.VB_ProcData.VB_Invoke_Func = " \n14"
     ActiveSheet.Range("A1:H25").Interior.ColorIndex = xlColorIndexNone

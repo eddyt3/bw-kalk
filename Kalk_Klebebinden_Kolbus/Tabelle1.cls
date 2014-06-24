@@ -57,7 +57,6 @@ Private Sub CommandButton3_Click()
     'Eingabe Produktformat
     Run Worksheets("SEingabe").Formatinput
 End Sub
-
 Private Sub CommandButton4_Click()
     'Materialseite einblenden
     On Error Resume Next
@@ -301,7 +300,6 @@ Private Sub ComboBox14_Change()
         Worksheets("Eingabe").Range("G67") = "0"
         CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("Eingabe").Range("G71") = "0"
-        Application.Run Worksheets("Binden").Produktart
         Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     Case 2
@@ -312,7 +310,6 @@ Private Sub ComboBox14_Change()
         CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
         Worksheets("Eingabe").Range("G71") = "1"
         Worksheets("Fadenheften").Visible = True
-        Application.Run Worksheets("Binden").Produktart
         Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
         Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
     Case 3
@@ -323,11 +320,10 @@ Private Sub ComboBox14_Change()
         CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("Eingabe").Range("G71") = "0"
         Worksheets("Fadenheften").Visible = False
-        Application.Run Worksheets("Binden").Produktart
         Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     End Select
-
+    Application.Run Worksheets("Binden").Produktart
 End Sub
 Sub test()
     Run Worksheets("Binden").Produktart

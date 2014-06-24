@@ -8,16 +8,12 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Sub Standertwerte_Sammelheften()
+    '20140623
     Application.ScreenUpdating = False
-    Worksheets("SSammelheften").Select
     Worksheets("SSammelheften").Range("I2:I21").Copy Destination:=Worksheets("Sammelheften").Range("K3")
-    Worksheets("Sammelheften").Select
-    Worksheets("Sammelheften").Range("D4").Select
     Application.ScreenUpdating = True
 End Sub
-
 Sub Zusammentragen()
-'
 'Ermittlung der Stationen und der Anzahl Vorsammeln
 Dim a, BgAnzahl, AnzahlBgZus, AnzahlBgVors, AnzahlVors, intStatMa, intBg As Integer
 Dim intSeitenMax, intSeitenBgMin, intSeitenBgMax As Integer
