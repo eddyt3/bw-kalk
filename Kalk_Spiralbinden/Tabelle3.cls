@@ -84,7 +84,6 @@ Sub Formatfehler()
     F = Worksheets("SZusammentragen").Range("P11") 'Fehlerwert
     Fb = Worksheets("SZusammentragen").Range("N11") 'Fehlerwert Breite
     Fh = Worksheets("SZusammentragen").Range("O11") 'Fehlerwert Höhe
-    Worksheets("Eingabe").Unprotect "bw"
     Worksheets("Eingabe").Range("J60") = ""
     If Z > 0 Then
         If F = 1 Or F = 2 Then
@@ -100,5 +99,4 @@ Sub Formatfehler()
             MsgBox "Fehler Zusammentragen!" & vbCrLf & vbCrLf & "Die Produktbreite und -höhe über-/unterschreiten die Maschinenmaße."
         End If
     End If
-    Worksheets("Eingabe").Protect "bw"
 End Sub

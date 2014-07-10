@@ -22,11 +22,6 @@ Attribute Speichern.VB_ProcData.VB_Invoke_Func = " \n14"
           ThisWorkbook.SaveAs Filename:=strDateiname
       End Select
 End Sub
-Sub Druck_Form()
-Attribute Druck_Form.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
-    UFDrucken.Show
-End Sub
 Sub version()
     ' Versionsnummer um 1 erhöhen
     '04.01.2013
@@ -66,7 +61,6 @@ Attribute Farbe_zuweisen.VB_ProcData.VB_Invoke_Func = " \n14"
     Dim bytColorIndex As Byte
     Dim a, b As Integer
     Dim Auftrag, Kunde As String
-    Worksheets("Plantafel").Unprotect "bw"
     Auftrag = Worksheets("Steuerung").Range("C181")
     Kunde = Worksheets("Steuerung").Range("B181")
     bytColorIndex = ActiveSheet.Range("J1")

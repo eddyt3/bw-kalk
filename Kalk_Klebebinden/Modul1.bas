@@ -101,15 +101,12 @@ Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Anzeigen d. Produktangaben
     ' Makro von Enrico Dargel
     '
-    On Error Resume Next
     Dim format, Gewicht, Dicke As String
-        Worksheets("Verpacken").Unprotect "bw"
         format = Worksheets("Eingabe").CommandButton3.Caption
         Dicke = Range("Eingabe!C44")
         Gewicht = Range("Eingabe!C45")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
         & vbLf & vbLf & "Stärke: " & vbLf & Dicke & " mm" & vbLf & vbLf & "Gewicht: " & vbLf & Gewicht & " g"
-        Worksheets("Verpacken").Protect "bw"
 End Sub
 Sub Evaluierung_Binden() 'in Arbeit
 Attribute Evaluierung_Binden.VB_ProcData.VB_Invoke_Func = " \n14"

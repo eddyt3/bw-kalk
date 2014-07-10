@@ -22,9 +22,7 @@ Sub Schneidbogen()
     ' Loeschen d. vorhandenen Eingaben wenn d. Bg. nicht ausgewaehlt wurde
     '
     '20130218
-    On Error Resume Next
     Application.ScreenUpdating = False
-    Worksheets("Schneiden").Unprotect "bw"
     If Worksheets("Steuerung").Range("D49") = 2 Or Worksheets("Steuerung").Range("D49") = 4 Then
         Worksheets("Schneiden").Range("D3") = "0"
         Else
@@ -58,7 +56,6 @@ Sub Schneidbogen()
         Worksheets("Schneiden").Range("D31") = "0"
         Worksheets("Schneiden").Range("D38") = "0"
      End If
-    Worksheets("Schneiden").Protect "bw"
     Application.ScreenUpdating = True
 End Sub
 Sub SchneidenAnzeige()

@@ -81,18 +81,14 @@ With ComboBox3
 End With
 If Worksheets("Steuerung").Range("C30") = "0" Then
     If Worksheets("Steuerung").Range("C31") = "1" Then
-        Worksheets("Binden").Unprotect "bw"
         Worksheets("Binden").Rows("19:26").Hidden = False
         Worksheets("Binden").Rows("27").Hidden = True
         Else
-        Worksheets("Binden").Unprotect "bw"
         Worksheets("Binden").Range("D27:G27") = ""
         Worksheets("Binden").Rows("19:26").Hidden = True
         Worksheets("Binden").Rows("27").Hidden = False
     End If
 Else
-    Worksheets("Binden").Unprotect "bw"
     Worksheets("Binden").Rows("19:26").Hidden = True
 End If
-Worksheets("Binden").Protect "bw"
 End Sub

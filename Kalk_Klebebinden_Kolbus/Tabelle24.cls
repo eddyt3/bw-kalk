@@ -27,7 +27,6 @@ Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Auswahl Vor-, Nachsatzkleben
     On Error Resume Next
-    Worksheets("Kleben").Unprotect "bw"
         If CheckBox1.Value = True Then
             Worksheets("SKleben").Range("I2") = "1"
             Worksheets("Kleben").Rows("4:36").Hidden = False
@@ -48,13 +47,10 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             CheckBox3.Visible = False
         End If
         Run Worksheets("SKleben").KlebenAnzeige
-    Worksheets("Kleben").Protect "bw"
 End Sub
 Sub CheckBox2_Click()
 Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Auswahl Bogen ankleben
-    On Error Resume Next
-    Worksheets("Kleben").Unprotect "bw"
         If CheckBox2.Value = True Then
             Worksheets("SKleben").Range("I3") = "1"
             Worksheets("Kleben").Rows("39:50").Hidden = False
@@ -63,7 +59,6 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Kleben").Rows("39:50").Hidden = True
         End If
         Run Worksheets("SKleben").KlebenAnzeige
-    Worksheets("Kleben").Protect "bw"
 End Sub
 Private Sub CheckBox3_Click()
     On Error Resume Next
@@ -71,8 +66,6 @@ Private Sub CheckBox3_Click()
 End Sub
 Private Sub ComboBox1_DropButtonClick()
     'Papierberechnung je nach Auswahl
-    On Error Resume Next
-    Worksheets("Kleben").Unprotect "bw"
     Dim shpShape As Shape
         If Worksheets("SKleben").Range("C33") = "1" Then 'Bubi eingekauft
             Worksheets("Kleben").Rows("4:5").Hidden = False
@@ -90,17 +83,14 @@ Private Sub ComboBox1_DropButtonClick()
             CheckBox3.Visible = False
             For Each shpShape In Worksheets("Kleben").Shapes
                 If shpShape.Type = msoAutoShape Then
-                    Worksheets("Kleben").Unprotect "bw"
                     shpShape.Delete
                 End If
             Next shpShape
         End If
-    Worksheets("Kleben").Protect "bw"
 End Sub
 Private Sub TextBox1_Change()
     On Error Resume Next
     If Worksheets("SKleben").Range("C33") = 1 Then
-        Worksheets("Kleben").Unprotect "bw"
             With TextBox1
                 .Visible = True
                 .Top = 58
@@ -117,7 +107,6 @@ Private Sub TextBox1_Change()
                 & "Mit Zuschlag: " & VNFormatB & vbCrLf & vbCrLf & "Netto..........: " & VNFormatN
                 '.Locked = True
             End With
-        Worksheets("Kleben").Protect "bw"
     End If
 End Sub
 Sub VNFormat()

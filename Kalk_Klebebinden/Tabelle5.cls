@@ -109,7 +109,6 @@ End If
 End Sub
 Sub Bogen_erstellen_netto()
 'Originalnutzenverteilung
-On Error Resume Next
 Dim intHline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien u. Z‰hlervar.
 Dim intBgH, intBgW, intBgHoffset, intBgVoffset As Integer 'Bogenmaﬂe u. Offsets
 Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Versatzsumme
@@ -118,7 +117,6 @@ Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Ve
 '    Worksheets("Kleben").Shapes(intIndex).Delete
 'End If
 If Worksheets("Kleben").CheckBox1.Value = True And Worksheets("SKleben").Range("C33") = 1 Then
-    Worksheets("Kleben").Unprotect "bw"
     Dim shpShape As Shape
         For Each shpShape In ActiveSheet.Shapes
             If shpShape.Type = msoAutoShape Then
@@ -196,7 +194,6 @@ If Worksheets("Kleben").CheckBox1.Value = True And Worksheets("SKleben").Range("
     '         End If
     '      End If
     '   Next
-    Worksheets("Kleben").Protect "bw"
     Else
 End If
 End Sub

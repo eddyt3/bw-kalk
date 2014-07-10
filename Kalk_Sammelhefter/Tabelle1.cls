@@ -35,7 +35,6 @@ Attribute Fehlermeldung.VB_ProcData.VB_Invoke_Func = " \n14"
 If FNutzen Like "" And FFormat Like "" And FSeitenanz Like "" And FSeitenBgMin Like "" And FSeitenBgMax Like "" And FBgUMax Like "" Then
     Worksheets("Eingabe").TextBox1.Visible = False
     Else
-    Worksheets("Eingabe").Unprotect "bw"
     With Worksheets("Eingabe").TextBox1
         .Visible = True
         .Font = "Verdana"
@@ -52,7 +51,6 @@ If FNutzen Like "" And FFormat Like "" And FSeitenanz Like "" And FSeitenBgMin L
         '.Locked = True
     End With
 End If
-Worksheets("Eingabe").Protect "bw"
 End Sub
 Private Sub CommandButton1_Click()
     Application.ScreenUpdating = False

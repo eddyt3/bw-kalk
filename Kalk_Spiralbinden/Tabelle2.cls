@@ -14,8 +14,6 @@ Sub Schneidbogen()
 '
 ' Loeschen d. vorhandenen Eingaben wenn d. Bg. nicht ausgewaehlt wurde
 '
-On Error Resume Next
-Worksheets("Schneiden").Unprotect "bw"
 If Worksheets("SSchneiden").Range("B103") < 1 Then
     Worksheets("Schneiden").Range("D3") = "0"
     Else
@@ -50,7 +48,6 @@ If Worksheets("SSchneiden").Range("F111").Value < 1 Then
     Else
     Worksheets("Schneiden").Range("D3").FormulaLocal = "=SVERWEIS(SSchneiden!B104;SSchneiden!I13:K30;3)"
  End If
-Worksheets("Schneiden").Protect "bw"
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
 On Error Resume Next

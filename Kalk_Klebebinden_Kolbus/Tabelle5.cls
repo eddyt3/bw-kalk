@@ -116,7 +116,6 @@ Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Ve
 '    Worksheets("Kleben").Shapes(intIndex).Delete
 'End If
 If Worksheets("Kleben").CheckBox1.Value = True And Worksheets("SKleben").Range("C33") = 1 Then
-    Worksheets("Kleben").Unprotect "bw"
     Dim shpShape As Shape
         For Each shpShape In Worksheets("Kleben").Shapes
             If shpShape.Type = msoAutoShape Then
@@ -194,7 +193,6 @@ If Worksheets("Kleben").CheckBox1.Value = True And Worksheets("SKleben").Range("
     '         End If
     '      End If
     '   Next
-    Worksheets("Kleben").Protect "bw"
     Else
 End If
 End Sub

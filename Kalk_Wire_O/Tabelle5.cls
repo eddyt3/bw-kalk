@@ -50,7 +50,6 @@ Sub Inline()
     intBindeL = Worksheets("SBinden").Range("C122").Value
     sngBlock = Worksheets("SBinden").Range("D122").Value
     Application.ScreenUpdating = False
-    Worksheets("Eingabe").Unprotect "bw"
     If intMaschine = 1 Then 'Inlinefertigung
         If intVorsammeln = 0 Then
             'Zusammentr., Stanzen, 3Seitenbesch. deaktivieren
@@ -92,6 +91,5 @@ Sub Inline()
         Worksheets("Binden").Range("D8").Value = 1
     Else: Worksheets("Binden").Range("D8").Value = 0
     End If
-    Worksheets("Eingabe").Protect "bw"
     Application.ScreenUpdating = True
 End Sub

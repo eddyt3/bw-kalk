@@ -13,7 +13,6 @@ Attribute VB_Exposed = True
 Option Explicit
 Sub draws_delete()
     'alle Zeichnungen löschen
-    Worksheets("Verpacken").Unprotect "bw"
     Dim shpShape As Shape
         For Each shpShape In ActiveSheet.Shapes
             If shpShape.Type = msoAutoShape Then
@@ -28,7 +27,6 @@ Sub draw_all()
     Call VE_erstellen
     Call VE_einschweissen
     Call Palettenlage_erstellen
-    Worksheets("Verpacken").Protect "bw"
 End Sub
 Sub Palettenlage_erstellen()
     'Zeichnen der optimalen Exemplarverteilung auf d. Palette
@@ -146,7 +144,6 @@ Sub VE_erstellen()
     'If Worksheets("Verpacken").Shapes(intIndex).Type = msoShapeRectangle Then
     '    Worksheets("Verpacken").Shapes(intIndex).Delete
     'End If
-    Worksheets("Verpacken").Unprotect "bw"
     intVEB = Worksheets("SVerpacken").Range("Q46")
     intVEH = Worksheets("SVerpacken").Range("Q47")
     intVEHoffset = Worksheets("SVerpacken").Range("Q49")
@@ -204,7 +201,6 @@ Sub VE_einschweissen()
     'If Worksheets("Verpacken").Shapes(intIndex).Type = msoShapeRectangle Then
     '    Worksheets("Verpacken").Shapes(intIndex).Delete
     'End If
-    Worksheets("Verpacken").Unprotect "bw"
     If Worksheets("SVerpacken").Range("B71") > 1 Then
         If Worksheets("SVerpacken").Range("B61") = 1 Then
             'Hoch

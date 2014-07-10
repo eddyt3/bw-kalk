@@ -200,7 +200,6 @@ If FFormat Like "" And FSchlaufe Like "" And FSchlaufeS Like "" And FTeilung Lik
 FSchaftMax Like "" And FStanzen Like "" Then
     TextBox1.Visible = False
     Else
-    Worksheets("Eingabe").Unprotect "bw"
     With TextBox1
         .Visible = True
         .Font = "Verdana"
@@ -217,6 +216,5 @@ FSchaftMax Like "" And FStanzen Like "" Then
         '.Locked = True
     End With
 End If
-Worksheets("Eingabe").Protect "bw"
 End Sub
 

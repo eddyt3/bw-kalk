@@ -28,8 +28,8 @@ Sub Zusammentragen()
     If intBg > intStatMa Then
         a = 1
         Do
-        BgAnzahl = intBg / a
-        a = a + 1
+            BgAnzahl = intBg / a
+            a = a + 1
         Loop Until BgAnzahl <= intStatMa
         If BgAnzahl - Int(BgAnzahl) > 0 Then
             intAnzahlBgVors = Int(BgAnzahl) + 1
@@ -42,7 +42,7 @@ Sub Zusammentragen()
         Worksheets("Zusammentragen").Range("D3") = intAnzahlBgZus
         Worksheets("Zusammentragen").Range("D14") = intAnzahlBgVors
         Worksheets("Zusammentragen").Range("D15") = intAnzahlVors
-        Else
+    Else
         intAnzahlBgZus = intBg
         intAnzahlBgVors = 0
         intAnzahlVors = 0

@@ -21,8 +21,6 @@ Sub Schneidbogen()
 '
 ' Loeschen d. vorhandenen Eingaben wenn d. Bg. nicht ausgewaehlt wurde
 '
-On Error Resume Next
-Worksheets("Schneiden").Unprotect "bw"
 If Worksheets("SSchneiden").Range("B103") < 1 Then
     Worksheets("Schneiden").Range("D3") = "0"
     Else
@@ -49,7 +47,6 @@ If Worksheets("SSchneiden").Range("F111") < 1 Then
     Worksheets("Schneiden").Range("D17") = "0"
     Worksheets("Schneiden").Range("D24") = "0"
  End If
-Worksheets("Schneiden").Protect "bw"
 End Sub
 Sub SchneidenAnzeige()
 'Anzeige d. zu schneidenden Bogen auf der Eingabeseite

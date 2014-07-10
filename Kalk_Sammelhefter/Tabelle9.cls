@@ -34,9 +34,7 @@ Sub Formatinput()
     If Worksheets("SEingabe").Range("C18") = 0 Then
         Answer = MsgBox("Ist Ihre Eingabe richtig?" & vbLf & vbLf & sngPL & " cm x " & sngPB & " cm", vbYesNo + 256 + vbQuestion, "Nachfrage")
         Worksheets("Eingabe").CommandButton2.Caption = sngPL & " x " & sngPB & "cm"
-        Worksheets("Produktionsdaten").Unprotect "bw"
         Worksheets("Produktionsdaten").Range("C7") = sngPL & " x " & sngPB & "cm"
-        Worksheets("Produktionsdaten").Protect "bw"
         FFormat = ""
         Else
         MsgBox ("Achtung! Bitte nur Zahlen eingeben!")

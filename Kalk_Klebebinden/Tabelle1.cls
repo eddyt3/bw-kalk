@@ -54,7 +54,6 @@ Attribute Fehlermeldung.VB_ProcData.VB_Invoke_Func = " \n14"
         And FBindenS Like "" And FBindenB Like "" And FBindenG Like "" Then
         TextBox1.Visible = False
         Else
-        Worksheets("Eingabe").Unprotect "bw"
         With TextBox1
             .Visible = True
             .Font = "Verdana"
@@ -71,7 +70,6 @@ Attribute Fehlermeldung.VB_ProcData.VB_Invoke_Func = " \n14"
             '.Locked = True
         End With
     End If
-Worksheets("Eingabe").Protect "bw"
 End Sub
 Private Sub ComboBox1_DropButtonClick()
     'Auswahl Broschure od. Buchblock
@@ -81,15 +79,15 @@ Private Sub ComboBox1_DropButtonClick()
     If Worksheets("Steuerung").Range("I3") = "1" Then 'Buchblock
         Worksheets("Kleben").Visible = True
         CheckBox7.Value = True 'Kalk. Kleben aktiviert
-        Worksheets("Eingabe").Range("G68") = "1"
+        Worksheets("Eingabe").Range("G69") = "1"
         CheckBox8.Value = True 'Kalk. Fadenheften aktiviert
-        Worksheets("Eingabe").Range("G70") = "1"
+        Worksheets("Eingabe").Range("G71") = "1"
     Else
         Worksheets("Kleben").Visible = False
         CheckBox7.Value = False 'Kalk. Kleben deaktiviert
-        Worksheets("Eingabe").Range("G68") = "0"
+        Worksheets("Eingabe").Range("G69") = "0"
         CheckBox8.Value = False 'Kalk. Fadenheften deaktiviert
-        Worksheets("Eingabe").Range("G70") = "0"
+        Worksheets("Eingabe").Range("G71") = "0"
     End If
 End Sub
 Sub ComboBox7_DropButtonClick()
@@ -128,11 +126,11 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Bogen B
         If CheckBox1.Value = True Then
-            Worksheets("Eingabe").Range("A17") = "1"
+            Worksheets("Eingabe").Range("A18") = "1"
             Worksheets("Schneiden").CheckBox2.Value = True
             Worksheets("Schneiden").CheckBox2.Visible = True
         Else
-            Worksheets("Eingabe").Range("A17") = "0"
+            Worksheets("Eingabe").Range("A18") = "0"
             Worksheets("Schneiden").CheckBox2.Value = False
             Worksheets("Schneiden").CheckBox2.Visible = False
             Worksheets("SFalzen").Range("I5") = 6
@@ -150,11 +148,11 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Bogen C
         If CheckBox2.Value = True Then
-            Worksheets("Eingabe").Range("A26") = "1"
+            Worksheets("Eingabe").Range("A27") = "1"
             Worksheets("Schneiden").CheckBox3.Value = True
             Worksheets("Schneiden").CheckBox3.Visible = True
         Else
-            Worksheets("Eingabe").Range("A26") = "0"
+            Worksheets("Eingabe").Range("A27") = "0"
             Worksheets("Schneiden").CheckBox3.Value = False
             Worksheets("Schneiden").CheckBox3.Visible = False
             Worksheets("SFalzen").Range("I6") = 6
@@ -172,11 +170,11 @@ Attribute CheckBox3_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Bogen D
         If CheckBox3.Value = True Then
-            Worksheets("Eingabe").Range("A35") = "1"
+            Worksheets("Eingabe").Range("A36") = "1"
             Worksheets("Schneiden").CheckBox4.Value = True
             Worksheets("Schneiden").CheckBox4.Visible = True
         Else
-            Worksheets("Eingabe").Range("A35") = "0"
+            Worksheets("Eingabe").Range("A36") = "0"
             Worksheets("Schneiden").CheckBox4.Value = False
             Worksheets("Schneiden").CheckBox4.Visible = False
             Worksheets("SFalzen").Range("I7") = 6
@@ -194,7 +192,7 @@ Attribute CheckBox4_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Schneiden
         If CheckBox4.Value = True Then
-            Worksheets("Eingabe").Range("G60") = "1"
+            Worksheets("Eingabe").Range("G61") = "1"
             Worksheets("Schneiden").CheckBox1.Value = True
             Worksheets("Schneiden").CheckBox1.Visible = True
             If Worksheets("Eingabe").CheckBox5.Value = True Then
@@ -210,7 +208,7 @@ Attribute CheckBox4_Click.VB_ProcData.VB_Invoke_Func = " \n14"
                 Worksheets("Schneiden").CheckBox4.Visible = True
             End If
         Else
-            Worksheets("Eingabe").Range("G60") = "0"
+            Worksheets("Eingabe").Range("G61") = "0"
             Worksheets("Schneiden").CheckBox1.Value = False
             Worksheets("Schneiden").CheckBox1.Visible = False
             Worksheets("Schneiden").CheckBox2.Value = False
@@ -230,8 +228,8 @@ Attribute CheckBox5_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Zusammentragen
         If CheckBox5.Value = True Then
-            Worksheets("Eingabe").Range("G62") = "1"
-        Else: Worksheets("Eingabe").Range("G62") = "0"
+            Worksheets("Eingabe").Range("G63") = "1"
+        Else: Worksheets("Eingabe").Range("G63") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -241,8 +239,8 @@ Attribute CheckBox6_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Falzen
         If CheckBox6.Value = True Then
-            Worksheets("Eingabe").Range("G64") = "1"
-        Else: Worksheets("Eingabe").Range("G64") = "0"
+            Worksheets("Eingabe").Range("G65") = "1"
+        Else: Worksheets("Eingabe").Range("G65") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -252,8 +250,8 @@ Attribute CheckBox7_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Kleben
         If CheckBox7.Value = True Then
-            Worksheets("Eingabe").Range("G68") = "1"
-        Else: Worksheets("Eingabe").Range("G68") = "0"
+            Worksheets("Eingabe").Range("G69") = "1"
+        Else: Worksheets("Eingabe").Range("G69") = "0"
         End If
     Run Worksheets("SKleben").kleben
     Application.ScreenUpdating = True
@@ -264,8 +262,8 @@ Attribute CheckBox8_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Fadenheften
         If CheckBox8.Value = True Then
-            Worksheets("Eingabe").Range("G70") = "1"
-        Else: Worksheets("Eingabe").Range("G70") = "0"
+            Worksheets("Eingabe").Range("G71") = "1"
+        Else: Worksheets("Eingabe").Range("G71") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -275,8 +273,8 @@ Attribute CheckBox9_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Binden
         If CheckBox9.Value = True Then
-            Worksheets("Eingabe").Range("G72") = "1"
-        Else: Worksheets("Eingabe").Range("G72") = "0"
+            Worksheets("Eingabe").Range("G73") = "1"
+        Else: Worksheets("Eingabe").Range("G73") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -286,8 +284,8 @@ Attribute CheckBox10_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl 3Seitenbeschnitt
         If CheckBox10.Value = True Then
-            Worksheets("Eingabe").Range("G74") = "1"
-        Else: Worksheets("Eingabe").Range("G74") = "0"
+            Worksheets("Eingabe").Range("G75") = "1"
+        Else: Worksheets("Eingabe").Range("G75") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -297,8 +295,8 @@ Attribute CheckBox11_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
     ' Auswahl Verpacken
         If CheckBox11.Value = True Then
-            Worksheets("Eingabe").Range("G78") = "1"
-        Else: Worksheets("Eingabe").Range("G78") = "0"
+            Worksheets("Eingabe").Range("G79") = "1"
+        Else: Worksheets("Eingabe").Range("G79") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -307,10 +305,10 @@ Sub CheckBox12_Click()
     Application.ScreenUpdating = False
     ' Auswahl Bohren
         If CheckBox12.Value = True Then
-            Worksheets("Eingabe").Range("G76") = "1"
+            Worksheets("Eingabe").Range("G77") = "1"
             Worksheets("Bohren").Visible = True
         Else
-            Worksheets("Eingabe").Range("G76") = "0"
+            Worksheets("Eingabe").Range("G77") = "0"
             Worksheets("Bohren").Visible = False
         End If
     Application.ScreenUpdating = True

@@ -2,28 +2,23 @@ Attribute VB_Name = "Modul2"
 Option Explicit
 Sub Speichern()
 Attribute Speichern.VB_ProcData.VB_Invoke_Func = " \n14"
-Dim knd, format, produkt, auflage As String
-Dim strVerzeichnis, strDateiname As String
-knd = Worksheets("Steuerung").Range("B181")
-format = Worksheets("Steuerung").Range("B182")
-produkt = Worksheets("Steuerung").Range("B183")
-auflage = Worksheets("Steuerung").Range("B184")
-strVerzeichnis = "\\192.168.100.1\daten\Kalkulationen\"
-'strDateiname = Application.GetSaveAsFilename("Test", FileFilter:="Microsoft Excel-Arbeitsmappe (*.xls), *.xls")
-strDateiname = Application.GetSaveAsFilename(InitialFileName:=strVerzeichnis & _
-knd & "_" & format & "_" & produkt & "_" & auflage & ".xls", _
-FileFilter:="Microsoft Excel-Arbeitsmappe (*.xls), *.xls")
-  Select Case strDateiname
-    Case False
-      Exit Sub
-    Case Else
-      ThisWorkbook.SaveAs Filename:=strDateiname
-  End Select
-End Sub
-Sub Druck_Form()
-Attribute Druck_Form.VB_ProcData.VB_Invoke_Func = " \n14"
-On Error Resume Next
-UFDrucken.Show
+    Dim knd, format, produkt, auflage As String
+    Dim strVerzeichnis, strDateiname As String
+    knd = Worksheets("Steuerung").Range("B181")
+    format = Worksheets("Steuerung").Range("B182")
+    produkt = Worksheets("Steuerung").Range("B183")
+    auflage = Worksheets("Steuerung").Range("B184")
+    strVerzeichnis = "\\192.168.100.1\daten\Kalkulationen\"
+    'strDateiname = Application.GetSaveAsFilename("Test", FileFilter:="Microsoft Excel-Arbeitsmappe (*.xls), *.xls")
+    strDateiname = Application.GetSaveAsFilename(InitialFileName:=strVerzeichnis & _
+    knd & "_" & format & "_" & produkt & "_" & auflage & ".xls", _
+    FileFilter:="Microsoft Excel-Arbeitsmappe (*.xls), *.xls")
+      Select Case strDateiname
+        Case False
+          Exit Sub
+        Case Else
+          ThisWorkbook.SaveAs Filename:=strDateiname
+      End Select
 End Sub
 Sub version()
 Attribute version.VB_ProcData.VB_Invoke_Func = " \n14"
@@ -37,10 +32,8 @@ Attribute version.VB_ProcData.VB_Invoke_Func = " \n14"
 End Sub
 Sub checkdate()
 Attribute checkdate.VB_ProcData.VB_Invoke_Func = " \n14"
-'
-'Datum d. Fehlerprüfung
-'
-Worksheets("Steuerung").Range("B179") = Now
+    'Datum d. Fehlerprüfung
+    Worksheets("Steuerung").Range("B179") = Now
 End Sub
 Sub Farbpalette_ausgeben()
 Attribute Farbpalette_ausgeben.VB_ProcData.VB_Invoke_Func = " \n14"
@@ -66,7 +59,6 @@ Attribute Farbe_zuweisen.VB_ProcData.VB_Invoke_Func = " \n14"
     Dim bytColorIndex As Byte
     Dim a, b As Integer
     Dim Auftrag, Kunde As String
-    Worksheets("Plantafel").Unprotect "bw"
     Auftrag = Worksheets("Steuerung").Range("C181")
     Kunde = Worksheets("Steuerung").Range("B181")
     bytColorIndex = ActiveSheet.Range("J1")

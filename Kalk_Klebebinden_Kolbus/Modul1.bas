@@ -1,22 +1,22 @@
 Attribute VB_Name = "Modul1"
 Public FFormat, FFormatMin As String 'Fehlervariabeln
 Public Function Aufrunden(Zahl) As Long
-If IsNumeric(Zahl) Then
-If Zahl - Int(Zahl) < 0.5 Then
-Aufrunden = Int(Zahl)
-Else
-Aufrunden = Int(Zahl) + 1
-End If
-End If
+    If IsNumeric(Zahl) Then
+        If Zahl - Int(Zahl) < 0.5 Then
+            Aufrunden = Int(Zahl)
+            Else
+            Aufrunden = Int(Zahl) + 1
+        End If
+    End If
 End Function
 Public Function Abrunden(Zahl) As Long
-If IsNumeric(Zahl) Then
-If Zahl - Int(Zahl) < 0.5 Then
-Abrunden = Int(Zahl)
-Else
-Aufrunden = Int(Zahl) + 1
-End If
-End If
+    If IsNumeric(Zahl) Then
+        If Zahl - Int(Zahl) < 0.5 Then
+            Abrunden = Int(Zahl)
+            Else
+            Aufrunden = Int(Zahl) + 1
+        End If
+    End If
 End Function
 Public Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X0 As Double) As Variant
     Dim Y0 As Double
@@ -54,7 +54,7 @@ Public Function Interpolation2(ZeitBereich As Range, WertBereich As Range, t As 
 End Function
 Sub FormatMin()
 Attribute FormatMin.VB_ProcData.VB_Invoke_Func = " \n14"
-'Prüfung Mindestformat für Zusammentragen
+    'Prüfung Mindestformat für Zusammentragen
     If Worksheets("Steuerung").Range("N128") = 1 Then
         MsgBox ("Achtung das Mindestformat f. Das Zusammentragen wurde unterschritten!" & vbCrLf & vbCrLf & "(Mindestformat: " _
         & Worksheets("Zusammentragen").Range("K2") & " x " & Worksheets("Zusammentragen").Range("M2") & " cm)")
@@ -65,14 +65,12 @@ Attribute FormatMin.VB_ProcData.VB_Invoke_Func = " \n14"
 End Sub
 Sub produkt()
 Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
-' Anzeigen d. Produktangaben
+    ' Anzeigen d. Produktangaben
     On Error Resume Next
     Dim format, Gewicht, Dicke As String
-        Worksheets("Verpacken").Unprotect "bw"
         format = Worksheets("Eingabe").CommandButton3.Caption
         Dicke = Range("Eingabe!C45")
         Gewicht = Range("Eingabe!C46")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
         & vbLf & vbLf & "Stärke: " & vbLf & Dicke & " mm" & vbLf & vbLf & "Gewicht: " & vbLf & Gewicht & " g"
-        Worksheets("Verpacken").Protect "bw"
 End Sub

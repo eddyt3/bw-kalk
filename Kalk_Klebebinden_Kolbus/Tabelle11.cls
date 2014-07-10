@@ -84,7 +84,6 @@ End Sub
 Sub Produktart()
 ' Broschüre, Buchblock, Ableimen
 ' 20140623
-    Worksheets("Binden").Unprotect "bw"
     Dim intArt As Integer
     intArt = Worksheets("SBinden").Range("B34")
     Select Case intArt
@@ -141,19 +140,15 @@ Sub Produktart()
         Worksheets("Binden").ComboBox4.ListIndex = 0 'kein Reiniger
     End Select
     Call Stoff
-    Worksheets("Binden").Protect "bw"
 End Sub
 Sub Stoff()
 ' Auswahl Scharnierstoff, Fälzel, Krepp
 ' 20140506
     On Error Resume Next
     If Worksheets("Material").Range("C51") > 1 Then
-        Worksheets("Binden").Unprotect "bw"
         Worksheets("Binden").Rows("20:28").Hidden = False
         Worksheets("Binden").Rows("27").Hidden = True
     Else
-        Worksheets("Binden").Unprotect "bw"
         Worksheets("Binden").Rows("20:28").Hidden = True
     End If
-    Worksheets("Binden").Protect "bw"
 End Sub

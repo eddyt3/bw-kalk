@@ -45,12 +45,10 @@ Attribute Produkt.VB_ProcData.VB_Invoke_Func = " \n14"
 '
 On Error Resume Next
 Dim format, Gewicht, Dicke As String
-    Worksheets("Verpacken").Unprotect "bw"
     format = Worksheets("Eingabe").CommandButton2.Caption
     Dicke = Range("Eingabe!C48")
     Gewicht = Range("Eingabe!C49")
     Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
     & vbLf & vbLf & "Stärke: " & vbLf & Dicke & " mm" & vbLf & vbLf & "Gewicht: " & vbLf & Gewicht & " g"
-    Worksheets("Verpacken").Protect "bw"
 End Sub
 

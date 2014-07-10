@@ -139,19 +139,16 @@ Sub Falzbogen()
 'unused
 ' Loeschen d. vorhandenen Eingaben u. Ausblendung, wenn d. Bg. nicht ausgewaehlt wurde
 '
-On Error Resume Next
-Worksheets("Falzen").Unprotect "bw"
-If Worksheets("Eingabe").Range("A17") < 1 Then
+If Worksheets("Eingabe").Range("A18") < 1 Then
     Worksheets("Falzen").Rows("23:41").Hidden = True
     Else: Worksheets("Falzen").Rows("23:41").Hidden = False
 End If
-If Worksheets("Eingabe").Range("A26") < 1 Then
+If Worksheets("Eingabe").Range("A27") < 1 Then
     Worksheets("Falzen").Rows("42:60").Hidden = True
     Else: Worksheets("Falzen").Rows("42:60").Hidden = False
 End If
-If Worksheets("Eingabe").Range("A35") < 1 Then
+If Worksheets("Eingabe").Range("A36") < 1 Then
     Worksheets("Falzen").Rows("61:79").Hidden = True
     Else: Worksheets("Falzen").Rows("61:79").Hidden = False
 End If
-Worksheets("Falzen").Protect "bw"
 End Sub

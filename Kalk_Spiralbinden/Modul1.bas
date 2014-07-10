@@ -165,15 +165,12 @@ End Sub
 Sub Produkt()
     ' Anzeigen d. Produktangaben bei "Verpacken"
     '
-    On Error Resume Next
     Dim format, Gewicht, Dicke As String
-    Worksheets("Verpacken").Unprotect "bw"
         format = Worksheets("Eingabe").CommandButton2.Caption
         Dicke = Range("Eingabe!C32")
         Gewicht = Range("Eingabe!C34")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
          & vbLf & vbLf & "Stärke: " & vbLf & Dicke & " mm" & vbLf & vbLf & "Gewicht: " & vbLf & Gewicht & " g"
-    Worksheets("Verpacken").Protect "bw"
 End Sub
 Sub NutzenCheck_Folie()
     ' Überprüfung der Nutzenanzahl

@@ -23,9 +23,7 @@ Sub Schneidbogen()
     '
     'Anzeige d. zu schneidenden Bogen auf der Eingabeseite
     '20130218
-    On Error Resume Next
     Application.ScreenUpdating = False
-    Worksheets("Schneiden").Unprotect "bw"
     If Worksheets("SSchneiden").Range("B103") < 1 Then
        Worksheets("Schneiden").Range("D3") = "0"
        Else
@@ -52,7 +50,6 @@ Sub Schneidbogen()
        Worksheets("Schneiden").Range("D17") = "0"
        Worksheets("Schneiden").Range("D24") = "0"
     End If
-    Worksheets("Schneiden").Protect "bw"
     Application.ScreenUpdating = True
 End Sub
 Sub SchneidenAnzeige()

@@ -7,16 +7,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-
-
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
-Private Sub ComboBox2_Change()
+Sub ComboBox2_Change()
     'Bindeseite
     Run Worksheets("SKleben").kleben
 End Sub
-Private Sub ComboBox3_DropButtonClick()
+Sub ComboBox3_DropButtonClick()
     '8seitiger Umschlag
     If Worksheets("SEingabe").Range("L5") > 1 Then
         MsgBox ("Bitte das Falzen der Umschläge nicht vergessen.")
@@ -26,45 +24,45 @@ Private Sub ComboBox4_Change()
     'Bogen A, Art
     'Run Worksheets("Falzen").Falzen
 End Sub
-Private Sub ComboBox5_DropButtonClick()
+Sub ComboBox5_DropButtonClick()
     'Zusammentragen Autom./Hand
     Run Worksheets("Zusammentragen").Zusammentragen
 End Sub
-Private Sub ComboBox9_Change()
+Sub ComboBox9_Change()
     'Bogen B, Art
     'Run Worksheets("Falzen").Falzen
 End Sub
-Private Sub ComboBox10_Change()
+Sub ComboBox10_Change()
     'Bogen C, Art
     'Run Worksheets("Falzen").Falzen
 End Sub
-Private Sub ComboBox11_Change()
+Sub ComboBox11_Change()
 'Bogen D, Art
     'Run Worksheets("Falzen").Falzen
 End Sub
-Private Sub CommandButton1_Click()
+Sub CommandButton1_Click()
     Application.ScreenUpdating = False
         Call Fehlerpruefung
         Call checkdate
     Application.ScreenUpdating = True
 End Sub
-Private Sub CommandButton2_Click()
+Sub CommandButton2_Click()
     Application.ScreenUpdating = False
         Call Speichern
     Application.ScreenUpdating = True
 End Sub
-Private Sub CommandButton3_Click()
+Sub CommandButton3_Click()
     'Eingabe Produktformat
     Run Worksheets("SEingabe").Formatinput
 End Sub
-Private Sub CommandButton4_Click()
+Sub CommandButton4_Click()
     'Materialseite einblenden
     On Error Resume Next
     Worksheets("Material").Visible = xlSheetVisible
     Worksheets("Material").Activate
     Worksheets("Material").Range("C5").Select
 End Sub
-Private Sub Worksheet_Change(ByVal Target As Excel.Range)
+Sub Worksheet_Change(ByVal Target As Excel.Range)
     Application.ScreenUpdating = False
         On Error Resume Next
         Call Fehlermeldung
@@ -91,7 +89,6 @@ Attribute Fehlermeldung.VB_ProcData.VB_Invoke_Func = " \n14"
     If FFormat Like "" And FFormatMin Like "" Then
         TextBox1.Visible = False
         Else
-        Worksheets("Eingabe").Unprotect "bw"
         With TextBox1
             .Visible = True
             .Font = "Verdana"
@@ -107,7 +104,6 @@ Attribute Fehlermeldung.VB_ProcData.VB_Invoke_Func = " \n14"
             '.Locked = True
         End With
     End If
-Worksheets("Eingabe").Protect "bw"
 End Sub
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
@@ -248,7 +244,7 @@ Sub CheckBox8_Click()
         End If
     Application.ScreenUpdating = True
 End Sub
-Private Sub CheckBox9_Click()
+Sub CheckBox9_Click()
 ' Auswahl Kleben
     On Error Resume Next
     Application.ScreenUpdating = False
@@ -259,7 +255,7 @@ Private Sub CheckBox9_Click()
     Run Worksheets("SKleben").kleben
     Application.ScreenUpdating = True
 End Sub
-Private Sub CheckBox10_Click()
+Sub CheckBox10_Click()
 ' Auswahl Fadenheften
     On Error Resume Next
     Application.ScreenUpdating = False
@@ -272,7 +268,7 @@ Private Sub CheckBox10_Click()
         End If
     Application.ScreenUpdating = True
 End Sub
-Private Sub CheckBox11_Click()
+Sub CheckBox11_Click()
 'Auswahl Zusammentragen
 '20140516
     If CheckBox11.Value = True Then
@@ -280,18 +276,18 @@ Private Sub CheckBox11_Click()
     Else: Worksheets("Eingabe").Range("G69") = "0"
     End If
 End Sub
-Private Sub ComboBox13_Change()
+Sub ComboBox13_Change()
 'Auswahl Leimart über Eingabeseite
 '20140422
     On Error Resume Next
     Run Worksheets("Binden").Leimart
 End Sub
-Private Sub ComboBox14_Change()
+Sub ComboBox14_Change()
 'Auswahl Produktart (Broschüre, Buchblock, Ableimen)
 '20140424
     'On Error Resume Next
     Dim intArt As Integer
-    intArt = Worksheets("SBinden").Range("B34")
+    intArt = ThisWorkbook.Worksheets("SBinden").Range("B34").Value
     Select Case intArt
     Case 1
         'Broschüre

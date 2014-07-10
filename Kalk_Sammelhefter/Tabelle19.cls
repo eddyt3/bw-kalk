@@ -40,7 +40,6 @@ Private Sub CheckBox4_Click()
     'Eingabe manuelle Lagen ja/nein
     '20140623
     On Error Resume Next
-    Worksheets("Verpacken").Unprotect "bw"
     If Worksheets("Verpacken").CheckBox4.Value = True Then
         Worksheets("Verpacken").Range("D31").Interior.ColorIndex = 6
         Worksheets("Verpacken").Range("D31").Interior.Pattern = xlSolid
@@ -57,7 +56,6 @@ Private Sub CheckBox4_Click()
         Worksheets("Verpacken").Range("D31").Interior.ColorIndex = 0
         Worksheets("Verpacken").Range("D31").Interior.Pattern = xlSolid
         Worksheets("Verpacken").Range("D31").Locked = True
-        Worksheets("Verpacken").Protect "bw"
         Run Worksheets("SVerpacken").VE_einschweissen
         Run Worksheets("SVerpacken").Palettenlage_erstellen
         Run Worksheets("SVerpacken").draws_delete
@@ -96,11 +94,9 @@ Private Sub ComboBox7_Change()
     'Standard V eintragen
     On Error Resume Next
     If Worksheets("SVerpacken").Range("B71") > 1 Then
-        Worksheets("Verpacken").Unprotect "bw"
         Worksheets("Verpacken").Range("D65").FormulaLocal = "=SVERWEIS(SVerpacken!B71;SVerpacken!A72:I75;9)"
         'MsgBox "Achtung, die Maschinengeschwindigkeit wurde zurückgesetzt!"
         Run Worksheets("SVerpacken").draw_all
-        Worksheets("Verpacken").Protect "bw"
     End If
 End Sub
 Private Sub ComboBox8_Change()
@@ -153,7 +149,6 @@ Sub Verpackungseinheit()
     'Festlegen Verpackungseinheit u. Einschweißen
     '20140623
     'On Error Resume Next
-    Worksheets("Verpacken").Unprotect "bw"
     Worksheets("Verpacken").Range("D6").ClearComments
     Worksheets("Verpacken").Range("D6").Locked = False
     Worksheets("Verpacken").Range("D6").FormulaHidden = False
@@ -205,7 +200,6 @@ Sub Verpackungseinheit()
         Worksheets("Verpacken").Range("D6").Comment.Text Text:="Einfaches Abstapeln ohne Folie od. Karton." & Chr(10) & _
         "Bei Bedarf Zwischenlagen festlegen."
     End If
-    Worksheets("Verpacken").Protect "bw"
     Call Kommentar
 End Sub
 Sub lkw()
@@ -219,7 +213,6 @@ Sub lkw()
     intOptPaletten = Worksheets("SVerpacken").Range("G52")
     intPaletten = Worksheets("SVerpacken").Range("K52")
     strActiveCell = ActiveCell.Address
-    Worksheets("Verpacken").Unprotect "bw"
     If Worksheets("Verpacken").ToggleButton1.Value = True Then
         Worksheets("SVerpacken").Range("K55").Value = 1
         If Worksheets("SVerpacken").Range("K54") > 0 Then
@@ -264,7 +257,6 @@ Sub Kommentar()
     '20140401
     'On Error Resume Next
     Dim VPalette, VExemplare As String
-    'Worksheets("Verpacken").Unprotect "bw"
     VPalette = Worksheets("SVerpacken").Range("I39")
     VExemplare = Worksheets("SVerpacken").Range("I45")
     Worksheets("Verpacken").Label2.Caption = "Gewicht volle Einzelpalette:" & Chr(10) & Chr(10) & VPalette & " kg"
