@@ -59,7 +59,7 @@ Public Sub Workbook_BeforePrint(Cancel As Boolean)
     v = Worksheets("Steuerung").Range("B178") & "/" & Worksheets("Steuerung").Range("A178")
     checkdate = Worksheets("Steuerung").Range("B179")
     ThisWorkbook.Worksheets("Eingabe").PageSetup.LeftFooter = "&""Verdana""&06" & Application.UserName & " " & format("&D", "dd.mm.yy") & " " & "&T" & " / Fehlerprfg.: " & checkdate
-    ThisWorkbook.Worksheets("Eingabe").PageSetup.CenterFooter = "&""Verdana""&06" & Chr(10) & ActiveWorkbook.Path & "\" & ActiveWorkbook.Name
+    ThisWorkbook.Worksheets("Eingabe").PageSetup.CenterFooter = "&""Verdana""&06" & Chr(10) & ThisWorkbook.Path & "\" & ThisWorkbook.Name
     ThisWorkbook.Worksheets("Eingabe").PageSetup.RightFooter = "&""Verdana""&06" & " (v" & v & ")"
     Call Dokumenteigenschaften_Soll
     Application.ScreenUpdating = True
