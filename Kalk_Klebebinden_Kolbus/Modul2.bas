@@ -8,7 +8,7 @@ Attribute Speichern.VB_ProcData.VB_Invoke_Func = " \n14"
     format = Worksheets("Steuerung").Range("B182")
     produkt = Worksheets("Steuerung").Range("B183")
     auflage = Worksheets("Steuerung").Range("B184")
-    strVerzeichnis = "\\192.168.100.1\daten\Kalkulationen\"
+    strVerzeichnis = "\\192.168.200.101\daten\Kalkulationen\"
     'strDateiname = Application.GetSaveAsFilename("Test", FileFilter:="Microsoft Excel-Arbeitsmappe (*.xls), *.xls")
     strDateiname = Application.GetSaveAsFilename(InitialFileName:=strVerzeichnis & _
     knd & "_" & format & "_" & produkt & "_" & auflage & ".xls", _
