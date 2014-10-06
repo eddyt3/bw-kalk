@@ -130,10 +130,9 @@ Private Sub ComboBox17_Change()
 End Sub
 Private Sub CommandButton1_Click()
     'Reset Ex./VE auf Standard
-    '20140319
-    On Error Resume Next
+    '20140711
     If Worksheets("Material").Range("C121") < 14 Then
-        Worksheets("Verpacken").Range("D6").FormulaLocal = "=WENN(ODER(Material!C121=14;Material!C121=13;Material!C121=12);1;ABRUNDEN(SVerpacken!D8/(SVerpacken!D122*10);0))"
+        Worksheets("Verpacken").Range("D6").FormulaLocal = "=WENN(ODER(Material!C121=14;Material!C121=13;Material!C121=12);1;SVerpacken!G27)"
     End If
     Call Kommentar
 End Sub
@@ -254,12 +253,12 @@ Sub Palettencheck()
 End Sub
 Sub Kommentar()
     'Anzeigen d. Palettendaten
-    '20140401
+    '201401002
     'On Error Resume Next
     Dim VPalette, VExemplare As String
     VPalette = Worksheets("SVerpacken").Range("I39")
-    VExemplare = Worksheets("SVerpacken").Range("I45")
-    Worksheets("Verpacken").Label2.Caption = "Gewicht volle Einzelpalette:" & Chr(10) & Chr(10) & VPalette & " kg"
+    VExemplare = Worksheets("SVerpacken").Range("G45")
+    Worksheets("Verpacken").Label2.Caption = "Volle Einzelpalette:" & Chr(10) & VPalette & " kg" & Chr(10) & VExemplare & " Ex."
 End Sub
 
 
