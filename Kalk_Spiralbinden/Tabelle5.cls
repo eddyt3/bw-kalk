@@ -12,7 +12,7 @@ Attribute VB_Exposed = True
 '
 Private Sub Worksheet_Activate()
     Application.ScreenUpdating = False
-    Run Spirale
+    Run Worksheets("Binden").Spirale
     Application.ScreenUpdating = True
 End Sub
 Private Sub ComboBox1_DropButtonClick()

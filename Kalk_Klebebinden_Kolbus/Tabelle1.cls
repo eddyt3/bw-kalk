@@ -291,7 +291,7 @@ Sub ComboBox14_Change()
     Select Case intArt
     Case 1
         'Broschüre
-        Worksheets("Kleben").Visible = False
+        ThisWorkbook.Worksheets("Kleben").Visible = False
         CheckBox9.Value = False 'Kalk. Kleben deaktiviert
         Worksheets("Eingabe").Range("G67") = "0"
         CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
@@ -300,7 +300,7 @@ Sub ComboBox14_Change()
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     Case 2
         'Buchblock
-        Worksheets("Kleben").Visible = True
+        ThisWorkbook.Worksheets("Kleben").Visible = True
         CheckBox9.Value = True 'Kalk. Kleben aktiviert
         Worksheets("Eingabe").Range("G67") = "1"
         CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
@@ -310,12 +310,12 @@ Sub ComboBox14_Change()
         Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
     Case 3
         'Ableimen
-        Worksheets("Kleben").Visible = False
+        ThisWorkbook.Worksheets("Kleben").Visible = False
         CheckBox9.Value = False 'Kalk. Kleben deaktiviert
         Worksheets("Eingabe").Range("G67") = "0"
         CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("Eingabe").Range("G71") = "0"
-        Worksheets("Fadenheften").Visible = False
+        ThisWorkbook.Worksheets("Fadenheften").Visible = False
         Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     End Select
