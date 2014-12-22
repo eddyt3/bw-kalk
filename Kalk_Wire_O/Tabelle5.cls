@@ -89,7 +89,7 @@ Sub Inline()
         Answer = MsgBox("Hinweis: Produktstärke > 3,2 mm, ausgewählte Maschine: Inline (P1766)." & vbCrLf & vbCrLf & "Für die Inline muss geteilt gestanzt werden." _
         & vbCrLf & "(Die Geschwindigkeit wurde angepasst; 1 zusätzl. HK wurde berücksichtigt.)", vbOKOnly, "Inline.")
         Worksheets("Binden").Range("D8").Value = 1
-    Else: Worksheets("Binden").Range("D8").Value = 0
+    'Else: Worksheets("Binden").Range("D8").Value = 0
     End If
     Application.ScreenUpdating = True
 End Sub

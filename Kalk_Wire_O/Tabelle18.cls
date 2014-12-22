@@ -145,7 +145,7 @@ Private Sub CommandButton2_Click()
 End Sub
 Sub Verpackungseinheit()
     'Festlegen Verpackungseinheit u. Einschweiﬂen
-    '20140623
+    '20141007
     'On Error Resume Next
     Worksheets("Verpacken").Range("D6").ClearComments
     Worksheets("Verpacken").Range("D6").Locked = False
@@ -163,7 +163,7 @@ Sub Verpackungseinheit()
     'Einschweiﬂen
     If Worksheets("Material").Range("C121") = 14 Then
         'Ja mit Vorauswahl
-        With Worksheets("Verpacken").Range("D6").ComboBox7
+        With Worksheets("Verpacken").ComboBox7
             .BoundColumn = 2
             .ColumnCount = 2
             .ListStyle = fmListStyleOption
