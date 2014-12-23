@@ -1,8 +1,10 @@
 Attribute VB_Name = "Modul1"
 Sub Tabellenblatt_ausblenden()
-    On Error Resume Next
+    'On Error Resume Next
     Dim wksWorksheet As Worksheet
+    ActiveWorkbook.Unprotect "bw"
     ActiveWorkbook.ActiveSheet().Visible = False
+    'ActiveWorkbook.ActiveSheet().Visible = xlVeryHidden 'l‰sst sich vom Benutzer nicht einblenden
     For Each wksWorksheet In ActiveWorkbook.Worksheets
         If wksWorksheet.Range("A1") = "Steuerungsdaten" Then
         wksWorksheet.Visible = False
@@ -10,7 +12,7 @@ Sub Tabellenblatt_ausblenden()
     Next wksWorksheet
 End Sub
 Sub Tabellenblaetter_einblenden()
-    On Error Resume Next
+    'On Error Resume Next
     Dim wksWorksheet As Worksheet
     For Each wksWorksheet In ActiveWorkbook.Worksheets
         wksWorksheet.Visible = xlSheetVisible
@@ -163,7 +165,6 @@ Public Sub Topix_Vorzeichen_umkehren()
     'Selection.NumberFormat = "0,00 ;[Red]-0,00"
     MsgBox "Fertig Master!"
 End Sub
-
 Public Sub Punkt2Komma()
     Dim rngC As Range
     Dim strWert As String
@@ -283,7 +284,7 @@ Sub Wbk_save_all()
     'Alle Arbeitsmappen sichern
     Dim wbkWorkbook As Workbook
     For Each wbkWorkbook In Application.Workbooks
-        wbkWorkbook.Activate
+        'wbkWorkbook.Activate
         wbkWorkbook.Save
     Next wbkWorkbook
 End Sub
@@ -306,10 +307,12 @@ Sub Wbk_close_other()
     Next wbkWorkbook
 End Sub
 Sub Wbk_save_close_all()
-    'Alle Arbeitsmappen schlieﬂen
+    'Alle Arbeitsmappen speichern und schlieﬂen
     Dim wbkWorkbook As Workbook
     For Each wbkWorkbook In Application.Workbooks
-        wbkWorkbook.Close SaveChanges:=True
+        If wbkWorkbook.Name <> "PERSONL.XLSB" Then
+            wbkWorkbook.Close SaveChanges:=True
+        End If
     Next wbkWorkbook
 End Sub
 Sub Inhalt_Cutten()
@@ -379,7 +382,7 @@ Sub Zeichen_einfuegen()
 End Sub
 Sub Blattschutz_loeschen()
     On Error Resume Next
-    For i = 65 To 66
+    For I = 65 To 66
     For j = 65 To 66
     For k = 65 To 66
     For L = 65 To 66
@@ -391,7 +394,7 @@ Sub Blattschutz_loeschen()
     For r = 65 To 66
     For s = 65 To 66
     For t = 32 To 126
-    ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & Chr(L) & Chr(m) & _
+    ActiveSheet.Unprotect Chr(I) & Chr(j) & Chr(k) & Chr(L) & Chr(m) & _
     Chr(n) & Chr(o) & Chr(p) & Chr(q) & Chr(r) & Chr(s) & Chr(t)
     Next t
     Next s
@@ -404,40 +407,40 @@ Sub Blattschutz_loeschen()
     Next L
     Next k
     Next j
-    Next i
+    Next I
     MsgBox "Fertig Master!"
 End Sub
 Sub ShapesUmbenennen()
-    Dim ws As Worksheet, i As Integer, NeuerName As String
+    Dim ws As Worksheet, I As Integer, NeuerName As String
     Set ws = ThisWorkbook.ActiveSheet
-    For i = 1 To ws.Shapes.count
-        ws.Shapes(i).Visible = False
+    For I = 1 To ws.Shapes.count
+        ws.Shapes(I).Visible = False
     Next
-    For i = 1 To ws.Shapes.count
-        ws.Shapes(i).Visible = True
-        ActiveWindow.ScrollColumn = ws.Shapes(i).TopLeftCell.Column
-        ActiveWindow.ScrollRow = ws.Shapes(i).TopLeftCell.Row
-        NeuerName = InputBox("Best‰tige den Namen '" & ws.Shapes(i).Name & "'" & vbLf & _
-            "oder gebe einen neuen Namen ein:", "Shapes Umbenennen", ws.Shapes(i).Name)
+    For I = 1 To ws.Shapes.count
+        ws.Shapes(I).Visible = True
+        ActiveWindow.ScrollColumn = ws.Shapes(I).TopLeftCell.Column
+        ActiveWindow.ScrollRow = ws.Shapes(I).TopLeftCell.Row
+        NeuerName = InputBox("Best‰tige den Namen '" & ws.Shapes(I).Name & "'" & vbLf & _
+            "oder gebe einen neuen Namen ein:", "Shapes Umbenennen", ws.Shapes(I).Name)
         If NeuerName = "" Then
             Exit For
         Else
-            If ws.Shapes(i).Name <> NeuerName Then
-                ws.Shapes(i).Name = NeuerName
+            If ws.Shapes(I).Name <> NeuerName Then
+                ws.Shapes(I).Name = NeuerName
             End If
         End If
-        ws.Shapes(i).Visible = False
+        ws.Shapes(I).Visible = False
     Next
-    For i = 1 To ws.Shapes.count
-        ws.Shapes(i).Visible = True
+    For I = 1 To ws.Shapes.count
+        ws.Shapes(I).Visible = True
     Next
     'ws.Range("A1").Activate
 End Sub
 Sub ShapesAlleEinblenden()
-    Dim ws As Worksheet, i As Integer
+    Dim ws As Worksheet, I As Integer
     Set ws = ThisWorkbook.ActiveSheet
-    For i = 1 To ws.Shapes.count
-        ws.Shapes(i).Visible = True
+    For I = 1 To ws.Shapes.count
+        ws.Shapes(I).Visible = True
     Next
     'ws.Range("A1").Activate
 End Sub
