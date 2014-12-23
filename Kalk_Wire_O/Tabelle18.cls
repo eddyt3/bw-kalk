@@ -91,7 +91,6 @@ Private Sub ComboBox7_Change()
     'Auswahl der Einschweiﬂmaschine
     '20090824
     'Standard V eintragen
-    On Error Resume Next
     If Worksheets("SVerpacken").Range("B71") > 1 Then
         Worksheets("Verpacken").Range("D65").FormulaLocal = "=SVERWEIS(SVerpacken!B71;SVerpacken!A72:I75;9)"
         'MsgBox "Achtung, die Maschinengeschwindigkeit wurde zur¸ckgesetzt!"
@@ -145,7 +144,7 @@ Private Sub CommandButton2_Click()
 End Sub
 Sub Verpackungseinheit()
     'Festlegen Verpackungseinheit u. Einschweiﬂen
-    '20141007
+    '20141223
     'On Error Resume Next
     Worksheets("Verpacken").Range("D6").ClearComments
     Worksheets("Verpacken").Range("D6").Locked = False
@@ -164,31 +163,14 @@ Sub Verpackungseinheit()
     If Worksheets("Material").Range("C121") = 14 Then
         'Ja mit Vorauswahl
         With Worksheets("Verpacken").ComboBox7
-            .BoundColumn = 2
-            .ColumnCount = 2
-            .ListStyle = fmListStyleOption
-            .ListFillRange = "SVerpacken!B73:C74"
+            .ListIndex = 1
         End With
-        Worksheets("SVerpacken").Range("B71") = 2
-       Else
-        'ohne Einschweiﬂen
-        With Worksheets("Verpacken").ComboBox7
-            .BoundColumn = 2
-            .ColumnCount = 2
-            .ListStyle = fmListStyleOption
-            .ListFillRange = "SVerpacken!B72:C74"
-        End With
-        Worksheets("SVerpacken").Range("B71") = 1
    End If
-    'Abstapeln v. Einzelexemplaren
+    'Abstapeln v. Einzelexemplaren ohne Einschweiﬂen
     If Worksheets("Material").Range("C121") = 15 Then
         With Worksheets("Verpacken").ComboBox7
-            .BoundColumn = 2
-            .ColumnCount = 2
-            .ListStyle = fmListStyleOption
-            .ListFillRange = "SVerpacken!B72:C74"
+            .ListIndex = 0
         End With
-        Worksheets("SVerpacken").Range("B71") = 1
         Worksheets("Verpacken").Range("D6") = 1
         Worksheets("Verpacken").Range("D6").Interior.ColorIndex = 0
         Worksheets("Verpacken").Range("D6").Locked = True

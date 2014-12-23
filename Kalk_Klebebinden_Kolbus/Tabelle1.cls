@@ -284,7 +284,7 @@ Sub ComboBox13_Change()
 End Sub
 Sub ComboBox14_Change()
 'Auswahl Produktart (Broschüre, Buchblock, Ableimen)
-'20140424
+'20141208
     'On Error Resume Next
     Dim intArt As Integer
     intArt = ThisWorkbook.Worksheets("SBinden").Range("B34").Value
@@ -296,10 +296,21 @@ Sub ComboBox14_Change()
         Worksheets("Eingabe").Range("G67") = "0"
         CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("Eingabe").Range("G71") = "0"
+        Worksheets("Fadenheften").Visible = False
         Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     Case 2
         'Buchblock
+        ThisWorkbook.Worksheets("Kleben").Visible = True
+        CheckBox9.Value = True 'Kalk. Kleben aktiviert
+        Worksheets("Eingabe").Range("G67") = "1"
+        CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
+        Worksheets("Eingabe").Range("G71") = "0"
+        Worksheets("Fadenheften").Visible = False
+        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
+        Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
+    Case 3
+        'Buchblock fadengeheftet
         ThisWorkbook.Worksheets("Kleben").Visible = True
         CheckBox9.Value = True 'Kalk. Kleben aktiviert
         Worksheets("Eingabe").Range("G67") = "1"
@@ -308,7 +319,7 @@ Sub ComboBox14_Change()
         Worksheets("Fadenheften").Visible = True
         Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
         Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
-    Case 3
+    Case 4
         'Ableimen
         ThisWorkbook.Worksheets("Kleben").Visible = False
         CheckBox9.Value = False 'Kalk. Kleben deaktiviert

@@ -89,6 +89,7 @@ Private Sub ComboBox1_DropButtonClick()
         End If
 End Sub
 Private Sub TextBox1_Change()
+    'Anzeige Bogeninfos
     On Error Resume Next
     If Worksheets("SKleben").Range("C33") = 1 Then
             With TextBox1

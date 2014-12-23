@@ -145,7 +145,7 @@ Private Sub CommandButton2_Click()
 End Sub
 Sub Verpackungseinheit()
     'Festlegen Verpackungseinheit u. Einschweiﬂen
-    '20140623
+    '20141223
     'On Error Resume Next
     Worksheets("Verpacken").Range("D6").ClearComments
     Worksheets("Verpacken").Range("D6").Locked = False
@@ -163,34 +163,16 @@ Sub Verpackungseinheit()
     'Einschweiﬂen
     If Worksheets("Material").Range("C121") = 14 Then
         'Ja mit Vorauswahl
-        With Worksheets("Verpacken").Range("D6").ComboBox7
-            .BoundColumn = 2
-            .ColumnCount = 2
-            .ListStyle = fmListStyleOption
-            .ListFillRange = "SVerpacken!B73:C74"
-        End With
-        Worksheets("SVerpacken").Range("B71") = 2
-       Else
-        'ohne Einschweiﬂen
         With Worksheets("Verpacken").ComboBox7
-            .BoundColumn = 2
-            .ColumnCount = 2
-            .ListStyle = fmListStyleOption
-            .ListFillRange = "SVerpacken!B72:C74"
+            .ListIndex = 1
         End With
-        Worksheets("SVerpacken").Range("B71") = 1
    End If
-    'Abstapeln v. Einzelexemplaren
+    'Abstapeln v. Einzelexemplaren ohne Einschweiﬂen
     If Worksheets("Material").Range("C121") = 15 Then
         With Worksheets("Verpacken").ComboBox7
-            .BoundColumn = 2
-            .ColumnCount = 2
-            .ListStyle = fmListStyleOption
-            .ListFillRange = "SVerpacken!B72:C74"
+            .ListIndex = 0
         End With
-        Worksheets("SVerpacken").Range("B71") = 1
         Worksheets("Verpacken").Range("D6") = 1
-        'Worksheets("Verpacken").Range("D6").Activate
         Worksheets("Verpacken").Range("D6").Interior.ColorIndex = 0
         Worksheets("Verpacken").Range("D6").Locked = True
         Worksheets("Verpacken").Range("D6").FormulaHidden = False

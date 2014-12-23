@@ -83,7 +83,7 @@ Sub Leimart()
 End Sub
 Sub Produktart()
 ' Broschüre, Buchblock, Ableimen
-' 20140623
+' 20141208
     Dim intArt As Integer
     intArt = Worksheets("SBinden").Range("B34")
     Select Case intArt
@@ -122,13 +122,30 @@ Sub Produktart()
         Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
         Worksheets("Binden").ComboBox4.ListIndex = 0 'kein Reiniger
     Case 3
+        'Buchblock fadengeheftet
+        'Hotmelt (Standardleim), mit Seitenleim, mit Fälzel, mit Vorsatz und Fadenheften
+        Worksheets("Binden").ComboBox5.ListIndex = 1 'Hotmelt auswählen
+        Worksheets("Binden").Range("D3") = ComboBox5.ListIndex + 1
+        Worksheets("Binden").ComboBox1.ListFillRange = "Material!D14:D18" 'Hotmelt Leimsorte
+        Worksheets("Binden").ComboBox1.LinkedCell = "Material!B8"
+        Worksheets("Binden").ComboBox1.ListIndex = 0 'Topmelt
+        Worksheets("Binden").ComboBox2.ListFillRange = "Material!D26:D36" 'Seitenleim
+        Worksheets("Binden").ComboBox2.ListIndex = 0 'mit Seitenleim
+        Worksheets("Binden").ComboBox2.LinkedCell = "Material!B25"
+        Worksheets("Binden").ComboBox3.ListFillRange = "Material!D52:D55" 'Rückenstoff
+        Worksheets("Binden").ComboBox3.LinkedCell = "Material!B51"
+        Worksheets("Binden").ComboBox3.ListIndex = 3 'Rücken mit Krepp
+        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D43" 'kein Reiniger
+        Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
+        Worksheets("Binden").ComboBox4.ListIndex = 0 'kein Reiniger
+    Case 4
         'Ableimen
         'Hotmelt (Katalogleim), 1/4 Leimeinsatz, ohne Seitenleim, ohne Fälzel
         Worksheets("Binden").ComboBox5.ListIndex = 1 'Hotmelt auswählen
         Worksheets("Binden").Range("D3") = ComboBox5.ListIndex + 1
         Worksheets("Binden").ComboBox1.ListFillRange = "Material!D14:D18" 'Leimsorte
         Worksheets("Binden").ComboBox1.LinkedCell = "Material!B8"
-        Worksheets("Binden").ComboBox1.ListIndex = 1 'Katalogleim
+        Worksheets("Binden").ComboBox1.ListIndex = 0 'Normaler Hotmelt kein extra Katalogleim mehr
         Worksheets("Binden").ComboBox2.ListFillRange = "Material!D26:D36" 'Seitenleim
         Worksheets("Binden").ComboBox2.ListIndex = 10 'ohne Seitenleim
         Worksheets("Binden").ComboBox2.LinkedCell = "Material!B25"
