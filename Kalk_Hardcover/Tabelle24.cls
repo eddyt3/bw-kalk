@@ -13,14 +13,14 @@ Attribute VB_Exposed = True
 Public VNFormatN, VNFormatB As String 'Vor-, Nachsatzformat f. Kleben
 Private Sub Worksheet_Activate()
     On Error Resume Next
-    Run Worksheets("SKleben").Bogen_erstellen_netto
+    Run Worksheets("SKleben").Bogen_erstellen
     Call CheckBox1_Click
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
     On Error Resume Next
     Call VNFormat
     Call TextBox1_Change
-    Run Worksheets("SKleben").Bogen_erstellen_netto
+    Run Worksheets("SKleben").Bogen_erstellen
 End Sub
 Private Sub CommandButton1_Click()
     'Materialseite einblenden
@@ -68,10 +68,6 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         End If
         Run Worksheets("SKleben").KlebenAnzeige
 End Sub
-Private Sub CheckBox3_Click()
-    On Error Resume Next
-    Run Worksheets("SKleben").Bogen_erstellen_netto
-End Sub
 Private Sub ComboBox1_DropButtonClick()
     'Papierberechnung je nach Auswahl
     Dim shpShape As Shape
@@ -115,7 +111,7 @@ End Sub
 Private Sub ComboBox4_Change()
     'Materialauswahl Vor-/Nachsatz
     Run Worksheets("Kleben").Materialauswahl
-    Run Worksheets("SKleben").Bogen_erstellen_netto
+    Run Worksheets("SKleben").Bogen_erstellen
 End Sub
 Private Sub TextBox1_Change()
     'Anzeige Bogeninfos
@@ -146,12 +142,19 @@ Private Sub TextBox3_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
       Case Else: KeyAscii = 0
     End Select
 End Sub
+Private Sub TextBox3_LostFocus()
+    Run Worksheets("SKleben").Bogen_erstellen
+End Sub
 Private Sub TextBox4_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Vor-/Nachsatz alternatives Bogenformat Länge
     Select Case KeyAscii
       Case 48 To 57
       Case Else: KeyAscii = 0
     End Select
+    Run Worksheets("SKleben").Bogen_erstellen
+End Sub
+Private Sub TextBox4_LostFocus()
+    Run Worksheets("SKleben").Bogen_erstellen
 End Sub
 Private Sub TextBox5_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Vor-/Nachsatz alternatives Bogenformat Grammatur
@@ -198,7 +201,7 @@ End Sub
 Sub Materialauswahl()
     'Materialauswahl für eingekaufte Bögen
     Dim intI As Integer
-        If Worksheets("SKleben").Range("B36") = "5" Then
+        If Worksheets("SKleben").Range("B36") = "7" Then
         Worksheets("Kleben").Rows("6").Hidden = False 'alternativer Bogen, Eingaben aktivieren
         For intI = 3 To 6
         With OLEObjects("TextBox" & intI)

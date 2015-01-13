@@ -28,6 +28,7 @@ Sub Cello_alternativ()
         Worksheets("Buchdecke").Rows("13:13").Hidden = False
         Else
         Worksheets("Buchdecke").Rows("13:13").Hidden = True
+        Worksheets("Buchdecke").Range("D13:G13").Value = 0
     End If
 End Sub
 

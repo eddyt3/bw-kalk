@@ -47,139 +47,86 @@ Sub KlebenAnzeige()
     End If
     Worksheets("SKleben").Range("B3") = anzeige
 End Sub
-Sub Bogen_erstellen_brutto()
-'unused
-'volle Ausnutzung des Bogens
-On Error Resume Next
-Dim intHline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien u. Zählervar.
-Dim intBgH, intBgW, intBgHoffset, intBgVoffset As Integer 'Bogenmaße u. Offsets
-Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Versatzsumme
-Dim rngBereich As Range, shpBogen As Shape ' Bereichauswahl f. Gruppierung
-intBgW = Worksheets("SKleben").Range("J49")
-intBgH = Worksheets("SKleben").Range("J50")
-intBgHoffset = Worksheets("SKleben").Range("J51")
-intBgVoffset = Worksheets("SKleben").Range("J52")
-' Anzahl d. Linien ermitteln
-If Worksheets("SKleben").Range("F49") = 1 Then
-    intHline = Worksheets("SKleben").Range("F51") - 1
-    intVline = Worksheets("SKleben").Range("F52") - 1
-    intHpixel = intBgW / Worksheets("SKleben").Range("F51")
-    intVpixel = intBgH / Worksheets("SKleben").Range("F52")
-    Else
-    intHline = Worksheets("SKleben").Range("G51") - 1
-    intVline = Worksheets("SKleben").Range("G52") - 1
-    intHpixel = intBgW / Worksheets("SKleben").Range("51")
-    intVpixel = intBgH / Worksheets("SKleben").Range("G52")
-End If
-' Bogen zeichnen
-    Worksheets("Kleben").Shapes.AddShape Type:=msoShapeRectangle, Left:=intBgHoffset, _
-    Top:=intBgVoffset, Width:=intBgW, Height:=intBgH
-If intHline > 0 Then
-    intHpixelSum = intHpixel
-    For intHnumber = 1 To intHline
-        Worksheets("Kleben").Shapes.AddShape Type:=msoShapeRectangle, Left:=(intBgHoffset + intHpixelSum), _
-        Top:=intBgVoffset, Width:=0.5, Height:=intBgH
-        intHpixelSum = intHpixelSum + intHpixel
-    Next
-End If
-If intVline > 0 Then
-    intVpixelSum = intVpixel
-    For intVnumber = 1 To intVline
-        Worksheets("Kleben").Shapes.AddShape Type:=msoShapeRectangle, Left:=intBgHoffset, _
-        Top:=(intBgVoffset + intVpixelSum), Width:=intBgW, Height:=0.5
-        intVpixelSum = intVpixelSum + intVpixel
-    Next
-End If
-End Sub
-Sub Bogen_erstellen_netto()
-'Originalnutzenverteilung
-On Error Resume Next
-Dim intHline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien u. Zählervar.
-Dim intBgH, intBgW, intBgHoffset, intBgVoffset As Integer 'Bogenmaße u. Offsets
-Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Versatzsumme
-' alle Autoformen löschen
-'If Worksheets("Kleben").Shapes(intIndex).Type = msoShapeRectangle Then
-'    Worksheets("Kleben").Shapes(intIndex).Delete
-'End If
-If Worksheets("Kleben").CheckBox1.Value = True And Worksheets("SKleben").Range("C33") = 1 Then
-    Dim shpShape As Shape
+Sub Bogen_erstellen()
+    'Originalnutzenverteilung
+    On Error Resume Next
+    Dim intHline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien u. Zählervar.
+    Dim intBgH, intBgW, intBgHpx, intBgWpx, intBgHoffset, intBgVoffset As Integer 'Bogenmaße u. Offsets
+    Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Versatzsumme
+    ' alle Autoformen löschen
+    'If Worksheets("Kleben").Shapes(intIndex).Type = msoShapeRectangle Then
+    '    Worksheets("Kleben").Shapes(intIndex).Delete
+    'End If
+    If Worksheets("Kleben").CheckBox1.Value = True And Worksheets("SKleben").Range("C33") = 1 Then
+        Dim shpShape As Shape
         For Each shpShape In Worksheets("Kleben").Shapes
             If shpShape.Type = msoAutoShape Then
                 shpShape.Delete
             End If
         Next shpShape
-    intBgW = Worksheets("SKleben").Range("J49")
-    intBgH = Worksheets("SKleben").Range("J50")
-    intBgHoffset = Worksheets("SKleben").Range("J51")
-    intBgVoffset = Worksheets("SKleben").Range("J52")
-    If Worksheets("SKleben").Range("G46") = 0 Then 'alternative Laufrichtung prüfen
-            ' Anzahl d. Linien ermitteln bei optimaler Nutzenverteilung
-            If Worksheets("SKleben").Range("F49") = 1 Then
-                intHline = Worksheets("SKleben").Range("F51")
-                intVline = Worksheets("SKleben").Range("F52")
-                intHpixel = Worksheets("SKleben").Range("K56")
-                intVpixel = Worksheets("SKleben").Range("K57")
-                Else
-                intHline = Worksheets("SKleben").Range("G51")
-                intVline = Worksheets("SKleben").Range("G52")
-                intHpixel = Worksheets("SKleben").Range("K57")
-                intVpixel = Worksheets("SKleben").Range("K56")
-            End If
+        intBgW = Worksheets("SKleben").Range("B37")
+        intBgH = Worksheets("SKleben").Range("C37")
+        intBgHoffset = Worksheets("SKleben").Range("J51")
+        intBgVoffset = Worksheets("SKleben").Range("J52")
+        intHpixel = Worksheets("SKleben").Range("K57")
+        intVpixel = Worksheets("SKleben").Range("K56")
+        If intBgW > intBgH Then 'Breitbahn
+            intBgWpx = Worksheets("SKleben").Range("J49")
+            intBgHpx = Worksheets("SKleben").Range("J50")
+            intHline = Worksheets("SKleben").Range("F51")
+            intVline = Worksheets("SKleben").Range("F52")
+        Else 'Schmalbahn
+            intBgWpx = Worksheets("SKleben").Range("K49")
+            intBgHpx = Worksheets("SKleben").Range("K50")
+            intHline = Worksheets("SKleben").Range("G51")
+            intVline = Worksheets("SKleben").Range("G52")
+        End If
+        ' Bogen zeichnen
+            Set shpShape = Worksheets("Kleben").Shapes.AddShape(Type:=msoShapeRectangle, Left:=intBgHoffset, _
+            Top:=intBgVoffset, Width:=intBgWpx, Height:=intBgHpx)
+            With shpShape.Fill
+                .ForeColor.RGB = RGB(255, 153, 0)
+                .Solid
+            End With
+            With shpShape.Shadow
+                .Type = msoShadow2
+            End With
+        'Nutzen zeichnen
+        If intHline > 0 Then
+            intHpixelSum = intHpixel
+            For intHnumber = 1 To intHline
+                Worksheets("Kleben").Shapes.AddShape Type:=msoShapeRectangle, Left:=(intBgHoffset + intHpixelSum), _
+                Top:=intBgVoffset, Width:=0.2, Height:=(intVpixel * intVline)
+                intHpixelSum = intHpixelSum + intHpixel
+            Next
+            Else
+            MsgBox "Achtung, das Bogenformat f. Vor-, Nachsatz ist zu klein!"
+        End If
+        If intVline > 0 Then
+            intVpixelSum = intVpixel
+            For intVnumber = 1 To intVline
+                Worksheets("Kleben").Shapes.AddShape Type:=msoShapeRectangle, Left:=intBgHoffset, _
+                Top:=(intBgVoffset + intVpixelSum), Width:=(intHpixel * intHline), Height:=0.2
+                intVpixelSum = intVpixelSum + intVpixel
+            Next
+            Else
+            MsgBox "Achtung, das Bogenformat f. Vor-, Nachsatz ist zu klein!"
+        End If
+        'Auswahl aller Shapes im Bereich u. Gruppierung
+        '   Set rngBereich = Range("H14:L27")
+        '   For Each shpBogen In Worksheets("Kleben").Shapes
+        '      If shpBogen.Top > rngBereich.Top And shpBogen.Height < rngBereich.Height Then
+        '         If shpBogen.Left > rngBereich.Left And shpBogen.Width < rngBereich.Width Then
+        '            shpBogen.Group
+        '         End If
+        '      End If
+        '   Next
         Else
-        ' Anzahl d. Linien ermitteln bei alternativer Laufrichtung
-            If Worksheets("SKleben").Range("F93") = 1 Then
-                intHline = Worksheets("SKleben").Range("G51")
-                intVline = Worksheets("SKleben").Range("G52")
-                intHpixel = Worksheets("SKleben").Range("K57")
-                intVpixel = Worksheets("SKleben").Range("K56")
-                Else
-                intHline = Worksheets("SKleben").Range("F51")
-                intVline = Worksheets("SKleben").Range("F52")
-                intHpixel = Worksheets("SKleben").Range("K56")
-                intVpixel = Worksheets("SKleben").Range("K57")
-            End If
     End If
-    ' Bogen zeichnen
-        Set shpShape = Worksheets("Kleben").Shapes.AddShape(Type:=msoShapeRectangle, Left:=intBgHoffset, _
-        Top:=intBgVoffset, Width:=intBgW, Height:=intBgH)
-        With shpShape.Fill
-            .ForeColor.RGB = RGB(255, 153, 0)
-            .Solid
-        End With
-        With shpShape.Shadow
-            .Type = msoShadow2
-        End With
-    'Nutzen zeichnen
-    If intHline > 0 Then
-        intHpixelSum = intHpixel
-        For intHnumber = 1 To intHline
-            Worksheets("Kleben").Shapes.AddShape Type:=msoShapeRectangle, Left:=(intBgHoffset + intHpixelSum), _
-            Top:=intBgVoffset, Width:=0.2, Height:=(intVpixel * intVline)
-            intHpixelSum = intHpixelSum + intHpixel
-        Next
-        Else
-        MsgBox "Achtung, das Bogenformat f. Vor-, Nachsatz ist zu klein!"
-    End If
-    If intVline > 0 Then
-        intVpixelSum = intVpixel
-        For intVnumber = 1 To intVline
-            Worksheets("Kleben").Shapes.AddShape Type:=msoShapeRectangle, Left:=intBgHoffset, _
-            Top:=(intBgVoffset + intVpixelSum), Width:=(intHpixel * intHline), Height:=0.2
-            intVpixelSum = intVpixelSum + intVpixel
-        Next
-        Else
-        MsgBox "Achtung, das Bogenformat f. Vor-, Nachsatz ist zu klein!"
-    End If
-    'Auswahl aller Shapes im Bereich u. Gruppierung
-    '   Set rngBereich = Range("H14:L27")
-    '   For Each shpBogen In Worksheets("Kleben").Shapes
-    '      If shpBogen.Top > rngBereich.Top And shpBogen.Height < rngBereich.Height Then
-    '         If shpBogen.Left > rngBereich.Left And shpBogen.Width < rngBereich.Width Then
-    '            shpBogen.Group
-    '         End If
-    '      End If
-    '   Next
-    Else
-End If
+    With Worksheets("Kleben").Shapes("Textfeld 23")
+        .Left = intBgHoffset - 80
+        .Top = intBgVoffset + 50
+        .Locked = True
+    End With
 End Sub
 
