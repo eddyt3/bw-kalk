@@ -169,28 +169,55 @@ Sub Loesche_Zeile_wenn_best_String()
     MsgBox "Fertig Master!" & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
 End Sub
 
-Sub Loesche_LeereZeilen()
+Sub Loesche_markierteZeilen_Spalte1_leer()
     'Löscht alle Zeilen ohne Wert in erster Spalte
     Dim rngC As Range
     Dim strSH As String
-    Dim a, b, FRow, LRow, FColumn, LColumn, intL, intPosS, intPosH, tMin As Integer
+    Dim a, b, FRow, LRow, FColumn, LColumn, intL, intPosS, intPosH, tMin  As Integer
     Dim t, tSumSec, tSec As Double
     t = Timer
     FRow = Range(Selection.Address).Row
     LRow = Range(Selection.Address).Row + Selection.Rows.count - 1
-    FColumn = Range(Selection.Address).Column
-    LColumn = Range(Selection.Address).Column + Selection.Columns.count - 1
+    Zeilenzahl = LRow - FRow + 1
     Application.ScreenUpdating = False
     For a = LRow To FRow Step -1
         If ActiveSheet.Cells(a, 1) = "" Then
-        ActiveSheet.Rows(a).Delete
+            ActiveSheet.Rows(a).Delete
+            b = b + 1
         End If
     Next
     Application.ScreenUpdating = True
     tSumSec = Timer - t
     tMin = CInt(tSumSec / 60)
     tSec = tSumSec - Fix(tSumSec)
-    MsgBox "Fertig Master!" & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
+    MsgBox "Fertig Master!" & vbLf & vbLf & b & " von " & Zeilenzahl & " gelöscht." _
+    & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
 End Sub
-Option Explicit
+Sub Loesche_markierteZeilen_SpalteX_leer()
+    'Löscht alle Zeilen ohne Wert in Spalte X
+    Dim rngC As Range
+    Dim strSH As String
+    Dim a, b, FRow, LRow, intL, intPosS, intPosH, tMin, ZSpalte As Integer
+    Dim t, tSumSec, tSec As Double
+    t = Timer
+    FRow = Range(Selection.Address).Row
+    LRow = Range(Selection.Address).Row + Selection.Rows.count - 1
+    Zeilenzahl = LRow - FRow + 1
+    ZSpalte = Application.InputBox(Prompt:="Welche Spalte soll verglichen werden?" & vbLf & vbLf _
+    & "(Bitte Spalte als Zahl eingeben)", Title:="Vergleichsspalte", Type:=1)
+    b = 0
+    Application.ScreenUpdating = False
+    For a = LRow To FRow Step -1
+        If ActiveSheet.Cells(a, ZSpalte) = "" Then
+            ActiveSheet.Rows(a).Delete
+            b = b + 1
+        End If
+    Next
+    Application.ScreenUpdating = True
+    tSumSec = Timer - t
+    tMin = CInt(tSumSec / 60)
+    tSec = tSumSec - Fix(tSumSec)
+    MsgBox "Fertig Master!" & vbLf & vbLf & b & " von " & Zeilenzahl & " gelöscht." _
+    & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
+End Sub
 
