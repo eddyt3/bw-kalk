@@ -41,9 +41,8 @@ Private Sub CommandButton1_Click()
 End Sub
 Sub Leimart()
 ' Auswahl Leimart
-' 20140422
+' 20150114
     ' Auswahl Leimart PUR
-    On Error Resume Next
     If ComboBox5.ListIndex = 0 Then
         Worksheets("Binden").Range("D3") = ComboBox5.ListIndex + 1
         Worksheets("Binden").ComboBox1.ListFillRange = "Material!D9:D13" 'Auswahl PUR Kleber
@@ -56,9 +55,9 @@ Sub Leimart()
         Worksheets("Binden").ComboBox1.ListFillRange = "Material!D14:D18" 'Auswahl HM Kleber
         Worksheets("Binden").ComboBox1.ListIndex = 0
         Worksheets("Binden").ComboBox1.LinkedCell = "Material!B8" 'Ausgabe Leimname
-        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D43" 'kein Reiniger
-        Worksheets("Binden").ComboBox4.ListIndex = 0
-        Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37" 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'Reiniger
+        Worksheets("Binden").ComboBox4.ListIndex = 0 'Reiniger
+        Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
     End If
     ' Auswahl Leimart Hotmelt
     If ComboBox5.ListIndex = 1 Then
@@ -66,16 +65,16 @@ Sub Leimart()
         Worksheets("Binden").ComboBox1.ListFillRange = "Material!D14:D18"
         Worksheets("Binden").ComboBox1.ListIndex = 0
         Worksheets("Binden").ComboBox1.LinkedCell = "Material!B8"
-        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D43" 'kein Reiniger
-        Worksheets("Binden").ComboBox4.ListIndex = 0
-        Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37" 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'Reiniger
+        Worksheets("Binden").ComboBox4.ListIndex = 5 'kein Reiniger
+        Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
     Else
         Worksheets("Binden").ComboBox1.ListFillRange = "Material!D9:D13"
         Worksheets("Binden").ComboBox1.ListIndex = 0
         Worksheets("Binden").ComboBox1.LinkedCell = "Material!B8"
-        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'Auswahl PUR Reiniger
-        Worksheets("Binden").ComboBox4.ListIndex = 0
-        Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37" 'Ausgabe PUR Reiniger
+        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'Reiniger
+        Worksheets("Binden").ComboBox4.ListIndex = 5 'kein Reiniger
+        Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
     End If
     Worksheets("Binden").ComboBox2.ListFillRange = "Material!D26:D36"
     Worksheets("Binden").ComboBox2.ListIndex = 0
@@ -83,7 +82,7 @@ Sub Leimart()
 End Sub
 Sub Produktart()
 ' Broschüre, Buchblock, Ableimen
-' 20140623
+' 20150114
     Dim intArt As Integer
     intArt = Worksheets("SBinden").Range("B34")
     Select Case intArt
@@ -101,26 +100,26 @@ Sub Produktart()
         Worksheets("Binden").ComboBox3.ListFillRange = "Material!D52:D55" 'Rückenstoff
         Worksheets("Binden").ComboBox3.LinkedCell = "Material!B51"
         Worksheets("Binden").ComboBox3.ListIndex = 0 'Rücken ohne Stoff
-        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'Reiniger
         Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
         Worksheets("Binden").ComboBox4.ListIndex = 5 'kein Reiniger
     Case 2
         'Buchblock
-        'Hotmelt (Standardleim), mit Seitenleim, mit Fälzel, mit Vorsatz ohne Fadenheften
-        Worksheets("Binden").ComboBox5.ListIndex = 1 'Hotmelt auswählen
+        'PUR (Standardleim), mit Seitenleim, mit Fälzel, mit Vorsatz ohne Fadenheften
+        Worksheets("Binden").ComboBox5.ListIndex = 0 'PUR auswählen
         Worksheets("Binden").Range("D3") = ComboBox5.ListIndex + 1
-        Worksheets("Binden").ComboBox1.ListFillRange = "Material!D14:D18" 'Hotmelt Leimsorte
+        Worksheets("Binden").ComboBox1.ListFillRange = "Material!D9:D13" 'PUR Leimsorte
         Worksheets("Binden").ComboBox1.LinkedCell = "Material!B8"
-        Worksheets("Binden").ComboBox1.ListIndex = 0 'Topmelt
+        Worksheets("Binden").ComboBox1.ListIndex = 0 'PURmelt QR3315
         Worksheets("Binden").ComboBox2.ListFillRange = "Material!D26:D36" 'Seitenleim
         Worksheets("Binden").ComboBox2.ListIndex = 0 'mit Seitenleim
         Worksheets("Binden").ComboBox2.LinkedCell = "Material!B25"
         Worksheets("Binden").ComboBox3.ListFillRange = "Material!D52:D55" 'Rückenstoff
         Worksheets("Binden").ComboBox3.LinkedCell = "Material!B51"
         Worksheets("Binden").ComboBox3.ListIndex = 3 'Rücken mit Krepp
-        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D43" 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'Reiniger
         Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
-        Worksheets("Binden").ComboBox4.ListIndex = 0 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListIndex = 5 'kein Reiniger
     Case 3
         'Buchblock fadengeheftet
         'Hotmelt (Standardleim), mit Seitenleim, mit Fälzel, mit Vorsatz und Fadenheften
@@ -135,9 +134,9 @@ Sub Produktart()
         Worksheets("Binden").ComboBox3.ListFillRange = "Material!D52:D55" 'Rückenstoff
         Worksheets("Binden").ComboBox3.LinkedCell = "Material!B51"
         Worksheets("Binden").ComboBox3.ListIndex = 3 'Rücken mit Krepp
-        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D43" 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'Reiniger
         Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
-        Worksheets("Binden").ComboBox4.ListIndex = 0 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListIndex = 5 'kein Reiniger
     Case 4
         'Ableimen
         'Hotmelt (Katalogleim), 1/4 Leimeinsatz, ohne Seitenleim, ohne Fälzel
@@ -152,9 +151,9 @@ Sub Produktart()
         Worksheets("Binden").ComboBox3.ListFillRange = "Material!D52:D55" 'Rückenstoff
         Worksheets("Binden").ComboBox3.LinkedCell = "Material!B51"
         Worksheets("Binden").ComboBox3.ListIndex = 0 'Rücken ohne Stoff
-        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D43" 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'Reiniger
         Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
-        Worksheets("Binden").ComboBox4.ListIndex = 0 'kein Reiniger
+        Worksheets("Binden").ComboBox4.ListIndex = 5 'kein Reiniger
     End Select
     Call Stoff
 End Sub

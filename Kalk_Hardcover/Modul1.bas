@@ -68,9 +68,9 @@ Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Anzeigen d. Produktangaben
     On Error Resume Next
     Dim format, Gewicht, Dicke As String
-        format = Worksheets("Eingabe").CommandButton3.Caption
-        Dicke = Range("Eingabe!C45")
-        Gewicht = Range("Eingabe!C46")
+        format = Worksheets("SEingabe").Range("B127") & " x " & Worksheets("SEingabe").Range("C127") & "cm"
+        Dicke = Worksheets("SEingabe").Range("D127")
+        Gewicht = Worksheets("SEingabe").Range("B123")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
-        & vbLf & vbLf & "Stärke: " & vbLf & Dicke & " mm" & vbLf & vbLf & "Gewicht: " & vbLf & Gewicht & " g"
+        & vbLf & vbLf & "Stärke: " & vbLf & Dicke & "cm" & vbLf & vbLf & "Gewicht: " & vbLf & Gewicht & "g"
 End Sub

@@ -7,13 +7,11 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-
-
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
 Private Sub Worksheet_Activate()
-    On Error Resume Next
+    'On Error Resume Next
     Call produkt
     Call Kommentar
     Run Worksheets("SVerpacken").draw_all
@@ -79,11 +77,17 @@ Private Sub ComboBox1_DropButtonClick()
     Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub ComboBox2_Change()
+    '20150115
     'Verpackungsart
-    On Error Resume Next
     Call Verpackungseinheit
     Run Worksheets("SVerpacken").draw_all
     Call Kommentar
+    'Prüfung ob Ex. in VE passt
+    If Worksheets("SVerpacken").Range("G25") = 0 Then
+        MsgBox "Achtung!" & vbLf & vbLf & "Verpackungsmaterial < Produkt!"
+        Worksheets("Verpacken").ComboBox2.BackColor = &HFF 'rot &H000000FF
+    Else: Worksheets("Verpacken").ComboBox2.BackColor = vbYellow 'gelb &H0000FFFF
+    End If
 End Sub
 Private Sub ComboBox3_Change()
     'Palettendeckelauswahl
@@ -245,4 +249,7 @@ Sub Kommentar()
     VExemplare = Worksheets("SVerpacken").Range("G45")
     Worksheets("Verpacken").Label2.Caption = "Volle Einzelpalette:" & Chr(10) & VPalette & " kg" & Chr(10) & VExemplare & " Ex."
 End Sub
+
+'Standardwerte
+'Einwegpalette Tausch 63x88
 

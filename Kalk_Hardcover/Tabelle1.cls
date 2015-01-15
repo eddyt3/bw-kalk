@@ -11,6 +11,19 @@ Attribute VB_Exposed = True
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
+Private Sub Worksheet_Activate()
+        Run Worksheets("SBuchdecke").Thickness
+End Sub
+Sub Worksheet_Change(ByVal Target As Excel.Range)
+    Application.ScreenUpdating = False
+        On Error Resume Next
+        Call Fehlermeldung
+        Run Worksheets("Zusammentragen").Zusammentragen
+        'Run Worksheets("Falzen").Falzen
+        Run Worksheets("SBuchdecke").Beschriftung
+    Application.ScreenUpdating = True
+End Sub
+
 Sub ComboBox2_Change()
     'Bindeseite
     Run Worksheets("SKleben").kleben
@@ -40,6 +53,69 @@ Sub ComboBox11_Change()
 'Bogen D, Art
     'Run Worksheets("Falzen").Falzen
 End Sub
+Sub ComboBox13_Change()
+'Auswahl Leimart über Eingabeseite
+'20140422
+    On Error Resume Next
+    Run Worksheets("Binden").Leimart
+End Sub
+Sub ComboBox14_Change()
+'Auswahl Produktart (Broschüre, Hardcover, Ableimen)
+'20140424
+    'On Error Resume Next
+    Dim intArt As Integer
+    intArt = ThisWorkbook.Worksheets("SBinden").Range("B34").Value
+    Select Case intArt
+    Case 1
+        'Broschüre
+        ThisWorkbook.Worksheets("Kleben").Visible = False
+        CheckBox9.Value = False 'Kalk. Kleben deaktiviert
+        Worksheets("Eingabe").Range("G67") = "0"
+        CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
+        Worksheets("Eingabe").Range("G71") = "0"
+        Worksheets("Fadenheften").Visible = False
+        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
+        Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
+    Case 2
+        'Hardcover
+        ThisWorkbook.Worksheets("Kleben").Visible = True
+        CheckBox9.Value = True 'Kalk. Kleben aktiviert
+        Worksheets("Eingabe").Range("G67") = "1"
+        CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
+        Worksheets("Eingabe").Range("G71") = "0"
+        Worksheets("Fadenheften").Visible = False
+        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
+        Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
+    Case 3
+        'Hardcover fadengeheftet
+        ThisWorkbook.Worksheets("Kleben").Visible = True
+        CheckBox9.Value = True 'Kalk. Kleben aktiviert
+        Worksheets("Eingabe").Range("G67") = "1"
+        CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
+        Worksheets("Eingabe").Range("G71") = "1"
+        Worksheets("Fadenheften").Visible = True
+        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
+        Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
+    Case 4
+        'Ableimen
+        ThisWorkbook.Worksheets("Kleben").Visible = False
+        CheckBox9.Value = False 'Kalk. Kleben deaktiviert
+        Worksheets("Eingabe").Range("G67") = "0"
+        CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
+        Worksheets("Eingabe").Range("G71") = "0"
+        ThisWorkbook.Worksheets("Fadenheften").Visible = False
+        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
+        Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
+    End Select
+    Application.Run Worksheets("Binden").Produktart
+End Sub
+Private Sub ComboBox16_Change()
+'Buchrückenform
+    If Worksheets("SBuchdecke").Range("B38") = "4" Then
+        Worksheets("Einhängen").CheckBox2.Value = True 'Runden beim Einhängen aktivieren
+    Else: Worksheets("Einhängen").CheckBox2.Value = False
+    End If
+End Sub
 Sub CommandButton1_Click()
     Application.ScreenUpdating = False
         Call Fehlerpruefung
@@ -57,50 +133,6 @@ Sub CommandButton4_Click()
     Worksheets("Material").Visible = xlSheetVisible
     Worksheets("Material").Activate
     Worksheets("Material").Range("C5").Select
-End Sub
-Sub Worksheet_Change(ByVal Target As Excel.Range)
-    Application.ScreenUpdating = False
-        On Error Resume Next
-        Call Fehlermeldung
-        Run Worksheets("Zusammentragen").Zusammentragen
-        'Run Worksheets("Falzen").Falzen
-        Run Worksheets("SBuchdecke").Beschriftung
-    Application.ScreenUpdating = True
-End Sub
-Sub Fehlerpruefung()
-Attribute Fehlerpruefung.VB_ProcData.VB_Invoke_Func = " \n14"
-    Application.ScreenUpdating = False
-        On Error Resume Next
-        Call FormatMin
-        Call Fehlermeldung
-        If FFormat Like "" And FFormatMin Like "" Then
-                MsgBox ("Alle Eingaben scheinen richtig zu sein." & vbCrLf & vbCrLf & _
-                "Hinweis: Dies ist keine Auftragsprüfung!")
-                Else
-        End If
-    Application.ScreenUpdating = True
-End Sub
-Sub Fehlermeldung()
-Attribute Fehlermeldung.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
-    If FFormat Like "" And FFormatMin Like "" Then
-        TextBox1.Visible = False
-        Else
-        With TextBox1
-            .Visible = True
-            .Font = "Verdana"
-            .Font.Size = 10
-            .Font.Bold = True
-            .BorderColor = vbRed
-            .BackColor = vbRed
-            .Height = 120
-            .Width = 525
-            .MaxLength = 600
-            .WordWrap = False
-            .Value = "Fehlermeldungen:" & vbCrLf & "=============" & vbCrLf & FFormat & vbCrLf & FFormatMin
-            '.Locked = True
-        End With
-    End If
 End Sub
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
@@ -279,69 +311,6 @@ Sub CheckBox12_Click()
         End If
     Application.ScreenUpdating = True
 End Sub
-Sub ComboBox13_Change()
-'Auswahl Leimart über Eingabeseite
-'20140422
-    On Error Resume Next
-    Run Worksheets("Binden").Leimart
-End Sub
-Sub ComboBox14_Change()
-'Auswahl Produktart (Broschüre, Buchblock, Ableimen)
-'20140424
-    'On Error Resume Next
-    Dim intArt As Integer
-    intArt = ThisWorkbook.Worksheets("SBinden").Range("B34").Value
-    Select Case intArt
-    Case 1
-        'Broschüre
-        ThisWorkbook.Worksheets("Kleben").Visible = False
-        CheckBox9.Value = False 'Kalk. Kleben deaktiviert
-        Worksheets("Eingabe").Range("G67") = "0"
-        CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
-        Worksheets("Eingabe").Range("G71") = "0"
-        Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
-        Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
-    Case 2
-        'Buchblock
-        ThisWorkbook.Worksheets("Kleben").Visible = True
-        CheckBox9.Value = True 'Kalk. Kleben aktiviert
-        Worksheets("Eingabe").Range("G67") = "1"
-        CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
-        Worksheets("Eingabe").Range("G71") = "0"
-        Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
-        Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
-    Case 3
-        'Buchblock fadengeheftet
-        ThisWorkbook.Worksheets("Kleben").Visible = True
-        CheckBox9.Value = True 'Kalk. Kleben aktiviert
-        Worksheets("Eingabe").Range("G67") = "1"
-        CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
-        Worksheets("Eingabe").Range("G71") = "1"
-        Worksheets("Fadenheften").Visible = True
-        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
-        Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
-    Case 4
-        'Ableimen
-        ThisWorkbook.Worksheets("Kleben").Visible = False
-        CheckBox9.Value = False 'Kalk. Kleben deaktiviert
-        Worksheets("Eingabe").Range("G67") = "0"
-        CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
-        Worksheets("Eingabe").Range("G71") = "0"
-        ThisWorkbook.Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
-        Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
-    End Select
-    Application.Run Worksheets("Binden").Produktart
-End Sub
-Private Sub ComboBox16_Change()
-'Buchrückenform
-    If Worksheets("SBuchdecke").Range("B38") = "4" Then
-        Worksheets("Einhängen").CheckBox2.Value = True 'Runden beim Einhängen aktivieren
-    Else: Worksheets("Einhängen").CheckBox2.Value = False
-    End If
-End Sub
 Private Sub TextBox3_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Buchdecke, alternative Pappstärke mit Nachkommastelle
     Select Case KeyAscii
@@ -350,27 +319,71 @@ Private Sub TextBox3_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     End Select
     Run Worksheets("SBuchdecke").Beschriftung
 End Sub
+Private Sub TextBox3_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+   If KeyCode = vbKeyTab Then TextBox6.Activate
+End Sub
 Private Sub TextBox4_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Produktbreite
     Select Case KeyAscii
-      Case 48 To 57
+      Case 48 To 57, 43 To 46
       Case Else: KeyAscii = 0
     End Select
+End Sub
+Private Sub TextBox4_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+   If KeyCode = vbKeyTab Then TextBox5.Activate
 End Sub
 Private Sub TextBox5_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Produktlänge
     Select Case KeyAscii
+      Case 48 To 57, 43 To 46
+      Case Else: KeyAscii = 0
+    End Select
+End Sub
+Private Sub TextBox6_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
+' Bezug Nutzenanzahl
+    Select Case KeyAscii
       Case 48 To 57
       Case Else: KeyAscii = 0
     End Select
 End Sub
-'Private Sub TextBox6_Change(ByVal KeyAscii As MSForms.ReturnInteger)
-'' Bezug Nutzenanzahl
-'    Select Case KeyAscii
-'      Case 48 To 57
-'      Case Else: KeyAscii = 0
-'    End Select
-'End Sub
+Private Sub TextBox6_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+   If KeyCode = vbKeyTab Then TextBox4.Activate
+End Sub
 Sub test()
     Run Worksheets("Binden").Produktart
 End Sub
+Sub Fehlerpruefung()
+    Application.ScreenUpdating = False
+        On Error Resume Next
+        Call FormatMin
+        Call Fehlermeldung
+        If FFormat Like "" And FFormatMin Like "" Then
+                MsgBox ("Alle Eingaben scheinen richtig zu sein." & vbCrLf & vbCrLf & _
+                "Hinweis: Dies ist keine Auftragsprüfung!")
+                Else
+        End If
+    Application.ScreenUpdating = True
+End Sub
+Sub Fehlermeldung()
+    On Error Resume Next
+    If FFormat Like "" And FFormatMin Like "" Then
+        TextBox1.Visible = False
+        Else
+        With TextBox1
+            .Visible = True
+            .Font = "Verdana"
+            .Font.Size = 10
+            .Font.Bold = True
+            .BorderColor = vbRed
+            .BackColor = vbRed
+            .Height = 120
+            .Width = 525
+            .MaxLength = 600
+            .WordWrap = False
+            .Value = "Fehlermeldungen:" & vbCrLf & "=============" & vbCrLf & FFormat & vbCrLf & FFormatMin
+            '.Locked = True
+        End With
+    End If
+End Sub
+
+
