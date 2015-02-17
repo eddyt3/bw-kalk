@@ -30,10 +30,10 @@ Public Function SummeWennFarbe(Bereich As Range, _
     
     'Zur automatischen Aktualisierung im Tabellenblatt den folgenden Term
     'anhängen: +(0*JETZT()) und durch F9 drücken die Funktion aktualisieren
-    'Also z.B. wie folgt: =SummeWennFarbe(A1:A10;A1)+(0*JETZT())
-    Dim intColor        As Integer
-    Dim lngI            As Long
-    Dim Summe           As Variant
+    'Also z.B. wie folgt:
+    Dim intColor As Integer
+    Dim lngI As Long
+    Dim Summe As Variant
    If Summe_Bereich Is Nothing Then Set Summe_Bereich = Bereich
    If bolFont Then
       If IsObject(SuchFarbe) Then
