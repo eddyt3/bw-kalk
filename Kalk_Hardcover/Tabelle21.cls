@@ -137,9 +137,9 @@ Private Sub ComboBox17_Change()
 End Sub
 Private Sub CommandButton1_Click()
     'Reset Ex./VE auf Standard
-    '20140711
+    '20150216
     If Worksheets("Material").Range("C121") < 14 Then
-        Worksheets("Verpacken").Range("D6").FormulaLocal = "=WENN(ODER(Material!C121=14;Material!C121=13;Material!C121=12);1;SVerpacken!G27)"
+        Worksheets("Verpacken").Range("D6").FormulaLocal = "=WENN(ODER(Material!C121=14;Material!C121=13;Material!C121=12);1;WENN(SVerpacken!B121<SVerpacken!G27;SVerpacken!B121;SVerpacken!G27))"
     End If
     Call Kommentar
 End Sub
