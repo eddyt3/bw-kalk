@@ -7,12 +7,17 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+'Standardwerte
+'Cello Kunde geliefert
 
+Private Sub Worksheet_Activate()
+    Run Worksheets("SBuchdecke").Beschriftung
+End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
     Run Worksheets("SBuchdecke").Beschriftung
 End Sub
 Private Sub ComboBox1_Change()
-    Run Worksheets("Buchdecke").Cello_alternativ
+    Run ThisWorkbook.Sheets("Buchdecke").Cello_alternativ
 End Sub
 Private Sub CommandButton1_Click()
     'Materialseite einblenden
@@ -34,5 +39,3 @@ Sub Cello_alternativ()
         Worksheets("Eingabe").TextBox21.Visible = False
     End If
 End Sub
-'Standardwerte
-'Cello Kunde geliefert
