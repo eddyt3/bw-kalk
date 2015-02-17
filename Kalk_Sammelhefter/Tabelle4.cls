@@ -17,4 +17,10 @@ End Sub
 Private Sub Worksheet_Activate()
     Run Worksheets("SSammelheften").Zusammentragen
 End Sub
-
+Private Sub CommandButton1_Click()
+    'Reset V auf Standard
+    '20150112
+    If Worksheets("Sammelheften").Range("D4").HasFormula = False Then
+        Worksheets("Sammelheften").Range("D4").FormulaLocal = "=SSammelheften!E51"
+    End If
+End Sub
