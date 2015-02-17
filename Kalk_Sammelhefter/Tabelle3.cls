@@ -10,7 +10,7 @@ Attribute VB_Exposed = True
 Sub Standertwerte_Sammelheften()
     '20140623
     Application.ScreenUpdating = False
-    Worksheets("SSammelheften").Range("I2:I21").Copy Destination:=Worksheets("Sammelheften").Range("K3")
+    Worksheets("SSammelheften").Range("I2:I22").Copy Destination:=Worksheets("Sammelheften").Range("K3")
     Application.ScreenUpdating = True
 End Sub
 Sub Zusammentragen()
