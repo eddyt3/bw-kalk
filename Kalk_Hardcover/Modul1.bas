@@ -14,7 +14,7 @@ Public Function Abrunden(Zahl) As Long
         If Zahl - Int(Zahl) < 0.5 Then
             Abrunden = Int(Zahl)
             Else
-            Aufrunden = Int(Zahl) + 1
+            Abrunden = Int(Zahl) + 1
         End If
     End If
 End Function
