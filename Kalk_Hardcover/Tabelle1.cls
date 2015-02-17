@@ -11,6 +11,9 @@ Attribute VB_Exposed = True
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
+'Standardwerte
+'Buchrücken gerade Schrenz 600g
+'Bindeseite lang
 Private Sub Worksheet_Activate()
         Run Worksheets("SBuchdecke").Thickness
 End Sub
@@ -111,9 +114,9 @@ Sub ComboBox14_Change()
 End Sub
 Private Sub ComboBox16_Change()
 'Buchrückenform
-    If Worksheets("SBuchdecke").Range("B38") = "4" Then
-        Worksheets("Einhängen").CheckBox2.Value = True 'Runden beim Einhängen aktivieren
-    Else: Worksheets("Einhängen").CheckBox2.Value = False
+    If ThisWorkbook.Sheets("SBuchdecke").Range("B38") = 4 Then
+        ThisWorkbook.Sheets("Einhängen").CheckBox2.Value = True 'Runden beim Einhängen aktivieren
+    Else: ThisWorkbook.Sheets("Einhängen").CheckBox2.Value = False
     End If
 End Sub
 Sub CommandButton1_Click()
