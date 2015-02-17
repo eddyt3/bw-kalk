@@ -11,6 +11,7 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Public VNFormatN, VNFormatB As String 'Vor-, Nachsatzformat f. Kleben
+
 Private Sub Worksheet_Activate()
     On Error Resume Next
     Run Worksheets("SKleben").Bogen_erstellen
@@ -77,12 +78,11 @@ Private Sub ComboBox1_DropButtonClick()
             Worksheets("Kleben").Rows("8:12").Hidden = False
             Worksheets("Kleben").Rows("7").Hidden = True
             Worksheets("Kleben").Range("D7:G7") = "0"
-            TextBox1.Visible = True 'Formatanzeige
-            TextBox8.Visible = False 'Nutzen gelieferte Bg.
-            CheckBox2.Visible = True 'Bg. ankleben
-            CheckBox3.Visible = True 'andere Laufrichtung
-            ComboBox4.Visible = True 'Materialauswahl
-            ComboBox4.Top = 66.75
+            Worksheets("Kleben").TextBox1.Visible = True 'Formatanzeige
+            Worksheets("Kleben").TextBox8.Visible = False 'Nutzen gelieferte Bg.
+            Worksheets("Kleben").CheckBox2.Visible = True 'Bg. ankleben
+            Worksheets("Kleben").ComboBox4.Visible = True 'Materialauswahl
+            Worksheets("Kleben").ComboBox4.Top = 66.75
             'ComboBox4.ListIndex = 0
             Run Worksheets("Kleben").Materialauswahl
         Else 'Kunde geliefert
@@ -90,17 +90,16 @@ Private Sub ComboBox1_DropButtonClick()
             Worksheets("Kleben").Rows("8:12").Hidden = True
             Worksheets("Kleben").Rows("7").Hidden = False
             'Worksheets("Kleben").Range("D11:G11") = "0"
-            TextBox1.Visible = False
+            Worksheets("Kleben").TextBox1.Visible = False
             For intI = 3 To 7
             With OLEObjects("TextBox" & intI)
                 .Visible = False
             End With
             Next
-            TextBox8.Visible = True 'Nutzen gelieferte Bg.
-            TextBox8.Top = 53.25
-            CheckBox2.Visible = True
-            CheckBox3.Visible = False
-            ComboBox4.Visible = False
+            Worksheets("Kleben").TextBox8.Visible = True 'Nutzen gelieferte Bg.
+            Worksheets("Kleben").TextBox8.Top = 53.25
+            Worksheets("Kleben").CheckBox2.Visible = True
+            Worksheets("Kleben").ComboBox4.Visible = False
             For Each shpShape In Worksheets("Kleben").Shapes
                 If shpShape.Type = msoAutoShape Then
                     shpShape.Delete
@@ -186,11 +185,11 @@ Private Sub TextBox8_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
 End Sub
 Sub VNFormat()
     '
-    'Berechnung Vor-, Nachsatzformat für Nutzenauswertung (Papierbestellung)
+    'Anzeige Vor-, Nachsatzformat Brutto/Netto (Papierbestellung)
     '
     On Error Resume Next
-    VNFormatN = Worksheets("SKleben").Range("B52") & " cm x " & Worksheets("SKleben").Range("C52") & " cm"
-    VNFormatB = Worksheets("SKleben").Range("B53") & " cm x " & Worksheets("SKleben").Range("C53") & " cm"
+        VNFormatN = Worksheets("SKleben").Range("C52") & " cm x " & Worksheets("SKleben").Range("B52") & " cm"
+        VNFormatB = Worksheets("SKleben").Range("C53") & " cm x " & Worksheets("SKleben").Range("B53") & " cm"
 End Sub
 Sub Maschinendaten()
     'MinMax Format Prüfen
