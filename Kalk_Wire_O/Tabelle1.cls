@@ -156,12 +156,12 @@ Private Sub ComboBox7_DropButtonClick()
     Run Worksheets("SSchneiden").Schneidbogen
     Application.ScreenUpdating = True
 End Sub
+Private Sub ComboBox8_DropButtonClick()
+    Call NutzenCheck_Folie
+End Sub
 Private Sub ComboBox12_DropButtonClick()
 'Nutzen Pappe
     Call NutzenCheck_Pappe
-End Sub
-Private Sub ComboBox8_DropButtonClick()
-    Call NutzenCheck_Folie
 End Sub
 Private Sub CommandButton1_Click()
 'Nutzen Folie
