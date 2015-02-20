@@ -119,6 +119,28 @@ Private Sub ComboBox16_Change()
     Else: ThisWorkbook.Sheets("Einhängen").CheckBox2.Value = False
     End If
 End Sub
+Private Sub ComboBox21_Change()
+'Auswahl Buchblockformat
+    If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
+        TextBox4.Visible = True
+        TextBox5.Visible = True
+        With Worksheets("Eingabe").Range("E9")
+            .Interior.ColorIndex = 6
+            .Value = "x"
+        End With
+        Worksheets("Eingabe").Range("F9") = "Sonderformat"
+    Else
+        ComboBox3.ListIndex = 0 'Standardformate nur mit 2mm Pappstärke
+        TextBox4.Visible = False
+        TextBox5.Visible = False
+        With Worksheets("Eingabe").Range("E9")
+            .Interior.ColorIndex = 0
+            .Value = ""
+        End With
+        Worksheets("Eingabe").Range("E9").Value = Worksheets("SEingabe").Range("G26").Value
+        Worksheets("Eingabe").Range("F9") = ""
+    End If
+End Sub
 Sub CommandButton1_Click()
     Application.ScreenUpdating = False
         Call Fehlerpruefung

@@ -16,6 +16,13 @@ Sub Thickness()
         Else
             Worksheets("Eingabe").TextBox3.Visible = False
         End If
+        If Worksheets("Eingabe").ComboBox3.ListIndex > 0 And Worksheets("SEingabe").Range("H26") = 1 Then
+            MsgBox ("Standardformate nur in 2mm Pappstärke vorrätig!")
+            Worksheets("Eingabe").Range("F9") = "Sonderformat"
+        End If
+        If Worksheets("Eingabe").ComboBox3.ListIndex = 0 And Worksheets("SEingabe").Range("H26") = 1 Then
+            Worksheets("Eingabe").Range("F9") = ""
+        End If
     Application.ScreenUpdating = True
 End Sub
 Sub Beschriftung()
