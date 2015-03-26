@@ -1,4 +1,5 @@
 Attribute VB_Name = "Modul2"
+Option Explicit
 Sub Verknuepfungen_Suchen()
 Dim rngGefundeneZelle As Range
 Dim intI%, intN%, intAbfrage%, intZähler%, intNamenAbfrage%, intLöschZähler%
@@ -71,7 +72,7 @@ Sub Verknuepfungen_aendern()
     'Beispiel - Verknüpfungen i. einer Arbeitsmappe ändern
     Dim wbkMappe As Workbook
     Dim varVLink As Variant
-    Dim I, e As Integer
+    Dim i, e As Integer
     Dim strPrefix, strPath, strFile, strRefFile As String
     
     strPath = ThisWorkbook.Path
@@ -87,11 +88,11 @@ Sub Verknuepfungen_aendern()
     varVLink = wbkMappe.LinkSources(xlExcelLinks)
     
     If Not IsEmpty(varVLink) Then
-        For I = 1 To UBound(varVLink)
-            e = InStrRev(varVLink(I), "\") + 1
+        For i = 1 To UBound(varVLink)
+            e = InStrRev(varVLink(i), "\") + 1
             'strRefFile = Mid(varVLink(i), e, 20) 'alternativ Referenzfilenamen auslesen
-            ThisWorkbook.ChangeLink varVLink(I), strPath & "\" & strRefFile, xlLinkTypeExcelLinks
-        Next I
+            ThisWorkbook.ChangeLink varVLink(i), strPath & "\" & strRefFile, xlLinkTypeExcelLinks
+        Next i
     End If
     MsgBox "Fertig Master!"
 End Sub
@@ -118,7 +119,7 @@ End Sub
 Sub Loesche_DoppleteZeilen()
     'doppelte Zeilen löschen
     Dim temp
-    Dim I, n, zn, ZSpalte, ZZeile, counter, tMin As Integer
+    Dim i, n, zn, ZSpalte, ZZeile, counter, tMin As Integer
     Dim Zeilenzahl As Long
     Dim t, tSumSec, tSec As Double
     t = Timer
@@ -131,14 +132,14 @@ Sub Loesche_DoppleteZeilen()
         Zeilenzahl = ActiveSheet.Cells(Rows.count, ZSpalte).End(xlUp).Row
     For n = ZZeile To Zeilenzahl
         temp = ActiveSheet.Cells(n, ZSpalte).Value
-            For I = n To Zeilenzahl
-                m = ActiveSheet.Cells(I + 1, ZSpalte).Value
-                Do While ActiveSheet.Cells(I + 1, ZSpalte).Value = temp
+            For i = n To Zeilenzahl
+                m = ActiveSheet.Cells(i + 1, ZSpalte).Value
+                Do While ActiveSheet.Cells(i + 1, ZSpalte).Value = temp
                     counter = counter + 1
-                    ActiveSheet.Cells(I + 1, ZSpalte).EntireRow.Delete
+                    ActiveSheet.Cells(i + 1, ZSpalte).EntireRow.Delete
                     Zeilenzahl = Zeilenzahl - 1
                 Loop
-            Next I
+            Next i
     Next n
     tSumSec = Timer - t
     tMin = CInt(tSumSec / 60)
@@ -220,4 +221,60 @@ Sub Loesche_markierteZeilen_SpalteX_leer()
     MsgBox "Fertig Master!" & vbLf & vbLf & b & " von " & Zeilenzahl & " gelöscht." _
     & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
 End Sub
+Sub List_Location_Size_for_all_VB_Buttons()
+    'Problem: unterschiedliche Größen der Buttons bei unterschiedlichen Bildschirmauflösungen
+    'Macro liest alle Buttonformate (Standard) aus
+    'den Code aus dem Direktbereich in die Workbook_Open() Sub übernehmen (Komma noch durch Punkt ersetzen)
+    'Danach werden bei jedem Öffnen die Buttons auf ihre Standardwerte zurückgesetzt unabhängig der aktuellen Bildschirmauflösung
+    Dim ShCounter As Long, Sh As Shape
+    Dim i As Integer
+    ShCounter = 0
+    DebugClear
+    'Debug.Print "fntSize=10"
+    DebugPrint "fntSize=10"
+    For i = 1 To Sheets.count - 1
+      With Sheets(i)
+       For Each Sh In .Shapes
+        If Sh.Type = msoOLEControlObject Then  'Only list VB buttons
+            ShCounter = ShCounter + 1
+    ' Code für Direktbereich
+    '        Debug.Print "WITH WorkSheets("; Chr(34); Sheets(i).Name; Chr(34); ")."; Sh.Name, "   '"; ShCounter
+    '        Debug.Print "   .Height="; Sh.Height;
+    '        Debug.Print ": .Width="; Sh.Width;
+    '        Debug.Print ": .Top="; Sh.Top;
+    '        Debug.Print ": .Left = "; Sh.Left;
+    '        Debug.Print ": .FontSize = fntSize"
+    '        Debug.Print "END WITH"
+    
+    'Code für Ausgabe in debug.log File, wenn Puffer Direktbereich zu klein
+            DebugPrint "WITH WorkSheets(" & Chr(34) & Sheets(i).Name & Chr(34) & ")." & Sh.Name & "   '" & ShCounter
+            DebugPrint "   .Height=" & Sh.Height & ": .Width=" & Sh.Width & ": .Top=" & Sh.Top & ": .Left = " & Sh.Left & ": .FontSize = fntSize"
+            DebugPrint "END WITH"
+    '
+         End If
+        Next Sh
+      End With
+    Next i
+    MsgBox "Fertig Master!" & vbLf & vbLf & ShCounter & " VB Buttonformate exportiert."
+End Sub
+Sub Test()
+'Test File Ausgabe
+   Dim i As Long
 
+   DebugClear
+   For i = 1 To 100
+      DebugPrint "Hello world.  " & Now
+   Next
+End Sub
+Sub DebugPrint(s As String)
+   Static fso As Object
+
+   If fso Is Nothing Then Set fso = CreateObject("Scripting.FileSystemObject")
+   With fso.OpenTextFile(ThisWorkbook.Path & "\debug.log", 8, True, -1)
+      .WriteLine s
+      .Close
+   End With
+End Sub
+Sub DebugClear()
+   CreateObject("Scripting.FileSystemObject").CreateTextFile ThisWorkbook.Path & "\debug.log", True, True
+End Sub

@@ -54,17 +54,17 @@ Sub Autoformen_loeschen_Alle()
 End Sub
 Sub Autoformen_loeschen_Bereich()
     'Autoformen in einem bestimmten Bereich löschen
-    Dim c As Range, sh As Shape
+    Dim c As Range, Sh As Shape
     FRow = Range(Selection.Address).Row
     LRow = Range(Selection.Address).Row + Selection.Rows.count - 1
     FColumn = Range(Selection.Address).Column
     LColumn = Range(Selection.Address).Column + Selection.Columns.count - 1
 
    Set c = Range(Cells(FRow, FColumn), Cells(LRow, LColumn))
-   For Each sh In ActiveSheet.Shapes
-      If sh.Top > c.Top And sh.Height < c.Height Then
-         If sh.Left > c.Left And sh.Width < c.Width Then
-            sh.Delete
+   For Each Sh In ActiveSheet.Shapes
+      If Sh.Top > c.Top And Sh.Height < c.Height Then
+         If Sh.Left > c.Left And Sh.Width < c.Width Then
+            Sh.Delete
          End If
       End If
    Next
@@ -382,7 +382,7 @@ Sub Zeichen_einfuegen()
 End Sub
 Sub Blattschutz_loeschen()
     On Error Resume Next
-    For I = 65 To 66
+    For i = 65 To 66
     For j = 65 To 66
     For k = 65 To 66
     For L = 65 To 66
@@ -394,7 +394,7 @@ Sub Blattschutz_loeschen()
     For r = 65 To 66
     For s = 65 To 66
     For t = 32 To 126
-    ActiveSheet.Unprotect Chr(I) & Chr(j) & Chr(k) & Chr(L) & Chr(m) & _
+    ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & Chr(L) & Chr(m) & _
     Chr(n) & Chr(o) & Chr(p) & Chr(q) & Chr(r) & Chr(s) & Chr(t)
     Next t
     Next s
@@ -407,40 +407,40 @@ Sub Blattschutz_loeschen()
     Next L
     Next k
     Next j
-    Next I
+    Next i
     MsgBox "Fertig Master!"
 End Sub
 Sub ShapesUmbenennen()
-    Dim ws As Worksheet, I As Integer, NeuerName As String
+    Dim ws As Worksheet, i As Integer, NeuerName As String
     Set ws = ThisWorkbook.ActiveSheet
-    For I = 1 To ws.Shapes.count
-        ws.Shapes(I).Visible = False
+    For i = 1 To ws.Shapes.count
+        ws.Shapes(i).Visible = False
     Next
-    For I = 1 To ws.Shapes.count
-        ws.Shapes(I).Visible = True
-        ActiveWindow.ScrollColumn = ws.Shapes(I).TopLeftCell.Column
-        ActiveWindow.ScrollRow = ws.Shapes(I).TopLeftCell.Row
-        NeuerName = InputBox("Bestätige den Namen '" & ws.Shapes(I).Name & "'" & vbLf & _
-            "oder gebe einen neuen Namen ein:", "Shapes Umbenennen", ws.Shapes(I).Name)
+    For i = 1 To ws.Shapes.count
+        ws.Shapes(i).Visible = True
+        ActiveWindow.ScrollColumn = ws.Shapes(i).TopLeftCell.Column
+        ActiveWindow.ScrollRow = ws.Shapes(i).TopLeftCell.Row
+        NeuerName = InputBox("Bestätige den Namen '" & ws.Shapes(i).Name & "'" & vbLf & _
+            "oder gebe einen neuen Namen ein:", "Shapes Umbenennen", ws.Shapes(i).Name)
         If NeuerName = "" Then
             Exit For
         Else
-            If ws.Shapes(I).Name <> NeuerName Then
-                ws.Shapes(I).Name = NeuerName
+            If ws.Shapes(i).Name <> NeuerName Then
+                ws.Shapes(i).Name = NeuerName
             End If
         End If
-        ws.Shapes(I).Visible = False
+        ws.Shapes(i).Visible = False
     Next
-    For I = 1 To ws.Shapes.count
-        ws.Shapes(I).Visible = True
+    For i = 1 To ws.Shapes.count
+        ws.Shapes(i).Visible = True
     Next
     'ws.Range("A1").Activate
 End Sub
 Sub ShapesAlleEinblenden()
-    Dim ws As Worksheet, I As Integer
+    Dim ws As Worksheet, i As Integer
     Set ws = ThisWorkbook.ActiveSheet
-    For I = 1 To ws.Shapes.count
-        ws.Shapes(I).Visible = True
+    For i = 1 To ws.Shapes.count
+        ws.Shapes(i).Visible = True
     Next
     'ws.Range("A1").Activate
 End Sub
