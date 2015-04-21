@@ -33,11 +33,6 @@ Sub version()
     Worksheets("Steuerung").Range("B178") = v1
     Worksheets("Steuerung").Range("A178") = Date & "/" & Time
 End Sub
-Sub checkdate()
-    'Datum d. Fehlerprüfung
-    '14.01.2009
-    Worksheets("Steuerung").Range("B179") = Now
-End Sub
 'Sub TextBox2_Change()
 ''Auflage 1 nur Zahleneingabe möglich
 '    If Not IsNumeric(TextBox2) And Not TextBox2 = "" Then

@@ -10,66 +10,18 @@ Attribute VB_Exposed = True
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
-Private Sub CommandButton1_Click()
-    'Fehlerprüfung
-    Application.ScreenUpdating = False
-    Call Fehlerpruefung
-    Call checkdate
-    Application.ScreenUpdating = True
-End Sub
 Private Sub CommandButton2_Click()
     'Speichern
     Application.ScreenUpdating = False
     Call Speichern
     Application.ScreenUpdating = True
 End Sub
-Private Sub CommandButton3_Click()
-    'Eingabe Produktformat
-    Run Worksheets("SEingabe").Formatinput
-End Sub
 Private Sub Worksheet_Change(ByVal Target As Excel.Range)
     On Error Resume Next
     Application.ScreenUpdating = False
-    Call Fehlermeldung
     Run Worksheets("Zusammentragen").Zusammentragen
     'Run Worksheets("Falzen").Falzen
     Application.ScreenUpdating = True
-End Sub
-Sub Fehlerpruefung()
-Attribute Fehlerpruefung.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
-    Call Nutzenauswertung
-    Call Fehlermeldung
-    If FNutzen Like "" And FFormat Like "" And FDicke Like "" _
-        And FBindenS Like "" And FBindenB Like "" And FBindenG Like "" Then
-            MsgBox ("Alle Eingaben scheinen richtig zu sein." & vbCrLf & vbCrLf & _
-            "Hinweis: Dies ist keine Auftragsprüfung!")
-            Else
-    End If
-End Sub
-Sub Fehlermeldung()
-Attribute Fehlermeldung.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
-    If FNutzen Like "" And FSeite Like "" And FFormat Like "" And FDicke Like "" _
-        And FBindenS Like "" And FBindenB Like "" And FBindenG Like "" Then
-        TextBox1.Visible = False
-        Else
-        With TextBox1
-            .Visible = True
-            .Font = "Verdana"
-            .Font.Size = 10
-            .Font.Bold = True
-            .BorderColor = vbRed
-            .BackColor = vbRed
-            .Height = 120
-            .Width = 525
-            .MaxLength = 600
-            .WordWrap = False
-            .Value = "Fehlermeldungen:" & vbCrLf & "=============" & vbCrLf & FFormat & vbCrLf & FNutzen & vbCrLf _
-            & FDicke & vbCrLf & FBindenS & vbCrLf & FBindenB & vbCrLf & FBindenG
-            '.Locked = True
-        End With
-    End If
 End Sub
 Private Sub ComboBox1_DropButtonClick()
     'Auswahl Broschure od. Buchblock
@@ -120,6 +72,11 @@ Private Sub ComboBox11_Change()
         Worksheets("3Seitenbeschnitt").Range("D6") = 1
     End If
 End Sub
+Private Sub ComboBox12_Change()
+'Auswahl Buchblockformat
+'20150421
+    Run Worksheets("Eingabe").Produktformat
+End Sub
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     On Error Resume Next
@@ -138,7 +95,6 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
         'Run Worksheets("Falzen").Falzen
-        Call Fehlerpruefung
         Run Worksheets("SKleben").kleben
     Application.ScreenUpdating = True
 End Sub
@@ -160,7 +116,6 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
         'Run Worksheets("Falzen").Falzen
-       Call Fehlerpruefung
        Run Worksheets("SKleben").kleben
     Application.ScreenUpdating = True
 End Sub
@@ -182,7 +137,6 @@ Attribute CheckBox3_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
         'Run Worksheets("Falzen").Falzen
-        Call Fehlerpruefung
         Run Worksheets("SKleben").kleben
     Application.ScreenUpdating = True
 End Sub
@@ -312,5 +266,46 @@ Sub CheckBox12_Click()
             Worksheets("Bohren").Visible = False
         End If
     Application.ScreenUpdating = True
+End Sub
+Private Sub TextBox1_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
+    'Produktbreite
+    Select Case KeyAscii
+      Case 48 To 57, 43 To 46
+      Case Else: KeyAscii = 0
+    End Select
+End Sub
+Private Sub TextBox1_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+'Tabsprung zur nächsten Eingabe
+   If KeyCode = vbKeyTab Then TextBox2.Activate
+End Sub
+Private Sub TextBox2_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
+    'Produktlänge
+    Select Case KeyAscii
+      Case 48 To 57, 43 To 46
+      Case Else: KeyAscii = 0
+    End Select
+End Sub
+Sub Produktformat()
+'Auswahl Produktformat
+'20150221
+    If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
+        TextBox1.Visible = True
+        TextBox2.Visible = True
+        With Worksheets("Eingabe").Range("E9")
+            .Interior.ColorIndex = 6
+            .Value = "x"
+        End With
+        Worksheets("Eingabe").Range("F9") = "Sonderformat"
+    Else
+        'Standardformate
+        TextBox1.Visible = False
+        TextBox2.Visible = False
+        With Worksheets("Eingabe").Range("E9")
+            .Interior.ColorIndex = 0
+            .Value = ""
+        End With
+        Worksheets("Eingabe").Range("E9").Value = Worksheets("SEingabe").Range("G26").Value
+        Worksheets("Eingabe").Range("F9") = ""
+    End If
 End Sub
 

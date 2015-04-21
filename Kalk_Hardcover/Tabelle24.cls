@@ -29,6 +29,11 @@ Private Sub CommandButton1_Click()
     Worksheets("Material").Activate
     Worksheets("Material").Range("G348").Select
 End Sub
+Private Sub CommandButton21_Click()
+    'Reset Schnittanzahl auf Standard
+    '20150225
+    Worksheets("Kleben").Range("D13").FormulaLocal = "=SKleben!D76"
+End Sub
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Auswahl Vor-, Nachsatzkleben
@@ -200,7 +205,7 @@ End Sub
 Sub Materialauswahl()
     'Materialauswahl für eingekaufte Bögen
     Dim intI As Integer
-        If Worksheets("SKleben").Range("B36") = "7" Then
+        If Worksheets("SKleben").Range("B36") = "11" Then 'freie Eingabe
         Worksheets("Kleben").Rows("6").Hidden = False 'alternativer Bogen, Eingaben aktivieren
         For intI = 3 To 6
         With OLEObjects("TextBox" & intI)

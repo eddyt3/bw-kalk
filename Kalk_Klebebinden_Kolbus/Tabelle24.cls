@@ -23,6 +23,11 @@ Private Sub Worksheet_Change(ByVal Target As Range)
     Run Worksheets("SKleben").Produktformat_Kleben
     Run Worksheets("SKleben").Bogen_erstellen_netto
 End Sub
+Private Sub CommandButton21_Click()
+    'Reset Schnittanzahl auf Standard
+    '20150225
+    Worksheets("Kleben").Range("D12").FormulaLocal = "=SKleben!D76"
+End Sub
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Auswahl Vor-, Nachsatzkleben
@@ -72,6 +77,7 @@ Private Sub ComboBox1_DropButtonClick()
             Worksheets("Kleben").Rows("7:11").Hidden = False
             Worksheets("Kleben").Rows("6").Hidden = True
             Worksheets("Kleben").Range("D6:G6") = "0"
+            ThisWorkbook.Sheets("Kleben").TextBox8.Visible = False 'Nutzen gelieferte Bg.
             TextBox1.Visible = True
             CheckBox3.Visible = True
             Else 'Kunde geliefert
@@ -79,6 +85,8 @@ Private Sub ComboBox1_DropButtonClick()
             Worksheets("Kleben").Rows("7:11").Hidden = True
             Worksheets("Kleben").Rows("6").Hidden = False
             Worksheets("Kleben").Range("D10:G10") = "0"
+            ThisWorkbook.Sheets("Kleben").TextBox8.Visible = True 'Nutzen gelieferte Bg.
+            Worksheets("Kleben").TextBox8.Top = 53.25
             TextBox1.Visible = False
             CheckBox3.Visible = False
             For Each shpShape In Worksheets("Kleben").Shapes
@@ -109,6 +117,13 @@ Private Sub TextBox1_Change()
                 '.Locked = True
             End With
     End If
+End Sub
+Private Sub TextBox8_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
+    'Nutzenanzahl gelieferte Bogen
+    Select Case KeyAscii
+      Case 48 To 57
+      Case Else: KeyAscii = 0
+    End Select
 End Sub
 Sub VNFormat()
     '

@@ -13,24 +13,26 @@ Attribute VB_Exposed = True
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Circut
+' 20150220
 On Error Resume Next
     If CheckBox1.Value = True Then
-        'Worksheets("3Seitenbeschnitt").CheckBox2.Value = False
-        Worksheets("Steuerung").Range("N8") = "1"
+        Worksheets("3Seitenbeschnitt").CheckBox2.Value = False
+        Worksheets("S3Seitenbeschnitt").Range("H4") = "1"
         Else
-        'Worksheets("3Seitenbeschnitt").CheckBox2.Value = True
-        Worksheets("Steuerung").Range("N8") = "0"
+        Worksheets("3Seitenbeschnitt").CheckBox2.Value = True
+        Worksheets("S3Seitenbeschnitt").Range("H4") = "0"
     End If
 End Sub
 Sub CheckBox2_Click()
 Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Circut
+' 20150220
 On Error Resume Next
     If CheckBox2.Value = True Then
-        'Worksheets("3Seitenbeschnitt").CheckBox1.Value = False
-        Worksheets("Steuerung").Range("N9") = "1"
+        Worksheets("3Seitenbeschnitt").CheckBox1.Value = False
+        Worksheets("S3Seitenbeschnitt").Range("H5") = "1"
         Else
-        'Worksheets("3Seitenbeschnitt").CheckBox1.Value = True
-        Worksheets("Steuerung").Range("N9") = "0"
+        Worksheets("3Seitenbeschnitt").CheckBox1.Value = True
+        Worksheets("S3Seitenbeschnitt").Range("H5") = "0"
     End If
 End Sub

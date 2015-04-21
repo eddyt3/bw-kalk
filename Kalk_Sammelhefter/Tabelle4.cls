@@ -7,6 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
@@ -24,3 +25,25 @@ Private Sub CommandButton1_Click()
         Worksheets("Sammelheften").Range("D4").FormulaLocal = "=SSammelheften!E51"
     End If
 End Sub
+Private Sub ComboBox2_Change()
+    'Berechnung der Klammern und Ösen
+    '20150415
+    Dim intTyp, intAnz As Integer
+    intTyp = Sheets("SSammelheften").[B8]
+    intAnz = Application.WorksheetFunction.VLookup(Sheets("SSammelheften").[B8], Sheets("SSammelheften").[B9:C11], 2, False)
+    Select Case intTyp
+    Case 1
+        'Klammern
+        Worksheets("Eingabe").Range("C15") = 2
+        Worksheets("Eingabe").Range("B15") = "Klammern/Ex."
+    Case 2
+        '2 Ösen
+        Worksheets("Eingabe").Range("C15") = intAnz
+        Worksheets("Eingabe").Range("B15") = "Ösen/Ex."
+    Case 3
+        '4 Ösen
+        Worksheets("Eingabe").Range("C15") = intAnz
+        Worksheets("Eingabe").Range("B15") = "Ösen/Ex."
+    End Select
+End Sub
+

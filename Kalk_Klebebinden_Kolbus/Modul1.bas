@@ -1,5 +1,4 @@
 Attribute VB_Name = "Modul1"
-Public FFormat, FFormatMin As String 'Fehlervariabeln
 Public Function Aufrunden(Zahl) As Long
     If IsNumeric(Zahl) Then
         If Zahl - Int(Zahl) < 0.5 Then
@@ -24,7 +23,7 @@ Public Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Do
         Y0 = (Y2 - Y1) / (X2 - X1) * (X0 - X1) + Y1
         Interpolation = Y0
         If (X0 < X1 And X0 < X2) Or (X0 > X1 And X0 > X2) Then
-            MsgBox "X0 liegt nicht zwischen X1 und X2", vbInformation, "Trendberechnung"
+            'MsgBox "X0 liegt nicht zwischen X1 und X2", vbInformation, "Trendberechnung"
         End If
     Else
         MsgBox "Tabellenwerte X1 und X2 dürfen nicht übereinstimmen", vbCritical, "Achtung"
@@ -52,23 +51,12 @@ Public Function Interpolation2(ZeitBereich As Range, WertBereich As Range, t As 
         Interpolation2 = Interpolation2 * (t - ZeitBereich(i)) + Werte(i)
     Next i
 End Function
-Sub FormatMin()
-Attribute FormatMin.VB_ProcData.VB_Invoke_Func = " \n14"
-    'Prüfung Mindestformat für Zusammentragen
-    If Worksheets("Steuerung").Range("N128") = 1 Then
-        MsgBox ("Achtung das Mindestformat f. Das Zusammentragen wurde unterschritten!" & vbCrLf & vbCrLf & "(Mindestformat: " _
-        & Worksheets("Zusammentragen").Range("K2") & " x " & Worksheets("Zusammentragen").Range("M2") & " cm)")
-        FFormatMin = "Das Mindestformat für das Zusammentragen wurde unterschritten!"
-        Else
-        FFormatMin = ""
-    End If
-End Sub
 Sub produkt()
 Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Anzeigen d. Produktangaben
     On Error Resume Next
     Dim format, Gewicht, Dicke As String
-        format = Worksheets("Eingabe").CommandButton3.Caption
+        format = Worksheets("SEingabe").Range("G26")
         Dicke = Range("Eingabe!C45")
         Gewicht = Range("Eingabe!C46")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _

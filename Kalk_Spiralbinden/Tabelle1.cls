@@ -11,16 +11,6 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Option Explicit
-
-Private Sub Worksheet_Deactivate()
-    Application.ScreenUpdating = False
-    Run Worksheets("Zusammentragen").Zusammentragen
-    Run Worksheets("SSchneiden").Schneidbogen
-    Run Worksheets("SSchneiden").SchneidenAnzeige
-    Run Worksheets("Zusammentragen").Formatfehler
-    Run Worksheets("Binden").Spirale
-    Application.ScreenUpdating = True
-End Sub
 Private Sub Worksheet_Activate()
     Application.ScreenUpdating = False
     Run Worksheets("Zusammentragen").Zusammentragen
@@ -30,7 +20,15 @@ Private Sub Worksheet_Activate()
     Run Worksheets("Binden").Spirale
     Application.ScreenUpdating = True
 End Sub
-
+Private Sub Worksheet_Deactivate()
+    Application.ScreenUpdating = False
+    Run Worksheets("Zusammentragen").Zusammentragen
+    Run Worksheets("SSchneiden").Schneidbogen
+    Run Worksheets("SSchneiden").SchneidenAnzeige
+    Run Worksheets("Zusammentragen").Formatfehler
+    Run Worksheets("Binden").Spirale
+    Application.ScreenUpdating = True
+End Sub
 Private Sub CheckBox1_Click()
 On Error Resume Next
 Application.ScreenUpdating = False
@@ -155,32 +153,69 @@ Private Sub ComboBox7_DropButtonClick()
     Run Worksheets("SSchneiden").Schneidbogen
     Application.ScreenUpdating = True
 End Sub
+Private Sub ComboBox8_DropButtonClick()
+    Call NutzenCheck_Folie
+End Sub
 Private Sub ComboBox12_DropButtonClick()
 'Nutzen Pappe
     Call NutzenCheck_Pappe
 End Sub
-Private Sub ComboBox8_DropButtonClick()
-    Call NutzenCheck_Folie
+Private Sub ComboBox13_Change()
+'Auswahl Buchblockformat
+'20150421
+    Run Worksheets("Eingabe").Produktformat
 End Sub
 Private Sub CommandButton1_Click()
 'Nutzen Folie
     Call Bogenformat_Pappe
 End Sub
-Private Sub CommandButton2_Click()
-'Eingabe Produktformat
-    Run Worksheets("SEingabe").Formatinput
-End Sub
 Private Sub CommandButton3_Click()
 'Speichern
     Call Speichern
 End Sub
-Private Sub CommandButton4_Click()
-'Fehlerprüfung
-    Call Fehlerpruefung
-    Call checkdate
-End Sub
 Private Sub CommandButton5_Click()
 'Bogenformat Folie
     Call Bogenformat_Folie
+End Sub
+Private Sub TextBox1_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
+    'Produktbreite
+    Select Case KeyAscii
+      Case 48 To 57, 43 To 46
+      Case Else: KeyAscii = 0
+    End Select
+End Sub
+Private Sub TextBox1_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+'Tabsprung zur nächsten Eingabe
+   If KeyCode = vbKeyTab Then TextBox2.Activate
+End Sub
+Private Sub TextBox2_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
+    'Produktlänge
+    Select Case KeyAscii
+      Case 48 To 57, 43 To 46
+      Case Else: KeyAscii = 0
+    End Select
+End Sub
+Sub Produktformat()
+'Auswahl Produktformat
+'20150221
+    If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
+        TextBox1.Visible = True
+        TextBox2.Visible = True
+        With Worksheets("Eingabe").Range("E9")
+            .Interior.ColorIndex = 6
+            .Value = "x"
+        End With
+        Worksheets("Eingabe").Range("F9") = "Sonderformat"
+    Else
+        'Standardformate
+        TextBox1.Visible = False
+        TextBox2.Visible = False
+        With Worksheets("Eingabe").Range("E9")
+            .Interior.ColorIndex = 0
+            .Value = ""
+        End With
+        Worksheets("Eingabe").Range("E9").Value = Worksheets("SEingabe").Range("G26").Value
+        Worksheets("Eingabe").Range("F9") = ""
+    End If
 End Sub
 

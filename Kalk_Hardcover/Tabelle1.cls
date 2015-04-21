@@ -7,7 +7,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
@@ -20,13 +19,11 @@ End Sub
 Sub Worksheet_Change(ByVal Target As Excel.Range)
     Application.ScreenUpdating = False
         On Error Resume Next
-        Call Fehlermeldung
         Run Worksheets("Zusammentragen").Zusammentragen
         'Run Worksheets("Falzen").Falzen
         Run Worksheets("SBuchdecke").Beschriftung
     Application.ScreenUpdating = True
 End Sub
-
 Sub ComboBox2_Change()
     'Bindeseite
     Run Worksheets("SKleben").kleben
@@ -35,6 +32,7 @@ Sub ComboBox3_DropButtonClick()
     'Buchdecke
     Run Worksheets("SBuchdecke").Thickness
     Run Worksheets("SBuchdecke").Beschriftung
+    Run Worksheets("Eingabe").Buchblockformat
 End Sub
 Private Sub ComboBox4_Change()
     'Bogen A, Art
@@ -121,31 +119,8 @@ Private Sub ComboBox16_Change()
 End Sub
 Private Sub ComboBox21_Change()
 'Auswahl Buchblockformat
-    If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
-        TextBox4.Visible = True
-        TextBox5.Visible = True
-        With Worksheets("Eingabe").Range("E9")
-            .Interior.ColorIndex = 6
-            .Value = "x"
-        End With
-        Worksheets("Eingabe").Range("F9") = "Sonderformat"
-    Else
-        ComboBox3.ListIndex = 0 'Standardformate nur mit 2mm Pappstärke
-        TextBox4.Visible = False
-        TextBox5.Visible = False
-        With Worksheets("Eingabe").Range("E9")
-            .Interior.ColorIndex = 0
-            .Value = ""
-        End With
-        Worksheets("Eingabe").Range("E9").Value = Worksheets("SEingabe").Range("G26").Value
-        Worksheets("Eingabe").Range("F9") = ""
-    End If
-End Sub
-Sub CommandButton1_Click()
-    Application.ScreenUpdating = False
-        Call Fehlerpruefung
-        Call checkdate
-    Application.ScreenUpdating = True
+'20150220
+    Run Worksheets("Eingabe").Buchblockformat
 End Sub
 Sub CommandButton2_Click()
     Application.ScreenUpdating = False
@@ -177,7 +152,6 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
         'Run Worksheets("Falzen").Falzen
-        Call Fehlerpruefung
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox2_Click()
@@ -198,7 +172,6 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
         'Run Worksheets("Falzen").Falzen
-       Call Fehlerpruefung
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox3_Click()
@@ -219,7 +192,6 @@ Attribute CheckBox3_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
         'Run Worksheets("Falzen").Falzen
-        Call Fehlerpruefung
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox4_Click()
@@ -355,6 +327,7 @@ Private Sub TextBox4_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     End Select
 End Sub
 Private Sub TextBox4_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+'Tabsprung zur nächsten Eingabe
    If KeyCode = vbKeyTab Then TextBox5.Activate
 End Sub
 Private Sub TextBox5_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
@@ -374,40 +347,30 @@ End Sub
 Private Sub TextBox6_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
    If KeyCode = vbKeyTab Then TextBox4.Activate
 End Sub
-Sub test()
+Sub Test()
     Run Worksheets("Binden").Produktart
 End Sub
-Sub Fehlerpruefung()
-    Application.ScreenUpdating = False
-        On Error Resume Next
-        Call FormatMin
-        Call Fehlermeldung
-        If FFormat Like "" And FFormatMin Like "" Then
-                MsgBox ("Alle Eingaben scheinen richtig zu sein." & vbCrLf & vbCrLf & _
-                "Hinweis: Dies ist keine Auftragsprüfung!")
-                Else
-        End If
-    Application.ScreenUpdating = True
-End Sub
-Sub Fehlermeldung()
-    On Error Resume Next
-    If FFormat Like "" And FFormatMin Like "" Then
-        TextBox1.Visible = False
-        Else
-        With TextBox1
-            .Visible = True
-            .Font = "Verdana"
-            .Font.Size = 10
-            .Font.Bold = True
-            .BorderColor = vbRed
-            .BackColor = vbRed
-            .Height = 120
-            .Width = 525
-            .MaxLength = 600
-            .WordWrap = False
-            .Value = "Fehlermeldungen:" & vbCrLf & "=============" & vbCrLf & FFormat & vbCrLf & FFormatMin
-            '.Locked = True
+Sub Buchblockformat()
+'Auswahl Buchblockformat
+'20150220
+    If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
+        TextBox4.Visible = True
+        TextBox5.Visible = True
+        With Worksheets("Eingabe").Range("E9")
+            .Interior.ColorIndex = 6
+            .Value = "x"
         End With
+        Worksheets("Eingabe").Range("F9") = "Sonderformat"
+    Else
+        ComboBox3.ListIndex = 0 'Standardformate nur mit 2mm Pappstärke
+        TextBox4.Visible = False
+        TextBox5.Visible = False
+        With Worksheets("Eingabe").Range("E9")
+            .Interior.ColorIndex = 0
+            .Value = ""
+        End With
+        Worksheets("Eingabe").Range("E9").Value = Worksheets("SEingabe").Range("G26").Value
+        Worksheets("Eingabe").Range("F9") = ""
     End If
 End Sub
 

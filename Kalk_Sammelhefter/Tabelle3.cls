@@ -50,26 +50,8 @@ If intBg > intStatMa Then
     Worksheets("Sammelheften").Range("D20") = intAnzahlBgVors
     Worksheets("Sammelheften").Range("D21") = intAnzahlVors
 End If
-'Prüfung Vorgaben
-'If intSeiten > intSeitenMax Then
-'    MsgBox ("Die maximale Seitenanzahl (" & intSeitenMax & " Seiten) wurde überschritten (" & intSeiten & " Seiten)!")
-'    FSeitenanz = "Die maximale Seitenanzahl (" & intSeitenMax & " Seiten) wurde überschritten (" & intSeiten & " Seiten)!"
-'    Else: FSeitenanz = ""
-'End If
-'If intSeitenBgMin > Worksheets("SSammelheften").Range("J39") Then
-'    MsgBox ("Die Mindestanzahl der Seiten/Bogen (" & intSeitenBgMin & " Seiten) wurde unterschritten (" & Worksheets("Steuerung").Range("J39") & " Seite(n))!")
-'    FSeitenBgMin = "Die Mindestanzahl der Seiten/Bogen (" & intSeitenBgMin & " Seiten) wurde unterschritten (" & Worksheets("Steuerung").Range("J39") & " Seite(n))!"
-'    Else: FSeitenBgMin = ""
-'End If
-'If intSeitenBgMax < Worksheets("SSammelheften").Range("J40") Then
-'    MsgBox ("Die Maximalanzahl der Seiten/Bogen (" & intSeitenBgMax & " Seiten) wurde unterschritten (" & Worksheets("Steuerung").Range("J40") & " Seiten)!")
-'    FSeitenBgMax = "Die Maximalanzahl der Seiten/Bogen (" & intSeitenBgMax & " Seiten) wurde überschritten (" & Worksheets("Steuerung").Range("J40") & " Seiten)!"
-'    Else: FSeitenBgMax = ""
-'End If
 If Worksheets("SEingabe").Range("G5") > 1 Then
     MsgBox ("Sie haben " & Worksheets("SEingabe").Range("G5") & " Umschläge!")
-    FBgUMax = "Sie haben " & Worksheets("SEingabe").Range("G5") & " Umschläge!"
-    Else: FBgUMax = ""
 End If
 
 End Sub

@@ -1,7 +1,5 @@
 Attribute VB_Name = "Modul1"
 'all rights by E.Dargel ed@dissenter.de
-Public FNutzen, FFormat, FDicke As String 'Fehlervariabeln
-Public FBindenS, FBindenB, FBindenG As String 'Fehlervariabeln Binden
 Public Function Aufrunden(Zahl) As Long
     If IsNumeric(Zahl) Then
         If Zahl - Int(Zahl) < 0.5 Then
@@ -26,7 +24,7 @@ Public Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Do
         Y0 = (Y2 - Y1) / (X2 - X1) * (X0 - X1) + Y1
         Interpolation = Y0
         If (X0 < X1 And X0 < X2) Or (X0 > X1 And X0 > X2) Then
-            MsgBox "X0 liegt nicht zwischen X1 und X2", vbInformation, "Trendberechnung"
+            'MsgBox "X0 liegt nicht zwischen X1 und X2", vbInformation, "Trendberechnung"
         End If
     Else
         MsgBox "Tabellenwerte X1 und X2 dürfen nicht übereinstimmen", vbCritical, "Achtung"
@@ -54,47 +52,6 @@ Public Function Interpolation2(ZeitBereich As Range, WertBereich As Range, t As 
         Interpolation2 = Interpolation2 * (t - ZeitBereich(i)) + Werte(i)
     Next i
 End Function
-Sub Nutzenauswertung()
-    '
-    ' Nutzenauswertung Makro
-    ' Makro von Enrico Dargel
-    ' Überprüfung der Angaben Seitenzahl, Bogenzahl, Seiten pro Bogen
-    On Error Resume Next
-    If Range("Steuerung!H57") > 0 Then
-        Dim BogenA, BogenB, BogenC, BogenD As String
-            If Range("Steuerung!H53") > 0 Then
-                MsgBox ("Fehlerhafte Eingabe(n) bei Bogen A! " & vbCrLf & vbCrLf & _
-                "Bitte 'Seitenzahl', 'Nutzen/Druckbogen', 'Buchbindebogen' u. 'Seiten/Buchbindebogen' kontrollieren.")
-                BogenA = " A,"
-                Else
-                BogenA = ""
-            End If
-            If Range("Steuerung!H54") > 0 Then
-                MsgBox ("Fehlerhafte Eingabe(n) bei Bogen B! " & vbCrLf & vbCrLf & _
-                "Bitte 'Seitenzahl', 'Nutzen/Druckbogen', 'Buchbindebogen' u. 'Seiten/Buchbindebogen' kontrollieren.")
-                BogenB = " B,"
-                Else
-                BogenB = ""
-            End If
-            If Range("Steuerung!H55") > 0 Then
-                MsgBox ("Fehlerhafte Eingabe(n) bei Bogen C! " & vbCrLf & vbCrLf & _
-                "Bitte 'Seitenzahl', 'Nutzen/Druckbogen', 'Buchbindebogen' u. 'Seiten/Buchbindebogen' kontrollieren.")
-                BogenC = " C,"
-                Else
-                BogenC = ""
-            End If
-            If Range("Steuerung!H56") > 0 Then
-                MsgBox ("Fehlerhafte Eingabe(n) bei Bogen D! " & vbCrLf & vbCrLf & _
-                "Bitte 'Seitenzahl', 'Nutzen/Druckbogen', 'Buchbindebogen' u. 'Seiten/Buchbindebogen' kontrollieren.")
-                BogenD = " D"
-                Else
-                BogenD = ""
-            End If
-        FNutzen = "Fehlerhafte Seitenzahl, Bogenzahl od. Seiten/Bogen bei Bogen: " & BogenA & BogenB & BogenC & BogenD & "."
-        Else
-        FNutzen = ""
-    End If
-End Sub
 Sub produkt()
 Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
     '
@@ -102,7 +59,7 @@ Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Makro von Enrico Dargel
     '
     Dim format, Gewicht, Dicke As String
-        format = Worksheets("Eingabe").CommandButton3.Caption
+        format = Worksheets("SEingabe").Range("G26")
         Dicke = Range("Eingabe!C44")
         Gewicht = Range("Eingabe!C45")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
@@ -151,8 +108,6 @@ Attribute Evaluierung_Binden.VB_ProcData.VB_Invoke_Func = " \n14"
     End If
     If Worksheets("Steuerung").Range("H61") > 0 Then
         MsgBox ("Fehlerhafte Seitenzahl pro Bogen:" & FbgAS & FbgBS & FbgCS & FbgDS & " (min. 8 u. max. 24 Seiten/Bg.)")
-        FBindenS = "Fehlerhafte Seitenzahl pro Bogen:" & FbgAS & FbgBS & FbgCS & FbgDS & " (min. 8 u. max. 24 Seiten/Bg.)"
-        Else: FBindenS = ""
     End If
     'Kontrolle Bogenzahl
     If bgAB < 2 Then
@@ -173,8 +128,6 @@ Attribute Evaluierung_Binden.VB_ProcData.VB_Invoke_Func = " \n14"
     End If
     If Worksheets("Steuerung").Range("H62") > 0 Then
         MsgBox ("Fehlerhafte Bogenzahl:" & FbgAB & FbgBB & FbgCB & FbgDB & " (min. 3 u. max. 256 Bögen)")
-        FBindenB = "Fehlerhafte Bogenzahl:" & FbgAB & FbgBB & FbgCB & FbgDB & " (min. 3 u. max. 256 Bögen)"
-        Else: FBindenB = ""
     End If
     'Kontrolle Nutzen
     '
@@ -199,15 +152,10 @@ Attribute Evaluierung_Binden.VB_ProcData.VB_Invoke_Func = " \n14"
     End If
     If Worksheets("Steuerung").Range("H64") > 0 Then
         MsgBox ("Fehlerhafte Grammatur Bogen:" & FbgAB & FbgBB & FbgCB & FbgDB & " (min. 100 g/qm u. max. 300 g/qm)")
-        FBindenG = "Fehlerhafte Grammatur Bogen:" & FbgAB & FbgBB & FbgCB & FbgDB & " (min. 100 g/qm u. max. 300 g/qm)"
-        Else: FBindenG = ""
     End If
     ' Ueberpruefung d. Mindeststärke
     Dicke = Worksheets("Steuerung").Range("D59")
     If Worksheets("Steuerung").Range("B59") < Worksheets("Steuerung").Range("C59") Then
         MsgBox ("Achtung zu geringe Produktstärke!" & vbCrLf & vbCrLf & "Die Mindeststärke beträgt 3 mm.")
-        FDicke = "Das Produkt ist für das Binden " & Dicke & " mm zu dünn (Mindeststärke: 3 mm)."
-        Else
-        FDicke = ""
     End If
 End Sub

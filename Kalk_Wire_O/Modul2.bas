@@ -33,28 +33,6 @@ Sub version()
     Worksheets("Steuerung").Range("B178") = v1
     Worksheets("Steuerung").Range("A178") = Date & "/" & Time
 End Sub
-Sub checkdate()
-    'Datum d. Fehlerprüfung
-    '14.01.2009
-    Worksheets("Steuerung").Range("B179") = Now
-End Sub
-'Sub TextBox2_Change()
-''Auflage 1 nur Zahleneingabe möglich
-'    If Not IsNumeric(TextBox2) And Not TextBox2 = "" Then
-'        TextBox2 = Left(TextBox2.Text, Len(TextBox2.Text) - 1)
-'    End If
-'    TextBox2 = format(Range("C8"), "#,###")
-'End Sub
-'Sub TextBox2_Exit(ByVal Cancel As MSForms.ReturnBoolean)
-'If IsNumeric(UserForm1.TextBox2) = False Then
-'MsgBox "TB verlassen"
-'End If
-'End Sub
-'Private Sub Worksheet_SelectionChange(ByVal Target As Range)
-    'If Target.Address = "$C$9" Then Call Formatinput 'Macrostart bei Klick in Zelle
-    'If Not Intersect(Target, Range("C32")) Is Nothing Then Call Materialkommentar 'Macrostart bei Maus over, Enter od. Tab
-    'If Not Intersect(Target, Range("C9")) Is Nothing Then Call Produktformat
-'End Sub
 Sub Farbpalette_ausgeben()
     Dim bytIndex As Byte
     Dim bytColumn As Byte

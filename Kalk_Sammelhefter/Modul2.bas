@@ -32,11 +32,6 @@ Sub version()
     Worksheets("Steuerung").Range("B178") = v1
     Worksheets("Steuerung").Range("A178") = Date & "/" & Time
 End Sub
-Sub checkdate()
-    'Datum d. Fehlerprüfung
-    '14.01.2009
-    Worksheets("Steuerung").Range("B179") = Now
-End Sub
 Sub Farbpalette_ausgeben()
 Attribute Farbpalette_ausgeben.VB_ProcData.VB_Invoke_Func = " \n14"
     Dim bytIndex As Byte

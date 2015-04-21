@@ -1,5 +1,4 @@
 Attribute VB_Name = "Modul1"
-Public FFormat, FFormatMin As String 'Fehlervariabeln
 Public Function Aufrunden(Zahl) As Long
     If IsNumeric(Zahl) Then
         If Zahl - Int(Zahl) < 0.5 Then
@@ -52,23 +51,12 @@ Public Function Interpolation2(ZeitBereich As Range, WertBereich As Range, t As 
         Interpolation2 = Interpolation2 * (t - ZeitBereich(i)) + Werte(i)
     Next i
 End Function
-Sub FormatMin()
-Attribute FormatMin.VB_ProcData.VB_Invoke_Func = " \n14"
-    'Prüfung Mindestformat für Zusammentragen
-    If Worksheets("Steuerung").Range("N128") = 1 Then
-        MsgBox ("Achtung das Mindestformat f. Das Zusammentragen wurde unterschritten!" & vbCrLf & vbCrLf & "(Mindestformat: " _
-        & Worksheets("Zusammentragen").Range("K2") & " x " & Worksheets("Zusammentragen").Range("M2") & " cm)")
-        FFormatMin = "Das Mindestformat für das Zusammentragen wurde unterschritten!"
-        Else
-        FFormatMin = ""
-    End If
-End Sub
 Sub produkt()
 Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Anzeigen d. Produktangaben
     On Error Resume Next
     Dim format, Gewicht, Dicke As String
-        format = Worksheets("SEingabe").Range("B127") & " x " & Worksheets("SEingabe").Range("C127") & "cm"
+        format = Worksheets("SEingabe").Range("G26")
         Dicke = Worksheets("SEingabe").Range("D127")
         Gewicht = Worksheets("SEingabe").Range("B123")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _

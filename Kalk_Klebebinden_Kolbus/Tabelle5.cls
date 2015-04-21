@@ -19,9 +19,6 @@ Sub Produktformat_Kleben()
     If Range("SKleben!E2") = FALSCH Then
         MsgBox ("Fehlerhafte Formateingabe! Bitte nur Werte mit Komma eingeben." & vbCrLf & vbCrLf & _
         "Beispiel: 21 x 29,7")
-        'FFormat = "Fehlerhafte Formateingabe! Bitte nur Werte mit Komma eingeben."
-        Else
-        'FFormat = ""
     End If
 End Sub '
 Sub kleben()

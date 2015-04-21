@@ -1,5 +1,4 @@
 Attribute VB_Name = "Modul1"
-Public FFormat, FSchlaufe, FSchlaufeS, FTeilung, FSchaftMin, FSchaftMax, FStanzen As String 'Fehlervariabeln
 Public v As Integer 'Versionsnummer
 Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X0 As Double) As Variant
     Dim Y0 As Double
@@ -166,7 +165,7 @@ Sub Produkt()
     ' Anzeigen d. Produktangaben bei "Verpacken"
     '
     Dim format, Gewicht, Dicke As String
-        format = Worksheets("Eingabe").CommandButton2.Caption
+        format = Worksheets("Eingabe").Range("G26")
         Dicke = Range("Eingabe!C32")
         Gewicht = Range("Eingabe!C34")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
@@ -239,8 +238,5 @@ Sub Stanzen_Size()
         Dim intSize As Double
         intSize = Worksheets("Stanzen").Range("F12").Value
         Debug.Print intSize
-            FStanzen = "Hinweis: Die Stanzstärke weicht um " & intSize & " mm ab!"
-            MsgBox (FStanzen)
-        Else: FStanzen = ""
     End If
 End Sub

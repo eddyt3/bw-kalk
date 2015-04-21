@@ -1,5 +1,4 @@
 Attribute VB_Name = "Modul1"
-Public FFormat, FSchlaufe, FSchlaufeS, FTeilung, FSchaftMin, FSchaftMax, FStanzen As String 'Fehlervariabeln
 Public v As Integer 'Versionsnummer
 Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X0 As Double) As Variant
     Dim Y0 As Double
@@ -26,16 +25,11 @@ Attribute Schlaufe.VB_ProcData.VB_Invoke_Func = " \r14"
     Range("Material_Binden!D104").FormulaLocal = "=SVERWEIS(Eingabe!C22;Material_Binden!A105:B117;2;FALSCH)"
     If Range("Material_Binden!D104") = 0 Then
         MsgBox ("Die Schlaufengroeﬂe " & Schlaufe & " ist nicht moeglich." & vbCrLf & vbCrLf & "Das entsprechende Werkzeug fehlt!")
-        FSchlaufe = "Hinweis: Die Schlaufengrˆﬂe " & Schlaufe & " kann nicht verarbeitet werden!"
         Else
             If Range("Material_Binden!D104") = 1 Then
-            FSchlaufe = ""
                 If Range("Eingabe!E22") = 0 Then
                     MsgBox ("Fuer die Teilung " & Teilung & " gibt es keine Schlaufe " & Schlaufe & " !" _
                      & vbCrLf & vbCrLf & "Bitte waehlen Sie eine andere Teilung oder Schlaufengroeﬂe.")
-                    FTeilung = "Hinweis: Die gewaehlte Schlaufengrˆﬂe oder Teilung ist falsch!"
-                Else
-                    FTeilung = ""
                 End If
             End If
     End If
@@ -53,9 +47,7 @@ Attribute SizeSchlaufe.VB_ProcData.VB_Invoke_Func = " \r14"
     If Range("Eingabe!E22") = 0 Then
         MsgBox ("Fuer die Teilung " & Teilung & " gibt es keine Schlaufe " & Schlaufe & " !" _
         & vbCrLf & vbCrLf & "Bitte waehlen Sie eine andere Teilung oder Schlaufengroeﬂe.")
-        FSchlaufeS = "Hinweis: Die gewaehlte Schlaufengroeﬂe oder Teilung ist falsch!"
     Else
-        FSchlaufeS = ""
     End If
 End Sub
 Sub SizeSchaft()
@@ -72,15 +64,10 @@ Sub SizeSchaft()
     If Range("Eingabe!C19") < Schaft_min Then
         MsgBox ("Es sind nur Schaftlaengen zwischen " _
         & vbCrLf & vbCrLf & Schaft_min_wert & " mm und " & Schaft_max_wert & " mm moeglich !" & vbCrLf & vbCrLf & "Bitte waehlen Sie eine andere Schaftlaenge.")
-        FSchaftMin = "Hinweis: Die gewaehlte Schaftlaenge von " & Schaft_Ist & " mm ist nicht verfuegbar! (mind. " & Schaft_min_wert & " mm)"
         Else
-        FSchaftMin = ""
         If Range("Eingabe!C19") > Schaft_max Then
             MsgBox ("Es sind nur Schaftlaengen zwischen " _
             & vbCrLf & vbCrLf & Schaft_min_wert & " mm und " & Schaft_max_wert & " mm moeglich !" & vbCrLf & vbCrLf & "Bitte waehlen Sie eine andere Schaftlaenge.")
-            FSchaftMax = "Hinweis: Die gewaehlte Schaftlaenge von " & Schaft_Ist & " mm ist nicht verfuegbar! (max. " & Schaft_max_wert & " mm)"
-            Else
-            FSchaftMax = ""
         End If
     End If
 End Sub
@@ -264,7 +251,7 @@ Sub Produkt()
     '
     On Error Resume Next
     Dim format, Gewicht, Dicke As String
-    format = Worksheets("Eingabe").CommandButton2.Caption
+    format = Worksheets("SEingabe").Range("G26")
     Dicke = Range("Eingabe!C32")
     Gewicht = Range("Eingabe!C34")
     Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
@@ -331,8 +318,5 @@ Sub Stanzen_Size()
         Dim intSize As Double
         intSize = Worksheets("Stanzen").Range("F12").Value
         Debug.Print intSize
-        FStanzen = "Hinweis: Die Stanzst‰rke weicht um " & intSize & " mm ab!"
-        MsgBox (FStanzen)
-        Else: FStanzen = ""
     End If
 End Sub
