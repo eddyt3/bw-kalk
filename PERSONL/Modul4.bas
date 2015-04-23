@@ -169,3 +169,47 @@ Function LIP(xVector As Range, yVector As Range, xValue As Double)
 Fehler:
     LIP = "Interpolationsfehler"
 End Function
+Sub Objektliste_Wkb_erstellen()
+    'alle OLE Objekte auflisten
+    Dim shListe As Worksheet
+    Dim sh As Worksheet
+    Dim obj As OLEObject
+    Dim shp As Shape
+    Dim sp As Long, ze As Long
+    On Error GoTo Objektliste_erstellen
+    Set shListe = ActiveWorkbook.Sheets("Objektliste")
+    On Error GoTo 0
+    shListe.Cells.Clear
+    sp = 1: ze = 2
+    For Each sh In ActiveWorkbook.Worksheets
+        shListe.Cells(1, sp).Value = sh.Name
+        For Each obj In sh.OLEObjects
+            shListe.Cells(ze, sp).Value = obj.Name
+            ze = ze + 1
+        Next
+        For Each shp In sh.Shapes
+            shListe.Cells(ze, sp).Value = shp.Name
+            ze = ze + 1
+        Next
+        sp = sp + 1
+        ze = 2
+    Next
+    Exit Sub
+Objektliste_erstellen:
+    Sheets.Add before:=ActiveWorkbook.Sheets(1)
+    ActiveSheet.Name = "Objektliste"
+    Resume
+End Sub
+Sub Objektliste_Wks_Direktbereich_erstellen()
+    'alle OLE Objekte nur im Direktbereich auflisten
+    Dim obj As OLEObject
+    Dim shp As Shape
+    For Each obj In ActiveSheet.OLEObjects
+        Debug.Print obj.Name
+    Next
+    For Each shp In ActiveSheet.Shapes
+        Debug.Print shp.Name
+    Next
+    Exit Sub
+End Sub
+

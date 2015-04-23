@@ -226,7 +226,7 @@ Sub List_Location_Size_for_all_VB_Buttons()
     'Macro liest alle Buttonformate (Standard) aus
     'den Code aus dem Direktbereich in die Workbook_Open() Sub übernehmen (Komma noch durch Punkt ersetzen)
     'Danach werden bei jedem Öffnen die Buttons auf ihre Standardwerte zurückgesetzt unabhängig der aktuellen Bildschirmauflösung
-    Dim ShCounter As Long, Sh As Shape
+    Dim ShCounter As Long, sh As Shape
     Dim i As Integer
     ShCounter = 0
     DebugClear
@@ -234,8 +234,8 @@ Sub List_Location_Size_for_all_VB_Buttons()
     DebugPrint "fntSize=10"
     For i = 1 To Sheets.count - 1
       With Sheets(i)
-       For Each Sh In .Shapes
-        If Sh.Type = msoOLEControlObject Then  'Only list VB buttons
+       For Each sh In .Shapes
+        If sh.Type = msoOLEControlObject Then  'Only list VB buttons
             ShCounter = ShCounter + 1
     ' Code für Direktbereich
     '        Debug.Print "WITH WorkSheets("; Chr(34); Sheets(i).Name; Chr(34); ")."; Sh.Name, "   '"; ShCounter
@@ -247,12 +247,12 @@ Sub List_Location_Size_for_all_VB_Buttons()
     '        Debug.Print "END WITH"
     
     'Code für Ausgabe in debug.log File, wenn Puffer Direktbereich zu klein
-            DebugPrint "WITH WorkSheets(" & Chr(34) & Sheets(i).Name & Chr(34) & ")." & Sh.Name & "   '" & ShCounter
-            DebugPrint "   .Height=" & Sh.Height & ": .Width=" & Sh.Width & ": .Top=" & Sh.Top & ": .Left = " & Sh.Left & ": .FontSize = fntSize"
+            DebugPrint "WITH WorkSheets(" & Chr(34) & Sheets(i).Name & Chr(34) & ")." & sh.Name & "   '" & ShCounter
+            DebugPrint "   .Height=" & sh.Height & ": .Width=" & sh.Width & ": .Top=" & sh.Top & ": .Left = " & sh.Left & ": .FontSize = fntSize"
             DebugPrint "END WITH"
     '
          End If
-        Next Sh
+        Next sh
       End With
     Next i
     MsgBox "Fertig Master!" & vbLf & vbLf & ShCounter & " VB Buttonformate exportiert."
@@ -277,4 +277,14 @@ Sub DebugPrint(s As String)
 End Sub
 Sub DebugClear()
    CreateObject("Scripting.FileSystemObject").CreateTextFile ThisWorkbook.Path & "\debug.log", True, True
+End Sub
+Sub references_eigenschaften()
+'verwendete VBA Verweise einer XLS anzeigen lassen
+    Dim b, r, ref
+    For Each b In Workbooks
+        Set ref = b.VBProject.References
+        For Each r In ref
+            Debug.Print b.Name, r.Name, r.Type, r.FullPath
+        Next
+    Next
 End Sub
