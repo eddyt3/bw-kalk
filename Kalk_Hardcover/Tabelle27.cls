@@ -58,15 +58,15 @@ Sub Zusammentragen()
         intWechsel = Worksheets("SZusammentragen").Range("B38")
         'ab 35 cm Breite immer Formatwechsel berechnen
         If intWechsel Then
-            CheckBox1.Visible = True
-            CheckBox1.Value = True
+            Worksheets("Zusammentragen").CheckBox1.Visible = True
+            Worksheets("Zusammentragen").CheckBox1.Value = True
         Else
-            CheckBox1.Visible = True
-            CheckBox1.Value = False
+            Worksheets("Zusammentragen").CheckBox1.Visible = True
+            Worksheets("Zusammentragen").CheckBox1.Value = False
         End If
     Else
-        CheckBox1.Visible = False
-        CheckBox1.Value = False
+        Worksheets("Zusammentragen").CheckBox1.Visible = False
+        Worksheets("Zusammentragen").CheckBox1.Value = False
     End If
     Application.ScreenUpdating = True
 End Sub

@@ -30,7 +30,6 @@ Sub draw_all()
 End Sub
 Sub Palettenlage_erstellen()
     'Zeichnen der optimalen Exemplarverteilung auf d. Palette
-    On Error Resume Next
     Dim intHline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien u. Z‰hlervar.
     Dim intPlL, intPlB, intPlHoffset, intPlVoffset As Integer 'Palettenmaﬂe u. Offsets
     Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Versatzsumme
@@ -136,7 +135,6 @@ End Sub
 Sub VE_erstellen()
     'Zeichnen der Verpackungseinheit mit Banderole
     '20090819
-    On Error Resume Next
     Dim intHline, intBline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien (vertikal, horizontal, diagonal) u. Z‰hlervar.
     Dim intVEB, intVEH, intVEHoffset, intVEVoffset As Integer 'VE-Maﬂe u. Offsets
     Dim shpShape As Shape
@@ -193,7 +191,6 @@ End Sub
 Sub VE_einschweissen()
     'Zeichnen der VE Lage beim Einschweiﬂen
     '20090820
-    On Error Resume Next
     Dim intHline, intBline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien (vertikal, horizontal, diagonal) u. Z‰hlervar.
     Dim intVEB, intVEH, intVEHoffset, intVEVoffset, intFB, intFBist, intFBsoll, intFBoffset As Integer 'VE- und Folienmaﬂe u. Offsets
     Dim shpShape As Shape

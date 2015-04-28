@@ -13,14 +13,12 @@ Attribute VB_Exposed = True
 Public VNFormatN, VNFormatB As String 'Vor-, Nachsatzformat f. Kleben
 
 Private Sub Worksheet_Activate()
-    On Error Resume Next
     Run Worksheets("SKleben").Bogen_erstellen
-    Call CheckBox1_Click
+    Call Worksheets("Kleben").CheckBox1_Click
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
-    On Error Resume Next
-    Call VNFormat
-    Call TextBox1_Change
+    Call Worksheets("Kleben").VNFormat
+    Call Worksheets("Kleben").TextBox1_Change
     Run Worksheets("SKleben").Bogen_erstellen
 End Sub
 Private Sub CommandButton1_Click()
@@ -37,36 +35,33 @@ End Sub
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Auswahl Vor-, Nachsatzkleben
-    On Error Resume Next
-        If CheckBox1.Value = True Then
+        If Worksheets("Kleben").CheckBox1.Value = True Then
             Worksheets("SKleben").Range("I2") = "1"
             Worksheets("Kleben").Rows("4:37").Hidden = False
-            ComboBox1.Visible = True
-            ComboBox2.Visible = True
-            TextBox1.Visible = True
-            CheckBox3.Visible = True
-            Call ComboBox1_DropButtonClick
-            Call Maschinendaten
+            Worksheets("Kleben").ComboBox1.Visible = True
+            Worksheets("Kleben").ComboBox2.Visible = True
+            Worksheets("Kleben").TextBox1.Visible = True
+            Call Worksheets("Kleben").ComboBox1_DropButtonClick
+            Call Worksheets("Kleben").Maschinendaten
         Else
             Worksheets("SKleben").Range("I2") = "0"
             Worksheets("Kleben").Rows("4:37").Hidden = True
-            ComboBox1.Visible = False
-            ComboBox2.Visible = False
-            ComboBox3.Visible = False
-            ComboBox4.Visible = False
-            TextBox1.Visible = False
-            CheckBox3.Visible = False
+            Worksheets("Kleben").ComboBox1.Visible = False
+            Worksheets("Kleben").ComboBox2.Visible = False
+            Worksheets("Kleben").ComboBox3.Visible = False
+            Worksheets("Kleben").ComboBox4.Visible = False
+            Worksheets("Kleben").TextBox1.Visible = False
         End If
         Run Worksheets("SKleben").KlebenAnzeige
 End Sub
 Sub CheckBox2_Click()
 Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Auswahl Bogen ankleben
-        If CheckBox2.Value = True Then
+        If Worksheets("Kleben").CheckBox2.Value = True Then
             Worksheets("SKleben").Range("I3") = "1"
             Worksheets("Kleben").Rows("40:51").Hidden = False
-            ComboBox3.Visible = True
-            ComboBox3.Top = 512.25
+            Worksheets("Kleben").ComboBox3.Visible = True
+            Worksheets("Kleben").ComboBox3.Top = 512.25
             Else
             Worksheets("SKleben").Range("I3") = "0"
             Worksheets("Kleben").Rows("40:51").Hidden = True
@@ -74,7 +69,7 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         End If
         Run Worksheets("SKleben").KlebenAnzeige
 End Sub
-Private Sub ComboBox1_DropButtonClick()
+Sub ComboBox1_DropButtonClick()
     'Papierberechnung je nach Auswahl
     Dim shpShape As Shape
     Dim intI As Integer
@@ -88,7 +83,7 @@ Private Sub ComboBox1_DropButtonClick()
             Worksheets("Kleben").CheckBox2.Visible = True 'Bg. ankleben
             Worksheets("Kleben").ComboBox4.Visible = True 'Materialauswahl
             Worksheets("Kleben").ComboBox4.Top = 66.75
-            'ComboBox4.ListIndex = 0
+            'Worksheets("Kleben").ComboBox4.ListIndex = 0
             Run Worksheets("Kleben").Materialauswahl
         Else 'Kunde geliefert
             Worksheets("Kleben").Rows("4:6").Hidden = True
@@ -117,15 +112,14 @@ Private Sub ComboBox4_Change()
     Run Worksheets("Kleben").Materialauswahl
     Run Worksheets("SKleben").Bogen_erstellen
 End Sub
-Private Sub TextBox1_Change()
+Sub TextBox1_Change()
     'Anzeige Bogeninfos
-    On Error Resume Next
     If Worksheets("SKleben").Range("C33") = 1 Then
-            With TextBox1
+            With Worksheets("Kleben").TextBox1
                 .Visible = True
                 .Top = 58
                 .Left = 744
-                .Font = "Verdana"
+                .Font.Name = "Verdana"
                 .Font.Size = 10
                 .Font.Bold = True
                 .BorderColor = vbRed
@@ -192,7 +186,6 @@ Sub VNFormat()
     '
     'Anzeige Vor-, Nachsatzformat Brutto/Netto (Papierbestellung)
     '
-    On Error Resume Next
         VNFormatN = Worksheets("SKleben").Range("C52") & " cm x " & Worksheets("SKleben").Range("B52") & " cm"
         VNFormatB = Worksheets("SKleben").Range("C53") & " cm x " & Worksheets("SKleben").Range("B53") & " cm"
 End Sub

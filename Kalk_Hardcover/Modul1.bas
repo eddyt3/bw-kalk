@@ -54,7 +54,6 @@ End Function
 Sub produkt()
 Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Anzeigen d. Produktangaben
-    On Error Resume Next
     Dim format, Gewicht, Dicke As String
         format = Worksheets("SEingabe").Range("G26")
         Dicke = Worksheets("SEingabe").Range("D127")

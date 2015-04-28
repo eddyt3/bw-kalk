@@ -21,7 +21,6 @@ Private Sub ComboBox1_Change()
 End Sub
 Private Sub CommandButton1_Click()
     'Materialseite einblenden
-    On Error Resume Next
     Worksheets("Material").Visible = xlSheetVisible
     Worksheets("Material").Activate
     Worksheets("Material").Range("H217").Select

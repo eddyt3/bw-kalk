@@ -15,7 +15,7 @@ Public Sub Workbook_BeforePrint(Cancel As Boolean)
     '20150421
     Dim Letzte As Long 'Letzte Zeile
     Dim a As Integer
-    Letzte = Cells(Rows.Count, 1).End(xlUp).Row
+    Letzte = Worksheets("Eingabe").Cells(Rows.Count, 1).End(xlUp).Row
     Worksheets("Eingabe").PageSetup.PrintArea = "A1:L" & Letzte
     Application.ScreenUpdating = False
     Dim wks As Worksheet
@@ -29,6 +29,7 @@ Public Sub Workbook_BeforePrint(Cancel As Boolean)
 End Sub
 Private Sub Workbook_Open()
 ' Buttonformat zurücksetzen wg. Problem der unterschiedlichen Größen bei unterschiedlichen Bildschirmauflösungen
+On Error Resume Next
 fntSize = 10
 With Worksheets("Eingabe").CheckBox1   '1
    .Height = 18.75: .Width = 57.75: .Top = 316.5: .Left = 9.75: .FontSize = fntSize
@@ -40,16 +41,16 @@ With Worksheets("Eingabe").CheckBox3   '3
    .Height = 18.75: .Width = 57.75: .Top = 543: .Left = 9.75: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CheckBox4   '4
-   .Height = 12: .Width = 12: .Top = 867: .Left = 574.5: .FontSize = fntSize
+   .Height = 12: .Width = 12: .Top = 867: .Left = 565.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CheckBox5   '5
-   .Height = 12: .Width = 12: .Top = 892.5: .Left = 574.5: .FontSize = fntSize
+   .Height = 12: .Width = 12: .Top = 892.5: .Left = 565.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CheckBox6   '6
-   .Height = 12: .Width = 12: .Top = 994.5: .Left = 574.5: .FontSize = fntSize
+   .Height = 12: .Width = 12: .Top = 994.5: .Left = 565.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CheckBox7   '7
-   .Height = 12: .Width = 12: .Top = 1071: .Left = 574.5: .FontSize = fntSize
+   .Height = 12: .Width = 12: .Top = 1071: .Left = 565.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").ComboBox2   '8
    .Height = 19.5: .Width = 86.25: .Top = 81.75: .Left = 3.75: .FontSize = fntSize
@@ -88,19 +89,19 @@ With Worksheets("Eingabe").ComboBox11   '19
    .Height = 19.5: .Width = 113.25: .Top = 561: .Left = 2.25: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CheckBox8   '20
-   .Height = 12: .Width = 12: .Top = 1020: .Left = 574.5: .FontSize = fntSize
+   .Height = 12: .Width = 12: .Top = 1020: .Left = 565.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CheckBox9   '21
-   .Height = 12: .Width = 12: .Top = 918: .Left = 574.5: .FontSize = fntSize
+   .Height = 12: .Width = 12: .Top = 918: .Left = 565.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CheckBox10   '22
-   .Height = 12: .Width = 12: .Top = 969: .Left = 574.5: .FontSize = fntSize
+   .Height = 12: .Width = 12: .Top = 969: .Left = 565.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CommandButton4   '23
    .Height = 35.25: .Width = 83.25: .Top = 63: .Left = 558: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").TextBox2   '24
-   .Height = 149.25: .Width = 282: .Top = 1108.5: .Left = 553.5: .FontSize = fntSize
+   .Height = 149.25: .Width = 282: .Top = 1107.75: .Left = 538.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").ComboBox13   '25
    .Height = 25.5: .Width = 111.75: .Top = 142.5: .Left = 3.75: .FontSize = fntSize
@@ -109,19 +110,19 @@ With Worksheets("Eingabe").ComboBox14   '26
    .Height = 19.5: .Width = 172.5: .Top = 80.25: .Left = 355.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CheckBox11   '27
-   .Height = 12: .Width = 12: .Top = 943.5: .Left = 574.5: .FontSize = fntSize
+   .Height = 12: .Width = 12: .Top = 943.5: .Left = 565.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").CheckBox12   '28
-   .Height = 12: .Width = 12: .Top = 1045.5: .Left = 574.5: .FontSize = fntSize
+   .Height = 12: .Width = 12: .Top = 1045.5: .Left = 565.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").TextBox3   '29
    .Height = 19.5: .Width = 28.5: .Top = 81.75: .Left = 172.5: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").TextBox4   '30
-   .Height = 19.5: .Width = 42: .Top = 200.25: .Left = 355.5: .FontSize = fntSize
+   .Height = 19.5: .Width = 42: .Top = 200.25: .Left = 344.25: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").TextBox5   '31
-   .Height = 19.5: .Width = 42: .Top = 200.25: .Left = 408: .FontSize = fntSize
+   .Height = 19.5: .Width = 42: .Top = 200.25: .Left = 396.75: .FontSize = fntSize
 End With
 With Worksheets("Eingabe").Label1   '32
    .Height = 13.5: .Width = 95.25: .Top = 105: .Left = 117.75: .FontSize = fntSize

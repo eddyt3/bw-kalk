@@ -12,7 +12,7 @@ Attribute VB_Exposed = True
 '
 Sub kleben()
     Application.ScreenUpdating = False
-    If Worksheets("SEingabe").Range("B34") > 0 Then
+    If Worksheets("SEingabe").Range("B32") > 0 Then
         Worksheets("Kleben").Visible = True
         Worksheets("Kleben").CheckBox1.Value = True
         Else
@@ -49,7 +49,6 @@ Sub KlebenAnzeige()
 End Sub
 Sub Bogen_erstellen()
     'Originalnutzenverteilung
-    On Error Resume Next
     Dim intHline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien u. Z‰hlervar.
     Dim intBgH, intBgW, intBgHpx, intBgWpx, intBgHoffset, intBgVoffset As Integer 'Bogenmaﬂe u. Offsets
     Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Versatzsumme
