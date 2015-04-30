@@ -232,8 +232,8 @@ Sub List_Location_Size_for_all_VB_Buttons()
     DebugClear
     'Debug.Print "fntSize=10"
     DebugPrint "fntSize=10"
-    For i = 1 To Sheets.count - 1
-      With Sheets(i)
+    For i = 1 To ActiveWorkbook.Sheets.count - 1
+      With ActiveWorkbook.Sheets(i)
        For Each sh In .Shapes
         If sh.Type = msoOLEControlObject Then  'Only list VB buttons
             ShCounter = ShCounter + 1
@@ -258,6 +258,7 @@ Sub List_Location_Size_for_all_VB_Buttons()
     MsgBox "Fertig Master!" & vbLf & vbLf & ShCounter & " VB Buttonformate exportiert."
 End Sub
 Sub Test()
+'zu List_Location_Size_for_all_VB_Buttons()
 'Test File Ausgabe
    Dim i As Long
 
@@ -267,16 +268,17 @@ Sub Test()
    Next
 End Sub
 Sub DebugPrint(s As String)
+'zu List_Location_Size_for_all_VB_Buttons()
    Static fso As Object
-
    If fso Is Nothing Then Set fso = CreateObject("Scripting.FileSystemObject")
-   With fso.OpenTextFile(ThisWorkbook.Path & "\debug.log", 8, True, -1)
+   With fso.OpenTextFile(ActiveWorkbook.Path & "\debug.log", 8, True, -1)
       .WriteLine s
       .Close
    End With
 End Sub
 Sub DebugClear()
-   CreateObject("Scripting.FileSystemObject").CreateTextFile ThisWorkbook.Path & "\debug.log", True, True
+'zu List_Location_Size_for_all_VB_Buttons()
+   CreateObject("Scripting.FileSystemObject").CreateTextFile ActiveWorkbook.Path & "\debug.log", True, True
 End Sub
 Sub references_eigenschaften()
 'verwendete VBA Verweise einer XLS anzeigen lassen
