@@ -20,7 +20,7 @@ End Sub
 Sub Zusammentragen()
     '
     'Ermittlung der Stationen und der Anzahl Vorsammeln
-    '20100122 modifiziert
+    '20150701 modifiziert
     Dim a, intM, BgAnzahl, AnzahlBgZus, AnzahlBgVors, AnzahlVors, intMa, intStatMa, intBg As Integer
     intStatMa = Worksheets("SZusammentragen").Range("E11") 'max Stationen
     intBg = Worksheets("SZusammentragen").Range("B8") 'Bogensumme
@@ -67,6 +67,13 @@ Sub Zusammentragen()
     Else
         Worksheets("Zusammentragen").CheckBox1.Visible = False
         Worksheets("Zusammentragen").CheckBox1.Value = False
+    End If
+    'Prüfung händisch Zusammenlegen (maschinenabhängig)
+    If Worksheets("SZusammentragen").Range("N16") = 1 And Worksheets("Zusammentragen").CheckBox2.Value = False Then
+        Worksheets("Zusammentragen").CheckBox2.Value = True
+    End If
+        If intAnzahlVors = 0 Then
+        Worksheets("Zusammentragen").CheckBox2.Value = False
     End If
     Application.ScreenUpdating = True
 End Sub
