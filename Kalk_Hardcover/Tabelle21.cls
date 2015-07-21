@@ -209,16 +209,15 @@ Sub lkw()
 End Sub
 Sub Palettencheck()
     'Palettenwerte setzen
-    'modified 20140623
+    'modified 20150721
     Dim intAuswahlPl As Integer
     intAuswahlPl = Worksheets("SVerpacken").Range("H7")
-    If intAuswahlPl = 8 Then
-        Worksheets("Verpacken").Range("D23").FormulaLocal = "=(SVERWEIS(SVerpacken!H7;Material!B79:J93;9)+SVERWEIS(SVerpacken!H7;Material!B79:J93;5))/10"
+    Worksheets("Verpacken").Range("D23").FormulaLocal = "=(SVERWEIS(SVerpacken!H7;Material!B79:J93;9)+SVERWEIS(SVerpacken!H7;Material!B79:J93;5))/10"
+    If intAuswahlPl = 8 Or intAuswahlPl = 9 Then
         Worksheets("Verpacken").Range("F23") = "(Palettenvorgabe)"
         Worksheets("Verpacken").Range("D23").Interior.ColorIndex = 0
         Worksheets("Verpacken").Range("D23").Interior.Pattern = xlSolid
     Else
-        Worksheets("Verpacken").Range("D23") = 120
         Worksheets("Verpacken").Range("F23") = ""
         Worksheets("Verpacken").Range("D23").Interior.ColorIndex = 6
         Worksheets("Verpacken").Range("D23").Interior.Pattern = xlSolid
