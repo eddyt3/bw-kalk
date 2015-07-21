@@ -41,6 +41,7 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Kleben").ComboBox1.Visible = True
             Worksheets("Kleben").ComboBox2.Visible = True
             Worksheets("Kleben").TextBox1.Visible = True
+            Worksheets("Kleben").CommandButton21.Visible = True
             Call Worksheets("Kleben").ComboBox1_DropButtonClick
             Call Worksheets("Kleben").Maschinendaten
         Else
@@ -51,6 +52,7 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Kleben").ComboBox3.Visible = False
             Worksheets("Kleben").ComboBox4.Visible = False
             Worksheets("Kleben").TextBox1.Visible = False
+            Worksheets("Kleben").CommandButton21.Visible = False
         End If
         Run Worksheets("SKleben").KlebenAnzeige
 End Sub
