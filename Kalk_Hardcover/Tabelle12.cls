@@ -12,6 +12,7 @@ Attribute VB_Exposed = True
 
 Private Sub Worksheet_Activate()
     Run Worksheets("SBuchdecke").Beschriftung
+    Run Worksheets("SBuchdecke").HardcoverVisual
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
     Run Worksheets("SBuchdecke").Beschriftung
