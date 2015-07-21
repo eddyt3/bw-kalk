@@ -300,17 +300,6 @@ Sub CheckBox12_Click()
         End If
     Application.ScreenUpdating = True
 End Sub
-Private Sub TextBox3_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
-    'Buchdecke, alternative Pappstärke mit Nachkommastelle
-    Select Case KeyAscii
-      Case 48 To 57, 43 To 46
-      Case Else: KeyAscii = 0
-    End Select
-    Run Worksheets("SBuchdecke").Beschriftung
-End Sub
-Private Sub TextBox3_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
-   If KeyCode = vbKeyTab Then Worksheets("Eingabe").TextBox6.Activate
-End Sub
 Private Sub TextBox4_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Produktbreite
     Select Case KeyAscii
@@ -366,8 +355,8 @@ Sub Buchblockformat()
         End With
         Worksheets("Eingabe").Range("F9") = "Sonderformat"
     Else
-        Worksheets("Eingabe").ComboBox3.ListIndex = 0 'Standardformate nur mit 2mm Pappstärke
-        Worksheets("Eingabe").TextBox3.Visible = False
+        Worksheets("Eingabe").ComboBox3.ListIndex = 6 'Standardformate nur mit 2mm Pappstärke
+        Worksheets("Eingabe").Label3.Visible = True
         Worksheets("Eingabe").TextBox4.Visible = False
         Worksheets("Eingabe").TextBox5.Visible = False
         With Worksheets("Eingabe").Range("E9")
