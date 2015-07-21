@@ -17,7 +17,7 @@ End Sub
 Private Sub CheckBox2_Click()
     'Auswahl Eckenrunden
     '20090824
-    If CheckBox2.Value = True Then
+    If Worksheets("Bohren").CheckBox2.Value = True Then
         Worksheets("SBohren").Range("F5") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bohrungen/Stunde eingeben:", "Eingabe", , Type:=1)
     Else: Worksheets("SBohren").Range("F5").FormulaLocal = "=SVERWEIS(B12;C13:F15;4)"
     End If
