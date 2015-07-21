@@ -16,18 +16,16 @@ Sub Schlaufe()
 Attribute Schlaufe.VB_Description = "Makro am 27.07.2005 von Enrico Dargel aufgezeichnet"
 Attribute Schlaufe.VB_ProcData.VB_Invoke_Func = " \r14"
     ' Schlaufenpruefung
-    '
-    On Error Resume Next
     Dim Teilung As String
     Dim Schlaufe As String
-    Teilung = Range("Steuerung!B37")
-    Schlaufe = Range("Steuerung!B38")
-    Range("Material_Binden!D104").FormulaLocal = "=SVERWEIS(Eingabe!C22;Material_Binden!A105:B117;2;FALSCH)"
-    If Range("Material_Binden!D104") = 0 Then
+    Teilung = Worksheets("Steuerung").Range("B37")
+    Schlaufe = Worksheets("Steuerung").Range("B38")
+    Worksheets("Material_Binden").Range("D104").FormulaLocal = "=SVERWEIS(Eingabe!C22;Material_Binden!A105:B117;2;FALSCH)"
+    If Worksheets("Material_Binden").Range("D104") = 0 Then
         MsgBox ("Die Schlaufengroeﬂe " & Schlaufe & " ist nicht moeglich." & vbCrLf & vbCrLf & "Das entsprechende Werkzeug fehlt!")
         Else
-            If Range("Material_Binden!D104") = 1 Then
-                If Range("Eingabe!E22") = 0 Then
+            If Worksheets("Material_Binden").Range("D104") = 1 Then
+                If Worksheets("Eingabe").Range("E22") = 0 Then
                     MsgBox ("Fuer die Teilung " & Teilung & " gibt es keine Schlaufe " & Schlaufe & " !" _
                      & vbCrLf & vbCrLf & "Bitte waehlen Sie eine andere Teilung oder Schlaufengroeﬂe.")
                 End If
@@ -38,13 +36,11 @@ Sub SizeSchlaufe()
 Attribute SizeSchlaufe.VB_Description = "Makro am 27.07.2005 von Enrico Dargel aufgezeichnet"
 Attribute SizeSchlaufe.VB_ProcData.VB_Invoke_Func = " \r14"
     ' Button
-    '
-    On Error Resume Next
     Dim Teilung As String
     Dim Schlaufe As String
-    Teilung = Range("Steuerung!B37")
-    Schlaufe = Range("Steuerung!B38")
-    If Range("Eingabe!E22") = 0 Then
+    Teilung = Worksheets("Steuerung").Range("B37")
+    Schlaufe = Worksheets("Steuerung").Range("B38")
+    If Worksheets("Eingabe").Range("E22") = 0 Then
         MsgBox ("Fuer die Teilung " & Teilung & " gibt es keine Schlaufe " & Schlaufe & " !" _
         & vbCrLf & vbCrLf & "Bitte waehlen Sie eine andere Teilung oder Schlaufengroeﬂe.")
     Else
@@ -52,20 +48,18 @@ Attribute SizeSchlaufe.VB_ProcData.VB_Invoke_Func = " \r14"
 End Sub
 Sub SizeSchaft()
     ' Pruefung der Schaftlaenge
-    '
-    On Error Resume Next
     Dim Schaft_min As Integer
     Dim Schaft_max As Integer
-    Schaft_min = Range("Material_Binden!H26")
-    Schaft_max = Range("Material_Binden!H27")
-    Schaft_min_wert = Range("Material_Binden!I26")
-    Schaft_max_wert = Range("Material_Binden!I27")
-    Schaft_Ist = Range("Material_Binden!I28")
-    If Range("Eingabe!C19") < Schaft_min Then
+    Schaft_min = Worksheets("Material_Binden").Range("H26")
+    Schaft_max = Worksheets("Material_Binden").Range("H27")
+    Schaft_min_wert = Worksheets("Material_Binden").Range("I26")
+    Schaft_max_wert = Worksheets("Material_Binden").Range("I27")
+    Schaft_Ist = Worksheets("Material_Binden").Range("I28")
+    If Worksheets("Eingabe").Range("C19") < Schaft_min Then
         MsgBox ("Es sind nur Schaftlaengen zwischen " _
         & vbCrLf & vbCrLf & Schaft_min_wert & " mm und " & Schaft_max_wert & " mm moeglich !" & vbCrLf & vbCrLf & "Bitte waehlen Sie eine andere Schaftlaenge.")
         Else
-        If Range("Eingabe!C19") > Schaft_max Then
+        If Worksheets("Eingabe").Range("C19") > Schaft_max Then
             MsgBox ("Es sind nur Schaftlaengen zwischen " _
             & vbCrLf & vbCrLf & Schaft_min_wert & " mm und " & Schaft_max_wert & " mm moeglich !" & vbCrLf & vbCrLf & "Bitte waehlen Sie eine andere Schaftlaenge.")
         End If
@@ -73,7 +67,6 @@ Sub SizeSchaft()
 End Sub
 Sub Bogenformat_Pappe() 'CommandButton1
     'Bogenformat d. alternativen Pappe
-    '
     If Worksheets("Steuerung").Range("H49").Value = 1 Or Worksheets("Steuerung").Range("H49").Value = 3 Then
         If Worksheets("Steuerung").Range("H70").Value = 1 Then
             Dim strBgLa, strBgLb As String 'Bogen L‰nge a, b
@@ -98,7 +91,6 @@ Sub Bogenformat_Pappe() 'CommandButton1
 End Sub
 Sub Bogenformat_Folie() 'CommandButton5
     'Bogenformat d. Folie
-    '
     If Worksheets("Steuerung").Range("D49").Value = 1 Or Worksheets("Steuerung").Range("D49").Value = 3 Then
         If Worksheets("Steuerung").Range("D70").Value = 1 Then
             Dim strBgLa, strBgLb As String 'Bogen L‰nge a, b
@@ -135,7 +127,6 @@ Sub Rueckpappe()
                    Worksheets("Steuerung").Range("H70") = 2 'Erste Standardgrammatur
                Call NutzenCheck_Pappe
                Worksheets("Eingabe").CommandButton1.Visible = False 'Format‰nderung Alternativ-Bogen
-    
            Case Is = 2 'formatig eingekauft
                Worksheets("Eingabe").ComboBox12.Visible = False
                Worksheets("Eingabe").ComboBox2.ListFillRange = "Steuerung!E72:F72" 'Auswahl alternativer Grammatur R¸ckpappe
@@ -143,14 +134,12 @@ Sub Rueckpappe()
                Worksheets("Steuerung").Range("H56").Value = 1 '1 Nutzen da formatig
                Worksheets("Steuerung").Range("H70").Value = 1 '1 alternative Grammatur
                Worksheets("Eingabe").CommandButton1.Visible = False 'kein alternatives Format
-           
            Case Is = 3 'geliefert
                Worksheets("Eingabe").ComboBox12.Visible = True
                Worksheets("Eingabe").ComboBox2.ListFillRange = "Steuerung!E72:F72" 'Auswahl alternativer Grammatur R¸ckpappe
                Worksheets("Steuerung").Range("H70").Value = 1 '1 alternative Grammatur
                Worksheets("Eingabe").CommandButton1.Visible = True 'Format‰nderung Alternativ-Bogen
                Call NutzenCheck_Pappe
-           
            Case Is = 4 'geliefert u. geschnitten
                Worksheets("Eingabe").ComboBox12.Visible = False
                Worksheets("Eingabe").ComboBox2.ListFillRange = "Steuerung!E72:F72" 'Auswahl alternativer Grammatur R¸ckpappe
@@ -161,7 +150,7 @@ Sub Rueckpappe()
     End If
 End Sub
 Sub Alternativfolie()
-    'On Error Resume Next
+    '
     Dim auswahl As Integer
     If Worksheets("Eingabe").Range("C11").Value > 0 Then
         auswahl = Worksheets("Steuerung").Range("D49").Value
@@ -175,21 +164,18 @@ Sub Alternativfolie()
                 Call Mindestmenge_Folie
                 Call NutzenCheck_Folie
                 Worksheets("Eingabe").CommandButton5.Visible = False 'Format‰nderung Alternativ-Bogen
-    
             Case Is = 2 'formatig eingekauft
                 Worksheets("Eingabe").ComboBox8.Visible = False
                 Worksheets("Eingabe").ComboBox1.ListFillRange = "Steuerung!B72:C72" 'Auswahl alternativer Grammatur R¸ckpappe
                 Worksheets("Steuerung").Range("D56").Value = 1 '1 Nutzen da formatig
                 Worksheets("Steuerung").Range("D70").Value = 1 '1 alternative Grammatur
                 Worksheets("Eingabe").CommandButton5.Visible = False 'kein alternatives Format
-            
             Case Is = 3 'geliefert
                 Worksheets("Eingabe").ComboBox8.Visible = True
                 Worksheets("Eingabe").ComboBox1.ListFillRange = "Steuerung!B72:C72" 'Auswahl alternativer Grammatur R¸ckpappe
                 Worksheets("Steuerung").Range("D70").Value = 1 '1 alternative Grammatur
                 Worksheets("Eingabe").CommandButton5.Visible = True 'Format‰nderung Bogen
                 Call NutzenCheck_Folie
-            
             Case Is = 4 'geliefert u. geschnitten
                 Worksheets("Eingabe").ComboBox8.Visible = False
                 Worksheets("Eingabe").ComboBox1.ListFillRange = "Steuerung!B72:C72" 'Auswahl alternativer Grammatur R¸ckpappe
@@ -201,7 +187,6 @@ Sub Alternativfolie()
 End Sub
 Sub Mindestmenge_Folie()
     'Pr¸fung der Mindestmenge f. Einkauf
-    '
     Dim intGewichtA, intGewichtB, intGewichtC, intGewichtMin As Integer
     intGewichtA = Worksheets("Binden").Range("D10")
     intGewichtB = Worksheets("Binden").Range("F10")
@@ -216,31 +201,27 @@ Sub Mindestmenge_Folie()
 End Sub
 Sub Materialkommentar()
     ' Einfuegen der einzelnen Materialstaerken in den Kommentar
-    '
-    On Error Resume Next
     Dim Folie, Deckblatt, Inhalt, Rueckblatt, Rueckpappe, Summe, Schlaufe As String
-    Folie = Range("Stanzen!K15")
-    Deckblatt = Range("Stanzen!K16")
-    Inhalt = Range("Stanzen!K17")
-    Rueckblatt = Range("Stanzen!K18")
-    Rueckpappe = Range("Stanzen!K19")
-    Summe = Range("Stanzen!K20")
-    Schlaufe = Range("Stanzen!K21")
-    Range("Eingabe!C32").ClearComments
-    Range("Eingabe!C32").AddComment
-    Range("Eingabe!C32").Comment.Visible = False
-    Range("Eingabe!C32").Comment.Text Text:="Einzelst‰rken:" & vbLf & "=================" & vbLf & Folie & " mm Folie" & vbLf & Deckblatt & " mm Deckblatt" & vbLf & Inhalt & " mm Inhalt" _
+    Folie = Worksheets("Stanzen").Range("K15")
+    Deckblatt = Worksheets("Stanzen").Range("K16")
+    Inhalt = Worksheets("Stanzen").Range("K17")
+    Rueckblatt = Worksheets("Stanzen").Range("K18")
+    Rueckpappe = Worksheets("Stanzen").Range("K19")
+    Summe = Worksheets("Stanzen").Range("K20")
+    Schlaufe = Worksheets("Stanzen").Range("K21")
+    Worksheets("Eingabe").Range("C32").ClearComments
+    Worksheets("Eingabe").Range("C32").AddComment
+    Worksheets("Eingabe").Range("C32").Comment.Visible = False
+    Worksheets("Eingabe").Range("C32").Comment.Text Text:="Einzelst‰rken:" & vbLf & "=================" & vbLf & Folie & " mm Folie" & vbLf & Deckblatt & " mm Deckblatt" & vbLf & Inhalt & " mm Inhalt" _
     & vbLf & Rueckblatt & " mm R¸ckblatt" & vbLf & Rueckpappe & " mm R¸ckpappe" & vbLf & "=================" & vbLf & Summe & " mm Summe" & vbLf & Schlaufe & " mm " & Chr(248) & " Schlaufe"
-    Range("Eingabe!C32").Comment.Shape.TextFrame.AutoSize = True
+    Worksheets("Eingabe").Range("C32").Comment.Shape.TextFrame.AutoSize = True
 End Sub
 Sub Bindemaschine()
     ' Maschinenpruefung
     ' Alle Schlaufen >1" koennen nur auf CLS verarbeitet werden
-    '
-    On Error Resume Next
     Dim Schlaufe As String
-    Schlaufe = Range("Steuerung!B38")
-    If Range("Eingabe!C22") > 11 And Range("SBinden!B4") < 4 Then
+    Schlaufe = Worksheets("Steuerung").Range("B38")
+    If Worksheets("Eingabe").Range("C22") > 11 And Worksheets("Eingabe").Range("B4") < 4 Then
         MsgBox ("Achtung! " & vbCrLf & vbCrLf & "Die Schlaufe " & Schlaufe & _
         " kann nur auf der CLS verarbeitet werden." & vbCrLf & vbCrLf & _
         "Bitte beim Binden richtige Maschine ausw‰hlen.")
@@ -248,22 +229,54 @@ Sub Bindemaschine()
 End Sub
 Sub Produkt()
     ' Anzeigen d. Produktangaben bei "Verpacken"
-    '
-    On Error Resume Next
-    Dim format, Gewicht, Dicke As String
+    ' Wire-O spezifisch!
+    ' 20150505
+    Dim format, Endformat, Gewicht, Dicke As String
+    Dim sngBreite, sngHoehe, sngLoop, sngOhneBindg, sngMitBindg, sngZuschlag As Single
+    Dim intSeite As Integer
+    sngBreite = Worksheets("SEingabe").Range("B122")
+    sngHoehe = Worksheets("SEingabe").Range("C122")
+    sngLoop = Worksheets("SEingabe").Range("C136")
+    sngZuschlag = Worksheets("SVerpacken").Range("K19")
+    intSeite = Worksheets("SEingabe").Range("B132")
     format = Worksheets("SEingabe").Range("G26")
-    Dicke = Range("Eingabe!C32")
-    Gewicht = Range("Eingabe!C34")
-    Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
+    Dicke = Worksheets("Eingabe").Range("C32")
+    Gewicht = Worksheets("Eingabe").Range("C34")
+    If intSeite = 2 Then '2 = Bindeseite lang
+        sngOhneBindg = WorksheetFunction.Min(sngHoehe, sngBreite) + sngZuschlag * (sngLoop / 10)
+        sngOhneBindg = WorksheetFunction.RoundUp(sngOhneBindg, 1)
+        sngMitBindg = WorksheetFunction.Max(sngHoehe, sngBreite)
+        If sngBreite < sngHoehe Then
+            Endformat = sngOhneBindg & "cm x " & sngMitBindg & "cm"
+            Worksheets("SVerpacken").Range("K17") = sngOhneBindg * 10
+            Worksheets("SVerpacken").Range("K18") = sngMitBindg * 10
+        Else
+            Endformat = sngMitBindg & "cm x " & sngOhneBindg & "cm"
+            Worksheets("SVerpacken").Range("K17") = sngMitBindg * 10
+            Worksheets("SVerpacken").Range("K18") = sngOhneBindg * 10
+        End If
+    Else
+        sngOhneBindg = WorksheetFunction.Max(sngHoehe, sngBreite) + sngZuschlag * (sngLoop / 10)
+        sngOhneBindg = WorksheetFunction.RoundUp(sngOhneBindg, 1)
+        sngMitBindg = WorksheetFunction.Min(sngHoehe, sngBreite)
+        If sngBreite < sngHoehe Then
+            Endformat = sngMitBindg & "cm x " & sngOhneBindg & "cm"
+            Worksheets("SVerpacken").Range("K17") = sngMitBindg * 10
+            Worksheets("SVerpacken").Range("K18") = sngOhneBindg * 10
+        Else
+            Endformat = sngOhneBindg & "cm x " & sngMitBindg & "cm"
+            Worksheets("SVerpacken").Range("K17") = sngOhneBindg * 10
+            Worksheets("SVerpacken").Range("K18") = sngMitBindg * 10
+        End If
+    End If
+    Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & Endformat _
      & vbLf & vbLf & "St‰rke: " & vbLf & Dicke & " mm" & vbLf & vbLf & "Gewicht: " & vbLf & Gewicht & " g"
 End Sub
 Sub NutzenCheck_Folie()
     ' ‹berpr¸fung der Nutzenanzahl
-    '
     If Worksheets("Steuerung").Range("D49").Value = 1 Or Worksheets("Steuerung").Range("D49").Value = 3 Then
     'Nur Pr¸fen wenn "von Bubi schneiden" oder "geliefert"
         Dim NutzenMax As Integer
-        
         If Worksheets("Steuerung").Range("D70").Value = 1 Then
             NutzenMax = Worksheets("SBinden").Range("C50")
             Else
@@ -287,7 +300,6 @@ Sub NutzenCheck_Folie()
 End Sub
 Sub NutzenCheck_Pappe()
     ' ‹berpr¸fung der Nutzenanzahl
-    '
     If Worksheets("Steuerung").Range("H49").Value = 1 Or Worksheets("Steuerung").Range("H49").Value = 3 Then
     'Nur Pr¸fen wenn "von Bubi schneiden" oder "geliefert"
         Dim NutzenMax As Integer

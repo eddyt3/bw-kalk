@@ -60,14 +60,13 @@ Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
     '
     Dim format, Gewicht, Dicke As String
         format = Worksheets("SEingabe").Range("G26")
-        Dicke = Range("Eingabe!C44")
-        Gewicht = Range("Eingabe!C45")
+        Dicke = Worksheets("Eingabe").Range("C44")
+        Gewicht = Worksheets("Eingabe").Range("C45")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
         & vbLf & vbLf & "Stärke: " & vbLf & Dicke & " mm" & vbLf & vbLf & "Gewicht: " & vbLf & Gewicht & " g"
 End Sub
 Sub Evaluierung_Binden() 'in Arbeit
 Attribute Evaluierung_Binden.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Dim bgAS, bgBS, bgCS, bgDS As Integer 'Seiten pro Bogen
     Dim bgAB, bgBB, bgCB, bgDB As Integer 'Bogenanzahl
     Dim bgAN, bgBN, bgCN, bgDN As Integer 'Nutzen

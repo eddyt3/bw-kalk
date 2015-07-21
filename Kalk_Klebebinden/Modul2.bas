@@ -76,7 +76,6 @@ Sub Dokumenteigenschaften_Ist()
     '14.01.2009
     Dim i As Long
     Dim a As Integer
-    On Error Resume Next
     a = 189
     For i = 1 To ThisWorkbook.BuiltinDocumentProperties.Count
       Worksheets("Steuerung").Cells(a + i, 1) = ThisWorkbook.BuiltinDocumentProperties(i).Name
@@ -89,7 +88,6 @@ Sub Dokumenteigenschaften_Soll()
     '14.01.2009
     Dim i As Long
     Dim a As Integer
-    On Error Resume Next
     Worksheets("Steuerung").Range("C190") = ThisWorkbook.Name
     Worksheets("Steuerung").Range("C218") = ThisWorkbook.FullName
     a = 189
