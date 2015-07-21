@@ -11,9 +11,7 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Sub Schneidbogen()
-'
 ' Loeschen d. vorhandenen Eingaben wenn d. Bg. nicht ausgewaehlt wurde
-'
 If Worksheets("SSchneiden").Range("B103") < 1 Then
     Worksheets("Schneiden").Range("D3") = "0"
     Else
@@ -50,10 +48,8 @@ If Worksheets("SSchneiden").Range("F111").Value < 1 Then
  End If
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
-On Error Resume Next
-Worksheets("Schneiden").EnableOutlining = True
+    Worksheets("Schneiden").EnableOutlining = True
 End Sub
-
 Private Sub CheckBox1_Click()
  Run Worksheets("SSchneiden").SchneidenAnzeige
 End Sub

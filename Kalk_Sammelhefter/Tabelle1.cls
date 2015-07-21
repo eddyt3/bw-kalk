@@ -11,7 +11,6 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Private Sub Worksheet_Change(ByVal Target As Excel.Range)
-    On Error Resume Next
     Application.ScreenUpdating = False
     Run Worksheets("SSammelheften").Zusammentragen
     'Run Worksheets("Falzen").Falzen
@@ -40,10 +39,9 @@ Private Sub ComboBox5_Change()
 End Sub
 Sub CheckBox1_Click()
 ' Auswahl Schneiden
-On Error Resume Next
 Application.ScreenUpdating = False
-    If CheckBox1.Value = True Then
-        Worksheets("Eingabe").Range("G60") = "1"
+    If Worksheets("Eingabe").CheckBox1.Value = True Then
+        Worksheets("SEingabe").Range("B25") = "1"
         Worksheets("Schneiden").CheckBox1.Value = True
         Worksheets("Schneiden").CheckBox1.Visible = True
         Worksheets("Schneiden").CheckBox2.Value = True
@@ -53,7 +51,7 @@ Application.ScreenUpdating = False
         Worksheets("Schneiden").CheckBox4.Value = True
         Worksheets("Schneiden").CheckBox4.Visible = True
     Else
-        Worksheets("Eingabe").Range("G60") = "0"
+        Worksheets("SEingabe").Range("B25") = "0"
         Worksheets("Schneiden").CheckBox1.Value = False
         Worksheets("Schneiden").CheckBox1.Visible = False
         Worksheets("Schneiden").CheckBox2.Value = False
@@ -70,42 +68,38 @@ End Sub
 Sub CheckBox2_Click()
 Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Falzen
-On Error Resume Next
 Application.ScreenUpdating = False
-    If CheckBox2.Value = True Then
-        Worksheets("Eingabe").Range("G62") = "1"
-    Else: Worksheets("Eingabe").Range("G62") = "0"
+    If Worksheets("Eingabe").CheckBox2.Value = True Then
+        Worksheets("SEingabe").Range("B26") = "1"
+    Else: Worksheets("SEingabe").Range("B26") = "0"
     End If
 Application.ScreenUpdating = True
 End Sub
 Sub CheckBox3_Click()
 Attribute CheckBox3_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Heften
-On Error Resume Next
 Application.ScreenUpdating = False
-    If CheckBox3.Value = True Then
-        Worksheets("Eingabe").Range("G64") = "1"
-    Else: Worksheets("Eingabe").Range("G64") = "0"
+    If Worksheets("Eingabe").CheckBox3.Value = True Then
+        Worksheets("SEingabe").Range("B27") = "1"
+    Else: Worksheets("SEingabe").Range("B27") = "0"
     End If
 Application.ScreenUpdating = True
 End Sub
 Sub CheckBox4_Click()
 Attribute CheckBox4_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Verpacken
-On Error Resume Next
 Application.ScreenUpdating = False
-    If CheckBox4.Value = True Then
-        Worksheets("Eingabe").Range("G68") = "1"
-    Else: Worksheets("Eingabe").Range("G68") = "0"
+    If Worksheets("Eingabe").CheckBox4.Value = True Then
+        Worksheets("SEingabe").Range("B29") = "1"
+    Else: Worksheets("SEingabe").Range("B29") = "0"
     End If
 Application.ScreenUpdating = True
 End Sub
 Sub CheckBox5_Click()
 Attribute CheckBox5_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Bogen B
-On Error Resume Next
 Application.ScreenUpdating = False
-    If CheckBox5.Value = True Then
+    If Worksheets("Eingabe").CheckBox5.Value = True Then
         Worksheets("Eingabe").Range("A18") = "1"
         Worksheets("Schneiden").CheckBox2.Value = True
         Worksheets("Schneiden").CheckBox2.Visible = True
@@ -123,9 +117,8 @@ End Sub
 Sub CheckBox6_Click()
 Attribute CheckBox6_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Bogen C
-On Error Resume Next
 Application.ScreenUpdating = False
-    If CheckBox6.Value = True Then
+    If Worksheets("Eingabe").CheckBox6.Value = True Then
         Worksheets("Eingabe").Range("A28") = "1"
         Worksheets("Schneiden").CheckBox3.Value = True
         Worksheets("Schneiden").CheckBox3.Visible = True
@@ -143,9 +136,8 @@ End Sub
 Sub CheckBox7_Click()
 Attribute CheckBox7_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Bogen D
-On Error Resume Next
 Application.ScreenUpdating = False
-    If CheckBox7.Value = True Then
+    If Worksheets("Eingabe").CheckBox7.Value = True Then
         Worksheets("Eingabe").Range("A38") = "1"
         Worksheets("Schneiden").CheckBox4.Value = True
         Worksheets("Schneiden").CheckBox4.Visible = True
@@ -161,14 +153,13 @@ Application.ScreenUpdating = False
 Application.ScreenUpdating = True
 End Sub
 Sub CheckBox8_Click()
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Bohren
-        If CheckBox8.Value = True Then
-            Worksheets("Eingabe").Range("G66") = "1"
+        If Worksheets("Eingabe").CheckBox8.Value = True Then
+            Worksheets("SEingabe").Range("B28") = "1"
             Worksheets("Bohren").Visible = True
         Else
-            Worksheets("Eingabe").Range("G66") = "0"
+            Worksheets("SEingabe").Range("B28") = "0"
             Worksheets("Bohren").Visible = False
         End If
     Application.ScreenUpdating = True
@@ -188,7 +179,13 @@ Private Sub TextBox2_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
 End Sub
 Private Sub TextBox2_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
 'Tabsprung zur nächsten Eingabe
-    If KeyCode = vbKeyTab Then TextBox3.Activate
+    If KeyCode = vbKeyTab Then
+        Worksheets("Eingabe").TextBox3.Activate
+        With Worksheets("Eingabe").TextBox3
+            .SelStart = 0
+            .SelLength = Len(.Text)
+        End With
+    End If
 End Sub
 Private Sub TextBox3_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Produktlänge
@@ -197,20 +194,24 @@ Private Sub TextBox3_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
       Case Else: KeyAscii = 0
     End Select
 End Sub
+Private Sub TextBox3_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+'Tabsprung zur nächsten Eingabe
+    If KeyCode = vbKeyTab Then Worksheets("Eingabe").Range("C10").Activate
+End Sub
 Sub Produktformat()
 'Auswahl Produktformat
 '20150420
     If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
-        TextBox2.Visible = True
-        TextBox3.Visible = True
+        Worksheets("Eingabe").TextBox2.Visible = True
+        Worksheets("Eingabe").TextBox3.Visible = True
         With Worksheets("Eingabe").Range("E9")
             .Interior.ColorIndex = 6
             .Value = "x"
         End With
         Worksheets("Eingabe").Range("F9") = "Sonderformat"
     Else
-        TextBox2.Visible = False 'Standardformate
-        TextBox3.Visible = False
+        Worksheets("Eingabe").TextBox2.Visible = False 'Standardformate
+        Worksheets("Eingabe").TextBox3.Visible = False
         With Worksheets("Eingabe").Range("E9")
             .Interior.ColorIndex = 0
             .Value = ""

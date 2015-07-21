@@ -11,7 +11,7 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Private Sub Worksheet_Change(ByVal Target As Range)
-On Error Resume Next
+
 Worksheets("Schneiden").EnableOutlining = True
 End Sub
 Private Sub CheckBox1_Click()

@@ -28,79 +28,73 @@ Private Sub Worksheet_Deactivate()
     Run Worksheets("Zusammentragen").Formatfehler
     Application.ScreenUpdating = True
     Call Materialkommentar
+    Call Produkt
 End Sub
 Private Sub CheckBox1_Click()
-On Error Resume Next
 Application.ScreenUpdating = False
 ' Auswahl Beschneiden
-    If CheckBox1.Value = True Then
-        Worksheets("Eingabe").Range("G58") = "1"
+    If Worksheets("Eingabe").CheckBox1.Value = True Then
+        Worksheets("SEingabe").Range("B25") = "1"
     Else
-        Worksheets("Eingabe").Range("G58") = "0"
+        Worksheets("SEingabe").Range("B25") = "0"
     End If
     Run Worksheets("SSchneiden").Schneidbogen
     Run Worksheets("SSchneiden").SchneidenAnzeige
 Application.ScreenUpdating = True
 End Sub
 Private Sub CheckBox2_Click()
-On Error Resume Next
 Application.ScreenUpdating = False
 ' Auswahl Zusammentragen
-    If CheckBox2.Value = True Then
-        Worksheets("Eingabe").Range("G60") = "1"
-    Else: Worksheets("Eingabe").Range("G60") = "0"
+    If Worksheets("Eingabe").CheckBox2.Value = True Then
+        Worksheets("SEingabe").Range("B26") = "1"
+    Else: Worksheets("SEingabe").Range("B26") = "0"
     End If
 Application.ScreenUpdating = True
 End Sub
 Private Sub CheckBox3_Click()
-On Error Resume Next
 Application.ScreenUpdating = False
 ' Auswahl 3Seitenbeschnitt
-    If CheckBox3.Value = True Then
-        Worksheets("Eingabe").Range("G62") = "1"
-    Else: Worksheets("Eingabe").Range("G62") = "0"
+    If Worksheets("Eingabe").CheckBox3.Value = True Then
+        Worksheets("SEingabe").Range("B27") = "1"
+    Else: Worksheets("SEingabe").Range("B27") = "0"
     End If
 Application.ScreenUpdating = True
 End Sub
 Private Sub CheckBox4_Click()
-On Error Resume Next
 Application.ScreenUpdating = False
 ' Auswahl Stanzen
-    If CheckBox4.Value = True Then
-        Worksheets("Eingabe").Range("G64") = "1"
-    Else: Worksheets("Eingabe").Range("G64") = "0"
+    If Worksheets("Eingabe").CheckBox4.Value = True Then
+        Worksheets("SEingabe").Range("B28") = "1"
+    Else: Worksheets("SEingabe").Range("B28") = "0"
     End If
 Application.ScreenUpdating = True
 End Sub
 Private Sub CheckBox5_Click()
-On Error Resume Next
 Application.ScreenUpdating = False
 ' Auswahl Binden
-    If CheckBox5.Value = True Then
-        Worksheets("Eingabe").Range("G66") = "1"
-    Else: Worksheets("Eingabe").Range("G66") = "0"
+    If Worksheets("Eingabe").CheckBox5.Value = True Then
+        Worksheets("SEingabe").Range("B29") = "1"
+    Else: Worksheets("SEingabe").Range("B29") = "0"
     End If
 Application.ScreenUpdating = True
 End Sub
 Private Sub CheckBox6_Click()
-On Error Resume Next
 Application.ScreenUpdating = False
 ' Auswahl Verpacken
-    If CheckBox6.Value = True Then
-        Worksheets("Eingabe").Range("G70") = "1"
-    Else: Worksheets("Eingabe").Range("G70") = "0"
+    If Worksheets("Eingabe").CheckBox6.Value = True Then
+        Worksheets("SEingabe").Range("B31") = "1"
+    Else: Worksheets("SEingabe").Range("B31") = "0"
     End If
 Application.ScreenUpdating = True
 End Sub
 Sub CheckBox7_Click()
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Bohren
-        If CheckBox7.Value = True Then
-            Worksheets("Eingabe").Range("G68") = "1"
+        If Worksheets("Eingabe").CheckBox7.Value = True Then
+            Worksheets("SEingabe").Range("B30") = "1"
             Worksheets("Bohren").Visible = True
         Else
-            Worksheets("Eingabe").Range("G68") = "0"
+            Worksheets("SEingabe").Range("B30") = "0"
             Worksheets("Bohren").Visible = False
         End If
     Application.ScreenUpdating = True
@@ -108,16 +102,16 @@ End Sub
 Private Sub ComboBox1_DropButtonClick()
 'Grammatur Folie
     If Worksheets("Steuerung").Range("D70") = 1 Then
-        CommandButton5.Visible = True 'Formatänderung Alternativ-Bogen
-        Else: CommandButton5.Visible = False
+        Worksheets("Eingabe").CommandButton5.Visible = True 'Formatänderung Alternativ-Bogen
+        Else: Worksheets("Eingabe").CommandButton5.Visible = False
     End If
     Call NutzenCheck_Folie
 End Sub
 Private Sub ComboBox2_DropButtonClick()
 'Grammatur Rückpappe
     If Worksheets("Steuerung").Range("H70") = 1 Then
-        CommandButton1.Visible = True 'Formatänderung Alternativ-Bogen
-        Else: CommandButton1.Visible = False
+        Worksheets("Eingabe").CommandButton1.Visible = True 'Formatänderung Alternativ-Bogen
+        Else: Worksheets("Eingabe").CommandButton1.Visible = False
     End If
     Call NutzenCheck_Pappe
 End Sub
@@ -186,7 +180,13 @@ Private Sub TextBox1_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
 End Sub
 Private Sub TextBox1_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
 'Tabsprung zur nächsten Eingabe
-   If KeyCode = vbKeyTab Then TextBox2.Activate
+    If KeyCode = vbKeyTab Then
+        Worksheets("Eingabe").TextBox2.Activate
+        With Worksheets("Eingabe").TextBox2
+            .SelStart = 0
+            .SelLength = Len(.Text)
+        End With
+    End If
 End Sub
 Private Sub TextBox2_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Produktlänge
@@ -195,12 +195,17 @@ Private Sub TextBox2_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
       Case Else: KeyAscii = 0
     End Select
 End Sub
+Private Sub TextBox2_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+'Tabsprung zur nächsten Eingabe
+    If KeyCode = vbKeyTab Then Worksheets("Eingabe").Range("C11").Activate
+End Sub
+
 Sub Produktformat()
 'Auswahl Produktformat
 '20150221
-    If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
-        TextBox1.Visible = True
-        TextBox2.Visible = True
+    If Worksheets("SEingabe").Range("F27") = 9 Then 'Sonderformat
+        Worksheets("Eingabe").TextBox1.Visible = True
+        Worksheets("Eingabe").TextBox2.Visible = True
         With Worksheets("Eingabe").Range("E9")
             .Interior.ColorIndex = 6
             .Value = "x"
@@ -208,8 +213,8 @@ Sub Produktformat()
         Worksheets("Eingabe").Range("F9") = "Sonderformat"
     Else
         'Standardformate
-        TextBox1.Visible = False
-        TextBox2.Visible = False
+        Worksheets("Eingabe").TextBox1.Visible = False
+        Worksheets("Eingabe").TextBox2.Visible = False
         With Worksheets("Eingabe").Range("E9")
             .Interior.ColorIndex = 0
             .Value = ""

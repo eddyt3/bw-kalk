@@ -10,7 +10,6 @@ Attribute VB_Exposed = True
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
-
 Private Sub CheckBox1_Click()
  Run Worksheets("SSchneiden").SchneidenAnzeige
  Run Worksheets("SSchneiden").Schneidbogen
