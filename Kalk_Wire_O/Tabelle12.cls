@@ -14,8 +14,7 @@ Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Circut
 ' 20150220
-On Error Resume Next
-    If CheckBox1.Value = True Then
+    If Worksheets("3Seitenbeschnitt").CheckBox1.Value = True Then
         Worksheets("3Seitenbeschnitt").CheckBox2.Value = False
         Worksheets("S3Seitenbeschnitt").Range("H4") = "1"
         Else
@@ -27,8 +26,7 @@ Sub CheckBox2_Click()
 Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Circut
 ' 20150220
-On Error Resume Next
-    If CheckBox2.Value = True Then
+    If Worksheets("3Seitenbeschnitt").CheckBox2.Value = True Then
         Worksheets("3Seitenbeschnitt").CheckBox1.Value = False
         Worksheets("S3Seitenbeschnitt").Range("H5") = "1"
         Else
