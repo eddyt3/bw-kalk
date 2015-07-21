@@ -18,68 +18,65 @@ Sub Standardwerte_Schneiden()
     Application.ScreenUpdating = True
 End Sub
 Sub Schneidbogen()
-'
 ' Loeschen d. vorhandenen Eingaben wenn d. Bg. nicht ausgewaehlt wurde
-'
-If Worksheets("SSchneiden").Range("B103") < 1 Then
-    Worksheets("Schneiden").Range("D3") = "0"
-    Else
-    Worksheets("Schneiden").Range("D3").FormulaLocal = "=SVERWEIS(SSchneiden!B104;SSchneiden!I13:K30;3)"
-End If
-If Worksheets("SSchneiden").Range("C103") < 1 Then
-    Worksheets("Schneiden").Range("D10") = "0"
-    Else
-    Worksheets("Schneiden").Range("D10").FormulaLocal = "=SVERWEIS(SSchneiden!C104;SSchneiden!I13:K30;3)"
-End If
-If Worksheets("SSchneiden").Range("D103") < 1 Then
-    Worksheets("Schneiden").Range("D17") = "0"
-    Else
-    Worksheets("Schneiden").Range("D17").FormulaLocal = "=SVERWEIS(SSchneiden!D104;SSchneiden!I13:K30;3)"
-End If
-If Worksheets("SSchneiden").Range("E103") < 1 Then
-    Worksheets("Schneiden").Range("D24") = "0"
-    Else
-    Worksheets("Schneiden").Range("D24").FormulaLocal = "=SVERWEIS(SSchneiden!E104;SSchneiden!I13:K30;3)"
-End If
-If Worksheets("SSchneiden").Range("F111") < 1 Then
-    Worksheets("Schneiden").Range("D3") = "0"
-    Worksheets("Schneiden").Range("D10") = "0"
-    Worksheets("Schneiden").Range("D17") = "0"
-    Worksheets("Schneiden").Range("D24") = "0"
- End If
+    If Worksheets("SSchneiden").Range("B103") < 1 Then
+        Worksheets("Schneiden").Range("D3") = "0"
+        Else
+        Worksheets("Schneiden").Range("D3").FormulaLocal = "=SVERWEIS(SSchneiden!B104;SSchneiden!I13:K30;3)"
+    End If
+    If Worksheets("SSchneiden").Range("C103") < 1 Then
+        Worksheets("Schneiden").Range("D10") = "0"
+        Else
+        Worksheets("Schneiden").Range("D10").FormulaLocal = "=SVERWEIS(SSchneiden!C104;SSchneiden!I13:K30;3)"
+    End If
+    If Worksheets("SSchneiden").Range("D103") < 1 Then
+        Worksheets("Schneiden").Range("D17") = "0"
+        Else
+        Worksheets("Schneiden").Range("D17").FormulaLocal = "=SVERWEIS(SSchneiden!D104;SSchneiden!I13:K30;3)"
+    End If
+    If Worksheets("SSchneiden").Range("E103") < 1 Then
+        Worksheets("Schneiden").Range("D24") = "0"
+        Else
+        Worksheets("Schneiden").Range("D24").FormulaLocal = "=SVERWEIS(SSchneiden!E104;SSchneiden!I13:K30;3)"
+    End If
+    If Worksheets("SSchneiden").Range("F111") < 1 Then
+        Worksheets("Schneiden").Range("D3") = "0"
+        Worksheets("Schneiden").Range("D10") = "0"
+        Worksheets("Schneiden").Range("D17") = "0"
+        Worksheets("Schneiden").Range("D24") = "0"
+    End If
 End Sub
 Sub SchneidenAnzeige()
 'Anzeige d. zu schneidenden Bogen auf der Eingabeseite
-Dim rngBgA, rngBgB, rngBgC, rngBgD, rngSum As String
-Dim BgA, BgB, BgC, BgD, anzeige As String
-
-rngBgA = Worksheets("SSchneiden").Range("D4")
-rngBgB = Worksheets("SSchneiden").Range("D5")
-rngBgC = Worksheets("SSchneiden").Range("D6")
-rngBgD = Worksheets("SSchneiden").Range("D7")
-rngSum = Worksheets("SSchneiden").Range("D8")
-
-If rngSum = True Then
-    If rngBgA = True Then
-        BgA = " A,"
-        Else: BgA = ""
+    Dim rngBgA, rngBgB, rngBgC, rngBgD, rngSum As String
+    Dim BgA, BgB, BgC, BgD, anzeige As String
+    rngBgA = Worksheets("SSchneiden").Range("D4")
+    rngBgB = Worksheets("SSchneiden").Range("D5")
+    rngBgC = Worksheets("SSchneiden").Range("D6")
+    rngBgD = Worksheets("SSchneiden").Range("D7")
+    rngSum = Worksheets("SSchneiden").Range("D8")
+    
+    If rngSum = True Then
+        If rngBgA = True Then
+            BgA = " A,"
+            Else: BgA = ""
+        End If
+        If rngBgB = True Then
+            BgB = "B,"
+            Else: BgB = ","
+        End If
+        If rngBgC = True Then
+            BgC = "C,"
+            Else: BgC = ","
+        End If
+        If rngBgD = True Then
+            BgD = "D"
+            Else: BgD = ""
+        End If
+        anzeige = "  Bg.:" & BgA & BgB & BgC & BgD
+        Else: anzeige = " "
     End If
-    If rngBgB = True Then
-        BgB = "B,"
-        Else: BgB = ","
-    End If
-    If rngBgC = True Then
-        BgC = "C,"
-        Else: BgC = ","
-    End If
-    If rngBgD = True Then
-        BgD = "D"
-        Else: BgD = ""
-    End If
-    anzeige = "  Bg.:" & BgA & BgB & BgC & BgD
-    Else: anzeige = " "
-End If
-Worksheets("SSchneiden").Range("D9") = anzeige
+    Worksheets("SSchneiden").Range("D9") = anzeige
 End Sub
 
 

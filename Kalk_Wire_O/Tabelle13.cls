@@ -18,9 +18,7 @@ Sub Standardwerte_Schneiden()
     Application.ScreenUpdating = True
 End Sub
 Sub Schneidbogen()
-    '
     ' Loeschen d. vorhandenen Eingaben wenn d. Bg. nicht ausgewaehlt wurde
-    '
     '20130218
     Application.ScreenUpdating = False
     If Worksheets("Steuerung").Range("D49") = 2 Or Worksheets("Steuerung").Range("D49") = 4 Then
@@ -64,14 +62,12 @@ Sub SchneidenAnzeige()
     Application.ScreenUpdating = False
     Dim rngBgA, rngBgB, rngBgC, rngBgD, rngBgE, rngSum As String
     Dim BgA, BgB, BgC, BgD, anzeige As String
-    
     rngBgA = Worksheets("SSchneiden").Range("D4")
     rngBgB = Worksheets("SSchneiden").Range("D5")
     rngBgC = Worksheets("SSchneiden").Range("D6")
     rngBgD = Worksheets("SSchneiden").Range("D7")
     rngBgE = Worksheets("SSchneiden").Range("D8")
     rngSum = Worksheets("SSchneiden").Range("D9")
-    
     If rngSum = True Then
         If rngBgA = True Then
             BgA = " F,"
@@ -93,7 +89,6 @@ Sub SchneidenAnzeige()
             BgE = "Rp"
             Else: BgE = ""
         End If
-    
         anzeige = "Bg.:" & BgA & BgB & BgC & BgD & BgE
         Else: anzeige = " "
     End If

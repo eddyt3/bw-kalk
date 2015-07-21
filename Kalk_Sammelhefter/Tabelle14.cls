@@ -11,26 +11,26 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Private Sub CheckBox1_Click()
-    If CheckBox1.Value = True Then
+    If Worksheets("Falzen").CheckBox1.Value = True Then
         Worksheets("SFalzen").Range("N4") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bogen A in Bogen/Stunde eingeben:", "Eingabe", , Type:=1)
         Else:
         Worksheets("SFalzen").Range("N4").FormulaLocal = "=WENN(Falzen!A4<>5;SVERWEIS(B106/B104;Falzen!M4:O10;3);F7)"
     End If
 End Sub
 Private Sub CheckBox2_Click()
-    If CheckBox2.Value = True Then
+    If Worksheets("Falzen").CheckBox2.Value = True Then
         Worksheets("SFalzen").Range("N5") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bogen B in Bogen/Stunde eingeben:", "Eingabe", , Type:=1)
     Else: Worksheets("SFalzen").Range("N5").FormulaLocal = "=WENN(Falzen!A24<>5;SVERWEIS(C106/C104;Falzen!M4:O10;3);F7)"
     End If
 End Sub
 Private Sub CheckBox3_Click()
-    If CheckBox3.Value = True Then
+    If Worksheets("Falzen").CheckBox3.Value = True Then
         Worksheets("SFalzen").Range("N6") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bogen C in Bogen/Stunde eingeben:", "Eingabe", , Type:=1)
     Else: Worksheets("SFalzen").Range("N6").FormulaLocal = "=WENN(Falzen!A43<>5;SVERWEIS(D106/D104;Falzen!M4:O10;3);F7)"
     End If
 End Sub
 Private Sub CheckBox4_Click()
-    If CheckBox4.Value = True Then
+    If Worksheets("Falzen").CheckBox4.Value = True Then
         Worksheets("SFalzen").Range("N7") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bogen D in Bogen/Stunde eingeben:", "Eingabe", , Type:=1)
     Else: Worksheets("SFalzen").Range("N7").FormulaLocal = "=WENN(Falzen!A62<>5;SVERWEIS(E106/E104;Falzen!M4:O10;3);F7)"
     End If

@@ -11,18 +11,16 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Private Sub Worksheet_Activate()
-    On Error Resume Next
     Call Produkt
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
     Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
-    Call Kommentar
-'    Call lkw
+    Call Worksheets("Verpacken").Kommentar
+'    Call Worksheets("Verpacken").lkw
 End Sub
 Private Sub ToggleButton1_Click()
     '20140623
-    'On Error Resume Next
     Dim intGewicht, intPaletten As Integer
     intGewicht = Worksheets("SVerpacken").Range("K53")
     intPaletten = Worksheets("SVerpacken").Range("K52")
@@ -32,14 +30,12 @@ Private Sub ToggleButton1_Click()
 End Sub
 Private Sub CheckBox1_Click()
     'Paletten ja/nein
-    On Error Resume Next
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
     Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub CheckBox4_Click()
     'Eingabe manuelle Lagen ja/nein
     '20140623
-    On Error Resume Next
     If Worksheets("Verpacken").CheckBox4.Value = True Then
         Worksheets("Verpacken").Range("D31").Interior.ColorIndex = 6
         Worksheets("Verpacken").Range("D31").Interior.Pattern = xlSolid
@@ -62,37 +58,33 @@ Private Sub CheckBox4_Click()
         Run Worksheets("SVerpacken").VE_erstellen
     End If
     MsgBox "Hinweis: Format A4 = 12 VE/Lage."
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
 End Sub
 Private Sub ComboBox1_DropButtonClick()
     'Palettenauswahl
     '20140623
-    On Error Resume Next
     Dim intRow As Integer
     intRow = Worksheets("Material").Range("D78")
     Worksheets("Verpacken").ComboBox1.ListRows = intRow
     Worksheets("Verpacken").ComboBox1.ListFillRange = "Material!C79:C" & (79 + intRow - 1)
-    Call Kommentar
-    Call Palettencheck
+    Call Worksheets("Verpacken").Kommentar
+    Call Worksheets("Verpacken").Palettencheck
     Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub ComboBox2_Change()
     'Verpackungsart
-    On Error Resume Next
-    Call Verpackungseinheit
+    Call Worksheets("Verpacken").Verpackungseinheit
     Run Worksheets("SVerpacken").draw_all
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
 End Sub
 Private Sub ComboBox3_Change()
     'Palettendeckelauswahl
-    On Error Resume Next
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
 End Sub
 Private Sub ComboBox7_Change()
     'Auswahl der Einschweißmaschine
     '20090824
     'Standard V eintragen
-    On Error Resume Next
     If Worksheets("SVerpacken").Range("B71") > 1 Then
         Worksheets("Verpacken").Range("D65").FormulaLocal = "=SVERWEIS(SVerpacken!B71;SVerpacken!A72:I75;9)"
         'MsgBox "Achtung, die Maschinengeschwindigkeit wurde zurückgesetzt!"
@@ -101,32 +93,28 @@ Private Sub ComboBox7_Change()
 End Sub
 Private Sub ComboBox8_Change()
     'Auswahl Kantenschutz
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
 End Sub
 Private Sub ComboBox9_Change()
     'Auswahl Umreifung
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
 End Sub
 Private Sub ComboBox13_Change()
     'Banderole zeichnen
-    On Error Resume Next
     Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub ComboBox14_Change()
     'Banderole zeichnen
-    On Error Resume Next
     Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub ComboBox16_Change()
     'VE Lage Einschweißen
     '20090820
-    On Error Resume Next
     Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub ComboBox17_Change()
     'VE Lage Einschweißen
     '20090820
-    On Error Resume Next
     Run Worksheets("SVerpacken").draw_all
 End Sub
 Private Sub CommandButton1_Click()
@@ -135,11 +123,10 @@ Private Sub CommandButton1_Click()
     If Worksheets("Material").Range("C121") < 14 Then
         Worksheets("Verpacken").Range("D6").FormulaLocal = "=WENN(ODER(Material!C121=14;Material!C121=13;Material!C121=12);1;WENN(SVerpacken!B121<SVerpacken!G27;SVerpacken!B121;SVerpacken!G27))"
     End If
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
 End Sub
 Private Sub CommandButton2_Click()
     'Materialseite einblenden
-    On Error Resume Next
     Worksheets("Material").Visible = xlSheetVisible
     Worksheets("Material").Activate
     Worksheets("Material").Range("B74").Select
@@ -147,7 +134,6 @@ End Sub
 Sub Verpackungseinheit()
     'Festlegen Verpackungseinheit u. Einschweißen
     '20141223
-    'On Error Resume Next
     Worksheets("Verpacken").Range("D6").ClearComments
     Worksheets("Verpacken").Range("D6").Locked = False
     Worksheets("Verpacken").Range("D6").FormulaHidden = False
@@ -182,12 +168,11 @@ Sub Verpackungseinheit()
         Worksheets("Verpacken").Range("D6").Comment.Text Text:="Einfaches Abstapeln ohne Folie od. Karton." & Chr(10) & _
         "Bei Bedarf Zwischenlagen festlegen."
     End If
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
 End Sub
 Sub lkw()
     'Berechnung der benötigten Lkws
     '20140623
-    'On Error Resume Next
     Dim intGewicht, intOptPaletten, intPaletten As Integer
     Dim strActiveCell As String
     intGewicht = Worksheets("SVerpacken").Range("K53")
@@ -217,27 +202,24 @@ Sub lkw()
 End Sub
 Sub Palettencheck()
     'Palettenwerte setzen
-    'modified 20140623
-    'On Error Resume Next
+    'modified 20150721
     Dim intAuswahlPl As Integer
     intAuswahlPl = Worksheets("SVerpacken").Range("H7")
-    If intAuswahlPl = 8 Then
-        Worksheets("Verpacken").Range("D23").FormulaLocal = "=(SVERWEIS(SVerpacken!H7;Material!B79:J93;9)+SVERWEIS(SVerpacken!H7;Material!B79:J93;5))/10"
+    Worksheets("Verpacken").Range("D23").FormulaLocal = "=(SVERWEIS(SVerpacken!H7;Material!B79:J93;9)+SVERWEIS(SVerpacken!H7;Material!B79:J93;5))/10"
+    If intAuswahlPl = 8 Or intAuswahlPl = 9 Then
         Worksheets("Verpacken").Range("F23") = "(Palettenvorgabe)"
         Worksheets("Verpacken").Range("D23").Interior.ColorIndex = 0
         Worksheets("Verpacken").Range("D23").Interior.Pattern = xlSolid
     Else
-        Worksheets("Verpacken").Range("D23") = 120
         Worksheets("Verpacken").Range("F23") = ""
         Worksheets("Verpacken").Range("D23").Interior.ColorIndex = 6
         Worksheets("Verpacken").Range("D23").Interior.Pattern = xlSolid
     End If
-    Call Kommentar
+    Call Worksheets("Verpacken").Kommentar
 End Sub
 Sub Kommentar()
     'Anzeigen d. Palettendaten
     '201401002
-    'On Error Resume Next
     Dim VPalette, VExemplare As String
     VPalette = Worksheets("SVerpacken").Range("I39")
     VExemplare = Worksheets("SVerpacken").Range("G45")

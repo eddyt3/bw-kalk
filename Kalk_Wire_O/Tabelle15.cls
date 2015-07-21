@@ -23,10 +23,10 @@ End Sub
 Sub draw_all()
     'Alles zeichnen
     '20090820
-    Call draws_delete
-    Call VE_erstellen
-    Call VE_einschweissen
-    Call Palettenlage_erstellen
+    Call Worksheets("SVerpacken").draws_delete
+    Call Worksheets("SVerpacken").VE_erstellen
+    Call Worksheets("SVerpacken").VE_einschweissen
+    Call Worksheets("SVerpacken").Palettenlage_erstellen
 End Sub
 Sub Palettenlage_erstellen()
     'Zeichnen der optimalen Exemplarverteilung auf d. Palette
@@ -135,7 +135,6 @@ End Sub
 Sub VE_erstellen()
     'Zeichnen der Verpackungseinheit mit Banderole
     '20090819
-    On Error Resume Next
     Dim intHline, intBline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien (vertikal, horizontal, diagonal) u. Z‰hlervar.
     Dim intVEB, intVEH, intVEHoffset, intVEVoffset As Integer 'VE-Maﬂe u. Offsets
     Dim shpShape As Shape
@@ -192,7 +191,6 @@ End Sub
 Sub VE_einschweissen()
     'Zeichnen der VE Lage beim Einschweiﬂen
     '20090820
-    On Error Resume Next
     Dim intHline, intBline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien (vertikal, horizontal, diagonal) u. Z‰hlervar.
     Dim intVEB, intVEH, intVEHoffset, intVEVoffset, intFB, intFBist, intFBsoll, intFBoffset As Integer 'VE- und Folienmaﬂe u. Offsets
     Dim shpShape As Shape

@@ -18,11 +18,8 @@ Sub Standertwerte_Schneiden()
     Application.ScreenUpdating = True
 End Sub
 Sub Schneidbogen()
-    '
     ' Loeschen d. vorhandenen Eingaben wenn d. Bg. nicht ausgewaehlt wurde
-    '
     '20130218
-    On Error Resume Next
     Application.ScreenUpdating = False
     If Worksheets("SSchneiden").Range("B103") < 1 Then
         Worksheets("Schneiden").Range("D3") = "0"
