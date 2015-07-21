@@ -24,8 +24,6 @@ End Sub
 Sub Spirale()
     '20140509
     'Spiralprüfung
-    '
-    'On Error Resume Next
     Dim intLProdukt, intMaxLProdukt As Integer
     intLBindeseite = Worksheets("SBinden").Range("A64")
     intMaxLProdukt = Worksheets("Binden").Range("K6")

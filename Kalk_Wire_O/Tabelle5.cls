@@ -15,8 +15,8 @@ Private Sub ComboBox1_DropButtonClick()
     Worksheets("Binden").Range("D3").FormulaLocal = "=SVERWEIS(SBinden!B4;SBinden!A5:F12;5)"
     'Geschwindigkeitsauswahl
     Worksheets("Binden").Range("D4").FormulaLocal = "=SVERWEIS(SBinden!B4;SBinden!A5:G12;6)"
-    Call Rillecart
-    Call Inline
+    Call Worksheets("Binden").Rillecart
+    Call Worksheets("Binden").Inline
 End Sub
 Sub Rillecart()
     'Rillecart-Maschinenbedingungen P1765 PB796 grün (1MFhr / 2HK)

@@ -12,7 +12,7 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Private Sub Worksheet_Change(ByVal Target As Range)
-    On Error Resume Next
+    
     Worksheets("Sammelheften").EnableOutlining = True
 End Sub
 Private Sub Worksheet_Activate()

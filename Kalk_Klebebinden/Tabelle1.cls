@@ -17,7 +17,6 @@ Private Sub CommandButton2_Click()
     Application.ScreenUpdating = True
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Excel.Range)
-    On Error Resume Next
     Application.ScreenUpdating = False
     Run Worksheets("Zusammentragen").Zusammentragen
     'Run Worksheets("Falzen").Falzen
@@ -25,21 +24,20 @@ Private Sub Worksheet_Change(ByVal Target As Excel.Range)
 End Sub
 Private Sub ComboBox1_DropButtonClick()
     'Auswahl Broschure od. Buchblock
-    On Error Resume Next
-    ComboBox1.ListFillRange = "Steuerung!H2:H3"
-    ComboBox1.LinkedCell = "A6"
+    Worksheets("Eingabe").ComboBox1.ListFillRange = "Steuerung!H2:H3"
+    Worksheets("Eingabe").ComboBox1.LinkedCell = "A6"
     If Worksheets("Steuerung").Range("I3") = "1" Then 'Buchblock
         Worksheets("Kleben").Visible = True
-        CheckBox7.Value = True 'Kalk. Kleben aktiviert
-        Worksheets("Eingabe").Range("G69") = "1"
-        CheckBox8.Value = True 'Kalk. Fadenheften aktiviert
-        Worksheets("Eingabe").Range("G71") = "1"
+        Worksheets("Eingabe").CheckBox7.Value = True 'Kalk. Kleben aktiviert
+        Worksheets("SEingabe").Range("B34") = "1"
+        Worksheets("Eingabe").CheckBox8.Value = True 'Kalk. Fadenheften aktiviert
+        Worksheets("SEingabe").Range("B35") = "1"
     Else
         Worksheets("Kleben").Visible = False
-        CheckBox7.Value = False 'Kalk. Kleben deaktiviert
-        Worksheets("Eingabe").Range("G69") = "0"
-        CheckBox8.Value = False 'Kalk. Fadenheften deaktiviert
-        Worksheets("Eingabe").Range("G71") = "0"
+        Worksheets("Eingabe").CheckBox7.Value = False 'Kalk. Kleben deaktiviert
+        Worksheets("SEingabe").Range("B34") = "0"
+        Worksheets("Eingabe").CheckBox8.Value = False 'Kalk. Fadenheften deaktiviert
+        Worksheets("SEingabe").Range("B35") = "0"
     End If
 End Sub
 Sub ComboBox7_DropButtonClick()
@@ -79,10 +77,9 @@ Private Sub ComboBox12_Change()
 End Sub
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Bogen B
-        If CheckBox1.Value = True Then
+        If Worksheets("Eingabe").CheckBox1.Value = True Then
             Worksheets("Eingabe").Range("A18") = "1"
             Worksheets("Schneiden").CheckBox2.Value = True
             Worksheets("Schneiden").CheckBox2.Visible = True
@@ -100,10 +97,9 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 End Sub
 Sub CheckBox2_Click()
 Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Bogen C
-        If CheckBox2.Value = True Then
+        If Worksheets("Eingabe").CheckBox2.Value = True Then
             Worksheets("Eingabe").Range("A27") = "1"
             Worksheets("Schneiden").CheckBox3.Value = True
             Worksheets("Schneiden").CheckBox3.Visible = True
@@ -121,10 +117,9 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 End Sub
 Sub CheckBox3_Click()
 Attribute CheckBox3_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Bogen D
-        If CheckBox3.Value = True Then
+        If Worksheets("Eingabe").CheckBox3.Value = True Then
             Worksheets("Eingabe").Range("A36") = "1"
             Worksheets("Schneiden").CheckBox4.Value = True
             Worksheets("Schneiden").CheckBox4.Visible = True
@@ -142,11 +137,10 @@ Attribute CheckBox3_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 End Sub
 Sub CheckBox4_Click()
 Attribute CheckBox4_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Schneiden
-        If CheckBox4.Value = True Then
-            Worksheets("Eingabe").Range("G61") = "1"
+        If Worksheets("Eingabe").CheckBox4.Value = True Then
+            Worksheets("SEingabe").Range("B30") = "1"
             Worksheets("Schneiden").CheckBox1.Value = True
             Worksheets("Schneiden").CheckBox1.Visible = True
             If Worksheets("Eingabe").CheckBox5.Value = True Then
@@ -162,7 +156,7 @@ Attribute CheckBox4_Click.VB_ProcData.VB_Invoke_Func = " \n14"
                 Worksheets("Schneiden").CheckBox4.Visible = True
             End If
         Else
-            Worksheets("Eingabe").Range("G61") = "0"
+            Worksheets("SEingabe").Range("B30") = "0"
             Worksheets("Schneiden").CheckBox1.Value = False
             Worksheets("Schneiden").CheckBox1.Visible = False
             Worksheets("Schneiden").CheckBox2.Value = False
@@ -178,91 +172,83 @@ Attribute CheckBox4_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 End Sub
 Sub CheckBox5_Click()
 Attribute CheckBox5_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Zusammentragen
-        If CheckBox5.Value = True Then
-            Worksheets("Eingabe").Range("G63") = "1"
-        Else: Worksheets("Eingabe").Range("G63") = "0"
+        If Worksheets("Eingabe").CheckBox5.Value = True Then
+            Worksheets("SEingabe").Range("B31") = "1"
+        Else: Worksheets("SEingabe").Range("B31") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox6_Click()
 Attribute CheckBox6_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Falzen
-        If CheckBox6.Value = True Then
-            Worksheets("Eingabe").Range("G65") = "1"
-        Else: Worksheets("Eingabe").Range("G65") = "0"
+        If Worksheets("Eingabe").CheckBox6.Value = True Then
+            Worksheets("SEingabe").Range("B32") = "1"
+        Else: Worksheets("SEingabe").Range("B32") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox7_Click()
 Attribute CheckBox7_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Kleben
-        If CheckBox7.Value = True Then
-            Worksheets("Eingabe").Range("G69") = "1"
-        Else: Worksheets("Eingabe").Range("G69") = "0"
+        If Worksheets("Eingabe").CheckBox7.Value = True Then
+            Worksheets("SEingabe").Range("B34") = "1"
+        Else: Worksheets("SEingabe").Range("B34") = "0"
         End If
     Run Worksheets("SKleben").kleben
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox8_Click()
 Attribute CheckBox8_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Fadenheften
-        If CheckBox8.Value = True Then
-            Worksheets("Eingabe").Range("G71") = "1"
-        Else: Worksheets("Eingabe").Range("G71") = "0"
+        If Worksheets("Eingabe").CheckBox8.Value = True Then
+            Worksheets("SEingabe").Range("B35") = "1"
+        Else: Worksheets("SEingabe").Range("B35") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox9_Click()
 Attribute CheckBox9_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Binden
-        If CheckBox9.Value = True Then
-            Worksheets("Eingabe").Range("G73") = "1"
-        Else: Worksheets("Eingabe").Range("G73") = "0"
+        If Worksheets("Eingabe").CheckBox9.Value = True Then
+            Worksheets("SEingabe").Range("B36") = "1"
+        Else: Worksheets("SEingabe").Range("B36") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox10_Click()
 Attribute CheckBox10_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl 3Seitenbeschnitt
-        If CheckBox10.Value = True Then
-            Worksheets("Eingabe").Range("G75") = "1"
-        Else: Worksheets("Eingabe").Range("G75") = "0"
+        If Worksheets("Eingabe").CheckBox10.Value = True Then
+            Worksheets("SEingabe").Range("B37") = "1"
+        Else: Worksheets("SEingabe").Range("B37") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox11_Click()
 Attribute CheckBox11_Click.VB_ProcData.VB_Invoke_Func = " \n14"
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Verpacken
-        If CheckBox11.Value = True Then
-            Worksheets("Eingabe").Range("G79") = "1"
-        Else: Worksheets("Eingabe").Range("G79") = "0"
+        If Worksheets("Eingabe").CheckBox11.Value = True Then
+            Worksheets("SEingabe").Range("B39") = "1"
+        Else: Worksheets("SEingabe").Range("B39") = "0"
         End If
     Application.ScreenUpdating = True
 End Sub
 Sub CheckBox12_Click()
-    On Error Resume Next
     Application.ScreenUpdating = False
     ' Auswahl Bohren
-        If CheckBox12.Value = True Then
-            Worksheets("Eingabe").Range("G77") = "1"
+        If Worksheets("Eingabe").CheckBox12.Value = True Then
+            Worksheets("SEingabe").Range("B38") = "1"
             Worksheets("Bohren").Visible = True
         Else
-            Worksheets("Eingabe").Range("G77") = "0"
+            Worksheets("SEingabe").Range("B38") = "0"
             Worksheets("Bohren").Visible = False
         End If
     Application.ScreenUpdating = True
@@ -275,8 +261,14 @@ Private Sub TextBox1_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     End Select
 End Sub
 Private Sub TextBox1_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
-'Tabsprung zur nächsten Eingabe
-   If KeyCode = vbKeyTab Then TextBox2.Activate
+    'Tabsprung zur nächsten Eingabe
+    If KeyCode = vbKeyTab Then
+        Worksheets("Eingabe").TextBox2.Activate
+        With Worksheets("Eingabe").TextBox2
+            .SelStart = 0
+            .SelLength = Len(.Text)
+        End With
+    End If
 End Sub
 Private Sub TextBox2_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Produktlänge
@@ -285,12 +277,16 @@ Private Sub TextBox2_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
       Case Else: KeyAscii = 0
     End Select
 End Sub
+Private Sub TextBox2_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+    'Tabsprung zur nächsten Eingabe
+    If KeyCode = vbKeyTab Then Worksheets("Eingabe").Range("C10").Activate
+End Sub
 Sub Produktformat()
-'Auswahl Produktformat
-'20150221
+    'Auswahl Produktformat
+    '20150221
     If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
-        TextBox1.Visible = True
-        TextBox2.Visible = True
+        Worksheets("Eingabe").TextBox1.Visible = True
+        Worksheets("Eingabe").TextBox2.Visible = True
         With Worksheets("Eingabe").Range("E9")
             .Interior.ColorIndex = 6
             .Value = "x"
@@ -298,8 +294,8 @@ Sub Produktformat()
         Worksheets("Eingabe").Range("F9") = "Sonderformat"
     Else
         'Standardformate
-        TextBox1.Visible = False
-        TextBox2.Visible = False
+        Worksheets("Eingabe").TextBox1.Visible = False
+        Worksheets("Eingabe").TextBox2.Visible = False
         With Worksheets("Eingabe").Range("E9")
             .Interior.ColorIndex = 0
             .Value = ""

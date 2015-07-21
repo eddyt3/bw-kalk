@@ -14,9 +14,9 @@ Sub Produktformat_Kleben()
     '
     ' Formatprüfung Makro
     ' Makro von Enrico Dargel
-    On Error Resume Next
+    
     Dim Dicke As String
-    If Range("SKleben!E2") = FALSCH Then
+    If Worksheets("SKleben").Range("E2") = FALSCH Then
         MsgBox ("Fehlerhafte Formateingabe! Bitte nur Werte mit Komma eingeben." & vbCrLf & vbCrLf & _
         "Beispiel: 21 x 29,7")
     End If
@@ -32,7 +32,7 @@ Sub kleben()
         Worksheets("Kleben").CheckBox2.Value = False
 
     End If
-    Call KlebenAnzeige
+    Call Worksheets("SKleben").KlebenAnzeige
     Application.ScreenUpdating = True
 End Sub
 Sub KlebenAnzeige()
@@ -61,7 +61,7 @@ End Sub
 Sub Bogen_erstellen_brutto()
 'unused
 'volle Ausnutzung des Bogens
-On Error Resume Next
+
 Dim intHline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien u. Zählervar.
 Dim intBgH, intBgW, intBgHoffset, intBgVoffset As Integer 'Bogenmaße u. Offsets
 Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Versatzsumme
@@ -104,7 +104,7 @@ End If
 End Sub
 Sub Bogen_erstellen_netto()
 'Originalnutzenverteilung
-On Error Resume Next
+
 Dim intHline, intVline, intHnumber, intVnumber As Integer 'Anzahl d. Linien u. Zählervar.
 Dim intBgH, intBgW, intBgHoffset, intBgVoffset As Integer 'Bogenmaße u. Offsets
 Dim intHpixel, intVpixel, intHpixelSum, intVpixelSum As Integer 'Versatzwert, Versatzsumme

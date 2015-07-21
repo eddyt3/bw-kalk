@@ -24,7 +24,6 @@ Private Sub Worksheet_Activate()
     Run Worksheets("Zusammentragen").Formatfehler
 End Sub
 Sub Zusammentragen()
-    '
     'Ermittlung der Stationen und der Anzahl Vorsammeln
     '20140415 modifiziert
     Application.ScreenUpdating = False
@@ -38,16 +37,16 @@ Sub Zusammentragen()
             intWechsel = Worksheets("SZusammentragen").Range("B38")
             'ab (35 cm Breite u. Höhe) oder (Streifenkalender = Breite < 35cm, Höhe > 35cm, Bindung schmale Seite) immer Formatwechsel berechnen
             If intWechsel Then
-                CheckBox1.Visible = True
-                CheckBox1.Value = True
+                Worksheets("Zusammentragen").CheckBox1.Visible = True
+                Worksheets("Zusammentragen").CheckBox1.Value = True
                 intStatMa = intStatMa / 2
             Else
-                CheckBox1.Visible = False
-                CheckBox1.Value = False
+                Worksheets("Zusammentragen").CheckBox1.Visible = False
+                Worksheets("Zusammentragen").CheckBox1.Value = False
             End If
         Else
-            CheckBox1.Visible = False
-            CheckBox1.Value = False
+            Worksheets("Zusammentragen").CheckBox1.Visible = False
+            Worksheets("Zusammentragen").CheckBox1.Value = False
         End If
     'Zusammentragen
     If intBg > intStatMa Then

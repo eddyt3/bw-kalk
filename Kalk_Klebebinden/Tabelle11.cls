@@ -13,48 +13,45 @@ Attribute VB_Exposed = True
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Leimart PUR
-On Error Resume Next
-    If CheckBox1.Value = True Then
+    If Worksheets("Binden").CheckBox1.Value = True Then
         Worksheets("Binden").CheckBox2.Value = False
         Worksheets("Steuerung").Range("K2") = "1"
-        ComboBox1.ListFillRange = "Material!C9:C10" 'Auswahl PUR Kleber
-        ComboBox1.ListIndex = 0 'Ersten Wert d. Auswahl autom. anzeigen
-        ComboBox1.LinkedCell = "Steuerung!K4" 'Ausgabe Leimname
+        Worksheets("Binden").ComboBox1.ListFillRange = "Material!C9:C10" 'Auswahl PUR Kleber
+        Worksheets("Binden").ComboBox1.ListIndex = 0 'Ersten Wert d. Auswahl autom. anzeigen
+        Worksheets("Binden").ComboBox1.LinkedCell = "Steuerung!K4" 'Ausgabe Leimname
     Else: Worksheets("Binden").CheckBox2.Value = True
         Worksheets("Steuerung").Range("K2") = "0"
-        ComboBox1.ListFillRange = "Material!C15" 'Auswahl HM Kleber
-        ComboBox1.ListIndex = 0
-        ComboBox1.LinkedCell = "Steuerung!K4" 'Ausgabe Leimname
+        Worksheets("Binden").ComboBox1.ListFillRange = "Material!C15" 'Auswahl HM Kleber
+        Worksheets("Binden").ComboBox1.ListIndex = 0
+        Worksheets("Binden").ComboBox1.LinkedCell = "Steuerung!K4" 'Ausgabe Leimname
     End If
-ComboBox2.ListFillRange = "Material!C16:C19" 'Auswahl Seitenleim
-ComboBox2.ListIndex = 0
-ComboBox2.LinkedCell = "Steuerung!K5"
+Worksheets("Binden").ComboBox2.ListFillRange = "Material!C16:C19" 'Auswahl Seitenleim
+Worksheets("Binden").ComboBox2.ListIndex = 0
+Worksheets("Binden").ComboBox2.LinkedCell = "Steuerung!K5"
 End Sub
 Sub CheckBox2_Click()
 Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Leimart Hotmelt
-On Error Resume Next
-    If CheckBox2.Value = True Then
+    If Worksheets("Binden").CheckBox2.Value = True Then
         Worksheets("Binden").CheckBox1.Value = False
         Worksheets("Steuerung").Range("K3") = "1"
-        ComboBox1.ListFillRange = "Material!C15"
-        ComboBox1.ListIndex = 0
-        ComboBox1.LinkedCell = "Steuerung!K4"
+        Worksheets("Binden").ComboBox1.ListFillRange = "Material!C15"
+        Worksheets("Binden").ComboBox1.ListIndex = 0
+        Worksheets("Binden").ComboBox1.LinkedCell = "Steuerung!K4"
     Else: Worksheets("Binden").CheckBox1.Value = True
         Worksheets("Steuerung").Range("K3") = "0"
-        ComboBox1.ListFillRange = "Material!C9:C10"
-        ComboBox1.ListIndex = 0
-        ComboBox1.LinkedCell = "Steuerung!K4"
+        Worksheets("Binden").ComboBox1.ListFillRange = "Material!C9:C10"
+        Worksheets("Binden").ComboBox1.ListIndex = 0
+        Worksheets("Binden").ComboBox1.LinkedCell = "Steuerung!K4"
     End If
-ComboBox2.ListFillRange = "Material!C16:C19"
-ComboBox2.ListIndex = 0
-ComboBox2.LinkedCell = "Steuerung!K5"
+Worksheets("Binden").ComboBox2.ListFillRange = "Material!C16:C19"
+Worksheets("Binden").ComboBox2.ListIndex = 0
+Worksheets("Binden").ComboBox2.LinkedCell = "Steuerung!K5"
 End Sub
 Sub CheckBox3_Click()
 Attribute CheckBox3_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Quickbinder
-On Error Resume Next
-    If CheckBox3.Value = True Then
+    If Worksheets("Binden").CheckBox3.Value = True Then
         Worksheets("Binden").CheckBox4.Value = False
         Worksheets("Steuerung").Range("C34") = "1"
     Else: Worksheets("Binden").CheckBox4.Value = True
@@ -64,8 +61,7 @@ End Sub
 Sub CheckBox4_Click()
 Attribute CheckBox4_Click.VB_ProcData.VB_Invoke_Func = " \n14"
 ' Auswahl Handbinden
-On Error Resume Next
-    If CheckBox4.Value = True Then
+    If Worksheets("Binden").CheckBox4.Value = True Then
         Worksheets("Binden").CheckBox3.Value = False
         Worksheets("Steuerung").Range("C35") = "1"
     Else: Worksheets("Binden").CheckBox3.Value = True
@@ -74,8 +70,7 @@ On Error Resume Next
 End Sub
 Sub ComboBox3_DropButtonClick()
 ' Auswahl Scharnierstoff od. Faelzel
-On Error Resume Next
-With ComboBox3
+With Worksheets("Binden").ComboBox3
     .ListFillRange = "Steuerung!B30:B32"
     .LinkedCell = "Steuerung!E31"
 End With

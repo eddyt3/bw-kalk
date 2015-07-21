@@ -11,7 +11,6 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Option Explicit
-
 Private Sub Worksheet_Activate()
 Call Farbe_zuweisen
 End Sub
