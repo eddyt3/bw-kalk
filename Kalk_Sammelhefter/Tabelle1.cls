@@ -103,6 +103,9 @@ Application.ScreenUpdating = False
         Worksheets("Eingabe").Range("A18") = "1"
         Worksheets("Schneiden").CheckBox2.Value = True
         Worksheets("Schneiden").CheckBox2.Visible = True
+        If Worksheets("Eingabe").CheckBox2.Value = True And Worksheets("Eingabe").ComboBox2.ListIndex = 0 Then 'Falzen und Inhalt aktiv?
+            Worksheets("Falzen").ComboBox2.ListIndex = 0 'Bg. B Falzen aktivieren
+        End If
         Else
         Worksheets("Eingabe").Range("A18") = "0"
         Worksheets("Schneiden").CheckBox2.Value = False
@@ -122,6 +125,9 @@ Application.ScreenUpdating = False
         Worksheets("Eingabe").Range("A28") = "1"
         Worksheets("Schneiden").CheckBox3.Value = True
         Worksheets("Schneiden").CheckBox3.Visible = True
+        If Worksheets("Eingabe").CheckBox2.Value = True And Worksheets("Eingabe").ComboBox3.ListIndex = 0 Then 'Falzen und Inhalt aktiv?
+            Worksheets("Falzen").ComboBox3.ListIndex = 0 'Bg. C Falzen aktivieren
+        End If
         Else
         Worksheets("Eingabe").Range("A28") = "0"
         Worksheets("Schneiden").CheckBox3.Value = False

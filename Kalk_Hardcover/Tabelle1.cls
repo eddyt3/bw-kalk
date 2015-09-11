@@ -102,7 +102,7 @@ Sub ComboBox14_Change()
         Worksheets("Eingabe").CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("SEingabe").Range("B34") = "0"
         Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
+        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     End Select
     Application.Run Worksheets("Binden").Produktart
@@ -138,6 +138,9 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Eingabe").Range("A18") = "1"
             Worksheets("Schneiden").CheckBox2.Value = True
             Worksheets("Schneiden").CheckBox2.Visible = True
+            If Worksheets("Eingabe").CheckBox5.Value = True And Worksheets("Eingabe").ComboBox9.ListIndex = 0 Then 'Falzen und Inhalt aktiv?
+                Worksheets("Falzen").ComboBox2.ListIndex = 0 'Bg. B Falzen aktivieren
+            End If
         Else
             Worksheets("Eingabe").Range("A18") = "0"
             Worksheets("Schneiden").CheckBox2.Value = False
@@ -157,6 +160,9 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Eingabe").Range("A27") = "1"
             Worksheets("Schneiden").CheckBox3.Value = True
             Worksheets("Schneiden").CheckBox3.Visible = True
+            If Worksheets("Eingabe").CheckBox5.Value = True And Worksheets("Eingabe").ComboBox10.ListIndex = 0 Then 'Falzen und Inhalt aktiv?
+                Worksheets("Falzen").ComboBox3.ListIndex = 0 'Bg. C Falzen aktivieren
+            End If
         Else
             Worksheets("Eingabe").Range("A27") = "0"
             Worksheets("Schneiden").CheckBox3.Value = False
@@ -354,6 +360,7 @@ Sub Buchblockformat()
             .Value = "x"
         End With
         Worksheets("Eingabe").Range("F9") = "Sonderformat"
+        Worksheets("SEingabe").Range("E127") = 1
     Else
         Worksheets("Eingabe").ComboBox3.ListIndex = 6 'Standardformate nur mit 2mm Pappstärke
         Worksheets("Eingabe").Label3.Visible = True
@@ -365,6 +372,7 @@ Sub Buchblockformat()
         End With
         Worksheets("Eingabe").Range("E9").Value = Worksheets("SEingabe").Range("G26").Value
         Worksheets("Eingabe").Range("F9") = ""
+        Worksheets("SEingabe").Range("E127") = 0
     End If
 End Sub
 
