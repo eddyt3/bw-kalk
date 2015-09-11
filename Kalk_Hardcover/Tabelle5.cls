@@ -21,7 +21,6 @@ Sub kleben()
         Worksheets("Kleben").Visible = False
         Worksheets("Kleben").CheckBox1.Value = False
         Worksheets("Kleben").CheckBox2.Value = False
-        Worksheets("Kleben").ComboBox3.Visible = False
     End If
     Call KlebenAnzeige
     Application.ScreenUpdating = True
@@ -127,6 +126,7 @@ Sub Bogen_erstellen()
     With Worksheets("Kleben").Shapes("Textfeld 23")
         .Left = intBgHoffset - 80
         .Top = intBgVoffset + 50
+        .Visible = True
         .Locked = True
     End With
 End Sub
