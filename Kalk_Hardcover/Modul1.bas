@@ -55,7 +55,7 @@ Sub produkt()
 Attribute produkt.VB_ProcData.VB_Invoke_Func = " \n14"
     ' Anzeigen d. Produktangaben
     Dim format, Gewicht, Dicke As String
-        format = Worksheets("SEingabe").Range("B127") & "cm x " & Worksheets("SEingabe").Range("C127") & "cm"
+        format = Worksheets("SEingabe").Range("G26")
         Dicke = Round(Worksheets("SEingabe").Range("D127"), 1)
         Gewicht = Worksheets("SEingabe").Range("B123")
         Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & format _
