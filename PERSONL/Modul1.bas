@@ -54,17 +54,17 @@ Sub Autoformen_loeschen_Alle()
 End Sub
 Sub Autoformen_loeschen_Bereich()
     'Autoformen in einem bestimmten Bereich löschen
-    Dim c As Range, sh As Shape
+    Dim c As Range, Sh As Shape
     FRow = Range(Selection.Address).Row
     LRow = Range(Selection.Address).Row + Selection.Rows.count - 1
     FColumn = Range(Selection.Address).Column
     LColumn = Range(Selection.Address).Column + Selection.Columns.count - 1
 
    Set c = Range(Cells(FRow, FColumn), Cells(LRow, LColumn))
-   For Each sh In ActiveSheet.Shapes
-      If sh.Top > c.Top And sh.Height < c.Height Then
-         If sh.Left > c.Left And sh.Width < c.Width Then
-            sh.Delete
+   For Each Sh In ActiveSheet.Shapes
+      If Sh.Top > c.Top And Sh.Height < c.Height Then
+         If Sh.Left > c.Left And Sh.Width < c.Width Then
+            Sh.Delete
          End If
       End If
    Next

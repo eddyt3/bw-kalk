@@ -37,3 +37,34 @@ Public Sub letzte_zelle_2()
 'Mit diesem Makro wird die letzte Zelle markiert
 Range("A1").SpecialCells(xlCellTypeLastCell).Select
 End Sub
+Sub WertUndPosAusArrayBestimmen()
+    'Ermittelt den kleinsten Wert und dessen Position aus einem ARRAY
+    '04.11.2008, NoNet
+
+    Dim arrWerte, lngZ As Long, intS As Integer, varMin
+    arrWerte = [A1:C10] 'Werte aus Tabelle in ARRAY einlesen
+    varMin = Application.Min(arrWerte)
+    MsgBox varMin, , "Kleinster Wert der Matrix" 'Kleinsten Wert ausgeben
+    'Position per MATRIX-Funktion in Tabelle ermitteln :
+    '=ADRESSE(MAX(WENN(A1:C10=MIN(A1:C10);ZEILE(1:10);0));MAX(WENN(A1:C10=MIN(A1:C10 );SPALTE(A:C));0))
+
+    'Variante 1 : Position per Schleifen ermitteln :
+    For lngZ = LBound(arrWerte) To UBound(arrWerte)
+        For intS = LBound(arrWerte) To UBound(Application.Transpose(arrWerte)) 'nur bis max 4561 Zeilen möglich !
+            If arrWerte(lngZ, intS) = varMin Then
+                MsgBox "Zeile : " & lngZ & vbLf & "Spalte : " & intS, , "Kleinster Wert an Position - Variante 1"
+            End If
+        Next
+    Next
+
+    'Variante 2 : Position durch Vergleich ermitteln
+    For intS = LBound(arrWerte) To UBound(Application.Transpose(arrWerte)) 'nur bis max 4561 Zeilen möglich !
+
+        If Not IsError(Application.Lookup(varMin, Application.WorksheetFunction.Index(Application.Transpose(arrWerte), intS))) Then
+            lngZ = Application.Match(varMin, Application.WorksheetFunction.Index(Application.Transpose(arrWerte), intS))
+            If lngZ > 0 Then
+                MsgBox "Zeile : " & lngZ & vbLf & "Spalte : " & intS, , "Kleinster Wert an Position - Variante 2"
+            End If
+        End If
+    Next
+End Sub

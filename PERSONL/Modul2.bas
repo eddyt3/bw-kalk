@@ -26,7 +26,7 @@ For intI = 1 To Worksheets.count
         strBereiche(intZähler - 1) = strErsteZelle
         Do While strAktuelleZelle <> strErsteZelle
             'nächste gefundene Zelle(n) auf dem aktuellen Blatt
-            Set rngGefundeneZelle = Worksheets(intI).Cells.FindNext(after:=rngGefundeneZelle)
+            Set rngGefundeneZelle = Worksheets(intI).Cells.FindNext(After:=rngGefundeneZelle)
             strAktuelleZelle = rngGefundeneZelle.Address(False, False)
             If strErsteZelle <> strAktuelleZelle Then
                 intZähler = intZähler + 1
@@ -67,6 +67,143 @@ If intZähler = 0 Then
 Else
     MsgBox "Es wurden insgesamt " & intZähler & " Verknüpfung(en) gefunden und davon " & intLöschZähler & " gelöscht.", vbOKOnly + vbInformation, "Fertig!"
 End If
+End Sub
+Sub Verknuepfungen_Suchen1()
+' Verknüpfungen auflisten
+' nach'* H. Ziplies
+'* 22.08.03, 24.04.04; 31.07.05; 18.10.05
+'* erstellt von Hajo.Ziplies@web.de
+'* http://home.media-n.de/ziplies/
+' geänd. von Erich G. 20.07.2008
+   Dim RaZelle As Range, ByMldg As Integer, Sh As Worksheet
+   Dim namN As Name, zz As Long
+
+   For Each Sh In Worksheets
+      If Sh.Name = "Verknüpfungen" Then
+         ByMldg = MsgBox("Tabelle Verknüfungen schon vorhanden - Löschen?", _
+            vbYesNo + vbQuestion, "Löschabfrage ?", "", 0)
+         If ByMldg <> 6 Then Exit Sub
+         Sh.Cells.Clear
+         Exit For
+      End If
+   Next Sh
+   If ByMldg <> 6 Then _
+      Sheets.Add(After:=Worksheets(Worksheets.count)).Name = "Verknüpfungen"
+   zz = 1
+   Cells(zz, 1) = "Zelle"
+   Cells(zz, 2) = "Tabelle"
+   Cells(zz, 3) = "Formel"
+   For Each Sh In Worksheets
+      If Sh.Name <> "Verknüpfungen" Then
+         ' Sh.Unprotect ' .unprotect "Passwort"
+         For Each RaZelle In Sh.UsedRange
+            If RaZelle.HasFormula And InStr(RaZelle.Formula, ":\") > 1 Then
+               zz = zz + 1
+               Cells(zz, 1) = RaZelle.Address(0, 0)
+               Cells(zz, 2) = Sh.Name
+               Cells(zz, 3) = "'" & RaZelle.Formula
+            End If
+         Next RaZelle
+         ' Sh.Protect    ' .Protect "Passwort"
+      End If
+   Next Sh
+'  ------------------------------------------------------------ Namen
+   zz = zz + 3
+   Cells(zz, 1) = "Name"
+   Cells(zz, 2) = "Bezug"
+   For Each namN In ActiveWorkbook.Names
+      zz = zz + 1
+      Cells(zz, 1) = namN.Name
+      With Cells(zz, 2)
+         If InStr(namN, "REF") <> 0 Then
+               .Value = namN '"Fehlerhaft"
+               .Font.Bold = True
+               .Font.ColorIndex = 3
+         ElseIf InStr(namN, "\") <> 0 Then
+               .Value = namN
+               .Font.Bold = True
+               .Font.ColorIndex = 4
+         Else
+               .Value = Mid(namN, 2)
+         End If
+      End With
+   Next
+End Sub
+Sub Verknuepfungen_Suchen2()
+    Dim Tab1 As Object
+    Dim Zelle1 As Object
+    Dim AlleFormeln As Object
+    Dim NeuesBlatt As Worksheet
+    Dim Zeile As Integer
+    On Error GoTo 0
+    Set NeuesBlatt = ActiveWorkbook.Worksheets.Add(ActiveWorkbook.Worksheets(1))
+    On Error Resume Next
+    NeuesBlatt.Name = "Externe Verknüpfungen"
+    NeuesBlatt.Range("a3").Formula = "Arbeitsblatt"
+    NeuesBlatt.Range("b3").Formula = "Zelle"
+    NeuesBlatt.Range("c3").Formula = "Externer Bezug"
+    NeuesBlatt.Range("d3").Formula = "Aktueller Wert"
+    NeuesBlatt.Range("a1").Font.Bold = True
+    NeuesBlatt.Range("a3:d3").Font.Bold = True
+    Zeile = 4
+    Application.ScreenUpdating = False
+    For Each Tab1 In ActiveWorkbook.Worksheets
+     If Tab1.Name <> NeuesBlatt.Name Then
+        Set AlleFormeln = Nothing
+        Set AlleFormeln = Tab1.Cells.SpecialCells(xlFormulas, 23)
+        'MsgBox (AlleFormeln)
+        If AlleFormeln Then
+        For Each Zelle1 In AlleFormeln
+            If InStr(Zelle1.Formula, "\") > 0 Then
+             'MsgBox (Zelle1)
+            'If Tab1.Name <> NeuesBlatt.Name Then
+             NeuesBlatt.Cells(Zeile, 1).Formula = Tab1.Name
+             NeuesBlatt.Cells(Zeile, 2).Formula = Zelle1.AddressLocal(False, False)
+             NeuesBlatt.Cells(Zeile, 3).Formula = Right$(Zelle1.FormulaLocal, Len(Zelle1. _
+FormulaLocal) - 2)
+             NeuesBlatt.Cells(Zeile, 4).Formula = Zelle1.Value
+             Zeile = Zeile + 1
+            'End If
+'                If Zelle1.HasArray Then
+'                    Zelle1.CurrentArray.Select
+'                    Selection.Copy
+'                    Selection.PasteSpecial Paste:=xlValues
+'                    Application.CutCopyMode = False
+'                Else
+'                    Zelle1.Formula = Zelle1.Value
+'                End If
+            End If
+        Next Zelle1
+       End If
+      End If
+    Next Tab1
+FormatiereDenRest:
+    For Zeile = 1 To 4
+     NeuesBlatt.Cells(1, Zeile).EntireColumn.AutoFit
+    Next
+    NeuesBlatt.Range("a1").Formula = "Externe Verknüpfungen in " + UCase$(ActiveWorkbook.Name)
+    On Error GoTo 0
+    'Aufräumen der Tabelle
+    Zeile = 4
+    While NeuesBlatt.Cells(Zeile, 1).Text <> ""
+     If NeuesBlatt.Cells(Zeile, 2).Text = "" Then
+      NeuesBlatt.Cells(Zeile, 2).EntireRow.Delete
+     Else
+      Zeile = Zeile + 1
+     End If
+    Wend
+    Application.ScreenUpdating = True
+    If Zeile = 4 Then
+     MsgBox "Keine externen Verknüpfungen gefunden", vbOKOnly, "Keine Verknüpfungen"
+     Application.DisplayAlerts = False
+     NeuesBlatt.Delete
+     Application.DisplayAlerts = True
+    End If
+    Application.ScreenUpdating = True
+    Exit Sub
+FehlerVerknüpfungAuflösen:
+    If Err = 1004 Then Resume Next Else MsgBox ("Keine Zellen mit externen Verknüpfungen gefunden ")
+    GoTo FormatiereDenRest
 End Sub
 Sub Verknuepfungen_aendern()
     'Beispiel - Verknüpfungen i. einer Arbeitsmappe ändern
@@ -198,7 +335,7 @@ Sub Loesche_markierteZeilen_SpalteX_leer()
     'Löscht alle Zeilen ohne Wert in Spalte X
     Dim rngC As Range
     Dim strSH As String
-    Dim a, b, FRow, LRow, intL, intPosS, intPosH, tMin, ZSpalte As Integer
+    Dim a, b, FRow, LRow, intL, intPosS, intPosH, tMin, ZSpalte, Zeilenzahl As Integer
     Dim t, tSumSec, tSec As Double
     t = Timer
     FRow = Range(Selection.Address).Row
@@ -221,12 +358,31 @@ Sub Loesche_markierteZeilen_SpalteX_leer()
     MsgBox "Fertig Master!" & vbLf & vbLf & b & " von " & Zeilenzahl & " gelöscht." _
     & vbLf & vbLf & tMin & " Min. " & tSec & " sec", , "Makrolaufzeit."
 End Sub
+Sub Loesche_Spalte_wenn_Zelle_erste_Zeile_leer()
+'Wenn in irgendeiner der Zellen aus Zeile 1 kein Wert steht, wird die gesamte Spalte gelöscht
+'Version ohne Schleife
+    ActiveSheet.Rows(1).SpecialCells(xlCellTypeBlanks).EntireColumn.Delete
+End Sub
+Sub Loesche_Spalte_wenn_Zelle_erste_Zeile_leer1()
+'Wenn in irgendeiner der Zellen aus Zeile 1 kein Wert steht, wird die gesamte Spalte gelöscht
+'Version mit Schleife
+    Dim lngSpalte As Long
+    Dim wksA As Worksheet
+    Dim lngLetzteSpalte As Long
+    Set wksA = ActiveSheet
+    lngLetzteSpalte = wksA.Cells(1, wksA.Columns.count).End(xlToLeft).Column
+    For lngSpalte = lngLetzteSpalte To 1 Step -1
+        If Trim(wksA.Cells(1, lngSpalte).Text) = "" Then
+            wksA.Columns(lngSpalte).Delete
+        End If
+    Next
+End Sub
 Sub List_Location_Size_for_all_VB_Buttons()
     'Problem: unterschiedliche Größen der Buttons bei unterschiedlichen Bildschirmauflösungen
     'Macro liest alle Buttonformate (Standard) aus
     'den Code aus dem Direktbereich in die Workbook_Open() Sub übernehmen (Komma noch durch Punkt ersetzen)
     'Danach werden bei jedem Öffnen die Buttons auf ihre Standardwerte zurückgesetzt unabhängig der aktuellen Bildschirmauflösung
-    Dim ShCounter As Long, sh As Shape
+    Dim ShCounter As Long, Sh As Shape
     Dim i As Integer
     ShCounter = 0
     DebugClear
@@ -234,8 +390,8 @@ Sub List_Location_Size_for_all_VB_Buttons()
     DebugPrint "fntSize=10"
     For i = 1 To ActiveWorkbook.Sheets.count - 1
       With ActiveWorkbook.Sheets(i)
-       For Each sh In .Shapes
-        If sh.Type = msoOLEControlObject Then  'Only list VB buttons
+       For Each Sh In .Shapes
+        If Sh.Type = msoOLEControlObject Then  'Only list VB buttons
             ShCounter = ShCounter + 1
     ' Code für Direktbereich
     '        Debug.Print "WITH WorkSheets("; Chr(34); Sheets(i).Name; Chr(34); ")."; Sh.Name, "   '"; ShCounter
@@ -247,12 +403,12 @@ Sub List_Location_Size_for_all_VB_Buttons()
     '        Debug.Print "END WITH"
     
     'Code für Ausgabe in debug.log File, wenn Puffer Direktbereich zu klein
-            DebugPrint "WITH WorkSheets(" & Chr(34) & Sheets(i).Name & Chr(34) & ")." & sh.Name & "   '" & ShCounter
-            DebugPrint "   .Height=" & sh.Height & ": .Width=" & sh.Width & ": .Top=" & sh.Top & ": .Left = " & sh.Left & ": .FontSize = fntSize"
+            DebugPrint "WITH WorkSheets(" & Chr(34) & Sheets(i).Name & Chr(34) & ")." & Sh.Name & "   '" & ShCounter
+            DebugPrint "   .Height=" & Sh.Height & ": .Width=" & Sh.Width & ": .Top=" & Sh.Top & ": .Left = " & Sh.Left & ": .FontSize = fntSize"
             DebugPrint "END WITH"
     '
          End If
-        Next sh
+        Next Sh
       End With
     Next i
     MsgBox "Fertig Master!" & vbLf & vbLf & ShCounter & " VB Buttonformate exportiert."

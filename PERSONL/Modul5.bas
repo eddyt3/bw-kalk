@@ -3,7 +3,7 @@ Sub Objektliste_Wkb_erstellen()
     'alle OLE Objekte auflisten
     'alle OLEObject-Objekte befinden sich ebenfalls in der Shapes-Auflistung
     Dim shListe As Worksheet
-    Dim sh As Worksheet
+    Dim Sh As Worksheet
     Dim obj As OLEObject
     Dim shp As Shape
     Dim sp As Long, ze As Long
@@ -12,9 +12,9 @@ Sub Objektliste_Wkb_erstellen()
     On Error GoTo 0
     shListe.Cells.Clear
     sp = 1: ze = 2
-    For Each sh In ActiveWorkbook.Worksheets
-        shListe.Cells(1, sp).Value = sh.Name
-        For Each obj In sh.OLEObjects
+    For Each Sh In ActiveWorkbook.Worksheets
+        shListe.Cells(1, sp).Value = Sh.Name
+        For Each obj In Sh.OLEObjects
             shListe.Cells(ze, sp).Value = obj.Name
             ze = ze + 1
         Next
@@ -62,5 +62,19 @@ Sub Objektliste_Wks_Direktbereich_erstellen()
     End If
     Exit Sub
 End Sub
+Sub AlleZellnamenLoeschen()
+    'löscht alle individuellen Zellnamen und setzt sie auf Standard z.B. "A1" zurück
+  Dim varName As Name
+  Dim intResponse As Integer
 
+  intResponse = MsgBox("Alle Namen löschen?", _
+  vbYesNo, "Excel Weekly")
+
+  If intResponse = vbNo Then Exit Sub
+
+  For Each varName In ActiveWorkbook.Names
+    varName.Delete
+  Next varName
+
+End Sub
 
