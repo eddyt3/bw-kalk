@@ -11,6 +11,11 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Public VNFormatN, VNFormatB As String 'Vor-, Nachsatzformat f. Kleben
+
+Private Sub ComboBox3_Change()
+
+End Sub
+
 Private Sub Worksheet_Activate()
     Run Worksheets("SKleben").Bogen_erstellen_netto
     Call Worksheets("Kleben").CheckBox1_Click
@@ -35,8 +40,10 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Kleben").ComboBox1.Visible = True
             Worksheets("Kleben").ComboBox2.Visible = True
             Worksheets("Kleben").ComboBox3.Visible = True 'andere Laufrichtung
+            Worksheets("Kleben").ComboBox3.Top = 247.75
             Worksheets("Kleben").TextBox1.Visible = True
             Worksheets("Kleben").CheckBox3.Visible = True
+            Worksheets("Kleben").CommandButton21.Visible = True
             Call Worksheets("Kleben").ComboBox1_DropButtonClick
             Call Worksheets("Kleben").Maschinendaten
             Else
@@ -47,6 +54,7 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Kleben").ComboBox3.Visible = False
             Worksheets("Kleben").TextBox1.Visible = False
             Worksheets("Kleben").CheckBox3.Visible = False
+            Worksheets("Kleben").CommandButton21.Visible = False
         End If
         Run Worksheets("SKleben").KlebenAnzeige
 End Sub
