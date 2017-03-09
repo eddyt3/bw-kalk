@@ -193,10 +193,10 @@ With Worksheets("Kleben").ComboBox3   '54
    .Height = 17.25: .Width = 174.75: .Top = 53.25: .Left = 35.25: .FontSize = fntSize
 End With
 With Worksheets("Kleben").TextBox2   '55
-   .Height = 106.5: .Width = 627.75: .Top = 381: .Left = 7.5: .FontSize = fntSize
+   .Height = 106.5: .Width = 627.75: .Top = 557.25: .Left = 7.5: .FontSize = fntSize
 End With
 With Worksheets("Kleben").CommandButton21   '56
-   .Height = 19.5: .Width = 39: .Top = 53.25: .Left = 342: .FontSize = fntSize
+   .Height = 19.5: .Width = 39: .Top = 151.5: .Left = 342: .FontSize = fntSize
 End With
 With Worksheets("Kleben").TextBox8   '57
    .Height = 19.5: .Width = 27.75: .Top = 53.25: .Left = 213.75: .FontSize = fntSize
@@ -214,7 +214,7 @@ With Worksheets("Zusammentragen").CheckBox2   '61
    .Height = 17.25: .Width = 72.75: .Top = 348: .Left = 123.75: .FontSize = fntSize
 End With
 With Worksheets("Fadenheften").TextBox1   '62
-   .Height = 92.25: .Width = 590.25: .Top = 558.75: .Left = 5.25: .FontSize = fntSize
+   .Height = 92.25: .Width = 590.25: .Top = 586.5: .Left = 5.25: .FontSize = fntSize
 End With
 With Worksheets("Binden").ComboBox1   '63
    .Height = 15.75: .Width = 107.25: .Top = 44.25: .Left = 291: .FontSize = fntSize
@@ -235,7 +235,7 @@ With Worksheets("Binden").ComboBox3   '68
    .Height = 15.75: .Width = 107.25: .Top = 75.75: .Left = 291: .FontSize = fntSize
 End With
 With Worksheets("Binden").TextBox1   '69
-   .Height = 131.25: .Width = 599.25: .Top = 588: .Left = 5.25: .FontSize = fntSize
+   .Height = 131.25: .Width = 599.25: .Top = 615.75: .Left = 5.25: .FontSize = fntSize
 End With
 With Worksheets("3Seitenbeschnitt").CheckBox1   '70
    .Height = 17.25: .Width = 72.75: .Top = 39.75: .Left = 112.5: .FontSize = fntSize
@@ -253,7 +253,7 @@ With Worksheets("Bohren").CheckBox2   '74
    .Height = 15.75: .Width = 65.25: .Top = 121.5: .Left = 585.75: .FontSize = fntSize
 End With
 With Worksheets("Bohren").CheckBox4   '75
-   .Height = 15.75: .Width = 65.25: .Top = 54.75: .Left = 107.25: .FontSize = fntSize
+   .Height = 15.75: .Width = 65.25: .Top = 54.75: .Left = 113.25: .FontSize = fntSize
 End With
 With Worksheets("Bohren").TextBox1   '76
    .Height = 116.25: .Width = 567.75: .Top = 489: .Left = 3: .FontSize = fntSize
@@ -262,73 +262,73 @@ With Worksheets("Verpacken").Label1   '77
    .Height = 146.25: .Width = 74.25: .Top = 87: .Left = 14.25: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox1   '78
-   .Height = 21: .Width = 296.25: .Top = 302.25: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 296.25: .Top = 302.25: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox2   '79
-   .Height = 19.5: .Width = 296.25: .Top = 61.5: .Left = 324: .FontSize = fntSize
+   .Height = 19.5: .Width = 296.25: .Top = 61.5: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").CheckBox1   '80
-   .Height = 18: .Width = 55.5: .Top = 282: .Left = 333: .FontSize = fntSize
+   .Height = 18: .Width = 55.5: .Top = 282: .Left = 339: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox3   '81
-   .Height = 21: .Width = 296.25: .Top = 348.75: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 296.25: .Top = 348.75: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox4   '82
-   .Height = 21: .Width = 296.25: .Top = 663.75: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 296.25: .Top = 663.75: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").CommandButton1   '83
-   .Height = 19.5: .Width = 39: .Top = 78.75: .Left = 624: .FontSize = fntSize
+   .Height = 19.5: .Width = 39: .Top = 78.75: .Left = 630: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox5   '84
-   .Height = 21: .Width = 200.25: .Top = 615.75: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 200.25: .Top = 615.75: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox6   '85
-   .Height = 21: .Width = 94.5: .Top = 615.75: .Left = 525.75: .FontSize = fntSize
+   .Height = 21: .Width = 94.5: .Top = 615.75: .Left = 531.75: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").CheckBox4   '86
-   .Height = 18: .Width = 111: .Top = 457.5: .Left = 204.75: .FontSize = fntSize
+   .Height = 18: .Width = 111: .Top = 457.5: .Left = 210.75: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox7   '87
-   .Height = 21: .Width = 296.25: .Top = 851.25: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 296.25: .Top = 851.25: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox8   '88
-   .Height = 21: .Width = 296.25: .Top = 382.5: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 296.25: .Top = 382.5: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox9   '89
-   .Height = 21: .Width = 193.5: .Top = 424.5: .Left = 427.5: .FontSize = fntSize
+   .Height = 21: .Width = 193.5: .Top = 424.5: .Left = 433.5: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox10   '90
-   .Height = 21: .Width = 48: .Top = 425.25: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 48: .Top = 425.25: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ToggleButton1   '91
-   .Height = 36.75: .Width = 93.75: .Top = 567: .Left = 114: .FontSize = fntSize
+   .Height = 36.75: .Width = 93.75: .Top = 567: .Left = 120: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox11   '92
-   .Height = 21: .Width = 48: .Top = 425.25: .Left = 372: .FontSize = fntSize
+   .Height = 21: .Width = 48: .Top = 425.25: .Left = 378: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox12   '93
-   .Height = 21: .Width = 296.25: .Top = 403.5: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 296.25: .Top = 403.5: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").CommandButton2   '94
-   .Height = 35.25: .Width = 83.25: .Top = 81.75: .Left = 114: .FontSize = fntSize
+   .Height = 35.25: .Width = 83.25: .Top = 81.75: .Left = 120: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox13   '95
-   .Height = 21: .Width = 48: .Top = 145.5: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 48: .Top = 145.5: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox14   '96
-   .Height = 21: .Width = 48: .Top = 145.5: .Left = 372.75: .FontSize = fntSize
+   .Height = 21: .Width = 48: .Top = 145.5: .Left = 378.75: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox15   '97
-   .Height = 21: .Width = 193.5: .Top = 145.5: .Left = 427.5: .FontSize = fntSize
+   .Height = 21: .Width = 193.5: .Top = 145.5: .Left = 433.5: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox16   '98
-   .Height = 21: .Width = 96.75: .Top = 911.25: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 96.75: .Top = 911.25: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").ComboBox17   '99
-   .Height = 21: .Width = 97.5: .Top = 971.25: .Left = 324: .FontSize = fntSize
+   .Height = 21: .Width = 97.5: .Top = 971.25: .Left = 330: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").TextBox1   '100
-   .Height = 102.75: .Width = 610.5: .Top = 1378.5: .Left = 3.75: .FontSize = fntSize
+   .Height = 102.75: .Width = 610.5: .Top = 1406.6: .Left = 3.75: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").Label2   '101
    .Height = 64.5: .Width = 76.5: .Top = 499.5: .Left = 123.75: .FontSize = fntSize
