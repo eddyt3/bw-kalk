@@ -199,7 +199,7 @@ With Worksheets("Kleben").ComboBox3   '56
    .Height = 17.25: .Width = 174.75: .Top = 234: .Left = 34.5: .FontSize = fntSize
 End With
 With Worksheets("Kleben").TextBox2   '57
-   .Height = 129.75: .Width = 636: .Top = 960: .Left = 1.5: .FontSize = fntSize
+   .Height = 129.75: .Width = 636: .Top = 987: .Left = 1.5: .FontSize = fntSize
 End With
 With Worksheets("Kleben").TextBox8   '58
    .Height = 19.5: .Width = 27.75: .Top = 53.25: .Left = 213: .FontSize = fntSize
@@ -229,7 +229,7 @@ With Worksheets("Kleben").CommandButton1   '66
    .Height = 35.25: .Width = 83.25: .Top = 31.5: .Left = 650.25: .FontSize = fntSize
 End With
 With Worksheets("Fadenheften").TextBox1   '67
-   .Height = 129.75: .Width = 590.25: .Top = 558.75: .Left = 3.75: .FontSize = fntSize
+   .Height = 129.75: .Width = 590.25: .Top = 585: .Left = 3.75: .FontSize = fntSize
 End With
 With Worksheets("Basis_Kolbus").TextBox1   '68
    .Height = 129.75: .Width = 623.25: .Top = 974.25: .Left = 3.75: .FontSize = fntSize
@@ -355,7 +355,7 @@ With Worksheets("Verpacken").CheckBox2   '108
    .Height = 18: .Width = 93.75: .Top = 1017: .Left = 338.25: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").TextBox1   '109
-   .Height = 129.75: .Width = 619.5: .Top = 1419.75: .Left = 3.75: .FontSize = fntSize
+   .Height = 129.75: .Width = 619.5: .Top = 1476.75: .Left = 3.75: .FontSize = fntSize
 End With
 With Worksheets("Verpacken").Label2   '110
    .Height = 64.5: .Width = 76.5: .Top = 499.5: .Left = 128.25: .FontSize = fntSize
