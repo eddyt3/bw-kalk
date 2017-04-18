@@ -256,7 +256,7 @@ End Sub
 Sub Loesche_DoppleteZeilen()
     'doppelte Zeilen löschen
     Dim temp
-    Dim i, n, zn, ZSpalte, ZZeile, counter, tMin As Integer
+    Dim i, m, n, zn, ZSpalte, ZZeile, counter, tMin As Integer
     Dim Zeilenzahl As Long
     Dim t, tSumSec, tSec As Double
     t = Timer
