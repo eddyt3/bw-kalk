@@ -105,7 +105,9 @@ Sub ComboBox14_Change()
         Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     End Select
+    Worksheets("SZusammentragen").Calculate
     Application.Run Worksheets("Binden").Produktart
+    Application.Run Worksheets("Zusammentragen").GeschwindigkeitZus
 End Sub
 Private Sub ComboBox16_Change()
 'Buchrückenform

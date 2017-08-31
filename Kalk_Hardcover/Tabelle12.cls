@@ -13,9 +13,13 @@ Attribute VB_Exposed = True
 Private Sub Worksheet_Activate()
     Run Worksheets("SBuchdecke").Beschriftung
     Run Worksheets("SBuchdecke").HardcoverVisual
+    Run Worksheets("SBuchdecke").MindermengeBuchdecke
 End Sub
 Private Sub Worksheet_Change(ByVal Target As Range)
     Run Worksheets("SBuchdecke").Beschriftung
+End Sub
+Private Sub Worksheet_Deactivate()
+    Run Worksheets("SBuchdecke").MindermengeBuchdecke
 End Sub
 Private Sub ComboBox1_Change()
     Run ThisWorkbook.Sheets("Buchdecke").Cello_alternativ
