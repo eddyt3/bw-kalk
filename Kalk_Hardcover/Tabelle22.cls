@@ -179,3 +179,26 @@ Sub HardcoverVisual()
     End With
     Worksheets("Buchdecke").Range("D37").Select
 End Sub
+Sub MindermengeBuchdecke()
+'Wenn nicht 2mm Standard Stärke oder Sonderformat, dann Berücksichtigung der Kosten bei Mindermenge
+'20170614
+    Dim AuftrWert As Integer
+    AuftrWert = Worksheets("Material").Range("H215")
+    If (Worksheets("SBuchdecke").Range("D26") <> 2 Or Worksheets("SBuchdecke").Range("E127") = 1) And (Worksheets("Buchdecke").Range("D19") < AuftrWert _
+    Or Worksheets("Buchdecke").Range("F19") < AuftrWert Or Worksheets("Buchdecke").Range("G19") < AuftrWert) Then
+        'MsgBox "Achtung!" & vbLf & vbLf & "Mindestauftragswert nicht erreicht!"
+        Worksheets("Buchdecke").Range("H19") = "Mindestauftragswert nicht erreicht!"
+        If Worksheets("Buchdecke").Range("D19") < AuftrWert Then
+            Worksheets("Buchdecke").Range("D19").Interior.ColorIndex = 3
+        End If
+        If Worksheets("Buchdecke").Range("F19") < AuftrWert Then
+            Worksheets("Buchdecke").Range("F19").Interior.ColorIndex = 3
+        End If
+        If Worksheets("Buchdecke").Range("G19") < AuftrWert Then
+            Worksheets("Buchdecke").Range("G19").Interior.ColorIndex = 3
+        End If
+    Else
+        Worksheets("Buchdecke").Range("H19") = ""
+        Worksheets("Buchdecke").Range("D19,F19,G19").Interior.ColorIndex = 0
+    End If
+End Sub
