@@ -12,7 +12,6 @@ Attribute VB_Exposed = True
 '
 Private Sub ComboBox2_DropButtonClick()
      Run Worksheets("Zusammentragen").Zusammentragen
-     Run Worksheets("Zusammentragen").GeschwindigkeitZus
 End Sub
 Private Sub Worksheet_Activate()
     Run Worksheets("Zusammentragen").Zusammentragen
@@ -74,6 +73,7 @@ Sub Zusammentragen()
         If intAnzahlVors = 0 Then
         Worksheets("Zusammentragen").CheckBox2.Value = False
     End If
+    Run Worksheets("Zusammentragen").GeschwindigkeitZus
     Application.ScreenUpdating = True
 End Sub
 Sub GeschwindigkeitZus()

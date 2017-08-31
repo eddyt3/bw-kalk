@@ -233,7 +233,7 @@ Sub ComboBox13_Change()
 End Sub
 Sub ComboBox14_Change()
 'Auswahl Produktart (Broschüre, Buchblock, Ableimen)
-'20141208
+'20170418
     Dim intArt As Integer
     intArt = ThisWorkbook.Worksheets("SBinden").Range("B34").Value
     Select Case intArt
@@ -278,7 +278,9 @@ Sub ComboBox14_Change()
         Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     End Select
+    Worksheets("SZusammentragen").Calculate
     Application.Run Worksheets("Binden").Produktart
+    Application.Run Worksheets("Zusammentragen").GeschwindigkeitZus
 End Sub
 Private Sub TextBox1_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     'Produktbreite
