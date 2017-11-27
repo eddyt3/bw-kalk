@@ -43,6 +43,19 @@ Sub KopfFusszeile_eintragen()
     Next wks
     MsgBox "Fertig Master!"
 End Sub
+Sub Zwischenzeilen_einfügen()
+    'Zwischenzeilen_einfügen
+    Dim i, z As Integer
+    FRow = Range(Selection.Address).Row
+    LRow = Range(Selection.Address).Row + Selection.Rows.count - 1
+    For i = (LRow + 1) To (FRow + 1) Step -1
+     For z = 1 To 1 'Zähler ggf. erhöhen für mehr als eine Leerzeile
+      Cells(i, 1).EntireRow.Insert Shift:=xlDown
+     Next z
+    Next
+    Cells(FRow, 1).Select
+    MsgBox "Fertig Master!"
+End Sub
 Sub Autoformen_loeschen_Alle()
     Dim shpShape As Shape
     For Each shpShape In ActiveSheet.Shapes
