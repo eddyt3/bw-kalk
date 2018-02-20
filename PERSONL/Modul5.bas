@@ -15,13 +15,13 @@ Sub Objektliste_Wkb_erstellen()
     For Each Sh In ActiveWorkbook.Worksheets
         shListe.Cells(1, sp).Value = Sh.Name
         For Each obj In Sh.OLEObjects
-            shListe.Cells(ze, sp).Value = obj.Name
+            shListe.Cells(ze, sp).Value = "Obj:" & obj.Name
             ze = ze + 1
         Next
-'        For Each shp In sh.Shapes
-'            shListe.Cells(ze, sp).Value = shp.Name
-'            ze = ze + 1
-'        Next
+        For Each shp In Sh.Shapes
+            shListe.Cells(ze, sp).Value = "Shp:" & shp.Name
+            ze = ze + 1
+        Next
         sp = sp + 1
         ze = 2
     Next
@@ -42,16 +42,16 @@ Sub Objektliste_Wks_Direktbereich_erstellen()
     For Each obj In ActiveSheet.OLEObjects
         'Debug.Print obj.Name
         ReDim Preserve tmpArray(i)
-        tmpArray(i) = obj.Name
+        tmpArray(i) = "Obj:" & obj.Name
         i = i + 1
     Next
-'    For Each shp In ActiveSheet.Shapes
-'        'Debug.Print shp.Namein837net
+    For Each shp In ActiveSheet.Shapes
+        'Debug.Print shp.Name
 
-'        ReDim Preserve tmpArray(i)
-'        tmpArray(i) = shp.Name
-'        i = i + 1
-'    Next
+        ReDim Preserve tmpArray(i)
+        tmpArray(i) = "Shp:" & shp.Name
+        i = i + 1
+    Next
     If (Not Not tmpArray) <> 0 Then 'prüfen ob array initialisiert ist, ansonsten Laufzeitfehler
         BubbleSort tmpArray
         For i = 1 To UBound(tmpArray)
