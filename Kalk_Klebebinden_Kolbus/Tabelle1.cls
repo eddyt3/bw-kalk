@@ -15,10 +15,11 @@ Sub ComboBox2_Change()
     Run Worksheets("SKleben").kleben
 End Sub
 Sub ComboBox3_DropButtonClick()
-    '8seitiger Umschlag
-    If Worksheets("SEingabe").Range("L5") > 1 Then
+    '6/8seitiger Umschlag
+    If Worksheets("SEingabe").Range("L6") > 1 Then
         MsgBox ("Bitte das Falzen der Umschläge nicht vergessen.")
     End If
+    Run Worksheets("Falzen").umschlag
 End Sub
 Private Sub ComboBox4_Change()
     'Bogen A, Art
@@ -31,14 +32,17 @@ End Sub
 Sub ComboBox9_Change()
     'Bogen B, Art
     'Run Worksheets("Falzen").Falzen
+    Run Worksheets("Falzen").umschlag
 End Sub
 Sub ComboBox10_Change()
     'Bogen C, Art
     'Run Worksheets("Falzen").Falzen
+    Run Worksheets("Falzen").umschlag
 End Sub
 Sub ComboBox11_Change()
     'Bogen D, Art
     'Run Worksheets("Falzen").Falzen
+    Run Worksheets("Falzen").umschlag
 End Sub
 Private Sub ComboBox15_Change()
 'Auswahl Buchblockformat
@@ -77,10 +81,10 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Eingabe").Range("A18") = "0"
             Worksheets("Schneiden").CheckBox2.Value = False
             Worksheets("Schneiden").CheckBox2.Visible = False
-            Worksheets("SFalzen").Range("I5") = 6
         End If
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
+        Run Worksheets("Falzen").umschlag
         'Run Worksheets("Falzen").Falzen
     Application.ScreenUpdating = True
 End Sub
@@ -99,10 +103,10 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Eingabe").Range("A27") = "0"
             Worksheets("Schneiden").CheckBox3.Value = False
             Worksheets("Schneiden").CheckBox3.Visible = False
-            Worksheets("SFalzen").Range("I6") = 6
         End If
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
+        Run Worksheets("Falzen").umschlag
         'Run Worksheets("Falzen").Falzen
     Application.ScreenUpdating = True
 End Sub
@@ -118,10 +122,10 @@ Attribute CheckBox3_Click.VB_ProcData.VB_Invoke_Func = " \n14"
             Worksheets("Eingabe").Range("A36") = "0"
             Worksheets("Schneiden").CheckBox4.Value = False
             Worksheets("Schneiden").CheckBox4.Visible = False
-            Worksheets("SFalzen").Range("I7") = 6
         End If
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
+        Run Worksheets("Falzen").umschlag
         'Run Worksheets("Falzen").Falzen
     Application.ScreenUpdating = True
 End Sub
@@ -228,8 +232,11 @@ Sub CheckBox11_Click()
 End Sub
 Sub ComboBox13_Change()
 'Auswahl Leimart über Eingabeseite
-'20140422
+'20180531
     Run Worksheets("Binden").Leimart
+    With Worksheets("Eingabe").ComboBox13
+        .FontSize = 20
+    End With
 End Sub
 Sub ComboBox14_Change()
 'Auswahl Produktart (Broschüre, Buchblock, Ableimen)

@@ -151,3 +151,105 @@ Sub Falzbogen()
         Else: Worksheets("Falzen").Rows("61:79").Hidden = False
     End If
 End Sub
+Sub umschlag()
+'Auswahl Umschlag
+    Dim intUmschlag As Integer
+    intUmschlag = ThisWorkbook.Worksheets("Eingabe").ComboBox3.ListIndex
+    Select Case intUmschlag
+    Case 0, 3, 4
+        '4 seitiger Umschlag
+        If Worksheets("SEingabe").Range("D3") = 1 Then 'Bg. A Inhalt
+            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 0
+        End If
+        If Worksheets("SEingabe").Range("D4") = 1 Then 'Bg. A Umschlag nicht Falzen
+            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 6
+        End If
+        If Worksheets("SEingabe").Range("D5") = 0 Then 'Bg. A nicht Falzen
+            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 6
+        End If
+        If Worksheets("Eingabe").CheckBox1.Value = True Then 'Bg. ja/nein
+            If Worksheets("SEingabe").Range("e3") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 0
+            End If
+            If Worksheets("SEingabe").Range("e4") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6
+            End If
+            If Worksheets("SEingabe").Range("e5") = 0 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6
+            End If
+        Else: ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6
+        End If
+        If Worksheets("Eingabe").CheckBox2.Value = True Then
+            If Worksheets("SEingabe").Range("f3") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 0
+            End If
+            If Worksheets("SEingabe").Range("f4") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 6
+            End If
+            If Worksheets("SEingabe").Range("f5") = 0 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 6
+            End If
+        Else: ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 6
+        End If
+        If Worksheets("Eingabe").CheckBox3.Value = True Then
+            If Worksheets("SEingabe").Range("g3") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 0
+            End If
+            If Worksheets("SEingabe").Range("g4") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 6
+            End If
+            If Worksheets("SEingabe").Range("g5") = 0 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 6
+            End If
+        Else: ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 6
+        End If
+    Case 1, 2
+        '6/8 seitiger Umschlag verkürzt
+        If Worksheets("SEingabe").Range("D3") = 1 Then 'Bg. A Inhalt
+            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 0
+        End If
+        If Worksheets("SEingabe").Range("D4") = 1 Then 'Bg. A Umschlag Falzen Fidia
+            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 4
+        End If
+        If Worksheets("SEingabe").Range("D5") = 0 Then 'Bg. A nicht Falzen
+            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 6
+        End If
+        If Worksheets("Eingabe").CheckBox1.Value = True Then 'Bg. ja/nein
+            If Worksheets("SEingabe").Range("e3") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 0
+            End If
+            If Worksheets("SEingabe").Range("e4") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 4
+            End If
+            If Worksheets("SEingabe").Range("e5") = 0 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6
+            End If
+        Else: ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6
+        End If
+        If Worksheets("Eingabe").CheckBox2.Value = True Then
+            If Worksheets("SEingabe").Range("f3") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 0
+            End If
+            If Worksheets("SEingabe").Range("f4") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 4
+            End If
+            If Worksheets("SEingabe").Range("f5") = 0 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 6
+            End If
+        Else: ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 6
+        End If
+        If Worksheets("Eingabe").CheckBox3.Value = True Then
+            If Worksheets("SEingabe").Range("g3") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 0
+            End If
+            If Worksheets("SEingabe").Range("g4") = 1 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 4
+            End If
+            If Worksheets("SEingabe").Range("g5") = 0 Then
+                ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 6
+            End If
+        Else: ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 6
+        End If
+    End Select
+    
+End Sub
