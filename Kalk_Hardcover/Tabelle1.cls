@@ -55,8 +55,11 @@ Sub ComboBox11_Change()
 End Sub
 Sub ComboBox13_Change()
 'Auswahl Leimart über Eingabeseite
-'20140422
+'20180531
     Run Worksheets("Binden").Leimart
+    With Worksheets("Eingabe").ComboBox13
+        .FontSize = 20
+    End With
 End Sub
 Sub ComboBox14_Change()
 'Auswahl Produktart (Broschüre, Hardcover, Ableimen)
