@@ -12,22 +12,26 @@ Attribute VB_Exposed = True
 '
 Public Sub Workbook_BeforePrint(Cancel As Boolean)
     'Druckbereich nur auf Eingabeseite festlegen
-    '20150421
+    '20180328
     Dim Letzte As Long 'Letzte Zeile
-    Dim a As Integer
+    Dim i As Integer
     Letzte = Worksheets("Eingabe").Cells(Rows.Count, 1).End(xlUp).Row
     Worksheets("Eingabe").PageSetup.PrintArea = "A1:L" & Letzte
     Application.ScreenUpdating = False
     Dim wks As Worksheet
     Dim v As String
     v = Worksheets("Steuerung").Range("B178") & "/" & Worksheets("Steuerung").Range("A178")
-    ThisWorkbook.Worksheets("Eingabe").PageSetup.LeftFooter = "&""Verdana""&06" & Application.UserName & " " & format("&D", "dd.mm.yy") & " " & "&T"
-    ThisWorkbook.Worksheets("Eingabe").PageSetup.CenterFooter = "&""Verdana""&06" & Chr(10) & ThisWorkbook.Path & "\" & ThisWorkbook.Name
-    ThisWorkbook.Worksheets("Eingabe").PageSetup.RightFooter = "&""Verdana""&06" & " (v" & v & ")"
+    For i = 1 To Sheets.Count
+        ActiveWorkbook.Sheets(i).PageSetup.LeftFooter = "&""Verdana""&06" & Application.UserName & " " & format("&D", "dd.mm.yy") & " " & "&T"
+        ActiveWorkbook.Sheets(i).PageSetup.CenterFooter = "&""Verdana""&06" & Chr(10) & ThisWorkbook.Path & "\" & ThisWorkbook.Name
+        ActiveWorkbook.Sheets(i).PageSetup.RightFooter = "&""Verdana""&06" & " (v" & v & ")"
+    Next
+    'MsgBox "Alle Footer gesetzt."
     Call Dokumenteigenschaften_Soll
     Application.ScreenUpdating = True
 End Sub
 Private Sub Workbook_Open()
+ActiveWorkbook.CheckCompatibility = False 'Unterdrückung d. Fehlermeldung beim Speichern in alte Excel Version
 ' Buttonformat zurücksetzen wg. Problem der unterschiedlichen Größen bei unterschiedlichen Bildschirmauflösungen
 On Error Resume Next
 fntSize = 10
@@ -266,7 +270,7 @@ With Worksheets("Fadenheften").TextBox1   '78
    .Height = 129.75: .Width = 590.25: .Top = 581.75: .Left = 3.75: .FontSize = fntSize
 End With
 With Worksheets("Basis_Kolbus").TextBox1   '79
-   .Height = 129.75: .Width = 623.25: .Top = 974.25: .Left = 3.75: .FontSize = fntSize
+   .Height = 129.75: .Width = 623.25: .Top = 985.5: .Left = 3.75: .FontSize = fntSize
 End With
 With Worksheets("Binden").ComboBox1   '80
    .Height = 15.75: .Width = 107.25: .Top = 44.25: .Left = 291: .FontSize = fntSize
@@ -281,13 +285,10 @@ With Worksheets("Binden").ComboBox4   '83
    .Height = 15.75: .Width = 107.25: .Top = 237.75: .Left = 291: .FontSize = fntSize
 End With
 With Worksheets("Binden").CheckBox3   '84
-   .Height = 14.25: .Width = 168.75: .Top = 536.25: .Left = 663.75: .FontSize = fntSize
+   .Height = 14.25: .Width = 168.75: .Top = 280.25: .Left = 663.75: .FontSize = fntSize
 End With
 With Worksheets("Binden").CommandButton1   '85
    .Height = 19.5: .Width = 39: .Top = 105: .Left = 249: .FontSize = fntSize
-End With
-With Worksheets("Binden").TextBox1   '86
-   .Height = 129.75: .Width = 601.5: .Top = 811.5: .Left = 5.25: .FontSize = fntSize
 End With
 With Worksheets("Binden").ComboBox5   '87
    .Height = 15.75: .Width = 107.25: .Top = 28.5: .Left = 291.75: .FontSize = fntSize

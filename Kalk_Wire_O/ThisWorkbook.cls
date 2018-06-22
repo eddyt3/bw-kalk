@@ -12,22 +12,26 @@ Attribute VB_Exposed = True
 '
 Public Sub Workbook_BeforePrint(Cancel As Boolean)
     'Druckbereich nur auf Eingabeseite festlegen
-    '20150421
+    '20180328
     Dim Letzte As Long 'Letzte Zeile
-    Dim a As Integer
+    Dim i As Integer
     Letzte = Worksheets("Eingabe").Cells(Rows.Count, 1).End(xlUp).Row
     Worksheets("Eingabe").PageSetup.PrintArea = "A1:L" & Letzte
     Application.ScreenUpdating = False
     Dim wks As Worksheet
     Dim v As String
     v = Worksheets("Steuerung").Range("B178") & "/" & Worksheets("Steuerung").Range("A178")
-    ThisWorkbook.Worksheets("Eingabe").PageSetup.LeftFooter = "&""Verdana""&06" & Application.UserName & " " & format("&D", "dd.mm.yy") & " " & "&T"
-    ThisWorkbook.Worksheets("Eingabe").PageSetup.CenterFooter = "&""Verdana""&06" & Chr(10) & ThisWorkbook.Path & "\" & ThisWorkbook.Name
-    ThisWorkbook.Worksheets("Eingabe").PageSetup.RightFooter = "&""Verdana""&06" & " (v" & v & ")"
+    For i = 1 To Sheets.Count
+        ActiveWorkbook.Sheets(i).PageSetup.LeftFooter = "&""Verdana""&06" & Application.UserName & " " & format("&D", "dd.mm.yy") & " " & "&T"
+        ActiveWorkbook.Sheets(i).PageSetup.CenterFooter = "&""Verdana""&06" & Chr(10) & ThisWorkbook.Path & "\" & ThisWorkbook.Name
+        ActiveWorkbook.Sheets(i).PageSetup.RightFooter = "&""Verdana""&06" & " (v" & v & ")"
+    Next
+    'MsgBox "Alle Footer gesetzt."
     Call Dokumenteigenschaften_Soll
     Application.ScreenUpdating = True
 End Sub
 Private Sub Workbook_Open()
+ActiveWorkbook.CheckCompatibility = False 'Unterdrückung d. Fehlermeldung beim Speichern in alte Excel Version
 On Error Resume Next
 fntSize = 10
 With Worksheets("Eingabe").ComboBox1   '1
