@@ -9,12 +9,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 '
 'Copyright by E.Dargel ed@dissenter.de
-'
+'20170907
 Private Sub ComboBox1_DropButtonClick()
     'Auswahl Maschine, Einrichtezeit
-    Worksheets("Binden").Range("D3").FormulaLocal = "=SVERWEIS(SBinden!B4;SBinden!A5:F12;5)"
+    Worksheets("Binden").Range("D3").FormulaLocal = "=SVERWEIS(SBinden!B4;SBinden!A5:F22;5)"
     'Geschwindigkeitsauswahl
-    Worksheets("Binden").Range("D4").FormulaLocal = "=SVERWEIS(SBinden!B4;SBinden!A5:G12;6)"
+    Worksheets("Binden").Range("D4").FormulaLocal = "=SVERWEIS(SBinden!B4;SBinden!A5:G22;6)"
     Call Worksheets("Binden").Rillecart
     Call Worksheets("Binden").Inline
 End Sub
@@ -41,10 +41,11 @@ Sub Rillecart()
 End Sub
 Sub Inline()
     'Inline-Maschinenbedingungen P1766 PB796 grau + ZTM TB216 (1MFhr / 2HK)
-    '20140507
+    'Inline-Maschinenbedingungen P1766 PB796 grau + ZTM TB216 + Einschweißtunnel(1MFhr / 2HK)
+    '20170907
     Dim intMaschine, intVorsammeln, intBindeB, intBindeL As Integer
     Dim sngBlock As Single
-    intMaschine = Worksheets("SBinden").Range("X13").Value
+    intMaschine = Worksheets("SBinden").Range("X23").Value 'Inlinemaschine
     intVorsammeln = Worksheets("Zusammentragen").Range("D14").Value
     intBindeB = Worksheets("SBinden").Range("B122").Value
     intBindeL = Worksheets("SBinden").Range("C122").Value
@@ -76,20 +77,30 @@ Sub Inline()
     If intBindeB <= 42 And intBindeL <= 42 Then
         If sngBlock <= 0.32 Then
             Worksheets("SBinden").Range("F9").Value = 750
-        Else: Worksheets("SBinden").Range("F9").Value = 450
+            Worksheets("SBinden").Range("F10").Value = 750
+        Else
+            Worksheets("SBinden").Range("F9").Value = 450
+            Worksheets("SBinden").Range("F10").Value = 450
         End If
     Else
         If sngBlock <= 0.32 Then
             Worksheets("SBinden").Range("F9").Value = 600
-        Else: Worksheets("SBinden").Range("F9").Value = 450
+            Worksheets("SBinden").Range("F10").Value = 600
+        Else
+            Worksheets("SBinden").Range("F9").Value = 450
+            Worksheets("SBinden").Range("F10").Value = 450
         End If
     End If
     'V geteilt gestanzt
-    If sngBlock > 0.32 And Worksheets("SBinden").Range("B4").Value = 5 Then
+    If sngBlock > 0.32 And (Worksheets("SBinden").Range("B4").Value = 5 Or Worksheets("SBinden").Range("B4").Value = 6) Then
         Answer = MsgBox("Hinweis: Produktstärke > 3,2 mm, ausgewählte Maschine: Inline (P1766)." & vbCrLf & vbCrLf & "Für die Inline muss geteilt gestanzt werden." _
         & vbCrLf & "(Die Geschwindigkeit wurde angepasst; 1 zusätzl. HK wurde berücksichtigt.)", vbOKOnly, "Inline.")
         Worksheets("Binden").Range("D8").Value = 1
     'Else: Worksheets("Binden").Range("D8").Value = 0
+    End If
+    'Inlinefertigung mit Schweißtunnel
+    If Worksheets("SBinden").Range("B4").Value = 6 Then
+        Worksheets("Verpacken").ComboBox7.ListIndex = 3
     End If
     Application.ScreenUpdating = True
 End Sub

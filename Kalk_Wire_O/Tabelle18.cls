@@ -133,7 +133,7 @@ Private Sub CommandButton2_Click()
 End Sub
 Sub Verpackungseinheit()
     'Festlegen Verpackungseinheit u. Einschweiﬂen
-    '20141223
+    '20180302
     Worksheets("Verpacken").Range("D6").ClearComments
     Worksheets("Verpacken").Range("D6").Locked = False
     Worksheets("Verpacken").Range("D6").FormulaHidden = False
@@ -151,7 +151,7 @@ Sub Verpackungseinheit()
     If Worksheets("Material").Range("C121") = 14 Then
         'Ja mit Vorauswahl
         With Worksheets("Verpacken").ComboBox7
-            .ListIndex = 1
+            .ListIndex = 2
         End With
    End If
     'Abstapeln v. Einzelexemplaren ohne Einschweiﬂen

@@ -33,9 +33,9 @@ End Sub
 Private Sub CommandButton1_Click()
     'Reset V auf Standard
     '20140325
-    Worksheets("Binden").Range("D8").FormulaLocal = "=Basis_Kolbus!H17"
-    Worksheets("Binden").Range("F8").FormulaLocal = "=Basis_Kolbus!I17"
-    Worksheets("Binden").Range("G8").FormulaLocal = "=Basis_Kolbus!J17"
+    Worksheets("Binden").Range("D8").FormulaLocal = "=Basis_Kolbus!H18"
+    Worksheets("Binden").Range("F8").FormulaLocal = "=Basis_Kolbus!I18"
+    Worksheets("Binden").Range("G8").FormulaLocal = "=Basis_Kolbus!J18"
 End Sub
 Sub Leimart()
 ' Auswahl Leimart

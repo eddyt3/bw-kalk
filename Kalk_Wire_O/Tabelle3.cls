@@ -25,13 +25,14 @@ Private Sub Worksheet_Activate()
 End Sub
 Sub Zusammentragen()
     'Ermittlung der Stationen und der Anzahl Vorsammeln
-    '20101021 modifiziert
+    '20170412 modifiziert
     Application.ScreenUpdating = False
     Dim a, intM, BgAnzahl, AnzahlBgZus, AnzahlBgVors, AnzahlVors, intMa, intStatMa, intBg As Integer
+    Dim myCom As Object
     intStatMa = Worksheets("SZusammentragen").Range("E11") 'max Stationen
     intBg = Worksheets("SZusammentragen").Range("B8") 'Bogensumme
-    intMa = Worksheets("Zusammentragen").Range("A4") 'Maschine
-    'Bei Formatwechsel TB216 nur die Hälfte der Maschinen berücksichtigen
+    intMa = Worksheets("SZusammentragen").Range("C11") 'Maschine
+    'Bei Formatwechsel TB216 nur die Hälfte der Maschinenstationen berücksichtigen
         If intMa = 1 Then
             Dim intWechsel As Boolean
             intWechsel = Worksheets("SZusammentragen").Range("B38")
@@ -40,13 +41,26 @@ Sub Zusammentragen()
                 Worksheets("Zusammentragen").CheckBox1.Visible = True
                 Worksheets("Zusammentragen").CheckBox1.Value = True
                 intStatMa = intStatMa / 2
+                If Worksheets("Zusammentragen").Range("A6").Comment Is Nothing Then
+                    Set myCom = Worksheets("Zusammentragen").Range("A6").AddComment
+                    With myCom
+                        .Visible = False
+                        .Text Text:="Automatischer Formatwechsel bei einer Überschreitung der Produktbreite und -länge von 35 cm." & Chr(10) & _
+                        "Oder bei Streifenkalendern (Streifenkalender = Breite < 35cm, Höhe > 35cm, Bindung schmale Seite)."
+                        .Shape.Height = 50
+                        .Shape.Width = 250
+                    End With
+                End If
             Else
                 Worksheets("Zusammentragen").CheckBox1.Visible = False
                 Worksheets("Zusammentragen").CheckBox1.Value = False
+                Worksheets("Zusammentragen").Range("A6").ClearComments
+                'Worksheets("Zusammentragen").Range("A6").Comment.Delete 'alternativ
             End If
         Else
             Worksheets("Zusammentragen").CheckBox1.Visible = False
             Worksheets("Zusammentragen").CheckBox1.Value = False
+            Worksheets("Zusammentragen").Range("A6").ClearComments
         End If
     'Zusammentragen
     If intBg > intStatMa Then

@@ -67,20 +67,21 @@ Sub SizeSchaft()
 End Sub
 Sub Bogenformat_Pappe() 'CommandButton1
     'Bogenformat d. alternativen Pappe
+    '20170907
     If Worksheets("Steuerung").Range("H49").Value = 1 Or Worksheets("Steuerung").Range("H49").Value = 3 Then
         If Worksheets("Steuerung").Range("H70").Value = 1 Then
             Dim strBgLa, strBgLb As String 'Bogen Länge a, b
             Do
             strBgLa = InputBox("Bitte Bogenlänge in cm eingeben:")
-            Worksheets("SBinden").Range("C21") = strBgLa
+            Worksheets("SBinden").Range("C31") = strBgLa
             strBgLb = InputBox("Bitte Bogenbreite in cm eingeben:")
-            Worksheets("SBinden").Range("D21") = strBgLb
-            If Worksheets("SBinden").Range("E21") = 0 Then
+            Worksheets("SBinden").Range("D31") = strBgLb
+            If Worksheets("SBinden").Range("E31") = 0 Then
                 Answer = MsgBox("Ist Ihre Eingabe richtig?" & vbLf & vbLf & strBgLb & " cm x " & strBgLa & " cm", vbYesNo + 256 + vbQuestion, "Nachfrage")
-                Worksheets("SBinden").Range("G21") = "(" & strBgLb & " x " & strBgLa & "cm)"
+                Worksheets("SBinden").Range("G31") = "(" & strBgLb & " x " & strBgLa & "cm)"
                 Else
                 MsgBox ("Achtung! Bitte nur Ganze Zahlen eingeben!")
-                Worksheets("SBinden").Range("G21") = "Formatfehler!"
+                Worksheets("SBinden").Range("G31") = "Formatfehler!"
             End If
             Loop Until Answer = 6
             Worksheets("Eingabe").CommandButton1.Visible = True
@@ -91,20 +92,21 @@ Sub Bogenformat_Pappe() 'CommandButton1
 End Sub
 Sub Bogenformat_Folie() 'CommandButton5
     'Bogenformat d. Folie
+    '20170907
     If Worksheets("Steuerung").Range("D49").Value = 1 Or Worksheets("Steuerung").Range("D49").Value = 3 Then
         If Worksheets("Steuerung").Range("D70").Value = 1 Then
             Dim strBgLa, strBgLb As String 'Bogen Länge a, b
             Do
             strBgLa = InputBox("Bitte Bogenlänge in cm eingeben:")
-            Worksheets("SBinden").Range("C20") = strBgLa
+            Worksheets("SBinden").Range("C30") = strBgLa
             strBgLb = InputBox("Bitte Bogenbreite in cm eingeben:")
-            Worksheets("SBinden").Range("D20") = strBgLb
-            If Worksheets("SBinden").Range("E20") = 0 Then
+            Worksheets("SBinden").Range("D30") = strBgLb
+            If Worksheets("SBinden").Range("E30") = 0 Then
                 Answer = MsgBox("Ist Ihre Eingabe richtig?" & vbLf & vbLf & strBgLb & " cm x " & strBgLa & " cm", vbYesNo + 256 + vbQuestion, "Nachfrage")
-                Worksheets("SBinden").Range("G20") = "(" & strBgLb & " x " & strBgLa & "cm)"
+                Worksheets("SBinden").Range("G30") = "(" & strBgLb & " x " & strBgLa & "cm)"
                 Else
                 MsgBox ("Achtung! Bitte nur Ganze Zahlen eingeben!")
-                Worksheets("SBinden").Range("G20") = "Formatfehler!"
+                Worksheets("SBinden").Range("G30") = "Formatfehler!"
             End If
             Loop Until Answer = 6
             Worksheets("Eingabe").CommandButton5.Visible = True
@@ -274,13 +276,14 @@ Sub Produkt()
 End Sub
 Sub NutzenCheck_Folie()
     ' Überprüfung der Nutzenanzahl
+    '20170907
     If Worksheets("Steuerung").Range("D49").Value = 1 Or Worksheets("Steuerung").Range("D49").Value = 3 Then
     'Nur Prüfen wenn "von Bubi schneiden" oder "geliefert"
         Dim NutzenMax As Integer
         If Worksheets("Steuerung").Range("D70").Value = 1 Then
-            NutzenMax = Worksheets("SBinden").Range("C50")
+            NutzenMax = Worksheets("SBinden").Range("C60")
             Else
-            NutzenMax = Worksheets("SBinden").Range("F50")
+            NutzenMax = Worksheets("SBinden").Range("F60")
         End If
         If Worksheets("Steuerung").Range("D56") > NutzenMax Then
             MsgBox "Achtung!" & vbLf & vbLf & "Ihre Nutzenanzahl der Folie ist zu hoch." _
@@ -300,13 +303,14 @@ Sub NutzenCheck_Folie()
 End Sub
 Sub NutzenCheck_Pappe()
     ' Überprüfung der Nutzenanzahl
+    '20170907
     If Worksheets("Steuerung").Range("H49").Value = 1 Or Worksheets("Steuerung").Range("H49").Value = 3 Then
     'Nur Prüfen wenn "von Bubi schneiden" oder "geliefert"
         Dim NutzenMax As Integer
         If Worksheets("Steuerung").Range("H70").Value = 1 Then
-            NutzenMax = Worksheets("SBinden").Range("I50")
+            NutzenMax = Worksheets("SBinden").Range("I60")
             Else
-            NutzenMax = Worksheets("SBinden").Range("L50")
+            NutzenMax = Worksheets("SBinden").Range("L60")
         End If
         If Worksheets("Steuerung").Range("H56") > NutzenMax Then
             MsgBox "Achtung!" & vbLf & vbLf & "Ihre Nutzenanzahl der Rückpappe ist zu hoch." _
