@@ -80,9 +80,9 @@ Sub GeschwindigkeitZus()
     '20140515 Festlegen der Geschwindigkeiten
     'Kolbus V auflagenabhängig
     If Worksheets("SZusammentragen").Range("C11") = 4 Then
-        Worksheets("Zusammentragen").Range("D4").FormulaLocal = "=Basis_Kolbus!H17"
-        Worksheets("Zusammentragen").Range("F4").FormulaLocal = "=Basis_Kolbus!I17"
-        Worksheets("Zusammentragen").Range("G4").FormulaLocal = "=Basis_Kolbus!J17"
+        Worksheets("Zusammentragen").Range("D4").FormulaLocal = "=Basis_Kolbus!H18"
+        Worksheets("Zusammentragen").Range("F4").FormulaLocal = "=Basis_Kolbus!I18"
+        Worksheets("Zusammentragen").Range("G4").FormulaLocal = "=Basis_Kolbus!J18"
     Else 'Standard Werte
         Worksheets("Zusammentragen").Range("D4").FormulaLocal = "=SZusammentragen!M11"
         Worksheets("Zusammentragen").Range("F4").FormulaLocal = "=D4"
