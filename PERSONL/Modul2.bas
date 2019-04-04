@@ -209,7 +209,7 @@ Sub Verknuepfungen_aendern()
     'Beispiel - Verknüpfungen i. einer Arbeitsmappe ändern
     Dim wbkMappe As Workbook
     Dim varVLink As Variant
-    Dim i, e As Integer
+    Dim I, e As Integer
     Dim strPrefix, strPath, strFile, strRefFile As String
     
     strPath = ThisWorkbook.Path
@@ -225,11 +225,11 @@ Sub Verknuepfungen_aendern()
     varVLink = wbkMappe.LinkSources(xlExcelLinks)
     
     If Not IsEmpty(varVLink) Then
-        For i = 1 To UBound(varVLink)
-            e = InStrRev(varVLink(i), "\") + 1
+        For I = 1 To UBound(varVLink)
+            e = InStrRev(varVLink(I), "\") + 1
             'strRefFile = Mid(varVLink(i), e, 20) 'alternativ Referenzfilenamen auslesen
-            ThisWorkbook.ChangeLink varVLink(i), strPath & "\" & strRefFile, xlLinkTypeExcelLinks
-        Next i
+            ThisWorkbook.ChangeLink varVLink(I), strPath & "\" & strRefFile, xlLinkTypeExcelLinks
+        Next I
     End If
     MsgBox "Fertig Master!"
 End Sub
@@ -256,7 +256,7 @@ End Sub
 Sub Loesche_DoppleteZeilen()
     'doppelte Zeilen löschen
     Dim temp
-    Dim i, m, n, zn, ZSpalte, ZZeile, counter, tMin As Integer
+    Dim I, m, n, zn, ZSpalte, ZZeile, counter, tMin As Integer
     Dim Zeilenzahl As Long
     Dim t, tSumSec, tSec As Double
     t = Timer
@@ -269,14 +269,14 @@ Sub Loesche_DoppleteZeilen()
         Zeilenzahl = ActiveSheet.Cells(Rows.count, ZSpalte).End(xlUp).Row
     For n = ZZeile To Zeilenzahl
         temp = ActiveSheet.Cells(n, ZSpalte).Value
-            For i = n To Zeilenzahl
-                m = ActiveSheet.Cells(i + 1, ZSpalte).Value
-                Do While ActiveSheet.Cells(i + 1, ZSpalte).Value = temp
+            For I = n To Zeilenzahl
+                m = ActiveSheet.Cells(I + 1, ZSpalte).Value
+                Do While ActiveSheet.Cells(I + 1, ZSpalte).Value = temp
                     counter = counter + 1
-                    ActiveSheet.Cells(i + 1, ZSpalte).EntireRow.Delete
+                    ActiveSheet.Cells(I + 1, ZSpalte).EntireRow.Delete
                     Zeilenzahl = Zeilenzahl - 1
                 Loop
-            Next i
+            Next I
     Next n
     tSumSec = Timer - t
     tMin = CInt(tSumSec / 60)
@@ -383,13 +383,13 @@ Sub List_Location_Size_for_all_VB_Buttons()
     'den Code aus dem Direktbereich in die Workbook_Open() Sub übernehmen (Komma noch durch Punkt ersetzen)
     'Danach werden bei jedem Öffnen die Buttons auf ihre Standardwerte zurückgesetzt unabhängig der aktuellen Bildschirmauflösung
     Dim ShCounter As Long, Sh As Shape
-    Dim i As Integer
+    Dim I As Integer
     ShCounter = 0
     DebugClear
     'Debug.Print "fntSize=10"
     DebugPrint "fntSize=10"
-    For i = 1 To ActiveWorkbook.Sheets.count - 1
-      With ActiveWorkbook.Sheets(i)
+    For I = 1 To ActiveWorkbook.Sheets.count - 1
+      With ActiveWorkbook.Sheets(I)
        For Each Sh In .Shapes
         If Sh.Type = msoOLEControlObject Then  'Only list VB buttons
             ShCounter = ShCounter + 1
@@ -403,23 +403,23 @@ Sub List_Location_Size_for_all_VB_Buttons()
     '        Debug.Print "END WITH"
     
     'Code für Ausgabe in debug.log File, wenn Puffer Direktbereich zu klein
-            DebugPrint "WITH WorkSheets(" & Chr(34) & Sheets(i).Name & Chr(34) & ")." & Sh.Name & "   '" & ShCounter
+            DebugPrint "WITH WorkSheets(" & Chr(34) & Sheets(I).Name & Chr(34) & ")." & Sh.Name & "   '" & ShCounter
             DebugPrint "   .Height=" & Sh.Height & ": .Width=" & Sh.Width & ": .Top=" & Sh.Top & ": .Left = " & Sh.Left & ": .FontSize = fntSize"
             DebugPrint "END WITH"
     '
          End If
         Next Sh
       End With
-    Next i
+    Next I
     MsgBox "Fertig Master!" & vbLf & vbLf & ShCounter & " VB Buttonformate exportiert."
 End Sub
 Sub Test()
 'zu List_Location_Size_for_all_VB_Buttons()
 'Test File Ausgabe
-   Dim i As Long
+   Dim I As Long
 
    DebugClear
-   For i = 1 To 100
+   For I = 1 To 100
       DebugPrint "Hello world.  " & Now
    Next
 End Sub

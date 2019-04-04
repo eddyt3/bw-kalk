@@ -37,30 +37,47 @@ Sub Objektliste_Wks_Direktbereich_erstellen()
     Dim obj As OLEObject
     Dim shp As Shape
     Dim tmpArray() As Variant
-    Dim i As Integer
-    i = 1
+    Dim I As Integer
+    I = 1
     For Each obj In ActiveSheet.OLEObjects
         'Debug.Print obj.Name
-        ReDim Preserve tmpArray(i)
-        tmpArray(i) = "Obj:" & obj.Name
-        i = i + 1
+        ReDim Preserve tmpArray(I)
+        tmpArray(I) = "Obj:" & obj.Name
+        I = I + 1
     Next
     For Each shp In ActiveSheet.Shapes
         'Debug.Print shp.Name
 
-        ReDim Preserve tmpArray(i)
-        tmpArray(i) = "Shp:" & shp.Name
-        i = i + 1
+        ReDim Preserve tmpArray(I)
+        tmpArray(I) = "Shp:" & shp.Name
+        I = I + 1
     Next
     If (Not Not tmpArray) <> 0 Then 'prüfen ob array initialisiert ist, ansonsten Laufzeitfehler
         BubbleSort tmpArray
-        For i = 1 To UBound(tmpArray)
-            Debug.Print i & ":" & tmpArray(i)
+        For I = 1 To UBound(tmpArray)
+            Debug.Print I & ":" & tmpArray(I)
             'Debug.Print tmpArray(i)
-        Next i
+        Next I
         'MsgBox UBound(tmpArray) & " Elemente gefunden."
     End If
     Exit Sub
+End Sub
+Sub Objektliste_ActiveX_controls_ActiveSheet()
+    Dim Ws As Worksheet
+    Dim count, countB As Integer
+    Set Ws = ActiveSheet
+    count = 0
+    countB = 0
+    For Each OleObj In Ws.OLEObjects
+        If OleObj.OLEType = xlOLEControl Then
+            ' Nur ActiveX ComboBox
+            If TypeName(OleObj.Object) = "ComboBox" Then
+                countB = countB + 1
+            End If
+            count = count + 1
+        End If
+    Next OleObj
+    MsgBox "Number of ActiveX controls: " & count & vbNewLine & "(ComboBoxes of that: " & countB & ")"
 End Sub
 Sub AlleZellnamenLoeschen()
     'löscht alle individuellen Zellnamen und setzt sie auf Standard z.B. "A1" zurück

@@ -45,12 +45,12 @@ Sub KopfFusszeile_eintragen()
 End Sub
 Sub Zwischenzeilen_einfügen()
     'Zwischenzeilen_einfügen
-    Dim i, z As Integer
+    Dim I, z As Integer
     FRow = Range(Selection.Address).Row
     LRow = Range(Selection.Address).Row + Selection.Rows.count - 1
-    For i = (LRow + 1) To (FRow + 1) Step -1
+    For I = (LRow + 1) To (FRow + 1) Step -1
      For z = 1 To 1 'Zähler ggf. erhöhen für mehr als eine Leerzeile
-      Cells(i, 1).EntireRow.Insert Shift:=xlDown
+      Cells(I, 1).EntireRow.Insert Shift:=xlDown
      Next z
     Next
     Cells(FRow, 1).Select
@@ -395,7 +395,7 @@ Sub Zeichen_einfuegen()
 End Sub
 Sub Blattschutz_loeschen()
     On Error Resume Next
-    For i = 65 To 66
+    For I = 65 To 66
     For j = 65 To 66
     For k = 65 To 66
     For L = 65 To 66
@@ -407,7 +407,7 @@ Sub Blattschutz_loeschen()
     For r = 65 To 66
     For s = 65 To 66
     For t = 32 To 126
-    ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & Chr(L) & Chr(m) & _
+    ActiveSheet.Unprotect Chr(I) & Chr(j) & Chr(k) & Chr(L) & Chr(m) & _
     Chr(n) & Chr(o) & Chr(p) & Chr(q) & Chr(r) & Chr(s) & Chr(t)
     Next t
     Next s
@@ -420,40 +420,40 @@ Sub Blattschutz_loeschen()
     Next L
     Next k
     Next j
-    Next i
+    Next I
     MsgBox "Fertig Master!"
 End Sub
 Sub ShapesUmbenennen()
-    Dim ws As Worksheet, i As Integer, NeuerName As String
-    Set ws = ThisWorkbook.ActiveSheet
-    For i = 1 To ws.Shapes.count
-        ws.Shapes(i).Visible = False
+    Dim Ws As Worksheet, I As Integer, NeuerName As String
+    Set Ws = ThisWorkbook.ActiveSheet
+    For I = 1 To Ws.Shapes.count
+        Ws.Shapes(I).Visible = False
     Next
-    For i = 1 To ws.Shapes.count
-        ws.Shapes(i).Visible = True
-        ActiveWindow.ScrollColumn = ws.Shapes(i).TopLeftCell.Column
-        ActiveWindow.ScrollRow = ws.Shapes(i).TopLeftCell.Row
-        NeuerName = InputBox("Bestätige den Namen '" & ws.Shapes(i).Name & "'" & vbLf & _
-            "oder gebe einen neuen Namen ein:", "Shapes Umbenennen", ws.Shapes(i).Name)
+    For I = 1 To Ws.Shapes.count
+        Ws.Shapes(I).Visible = True
+        ActiveWindow.ScrollColumn = Ws.Shapes(I).TopLeftCell.Column
+        ActiveWindow.ScrollRow = Ws.Shapes(I).TopLeftCell.Row
+        NeuerName = InputBox("Bestätige den Namen '" & Ws.Shapes(I).Name & "'" & vbLf & _
+            "oder gebe einen neuen Namen ein:", "Shapes Umbenennen", Ws.Shapes(I).Name)
         If NeuerName = "" Then
             Exit For
         Else
-            If ws.Shapes(i).Name <> NeuerName Then
-                ws.Shapes(i).Name = NeuerName
+            If Ws.Shapes(I).Name <> NeuerName Then
+                Ws.Shapes(I).Name = NeuerName
             End If
         End If
-        ws.Shapes(i).Visible = False
+        Ws.Shapes(I).Visible = False
     Next
-    For i = 1 To ws.Shapes.count
-        ws.Shapes(i).Visible = True
+    For I = 1 To Ws.Shapes.count
+        Ws.Shapes(I).Visible = True
     Next
     'ws.Range("A1").Activate
 End Sub
 Sub ShapesAlleEinblenden()
-    Dim ws As Worksheet, i As Integer
-    Set ws = ThisWorkbook.ActiveSheet
-    For i = 1 To ws.Shapes.count
-        ws.Shapes(i).Visible = True
+    Dim Ws As Worksheet, I As Integer
+    Set Ws = ThisWorkbook.ActiveSheet
+    For I = 1 To Ws.Shapes.count
+        Ws.Shapes(I).Visible = True
     Next
     'ws.Range("A1").Activate
 End Sub
@@ -503,6 +503,44 @@ Sub color_trend()
         FColumn = Range(Selection.Address).Column
     Next
     MsgBox "Fertig Master!"
+End Sub
+Public Sub ListPrinter()
+    'Speichert alle installierten Drucker im Array "arrPrinter"
+    Const HKEY_current_user = &H80000001
+    Dim oReg As Object, I As Long
+    Dim strKeyPath As String, strValue As String, msg As String
+    Dim arrPrinter As Variant
+    Set oReg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\default:StdRegProv")
+    strKeyPath = "Software\Microsoft\Windows NT\CurrentVersion\Devices"
+    oReg.EnumValues HKEY_current_user, strKeyPath, arrPrinter
+    For I = 0 To UBound(arrPrinter)
+        oReg.GetStringValue HKEY_current_user, strKeyPath, arrPrinter(I), strValue
+        msg = msg & arrPrinter(I) & Replace(strValue, "winspool,", " auf ") & vbCr
+    Next
+    Set oReg = Nothing
+    MsgBox msg, vbInformation, "Druckerliste WMI"
+End Sub
+Sub SwitchPrinter()
+    'Auswahl neuen Standard Drucker
+    Dim x As String
+    x = "Aktiver Drucker: " & Application.ActivePrinter
+    MsgBox Application.ActivePrinter
+    Application.Dialogs(xlDialogPrinterSetup).Show
+    MsgBox "Alter Drucker: " & x & vbNewLine & "Neuer Drucker: " & Application.ActivePrinter
+End Sub
+Public Sub PDF_Drucker_Einstellen()
+    Dim Mywsh
+    Dim Druckers
+    Dim I
+    Set Mywsh = CreateObject("WScript.Network")
+    Set Druckers = Mywsh.EnumPrinterConnections
+    For I = 0 To Druckers.count - 1 Step 2
+        If LCase(Druckers.Item(I + 1)) Like "*" & "pdf" & "*" Then
+            Mywsh.SetDefaultPrinter Druckers.Item(I + 1)
+            Exit For
+        End If
+    Next
+    MsgBox ActivePrinter
 End Sub
 
 

@@ -118,32 +118,32 @@ Ende:
 End Function
 Function LIP(xVector As Range, yVector As Range, xValue As Double)
     Dim Dimension As Long, MinDim As Long, MaxDim As Long
-    Dim I_oben As Long, I_unten As Long, i As Long
+    Dim I_oben As Long, I_unten As Long, I As Long
     Dimension = xVector.Cells.count
     On Error GoTo Fehler
     '1. X-Y-Wertepaar bestimmen, das verschieden ist von Leerstring
-    For i = 1 To Dimension
-      If xVector(i) <> "" And yVector(i) <> "" Then MinDim = i: Exit For
+    For I = 1 To Dimension
+      If xVector(I) <> "" And yVector(I) <> "" Then MinDim = I: Exit For
     Next
     'letztes X-Y-Wertepaar bestimmen, das verschieden ist von Leerstring
-    For i = Dimension To 1 Step -1
-      If xVector(i) <> "" And yVector(i) <> "" Then MaxDim = i: Exit For
+    For I = Dimension To 1 Step -1
+      If xVector(I) <> "" And yVector(I) <> "" Then MaxDim = I: Exit For
     Next
     If xValue < xVector.Cells(MinDim).Value Or xValue > xVector.Cells(MaxDim).Value Then
     'Extrapolation der Werte
         If xValue < xVector.Cells(MinDim).Value Then
             'Nächstes X-Y-Wertepaar mit Werten verschieden von Leerstring
-            For i = MinDim + 1 To Dimension
-              If xVector(i) <> "" And yVector(i) <> "" Then Exit For
+            For I = MinDim + 1 To Dimension
+              If xVector(I) <> "" And yVector(I) <> "" Then Exit For
             Next
-            m = (yVector.Cells(i) - yVector.Cells(MinDim)) / (xVector.Cells(i) - xVector.Cells(MinDim))
-            n = yVector.Cells(i) - m * xVector.Cells(i)
+            m = (yVector.Cells(I) - yVector.Cells(MinDim)) / (xVector.Cells(I) - xVector.Cells(MinDim))
+            n = yVector.Cells(I) - m * xVector.Cells(I)
         Else
             'Vorletztes X-Y-Wertepaar mit Werten verschieden von Leerstring
-            For i = MaxDim - 1 To MinDim Step -1
-              If xVector(i) <> "" And yVector(i) <> "" Then Exit For
+            For I = MaxDim - 1 To MinDim Step -1
+              If xVector(I) <> "" And yVector(I) <> "" Then Exit For
             Next
-            m = (yVector.Cells(MaxDim) - yVector.Cells(i)) / (xVector.Cells(MaxDim) - xVector.Cells(i))
+            m = (yVector.Cells(MaxDim) - yVector.Cells(I)) / (xVector.Cells(MaxDim) - xVector.Cells(I))
             n = yVector.Cells(MaxDim) - m * xVector.Cells(MaxDim)
         End If
         LIP = m * xValue + n
@@ -151,12 +151,12 @@ Function LIP(xVector As Range, yVector As Range, xValue As Double)
     Else
     'Interpolation der Werte
         'X-Y-Wertepaar mit X-Wert >= gesuchten X-Wert
-        For i = MinDim + 1 To MaxDim
-          If xValue <= xVector.Cells(i).Value And yVector(i) <> "" Then I_oben = i: Exit For
-        Next i
+        For I = MinDim + 1 To MaxDim
+          If xValue <= xVector.Cells(I).Value And yVector(I) <> "" Then I_oben = I: Exit For
+        Next I
         'Vorheriges X-Y-Wertepaar mit Werten verschieden von Leerstring
-        For i = I_oben - 1 To MinDim Step -1 '###### Korrketur in dieser Zeile ####
-          If xVector(i) <> "" And yVector(i) <> "" Then I_unten = i: Exit For
+        For I = I_oben - 1 To MinDim Step -1 '###### Korrketur in dieser Zeile ####
+          If xVector(I) <> "" And yVector(I) <> "" Then I_unten = I: Exit For
         Next
 
         LIP = yVector.Cells(I_unten).Value _
@@ -174,17 +174,17 @@ Function BubbleSort(ByRef strArray As Variant) As Variant()
     'eindimensionale Array
     'Bubble-Sortier-Verfahren
    Dim z       As Long
-   Dim i       As Long
+   Dim I       As Long
    Dim strWert As Variant
      
     For z = UBound(strArray) - 1 To LBound(strArray) Step -1
-        For i = LBound(strArray) To z
-            If LCase(strArray(i)) > LCase(strArray(i + 1)) Then
-                strWert = strArray(i)
-                strArray(i) = strArray(i + 1)
-                strArray(i + 1) = strWert
+        For I = LBound(strArray) To z
+            If LCase(strArray(I)) > LCase(strArray(I + 1)) Then
+                strWert = strArray(I)
+                strArray(I) = strArray(I + 1)
+                strArray(I + 1) = strWert
             End If
-        Next i
+        Next I
     Next z
      
     BubbleSort = strArray
