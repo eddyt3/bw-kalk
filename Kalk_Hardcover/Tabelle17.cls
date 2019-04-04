@@ -7,7 +7,4 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-'
-'Copyright by E.Dargel ed@dissenter.de
-'
 Option Explicit

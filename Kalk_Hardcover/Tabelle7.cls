@@ -7,14 +7,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-'
-'Copyright by E.Dargel ed@dissenter.de
-'
-
 Private Sub CommandButton1_Click()
-'Materialseite ausblenden
-    Worksheets("Material").Visible = False
-    Worksheets("Verpacken").Activate
-    Worksheets("Verpacken").Range("D3").Select
+Worksheets("Material").Visible = False
+Worksheets("Verpacken").Activate
+Worksheets("Verpacken").Range("D3").Select
 End Sub
-

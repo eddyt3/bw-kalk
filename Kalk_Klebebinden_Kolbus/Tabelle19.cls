@@ -11,24 +11,28 @@ Attribute VB_Exposed = True
 'Copyright by E.Dargel ed@dissenter.de
 '
 Private Sub CheckBox1_Click()
+'manuelle V Bg. A
     If Worksheets("Falzen").CheckBox1.Value = True Then
         Worksheets("SFalzen").Range("N4") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bogen A in Bogen/Stunde eingeben:", "Eingabe", , Type:=1)
         Else: Worksheets("SFalzen").Range("N4").FormulaLocal = "=WENN(Falzen!A4<>5;SVERWEIS(B106/B104;Falzen!M4:O10;3);F7)"
     End If
 End Sub
 Private Sub CheckBox2_Click()
+'manuelle V Bg. B
     If Worksheets("Falzen").CheckBox2.Value = True Then
         Worksheets("SFalzen").Range("N5") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bogen B in Bogen/Stunde eingeben:", "Eingabe", , Type:=1)
     Else: Worksheets("SFalzen").Range("N5").FormulaLocal = "=WENN(Falzen!A24<>5;SVERWEIS(C106/C104;Falzen!M4:O10;3);F7)"
     End If
 End Sub
 Private Sub CheckBox3_Click()
+'manuelle V Bg. C
     If Worksheets("Falzen").CheckBox3.Value = True Then
         Worksheets("SFalzen").Range("N6") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bogen C in Bogen/Stunde eingeben:", "Eingabe", , Type:=1)
     Else: Worksheets("SFalzen").Range("N6").FormulaLocal = "=WENN(Falzen!A43<>5;SVERWEIS(D106/D104;Falzen!M4:O10;3);F7)"
     End If
 End Sub
 Private Sub CheckBox4_Click()
+'manuelle V Bg. D
     If Worksheets("Falzen").CheckBox4.Value = True Then
         Worksheets("SFalzen").Range("N7") = Application.InputBox("Bitte Geschwindigkeit für" & vbCrLf & "Bogen D in Bogen/Stunde eingeben:", "Eingabe", , Type:=1)
     Else: Worksheets("SFalzen").Range("N7").FormulaLocal = "=WENN(Falzen!A62<>5;SVERWEIS(E106/E104;Falzen!M4:O10;3);F7)"
@@ -73,6 +77,7 @@ End Sub
 'Sub Falzen()
 ''Falzberechnung aktivieren/deaktivieren
 ''deaktiviert da bei Änderungen auf d. Eingabeseite immer wieder die 1. Falzmaschine ausgewählt wird
+''Steuerung jetzt über umschlag()
 '    'Bogen A
 '    'Umschlag falzbar wenn mehr als 4 Seiten
 '    If Worksheets("SFalzen").Range("B110").Value = 1 Then
@@ -152,7 +157,9 @@ Sub Falzbogen()
     End If
 End Sub
 Sub umschlag()
-'Auswahl Umschlag
+'20181212
+'Nur für Klebebinden!
+'Auswahl Falzen nach Umschlagart
     Dim intUmschlag As Integer
     intUmschlag = ThisWorkbook.Worksheets("Eingabe").ComboBox3.ListIndex
     Select Case intUmschlag
@@ -167,7 +174,7 @@ Sub umschlag()
         If Worksheets("SEingabe").Range("D5") = 0 Then 'Bg. A nicht Falzen
             ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 6
         End If
-        If Worksheets("Eingabe").CheckBox1.Value = True Then 'Bg. ja/nein
+        If Worksheets("Eingabe").CheckBox1.Value = True Then 'Bg. B ja/nein
             If Worksheets("SEingabe").Range("e3") = 1 Then
                 ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 0
             End If
@@ -179,7 +186,7 @@ Sub umschlag()
             End If
         Else: ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6
         End If
-        If Worksheets("Eingabe").CheckBox2.Value = True Then
+        If Worksheets("Eingabe").CheckBox2.Value = True Then 'Bg. C ja/nein
             If Worksheets("SEingabe").Range("f3") = 1 Then
                 ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 0
             End If
@@ -191,7 +198,7 @@ Sub umschlag()
             End If
         Else: ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 6
         End If
-        If Worksheets("Eingabe").CheckBox3.Value = True Then
+        If Worksheets("Eingabe").CheckBox3.Value = True Then 'Bg. D ja/nein
             If Worksheets("SEingabe").Range("g3") = 1 Then
                 ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 0
             End If

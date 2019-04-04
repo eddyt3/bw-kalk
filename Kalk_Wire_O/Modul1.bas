@@ -1,6 +1,7 @@
 Attribute VB_Name = "Modul1"
 Public v As Integer 'Versionsnummer
 Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X0 As Double) As Variant
+    Application.Volatile
     Dim Y0 As Double
     If X1 <> X2 Then
         Y0 = (Y2 - Y1) / (X2 - X1) * (X0 - X1) + Y1
@@ -239,7 +240,7 @@ Sub Produkt()
     sngBreite = Worksheets("SEingabe").Range("B122")
     sngHoehe = Worksheets("SEingabe").Range("C122")
     sngLoop = Worksheets("SEingabe").Range("C136")
-    sngZuschlag = Worksheets("SVerpacken").Range("K19")
+    sngZuschlag = Worksheets("SVerpacken").Range("K21")
     intSeite = Worksheets("SEingabe").Range("B132")
     format = Worksheets("SEingabe").Range("G26")
     Dicke = Worksheets("Eingabe").Range("C32")
@@ -250,12 +251,12 @@ Sub Produkt()
         sngMitBindg = WorksheetFunction.Max(sngHoehe, sngBreite)
         If sngBreite < sngHoehe Then
             Endformat = sngOhneBindg & "cm x " & sngMitBindg & "cm"
-            Worksheets("SVerpacken").Range("K17") = sngOhneBindg * 10
-            Worksheets("SVerpacken").Range("K18") = sngMitBindg * 10
+            Worksheets("SVerpacken").Range("K19") = sngOhneBindg * 10
+            Worksheets("SVerpacken").Range("K20") = sngMitBindg * 10
         Else
             Endformat = sngMitBindg & "cm x " & sngOhneBindg & "cm"
-            Worksheets("SVerpacken").Range("K17") = sngMitBindg * 10
-            Worksheets("SVerpacken").Range("K18") = sngOhneBindg * 10
+            Worksheets("SVerpacken").Range("K19") = sngMitBindg * 10
+            Worksheets("SVerpacken").Range("K20") = sngOhneBindg * 10
         End If
     Else
         sngOhneBindg = WorksheetFunction.Max(sngHoehe, sngBreite) + sngZuschlag * (sngLoop / 10)
@@ -263,12 +264,12 @@ Sub Produkt()
         sngMitBindg = WorksheetFunction.Min(sngHoehe, sngBreite)
         If sngBreite < sngHoehe Then
             Endformat = sngMitBindg & "cm x " & sngOhneBindg & "cm"
-            Worksheets("SVerpacken").Range("K17") = sngMitBindg * 10
-            Worksheets("SVerpacken").Range("K18") = sngOhneBindg * 10
+            Worksheets("SVerpacken").Range("K19") = sngMitBindg * 10
+            Worksheets("SVerpacken").Range("K20") = sngOhneBindg * 10
         Else
             Endformat = sngOhneBindg & "cm x " & sngMitBindg & "cm"
-            Worksheets("SVerpacken").Range("K17") = sngOhneBindg * 10
-            Worksheets("SVerpacken").Range("K18") = sngMitBindg * 10
+            Worksheets("SVerpacken").Range("K19") = sngOhneBindg * 10
+            Worksheets("SVerpacken").Range("K20") = sngMitBindg * 10
         End If
     End If
     Worksheets("Verpacken").Label1.Caption = "Produkt:" & vbLf & "======" & vbLf & vbLf & "Format: " & vbLf & Endformat _

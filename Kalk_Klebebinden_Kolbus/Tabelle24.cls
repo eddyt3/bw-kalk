@@ -123,7 +123,7 @@ Sub TextBox1_Change()
                 .Visible = True
                 .Top = 58
                 .Left = 744
-                .Font.Name = "Verdana"
+                .Font.Name = "Calibri"
                 .Font.Size = 10
                 .Font.Bold = True
                 .BorderColor = vbRed

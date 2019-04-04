@@ -8,7 +8,6 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
 Private Sub CommandButton1_Click()
-    'Materialseite einblenden
     Worksheets("Material").Visible = xlSheetVisible
     Worksheets("Material").Activate
     Worksheets("Material").Range("H288").Select

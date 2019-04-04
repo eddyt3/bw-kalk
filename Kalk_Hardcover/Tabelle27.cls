@@ -17,7 +17,6 @@ Private Sub Worksheet_Activate()
     Run Worksheets("Zusammentragen").Zusammentragen
 End Sub
 Sub Zusammentragen()
-    '
     'Ermittlung der Stationen und der Anzahl Vorsammeln
     '20150701 modifiziert
     Dim a, intM, BgAnzahl, AnzahlBgZus, AnzahlBgVors, AnzahlVors, intMa, intStatMa, intBg As Integer
@@ -68,7 +67,7 @@ Sub Zusammentragen()
         Worksheets("Zusammentragen").CheckBox1.Value = False
     End If
     'Prüfung händisch Zusammenlegen (maschinenabhängig)
-    If Worksheets("SZusammentragen").Range("N16") = 1 And Worksheets("Zusammentragen").CheckBox2.Value = False Then
+    If Worksheets("SZusammentragen").Range("O16") = 1 And Worksheets("Zusammentragen").CheckBox2.Value = False Then
         Worksheets("Zusammentragen").CheckBox2.Value = True
     End If
         If intAnzahlVors = 0 Then
@@ -77,17 +76,17 @@ Sub Zusammentragen()
     Run Worksheets("Zusammentragen").GeschwindigkeitZus
     Application.ScreenUpdating = True
 End Sub
-
 Sub GeschwindigkeitZus()
     '20140515 Festlegen der Geschwindigkeiten
     'Kolbus V auflagenabhängig
     If Worksheets("SZusammentragen").Range("C11") = 4 Then
-        Worksheets("Zusammentragen").Range("D4").FormulaLocal = "=Basis_Kolbus!H18"
-        Worksheets("Zusammentragen").Range("F4").FormulaLocal = "=Basis_Kolbus!I18"
-        Worksheets("Zusammentragen").Range("G4").FormulaLocal = "=Basis_Kolbus!J18"
+        Worksheets("Zusammentragen").Range("D4").FormulaLocal = "=Basis_Kolbus!H20"
+        Worksheets("Zusammentragen").Range("F4").FormulaLocal = "=Basis_Kolbus!I20"
+        Worksheets("Zusammentragen").Range("G4").FormulaLocal = "=Basis_Kolbus!J20"
     Else 'Standard Werte
-        Worksheets("Zusammentragen").Range("D4").FormulaLocal = "=SZusammentragen!M11"
+        Worksheets("Zusammentragen").Range("D4").FormulaLocal = "=SZusammentragen!N11"
         Worksheets("Zusammentragen").Range("F4").FormulaLocal = "=D4"
         Worksheets("Zusammentragen").Range("G4").FormulaLocal = "=D4"
     End If
 End Sub
+

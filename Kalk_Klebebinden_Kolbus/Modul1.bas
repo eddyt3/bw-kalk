@@ -18,6 +18,7 @@ Public Function Abrunden(Zahl) As Long
     End If
 End Function
 Public Function Interpolation(X1 As Double, Y1 As Double, X2 As Double, Y2 As Double, X0 As Double) As Variant
+    Application.Volatile
     Dim Y0 As Double
     If X1 <> X2 Then
         Y0 = (Y2 - Y1) / (X2 - X1) * (X0 - X1) + Y1

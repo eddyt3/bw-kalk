@@ -76,6 +76,10 @@ Private Sub ComboBox2_Change()
     Call Worksheets("Verpacken").Verpackungseinheit
     Run Worksheets("SVerpacken").draw_all
     Call Worksheets("Verpacken").Kommentar
+    If ComboBox2.ListIndex = 14 Then
+        ComboBox6.ListIndex = 4 'Zwischenlagen aller x mm, wenn ohne Verpackung
+    'Else: ComboBox6.ListIndex = 1 'Jede 2. Lage
+    End If
 End Sub
 Private Sub ComboBox3_Change()
     'Palettendeckelauswahl

@@ -7,9 +7,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-'
-'Copyright by E.Dargel ed@dissenter.de
-'
 Sub kleben()
     Application.ScreenUpdating = False
     If Worksheets("SEingabe").Range("B32") > 0 Then
@@ -17,7 +14,7 @@ Sub kleben()
         If Worksheets("Kleben").CheckBox1.Value = False Then
             Worksheets("Kleben").CheckBox1.Value = True
         End If
-        Else
+    Else
         Worksheets("Kleben").Visible = False
         Worksheets("Kleben").CheckBox1.Value = False
         Worksheets("Kleben").CheckBox2.Value = False
@@ -26,25 +23,22 @@ Sub kleben()
     Application.ScreenUpdating = True
 End Sub
 Sub KlebenAnzeige()
-    'Anzeige d. Klebearten auf der Eingabeseite
     Dim blVN, blBgankl, blKleben As Boolean
     Dim strVN, strBgankl, anzeige As String
-    
     blVN = Worksheets("Kleben").CheckBox1.Value
     blBgankl = Worksheets("Kleben").CheckBox2.Value
     blKleben = Worksheets("Eingabe").CheckBox9.Value
-    
     If blKleben = True Then
         If blVN = True Then
             strVN = "  V/N kleb., "
-            Else: strVN = "  "
+        Else: strVN = "  "
         End If
         If blBgankl = True Then
             strBgankl = "Bg. ankl."
-            Else: strBgankl = " "
+        Else: strBgankl = " "
         End If
         anzeige = strVN & strBgankl
-        Else: anzeige = " "
+    Else: anzeige = " "
     End If
     Worksheets("SKleben").Range("B3") = anzeige
 End Sub

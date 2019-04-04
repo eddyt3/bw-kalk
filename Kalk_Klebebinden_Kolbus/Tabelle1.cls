@@ -10,19 +10,44 @@ Attribute VB_Exposed = True
 '
 'Copyright by E.Dargel ed@dissenter.de
 '
+Sub Worksheet_Change(ByVal Target As Excel.Range)
+    Application.ScreenUpdating = False
+        Run Worksheets("SSchneiden").Schneidbogen
+        Run Worksheets("SSchneiden").SchneidenAnzeige
+        Run Worksheets("Zusammentragen").Zusammentragen
+        'Run Worksheets("Falzen").Falzen
+    Application.ScreenUpdating = True
+End Sub
 Sub ComboBox2_Change()
     'Bindeseite
     Run Worksheets("SKleben").kleben
 End Sub
 Sub ComboBox3_DropButtonClick()
-    '6/8seitiger Umschlag
-    If Worksheets("SEingabe").Range("L6") > 1 Then
-        MsgBox ("Bitte das Falzen der Umschl‰ge nicht vergessen.")
-    End If
+    ' Umschlag Art
+    ' 20181016
+    Dim intUS As Integer
+    intUS = Worksheets("SEingabe").Range("L7")
+    Select Case intUS
+        Case 1
+        '4-seitiger Umschlag
+            Worksheets("Binden").ComboBox3.ListIndex = 0 'ohne F‰lzel
+            Call Worksheets("Binden").Stoff
+        Case 2, 3
+        '6/8-seitiger Umschlag
+            MsgBox ("Bitte das Falzen der Umschl‰ge nicht vergessen.")
+            Worksheets("Binden").ComboBox3.ListIndex = 0 'ohne F‰lzel
+            Call Worksheets("Binden").Stoff
+        Case 4, 5
+        'Otabind immer mit F‰lzel
+        Worksheets("Binden").ComboBox3.ListIndex = 2
+        Call Worksheets("Binden").Stoff
+    End Select
     Run Worksheets("Falzen").umschlag
 End Sub
 Private Sub ComboBox4_Change()
     'Bogen A, Art
+    Run Worksheets("SSchneiden").Schneidbogen
+    Run Worksheets("SSchneiden").SchneidenAnzeige
     'Run Worksheets("Falzen").Falzen
 End Sub
 Sub ComboBox5_DropButtonClick()
@@ -31,23 +56,44 @@ Sub ComboBox5_DropButtonClick()
 End Sub
 Sub ComboBox9_Change()
     'Bogen B, Art
+    Run Worksheets("SSchneiden").Schneidbogen
+    Run Worksheets("SSchneiden").SchneidenAnzeige
     'Run Worksheets("Falzen").Falzen
     Run Worksheets("Falzen").umschlag
 End Sub
 Sub ComboBox10_Change()
     'Bogen C, Art
+    Run Worksheets("SSchneiden").Schneidbogen
+    Run Worksheets("SSchneiden").SchneidenAnzeige
     'Run Worksheets("Falzen").Falzen
     Run Worksheets("Falzen").umschlag
 End Sub
 Sub ComboBox11_Change()
     'Bogen D, Art
+    Run Worksheets("SSchneiden").Schneidbogen
+    Run Worksheets("SSchneiden").SchneidenAnzeige
     'Run Worksheets("Falzen").Falzen
     Run Worksheets("Falzen").umschlag
+End Sub
+Private Sub ComboBox12_Change()
+    'Tiefdrucklagen
 End Sub
 Private Sub ComboBox15_Change()
 'Auswahl Buchblockformat
 '20150421
     Run Worksheets("Eingabe").Produktformat
+End Sub
+Sub CommandButton1_Click()
+' Drucken
+'Auswahl neuen Standard Drucker
+    Application.Dialogs(xlDialogPrinterSetup).Show
+    'MsgBox "Alter Drucker: " & x & vbNewLine & "Neuer Drucker: " & Application.ActivePrinter
+    With ActiveSheet
+        .PageSetup.BlackAndWhite = True
+        .PrintOut Copies:=1, Collate:=True
+        '.PageSetup.BlackAndWhite = False
+        '.SelectedSheets.PrintOut Copies:=1, Collate:=False
+    End With
 End Sub
 Sub CommandButton2_Click()
     Application.ScreenUpdating = False
@@ -60,12 +106,6 @@ Sub CommandButton4_Click()
     Worksheets("Material").Activate
     Worksheets("Material").Range("C5").Select
 End Sub
-Sub Worksheet_Change(ByVal Target As Excel.Range)
-    Application.ScreenUpdating = False
-        Run Worksheets("Zusammentragen").Zusammentragen
-        'Run Worksheets("Falzen").Falzen
-    Application.ScreenUpdating = True
-End Sub
 Sub CheckBox1_Click()
 Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
@@ -73,14 +113,14 @@ Attribute CheckBox1_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         If Worksheets("Eingabe").CheckBox1.Value = True Then
             Worksheets("Eingabe").Range("A18") = "1"
             Worksheets("Schneiden").CheckBox2.Value = True
-            Worksheets("Schneiden").CheckBox2.Visible = True
+            'Worksheets("Schneiden").CheckBox2.Visible = True
             If Worksheets("Eingabe").CheckBox5.Value = True And Worksheets("Eingabe").ComboBox9.ListIndex = 0 Then 'Falzen und Inhalt aktiv?
                 Worksheets("Falzen").ComboBox2.ListIndex = 0 'Bg. B Falzen aktivieren
             End If
         Else
             Worksheets("Eingabe").Range("A18") = "0"
             Worksheets("Schneiden").CheckBox2.Value = False
-            Worksheets("Schneiden").CheckBox2.Visible = False
+            'Worksheets("Schneiden").CheckBox2.Visible = False
         End If
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
@@ -95,14 +135,14 @@ Attribute CheckBox2_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         If Worksheets("Eingabe").CheckBox2.Value = True Then
             Worksheets("Eingabe").Range("A27") = "1"
             Worksheets("Schneiden").CheckBox3.Value = True
-            Worksheets("Schneiden").CheckBox3.Visible = True
+            'Worksheets("Schneiden").CheckBox3.Visible = True
             If Worksheets("Eingabe").CheckBox5.Value = True And Worksheets("Eingabe").ComboBox10.ListIndex = 0 Then 'Falzen und Inhalt aktiv?
                 Worksheets("Falzen").ComboBox3.ListIndex = 0 'Bg. C Falzen aktivieren
             End If
         Else
             Worksheets("Eingabe").Range("A27") = "0"
             Worksheets("Schneiden").CheckBox3.Value = False
-            Worksheets("Schneiden").CheckBox3.Visible = False
+            'Worksheets("Schneiden").CheckBox3.Visible = False
         End If
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
@@ -117,11 +157,11 @@ Attribute CheckBox3_Click.VB_ProcData.VB_Invoke_Func = " \n14"
         If Worksheets("Eingabe").CheckBox3.Value = True Then
             Worksheets("Eingabe").Range("A36") = "1"
             Worksheets("Schneiden").CheckBox4.Value = True
-            Worksheets("Schneiden").CheckBox4.Visible = True
+            'Worksheets("Schneiden").CheckBox4.Visible = True
         Else
             Worksheets("Eingabe").Range("A36") = "0"
             Worksheets("Schneiden").CheckBox4.Value = False
-            Worksheets("Schneiden").CheckBox4.Visible = False
+            'Worksheets("Schneiden").CheckBox4.Visible = False
         End If
         Run Worksheets("SSchneiden").Schneidbogen
         Run Worksheets("SSchneiden").SchneidenAnzeige
@@ -135,24 +175,24 @@ Attribute CheckBox4_Click.VB_ProcData.VB_Invoke_Func = " \n14"
     Application.ScreenUpdating = False
         If Worksheets("Eingabe").CheckBox4.Value = True Then 'Schneiden
             Worksheets("SEingabe").Range("B30") = "1"
-            Worksheets("Schneiden").CheckBox1.Value = False 'Nur Umschlag soll standardm‰ﬂig geschnitte werden
-            Worksheets("Schneiden").CheckBox1.Visible = True
-            Worksheets("Schneiden").CheckBox2.Value = False
-            Worksheets("Schneiden").CheckBox2.Visible = True
-            Worksheets("Schneiden").CheckBox3.Value = False
-            Worksheets("Schneiden").CheckBox3.Visible = True
-            Worksheets("Schneiden").CheckBox4.Value = True 'Umschlag
-            Worksheets("Schneiden").CheckBox4.Visible = True
+'            Worksheets("Schneiden").CheckBox1.Value = False 'Nur Umschlag soll standardm‰ﬂig geschnitte werden
+'            Worksheets("Schneiden").CheckBox1.Visible = True
+'            Worksheets("Schneiden").CheckBox2.Value = False
+'            Worksheets("Schneiden").CheckBox2.Visible = True
+'            Worksheets("Schneiden").CheckBox3.Value = False
+'            Worksheets("Schneiden").CheckBox3.Visible = True
+'            Worksheets("Schneiden").CheckBox4.Value = True 'Umschlag
+'            Worksheets("Schneiden").CheckBox4.Visible = True
         Else
             Worksheets("SEingabe").Range("B30") = "0"
-            Worksheets("Schneiden").CheckBox1.Value = False
-            Worksheets("Schneiden").CheckBox1.Visible = False
-            Worksheets("Schneiden").CheckBox2.Value = False
-            Worksheets("Schneiden").CheckBox2.Visible = False
-            Worksheets("Schneiden").CheckBox3.Value = False
-            Worksheets("Schneiden").CheckBox3.Visible = False
-            Worksheets("Schneiden").CheckBox4.Value = False
-            Worksheets("Schneiden").CheckBox4.Visible = False
+'            Worksheets("Schneiden").CheckBox1.Value = False
+'            Worksheets("Schneiden").CheckBox1.Visible = False
+'            Worksheets("Schneiden").CheckBox2.Value = False
+'            Worksheets("Schneiden").CheckBox2.Visible = False
+'            Worksheets("Schneiden").CheckBox3.Value = False
+'            Worksheets("Schneiden").CheckBox3.Visible = False
+'            Worksheets("Schneiden").CheckBox4.Value = False
+'            Worksheets("Schneiden").CheckBox4.Visible = False
         End If
     Run Worksheets("SSchneiden").Schneidbogen
     Run Worksheets("SSchneiden").SchneidenAnzeige
@@ -267,7 +307,7 @@ Sub ComboBox14_Change()
     Case 3
         'Buchblock fadengeheftet
         ThisWorkbook.Worksheets("Kleben").Visible = True
-        Worksheets("Eingabe").CheckBox9.Value = True 'Kalk. Kleben aktiviert
+        Worksheets("Eingabe").CheckBox9.Value = False 'Kalk. Kleben deaktiviert
         Worksheets("SEingabe").Range("B33") = "1"
         Worksheets("Eingabe").CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
         Worksheets("SEingabe").Range("B35") = "1"
@@ -320,7 +360,7 @@ End Sub
 Sub Produktformat()
 'Auswahl Produktformat
 '20150221
-    If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
+    If Worksheets("SEingabe").Range("F27") = 8 Then 'Sonderformat
         Worksheets("Eingabe").TextBox1.Visible = True
         Worksheets("Eingabe").TextBox3.Visible = True
         With Worksheets("Eingabe").Range("E9")

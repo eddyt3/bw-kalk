@@ -18,37 +18,97 @@ Sub Standertwerte_Schneiden()
     Application.ScreenUpdating = True
 End Sub
 Sub Schneidbogen()
-    '
     ' Loeschen d. vorhandenen Eingaben wenn d. Bg. nicht ausgewaehlt wurde
-    '
-    '20130218
+    ' aktivieren wenn Nutzen
+    '20190227
     Application.ScreenUpdating = False
-    If Worksheets("SSchneiden").Range("B103") < 1 Then
+    If Worksheets("Eingabe").CheckBox4.Value = True Then 'Schneiden
+        'Bg. A
+        If Worksheets("SSchneiden").Range("B105") > 0 Then 'Bg. Anzahl
+            If Worksheets("SSchneiden").Range("B113") = 1 Then 'Umschlag immer schneiden
+                Worksheets("Schneiden").CheckBox1.Value = True
+                Worksheets("Schneiden").Range("D3").FormulaLocal = "=SVERWEIS(SSchneiden!B104;SSchneiden!I13:K30;3)"
+            Else
+                If Worksheets("SSchneiden").Range("B112") = 1 And Worksheets("SSchneiden").Range("B104") > 1 Then 'Schneiden wenn Inhalt ja und Nutzen > 1
+                    Worksheets("Schneiden").CheckBox1.Value = True
+                    Worksheets("Schneiden").Range("D3").FormulaLocal = "=SVERWEIS(SSchneiden!B104;SSchneiden!I13:K30;3)"
+                End If
+                'Schneiden wenn Inhalt und Nutzen = 1, manuelles deaktivieren der CheckBox möglich
+                If Worksheets("SSchneiden").Range("B112") = 1 And Worksheets("SSchneiden").Range("B104") = 1 Then
+                    Worksheets("Schneiden").Range("D3").FormulaLocal = "=SVERWEIS(SSchneiden!B104;SSchneiden!I13:K30;3)"
+                End If
+            End If
+        Else
+            Worksheets("Schneiden").Range("D3") = "0" 'Anzahl der Schnitte
+            Worksheets("Schneiden").CheckBox1.Value = False
+        End If
+        'Bg. B
+        If Worksheets("Eingabe").CheckBox1.Value = True Then 'Bg. ja/nein
+            If Worksheets("SSchneiden").Range("C113") = 1 Then 'Umschlag immer schneiden
+                Worksheets("Schneiden").CheckBox2.Value = True
+                Worksheets("Schneiden").Range("D10").FormulaLocal = "=SVERWEIS(SSchneiden!C104;SSchneiden!I13:K30;3)"
+            Else
+                If Worksheets("SSchneiden").Range("C112") = 1 And Worksheets("SSchneiden").Range("C104") > 1 Then 'Schneiden wenn Inhalt ja und Nutzen > 1
+                    Worksheets("Schneiden").CheckBox2.Value = True
+                    Worksheets("Schneiden").Range("D10").FormulaLocal = "=SVERWEIS(SSchneiden!C104;SSchneiden!I13:K30;3)"
+                End If
+                'Schneiden wenn Inhalt und Nutzen = 1, manuelles deaktivieren der CheckBox möglich
+                If Worksheets("SSchneiden").Range("C112") = 1 And Worksheets("SSchneiden").Range("C104") = 1 Then
+                    Worksheets("Schneiden").Range("D10").FormulaLocal = "=SVERWEIS(SSchneiden!C104;SSchneiden!I13:K30;3)"
+                End If
+            End If
+        Else
+            Worksheets("Schneiden").Range("D10") = "0" 'Anzahl der Schnitte
+            Worksheets("Schneiden").CheckBox2.Value = False
+        End If
+        'Bg. C
+        If Worksheets("Eingabe").CheckBox2.Value = True Then 'Bg. ja/nein
+            If Worksheets("SSchneiden").Range("D113") = 1 Then 'Umschlag immer schneiden
+                Worksheets("Schneiden").CheckBox3.Value = True
+                Worksheets("Schneiden").Range("D17").FormulaLocal = "=SVERWEIS(SSchneiden!D104;SSchneiden!I13:K30;3)"
+            Else
+                If Worksheets("SSchneiden").Range("D112") = 1 And Worksheets("SSchneiden").Range("D104") > 1 Then 'Schneiden wenn Inhalt ja und Nutzen >= 1
+                    Worksheets("Schneiden").CheckBox3.Value = True
+                    Worksheets("Schneiden").Range("D17").FormulaLocal = "=SVERWEIS(SSchneiden!D104;SSchneiden!I13:K30;3)"
+                End If
+                'Schneiden wenn Inhalt und Nutzen = 1, manuelles deaktivieren der CheckBox möglich
+                If Worksheets("SSchneiden").Range("D112") = 1 And Worksheets("SSchneiden").Range("D104") = 1 Then
+                    Worksheets("Schneiden").Range("D17").FormulaLocal = "=SVERWEIS(SSchneiden!D104;SSchneiden!I13:K30;3)"
+                End If
+            End If
+        Else
+            Worksheets("Schneiden").Range("D17") = "0" 'Anzahl der Schnitte
+            Worksheets("Schneiden").CheckBox3.Value = False
+        End If
+        'Bg. D
+        If Worksheets("Eingabe").CheckBox3.Value = True Then 'Bg. ja/nein
+            If Worksheets("SSchneiden").Range("E113") = 1 Then 'Umschlag immer schneiden
+                Worksheets("Schneiden").CheckBox4.Value = True
+                Worksheets("Schneiden").Range("D24").FormulaLocal = "=SVERWEIS(SSchneiden!E104;SSchneiden!I13:K30;3)"
+            Else
+                If Worksheets("SSchneiden").Range("E112") = 1 And Worksheets("SSchneiden").Range("E104") > 1 Then 'Schneiden wenn Inhalt und Nutzen > 1
+                    Worksheets("Schneiden").CheckBox4.Value = True
+                    Worksheets("Schneiden").Range("D24").FormulaLocal = "=SVERWEIS(SSchneiden!E104;SSchneiden!I13:K30;3)"
+                End If
+                'Schneiden wenn Inhalt und Nutzen = 1, manuelles deaktivieren der CheckBox möglich
+                If Worksheets("SSchneiden").Range("E112") = 1 And Worksheets("SSchneiden").Range("E104") = 1 Then
+                    Worksheets("Schneiden").Range("D24").FormulaLocal = "=SVERWEIS(SSchneiden!E104;SSchneiden!I13:K30;3)"
+                End If
+            End If
+        Else
+            Worksheets("Schneiden").Range("D24") = "0" 'Anzahl der Schnitte
+            Worksheets("Schneiden").CheckBox4.Value = False
+        End If
+    Else
         Worksheets("Schneiden").Range("D3") = "0"
-        Else
-        Worksheets("Schneiden").Range("D3").FormulaLocal = "=SVERWEIS(SSchneiden!B104;SSchneiden!I13:K30;3)"
-    End If
-    If Worksheets("SSchneiden").Range("C103") < 1 Then
+        Worksheets("Schneiden").CheckBox1.Value = False
         Worksheets("Schneiden").Range("D10") = "0"
-        Else
-        Worksheets("Schneiden").Range("D10").FormulaLocal = "=SVERWEIS(SSchneiden!C104;SSchneiden!I13:K30;3)"
-    End If
-    If Worksheets("SSchneiden").Range("D103") < 1 Then
+        Worksheets("Schneiden").CheckBox2.Value = False
         Worksheets("Schneiden").Range("D17") = "0"
-        Else
-        Worksheets("Schneiden").Range("D17").FormulaLocal = "=SVERWEIS(SSchneiden!D104;SSchneiden!I13:K30;3)"
-    End If
-    If Worksheets("SSchneiden").Range("E103") < 1 Then
+        Worksheets("Schneiden").CheckBox3.Value = False
         Worksheets("Schneiden").Range("D24") = "0"
-        Else
-        Worksheets("Schneiden").Range("D24").FormulaLocal = "=SVERWEIS(SSchneiden!E104;SSchneiden!I13:K30;3)"
+        Worksheets("Schneiden").CheckBox4.Value = False
     End If
-    If Worksheets("SSchneiden").Range("F111") < 1 Then
-        Worksheets("Schneiden").Range("D3") = "0"
-        Worksheets("Schneiden").Range("D10") = "0"
-        Worksheets("Schneiden").Range("D17") = "0"
-        Worksheets("Schneiden").Range("D24") = "0"
-     End If
     Application.ScreenUpdating = True
 End Sub
 Sub SchneidenAnzeige()
@@ -87,5 +147,4 @@ Sub SchneidenAnzeige()
     Worksheets("SSchneiden").Range("D9") = anzeige
     Application.ScreenUpdating = True
 End Sub
-
 

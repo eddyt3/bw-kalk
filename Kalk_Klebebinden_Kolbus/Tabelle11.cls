@@ -33,9 +33,9 @@ End Sub
 Private Sub CommandButton1_Click()
     'Reset V auf Standard
     '20140325
-    Worksheets("Binden").Range("D8").FormulaLocal = "=Basis_Kolbus!H18"
-    Worksheets("Binden").Range("F8").FormulaLocal = "=Basis_Kolbus!I18"
-    Worksheets("Binden").Range("G8").FormulaLocal = "=Basis_Kolbus!J18"
+    Worksheets("Binden").Range("D8").FormulaLocal = "=Basis_Kolbus!H20"
+    Worksheets("Binden").Range("F8").FormulaLocal = "=Basis_Kolbus!I20"
+    Worksheets("Binden").Range("G8").FormulaLocal = "=Basis_Kolbus!J20"
 End Sub
 Sub Leimart()
 ' Auswahl Leimart
@@ -131,7 +131,7 @@ Sub Produktart()
         Worksheets("Binden").ComboBox2.LinkedCell = "Material!B25"
         Worksheets("Binden").ComboBox3.ListFillRange = "Material!D52:D55" 'Rückenstoff
         Worksheets("Binden").ComboBox3.LinkedCell = "Material!B51"
-        Worksheets("Binden").ComboBox3.ListIndex = 3 'Rücken mit Krepp
+        Worksheets("Binden").ComboBox3.ListIndex = 0 'Ohne, US direkt an Rücken
         Worksheets("Binden").ComboBox4.ListFillRange = "Material!D38:D43" 'Reiniger
         Worksheets("Binden").ComboBox4.LinkedCell = "Material!B37"
         Worksheets("Binden").ComboBox4.ListIndex = 5 'kein Reiniger

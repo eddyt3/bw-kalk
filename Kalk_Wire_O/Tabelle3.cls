@@ -95,9 +95,9 @@ Sub Formatfehler()
     'Prüfung der Min./Max. Formate der Maschinen und Ausgabe einer Fehlermeldung
     Dim Z, F, Fb, Fh As Integer
     Z = Worksheets("SZusammentragen").Range("B2") 'Zusammentragen ja/nein
-    F = Worksheets("SZusammentragen").Range("P11") 'Fehlerwert
-    Fb = Worksheets("SZusammentragen").Range("N11") 'Fehlerwert Breite
-    Fh = Worksheets("SZusammentragen").Range("O11") 'Fehlerwert Höhe
+    F = Worksheets("SZusammentragen").Range("Q11") 'Fehlerwert
+    Fb = Worksheets("SZusammentragen").Range("O11") 'Fehlerwert Breite
+    Fh = Worksheets("SZusammentragen").Range("P11") 'Fehlerwert Höhe
     Worksheets("Eingabe").Range("J60") = ""
     Worksheets("Eingabe").Cells(60, 10).Interior.ColorIndex = xlNone
     If Z > 0 Then

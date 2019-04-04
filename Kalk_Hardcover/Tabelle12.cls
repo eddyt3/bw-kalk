@@ -7,9 +7,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
-'Standardwerte
-'Cello Kunde geliefert
-
 Private Sub Worksheet_Activate()
     Run Worksheets("SBuchdecke").Beschriftung
     Run Worksheets("SBuchdecke").HardcoverVisual
@@ -25,13 +22,11 @@ Private Sub ComboBox1_Change()
     Run ThisWorkbook.Sheets("Buchdecke").Cello_alternativ
 End Sub
 Private Sub CommandButton1_Click()
-    'Materialseite einblenden
     Worksheets("Material").Visible = xlSheetVisible
     Worksheets("Material").Activate
     Worksheets("Material").Range("H217").Select
 End Sub
 Sub Cello_alternativ()
-    ' Auswahl Cello Alternativkosten
     If Worksheets("Buchdecke").ComboBox1.ListIndex = 4 Then
         Worksheets("Buchdecke").Rows("13:13").Hidden = False
         Worksheets("Buchdecke").TextBox21.Visible = True

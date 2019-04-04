@@ -163,6 +163,18 @@ Private Sub CommandButton1_Click()
 'Nutzen Folie
     Call Bogenformat_Pappe
 End Sub
+Sub CommandButton2_Click()
+' Drucken
+'Auswahl neuen Standard Drucker
+    Application.Dialogs(xlDialogPrinterSetup).Show
+    'MsgBox "Alter Drucker: " & x & vbNewLine & "Neuer Drucker: " & Application.ActivePrinter
+    With ActiveSheet
+        .PageSetup.BlackAndWhite = True
+        .PrintOut Copies:=1, Collate:=True
+        '.PageSetup.BlackAndWhite = False
+        '.SelectedSheets.PrintOut Copies:=1, Collate:=False
+    End With
+End Sub
 Private Sub CommandButton3_Click()
 'Speichern
     Call Speichern
@@ -202,7 +214,7 @@ End Sub
 Sub Produktformat()
 'Auswahl Produktformat
 '20150221
-    If Worksheets("SEingabe").Range("F27") = 7 Then 'Sonderformat
+    If Worksheets("SEingabe").Range("F27") = 8 Then 'Sonderformat
         Worksheets("Eingabe").TextBox1.Visible = True
         Worksheets("Eingabe").TextBox2.Visible = True
         With Worksheets("Eingabe").Range("E9")
