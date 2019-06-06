@@ -43,7 +43,7 @@ End Sub
 Sub Inline()
     'Inline-Maschinenbedingungen P1766 PB796 grau + ZTM TB216 (1MFhr / 1HK)
     'Inline-Maschinenbedingungen P1766 PB796 grau + ZTM TB216 + Einschweißtunnel(1MFhr / 1HK)
-    '20190218
+    '20190522
     Dim intMaschine, intVorsammeln, intBindeB, intBindeL As Integer
     Dim sngBlock As Single
     intMaschine = Worksheets("SBinden").Range("X23").Value 'Inlinemaschine
@@ -91,18 +91,24 @@ Sub Inline()
             Worksheets("SBinden").Range("F10").Value = 450
         End If
     End If
-    'V geteilt gestanzt
+    'V + HK, geteilt gestanzt nur Inline
     If sngBlock > 0.32 And (Worksheets("SBinden").Range("B4").Value = 5 Or Worksheets("SBinden").Range("B4").Value = 6) Then
         Answer = MsgBox("Hinweis: Produktstärke > 3,2 mm, ausgewählte Maschine: Inline (P1766)." & vbCrLf & vbCrLf & "Für die Inline muss geteilt gestanzt werden." _
         & vbCrLf & "(Die Geschwindigkeit wurde angepasst; 1 zusätzl. HK wurde berücksichtigt.)", vbOKOnly, "Inline.")
         Worksheets("Binden").Range("D8").Value = 1
-    Else: Worksheets("Binden").Range("D8").Value = 0
+    Else
+        If Worksheets("SBinden").Range("B4").Value <> 5 Or Worksheets("SBinden").Range("B4").Value <> 6 Then
+            Worksheets("Binden").Range("D8").Value = 0
+        End If
     End If
     'Inlinefertigung mit Schweißtunnel
     If Worksheets("SBinden").Range("B4").Value = 6 Then
         Worksheets("Verpacken").ComboBox7.ListIndex = 3
         'V aller Maschinen anpassen
         'in progress
+    End If
+    If Worksheets("SBinden").Range("B4").Value = 5 Then
+        Worksheets("Verpacken").ComboBox7.ListIndex = 0
     End If
     Application.ScreenUpdating = True
 End Sub
