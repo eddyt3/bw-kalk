@@ -68,45 +68,46 @@ Sub ComboBox13_Change()
     End With
 End Sub
 Sub ComboBox14_Change()
+    '20190426
     'Produktart
     Dim intArt As Integer
     intArt = ThisWorkbook.Worksheets("SBinden").Range("B34").Value
     Select Case intArt
-    Case 1
+    Case 1 'Broschüre
         ThisWorkbook.Worksheets("Kleben").Visible = False
         Worksheets("Eingabe").CheckBox9.Value = False
         Worksheets("SEingabe").Range("B32") = "0"
         Worksheets("Eingabe").CheckBox10.Value = False
         Worksheets("SEingabe").Range("B34") = "0"
         Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "1"
+        Worksheets("SZusammentragen").Range("B43") = "1"
         Worksheets("SZusammentragen").Range("C11") = "4"
-    Case 2
+    Case 2 'Hardcover klebegebunden
         ThisWorkbook.Worksheets("Kleben").Visible = True
         Worksheets("Eingabe").CheckBox9.Value = True
         Worksheets("SEingabe").Range("B32") = "1"
         Worksheets("Eingabe").CheckBox10.Value = False
         Worksheets("SEingabe").Range("B34") = "0"
         Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "1"
+        Worksheets("SZusammentragen").Range("B43") = "1"
         Worksheets("SZusammentragen").Range("C11") = "4"
-    Case 3
+    Case 3 'Hardcover fadengeheftet
         ThisWorkbook.Worksheets("Kleben").Visible = True
         Worksheets("Eingabe").CheckBox9.Value = True
         Worksheets("SEingabe").Range("B32") = "1"
         Worksheets("Eingabe").CheckBox10.Value = True
         Worksheets("SEingabe").Range("B34") = "1"
         Worksheets("Fadenheften").Visible = True
-        Worksheets("SZusammentragen").Range("B42") = "2"
-        Worksheets("SZusammentragen").Range("C11") = "2"
-    Case 4
+        Worksheets("SZusammentragen").Range("B43") = "2"
+        Worksheets("SZusammentragen").Range("C11") = "5"
+    Case 4 'Ableimen
         ThisWorkbook.Worksheets("Kleben").Visible = False
         Worksheets("Eingabe").CheckBox9.Value = False
         Worksheets("SEingabe").Range("B32") = "0"
         Worksheets("Eingabe").CheckBox10.Value = False
         Worksheets("SEingabe").Range("B34") = "0"
         Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "1"
+        Worksheets("SZusammentragen").Range("B43") = "1"
         Worksheets("SZusammentragen").Range("C11") = "4"
     End Select
     Worksheets("SZusammentragen").Calculate
@@ -293,9 +294,11 @@ Sub CheckBox10_Click()
     If Worksheets("Eingabe").CheckBox10.Value = True Then
         Worksheets("SEingabe").Range("B34") = "1"
         Worksheets("Fadenheften").Visible = True
+        Worksheets("Zusammentragen").ComboBox2.ListIndex = 4
     Else
         Worksheets("SEingabe").Range("B34") = "0"
         Worksheets("Fadenheften").Visible = False
+        Worksheets("Zusammentragen").ComboBox2.ListIndex = 3
     End If
     Application.ScreenUpdating = True
 End Sub
