@@ -231,6 +231,34 @@ Public Sub Komma2Punkt()
     ActiveSheet.Cells(FRow, FColumn).Select
     MsgBox "Fertig Master!"
 End Sub
+Public Sub Prozent_Zahl2Prozent()
+'Dezimalzahl zu Prozentzahl
+    Dim rngC As Range
+    Dim strWert As String
+    Dim a, b, FRow, LRow, FColumn, LColumn As Integer
+    Dim Dummy As Double
+    FRow = Range(Selection.Address).Row
+    LRow = Range(Selection.Address).Row + Selection.Rows.count - 1
+    FColumn = Range(Selection.Address).Column
+    LColumn = Range(Selection.Address).Column + Selection.Columns.count - 1
+    For a = FRow To LRow
+        For b = FColumn To LColumn
+            'ActiveSheet.Cells(FRow, FColumn).NumberFormat = "@" 'Txt Format für Replace sicherstellen
+            'ActiveSheet.Cells(FRow, FColumn).Replace What:=".", Replacement:=",", lookat:=xlPart
+            strWert = ActiveSheet.Cells(FRow, FColumn).Value
+            If strWert <> "" Then
+            Dummy = CDbl(strWert / 100)
+                ActiveSheet.Cells(FRow, FColumn).Value = Dummy
+                ActiveSheet.Cells(FRow, FColumn).NumberFormat = "#%"
+            End If
+            FColumn = FColumn + 1
+        Next
+        FRow = FRow + 1
+        FColumn = Range(Selection.Address).Column
+    Next
+    ActiveSheet.Cells(FRow, FColumn).Select
+    MsgBox "Fertig Master!"
+End Sub
 Public Sub Zellen_mit_0_leeren()
     Dim rngC As Range
     Dim strWert As String
