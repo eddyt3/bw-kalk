@@ -18,35 +18,36 @@ Sub Standardwerte_Schneiden()
     Application.ScreenUpdating = True
 End Sub
 Sub Schneidbogen()
+    ' Nur f. Wire-O
     ' Loeschen d. vorhandenen Eingaben wenn d. Bg. nicht ausgewaehlt wurde
-    '20130218
+    '20180522
     Application.ScreenUpdating = False
     If Worksheets("Steuerung").Range("D49") = 2 Or Worksheets("Steuerung").Range("D49") = 4 Then
         Worksheets("Schneiden").Range("D3") = "0"
         Else
-        Worksheets("Schneiden").Range("D3").FormulaLocal = "=SVERWEIS(SSchneiden!B104;SSchneiden!I13:K30;3)"
+        Worksheets("Schneiden").Range("D3").FormulaLocal = "=SVERWEIS(SSchneiden!B104;SSchneiden!I13:K48;3)"
     End If
     If Worksheets("Steuerung").Range("E49") = 2 Or Worksheets("Steuerung").Range("E49") = 4 Then
         Worksheets("Schneiden").Range("D10") = "0"
         Else
-        Worksheets("Schneiden").Range("D10").FormulaLocal = "=SVERWEIS(SSchneiden!C104;SSchneiden!I13:K30;3)"
+        Worksheets("Schneiden").Range("D10").FormulaLocal = "=SVERWEIS(SSchneiden!C104;SSchneiden!I13:K48;3)"
     End If
     If Worksheets("Steuerung").Range("F49") = 2 Or Worksheets("Steuerung").Range("F49") = 4 Then
         Worksheets("Schneiden").Range("D17") = "0"
         Else
-        Worksheets("Schneiden").Range("D17").FormulaLocal = "=SVERWEIS(SSchneiden!D104;SSchneiden!I13:K30;3)"
+        Worksheets("Schneiden").Range("D17").FormulaLocal = "=SVERWEIS(SSchneiden!D104;SSchneiden!I13:K48;3)"
     End If
     If Worksheets("Steuerung").Range("G49") = 2 Or Worksheets("Steuerung").Range("G49") = 4 Then
         Worksheets("Schneiden").Range("D24") = "0"
         Else
-        Worksheets("Schneiden").Range("D24").FormulaLocal = "=SVERWEIS(SSchneiden!E104;SSchneiden!I13:K30;3)"
+        Worksheets("Schneiden").Range("D24").FormulaLocal = "=SVERWEIS(SSchneiden!E104;SSchneiden!I13:K48;3)"
     End If
     If Worksheets("Steuerung").Range("H49") = 2 Or Worksheets("Steuerung").Range("H49") = 4 Then
         Worksheets("Schneiden").Range("D31") = "0"
         Else
-        Worksheets("Schneiden").Range("D31").FormulaLocal = "=SVERWEIS(SSchneiden!F104;SSchneiden!I13:K30;3)"
+        Worksheets("Schneiden").Range("D31").FormulaLocal = "=SVERWEIS(SSchneiden!F104;SSchneiden!I13:K48;3)"
     End If
-    If Worksheets("Eingabe").CheckBox1 = False Then
+    If Worksheets("SSchneiden").Range("F111").Value < 1 Then
         Worksheets("Schneiden").Range("D3") = "0"
         Worksheets("Schneiden").Range("D10") = "0"
         Worksheets("Schneiden").Range("D17") = "0"
