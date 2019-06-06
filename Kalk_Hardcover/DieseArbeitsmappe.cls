@@ -263,7 +263,7 @@ With Worksheets("Zusammentragen").CheckBox2   '78
    .Height = 17.25: .Width = 72.75: .Top = 348: .Left = 123.75: .FontSize = fntSize
 End With
 With Worksheets("Fadenheften").TextBox1   '79
-   .Height = 129.75: .Width = 590.25: .Top = 582: .Left = 3.75: .FontSize = fntSize
+   .Height = 129.75: .Width = 590.25: .Top = 596.25: .Left = 3.75: .FontSize = fntSize
 End With
 With Worksheets("Fadenheften").CheckBox1   '80
    .Height = 19.5: .Width = 60.75: .Top = 141: .Left = 409.5: .FontSize = fntSize
