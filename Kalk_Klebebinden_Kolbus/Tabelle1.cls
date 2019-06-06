@@ -256,9 +256,11 @@ Sub CheckBox10_Click()
         If Worksheets("Eingabe").CheckBox10.Value = True Then
             Worksheets("SEingabe").Range("B35") = "1"
             Worksheets("Fadenheften").Visible = True
+            Worksheets("Zusammentragen").ComboBox2.ListIndex = 4
         Else
             Worksheets("SEingabe").Range("B35") = "0"
             Worksheets("Fadenheften").Visible = False
+            Worksheets("Zusammentragen").ComboBox2.ListIndex = 3
         End If
     Application.ScreenUpdating = True
 End Sub
@@ -292,7 +294,7 @@ Sub ComboBox14_Change()
         Worksheets("Eingabe").CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("SEingabe").Range("B35") = "0"
         Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
+        Worksheets("SZusammentragen").Range("B43") = "1" 'Kolbus ZU autom. Inline
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     Case 2
         'Buchblock
@@ -302,7 +304,7 @@ Sub ComboBox14_Change()
         Worksheets("Eingabe").CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("SEingabe").Range("B35") = "0"
         Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
+        Worksheets("SZusammentragen").Range("B43") = "1" 'Kolbus ZU autom. Inline
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     Case 3
         'Buchblock fadengeheftet
@@ -312,8 +314,8 @@ Sub ComboBox14_Change()
         Worksheets("Eingabe").CheckBox10.Value = True 'Kalk. Fadenheften aktiviert
         Worksheets("SEingabe").Range("B35") = "1"
         Worksheets("Fadenheften").Visible = True
-        Worksheets("SZusammentragen").Range("B42") = "2" 'Kolbus ZU handanlage
-        Worksheets("SZusammentragen").Range("C11") = "2" 'Zusammentragen auf ZTM370
+        Worksheets("SZusammentragen").Range("B43") = "2" 'Kolbus ZU handanlage
+        Worksheets("SZusammentragen").Range("C11") = "5" 'Zusammentragen auf Astronico
     Case 4
         'Ableimen
         ThisWorkbook.Worksheets("Kleben").Visible = False
@@ -322,7 +324,7 @@ Sub ComboBox14_Change()
         Worksheets("Eingabe").CheckBox10.Value = False 'Kalk. Fadenheften deaktiviert
         Worksheets("SEingabe").Range("B35") = "0"
         ThisWorkbook.Worksheets("Fadenheften").Visible = False
-        Worksheets("SZusammentragen").Range("B42") = "1" 'Kolbus ZU autom. Inline
+        Worksheets("SZusammentragen").Range("B43") = "1" 'Kolbus ZU autom. Inline
         Worksheets("SZusammentragen").Range("C11") = "4" 'Kolbus ZU autom. Inline
     End Select
     Worksheets("SZusammentragen").Calculate
