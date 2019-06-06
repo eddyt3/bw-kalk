@@ -17,12 +17,18 @@ Private Sub Worksheet_Activate()
     Run Worksheets("Zusammentragen").Zusammentragen
 End Sub
 Sub Zusammentragen()
+    'Nur für Hardcover gültig!
     'Ermittlung der Stationen und der Anzahl Vorsammeln
-    '20150701 modifiziert
+    '20190604 modifiziert
     Dim a, intM, BgAnzahl, AnzahlBgZus, AnzahlBgVors, AnzahlVors, intMa, intStatMa, intBg As Integer
     intStatMa = Worksheets("SZusammentragen").Range("E11") 'max Stationen
-    intBg = Worksheets("SZusammentragen").Range("B8") 'Bogensumme
+    intFadenh = Worksheets("SEingabe").Range("B34") 'Fadenheften ja/nein
     intMa = Worksheets("SZusammentragen").Range("C11") 'Maschine
+    If intFadenh = 1 Then
+        intBg = Worksheets("SZusammentragen").Range("D8") 'Bogensumme > 4 Seiter
+    Else
+        intBg = Worksheets("SZusammentragen").Range("B8") 'alle Inhaltsbg.
+    End If
     If intBg > intStatMa Then
         a = 1
         Do
@@ -52,8 +58,8 @@ Sub Zusammentragen()
     If intMa = 1 Then
         Dim intBreite As Integer
         Dim intWechsel As Boolean
-        intBreite = Worksheets("SZusammentragen").Range("B37")
-        intWechsel = Worksheets("SZusammentragen").Range("B38")
+        intBreite = Worksheets("SZusammentragen").Range("B38")
+        intWechsel = Worksheets("SZusammentragen").Range("B39")
         'ab 35 cm Breite immer Formatwechsel berechnen
         If intWechsel Then
             Worksheets("Zusammentragen").CheckBox1.Visible = True
@@ -67,11 +73,19 @@ Sub Zusammentragen()
         Worksheets("Zusammentragen").CheckBox1.Value = False
     End If
     'Prüfung händisch Zusammenlegen (maschinenabhängig)
-    If Worksheets("SZusammentragen").Range("O16") = 1 And Worksheets("Zusammentragen").CheckBox2.Value = False Then
+    If Worksheets("SZusammentragen").Range("O17") = 1 And Worksheets("Zusammentragen").CheckBox2.Value = False Then
         Worksheets("Zusammentragen").CheckBox2.Value = True
     End If
         If intAnzahlVors = 0 Then
         Worksheets("Zusammentragen").CheckBox2.Value = False
+        Worksheets("Zusammentragen").Range("D21") = "" 'HK
+    End If
+    'HK Vorsammeln Uniplex
+    If intMa = 5 And intAnzahlVors > 0 Then
+        If Worksheets("Zusammentragen").Range("D21") = "" Then 'nur eintragen wenn kein anderer Wert drin stand
+            Worksheets("Zusammentragen").Range("D21") = 1
+        'Else: Worksheets("Zusammentragen").Range("D21") = ""
+        End If
     End If
     Run Worksheets("Zusammentragen").GeschwindigkeitZus
     Application.ScreenUpdating = True
