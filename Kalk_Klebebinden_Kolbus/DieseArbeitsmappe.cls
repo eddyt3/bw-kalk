@@ -236,7 +236,7 @@ With Worksheets("Kleben").CommandButton1   '67
    .Height = 35.25: .Width = 83.25: .Top = 31.5: .Left = 650.25: .FontSize = fntSize
 End With
 With Worksheets("Fadenheften").TextBox1   '68
-   .Height = 129.75: .Width = 590.25: .Top = 585: .Left = 3.75: .FontSize = fntSize
+   .Height = 129.75: .Width = 597.75: .Top = 585: .Left = 3.75: .FontSize = fntSize
 End With
 With Worksheets("Fadenheften").CheckBox1   '69
    .Height = 19.5: .Width = 60.75: .Top = 144: .Left = 408.75: .FontSize = fntSize
