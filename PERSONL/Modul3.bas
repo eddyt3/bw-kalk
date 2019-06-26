@@ -68,3 +68,9 @@ Sub WertUndPosAusArrayBestimmen()
         End If
     Next
 End Sub
+Sub Zellfarbe_activeCell()
+'Farbcode markierte Zelle ermitteln
+    Dim Farbe As Integer
+    Farbe = ActiveCell.Interior.ColorIndex
+    MsgBox "Zellfarbe: " & Farbe
+End Sub

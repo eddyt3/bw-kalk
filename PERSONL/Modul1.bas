@@ -231,7 +231,7 @@ Public Sub Komma2Punkt()
     ActiveSheet.Cells(FRow, FColumn).Select
     MsgBox "Fertig Master!"
 End Sub
-Public Sub Prozent_Zahl2Prozent()
+Public Sub Change_Prozent_Zahl2Prozent()
 'Dezimalzahl zu Prozentzahl
     Dim rngC As Range
     Dim strWert As String
@@ -251,6 +251,46 @@ Public Sub Prozent_Zahl2Prozent()
                 ActiveSheet.Cells(FRow, FColumn).Value = Dummy
                 ActiveSheet.Cells(FRow, FColumn).NumberFormat = "#%"
             End If
+            FColumn = FColumn + 1
+        Next
+        FRow = FRow + 1
+        FColumn = Range(Selection.Address).Column
+    Next
+    ActiveSheet.Cells(FRow, FColumn).Select
+    MsgBox "Fertig Master!"
+End Sub
+Public Sub Change_TextZahl2Zahl()
+'Textzahl zu Zahl (es darf kein Text enthalten sein!)
+'CBool(Ausdruck) RÜckgabetyp=Boolean
+'CByte(Ausdruck) RÜckgabetyp=Byte
+'CCur(Ausdruck) RÜckgabetyp=Currency
+'CDate(Ausdruck) RÜckgabetyp=Date
+'CDbl(Ausdruck) RÜckgabetyp=Double
+'CDec(Ausdruck) RÜckgabetyp=Decimal
+'CInt(Ausdruck) RÜckgabetyp=Integer
+'CLng(Ausdruck) RÜckgabetyp=Long
+'CSng(Ausdruck) RÜckgabetyp=Single
+'CVar(Ausdruck) RÜckgabetyp=Variant
+'CStr(Ausdruck) RÜckgabetyp=String
+    Dim rngC As Range
+    Dim strWert As String
+    Dim a, b, FRow, LRow, FColumn, LColumn As Integer
+    Dim Dummy As Double
+    FRow = Range(Selection.Address).Row
+    LRow = Range(Selection.Address).Row + Selection.Rows.count - 1
+    FColumn = Range(Selection.Address).Column
+    LColumn = Range(Selection.Address).Column + Selection.Columns.count - 1
+    For a = FRow To LRow
+        For b = FColumn To LColumn
+            With ActiveSheet
+                .Cells(FRow, FColumn) = CDbl(Cells(FRow, FColumn))
+                .Cells(FRow, FColumn).NumberFormat = "General"
+                .Cells(FRow, FColumn).HorizontalAlignment = xlRight
+            End With
+            If ActiveSheet.Cells(FRow, FColumn).Value = 0 Then
+                ActiveSheet.Cells(FRow, FColumn).Value = ""
+            End If
+            
             FColumn = FColumn + 1
         Next
         FRow = FRow + 1
