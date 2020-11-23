@@ -163,18 +163,18 @@ Sub umschlag()
     Dim intUmschlag As Integer
     intUmschlag = ThisWorkbook.Worksheets("Eingabe").ComboBox3.ListIndex
     Select Case intUmschlag
-    Case 0, 3, 4
+    Case 0, 3
         '4 seitiger Umschlag
-        If Worksheets("SEingabe").Range("D3") = 1 Then 'Bg. A Inhalt
-            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 0
+        If Worksheets("SEingabe").Range("D3") = 1 And ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex <> 6 Then 'Bg. A = Inhalt und Auswahl auf "Falzen"
+            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 0 'Bg. A auf "Falzen" 1. Maschinenauswahl
         End If
-        If Worksheets("SEingabe").Range("D4") = 1 Then 'Bg. A Umschlag nicht Falzen
+        If Worksheets("SEingabe").Range("D4") = 1 Then 'Bg. A = Umschlag, nicht Falzen
             ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 6
         End If
         If Worksheets("SEingabe").Range("D5") = 0 Then 'Bg. A nicht Falzen
             ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 6
         End If
-        If Worksheets("Eingabe").CheckBox1.Value = True Then 'Bg. B ja/nein
+        If Worksheets("Eingabe").CheckBox1.Value = True And ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex <> 6 Then 'Bg. B ja/nein und Auswahl auf "Falzen"
             If Worksheets("SEingabe").Range("e3") = 1 Then
                 ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 0
             End If
@@ -184,9 +184,9 @@ Sub umschlag()
             If Worksheets("SEingabe").Range("e5") = 0 Then
                 ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6
             End If
-        Else: ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6
+        Else: ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6 'Bg. B nicht Falzen
         End If
-        If Worksheets("Eingabe").CheckBox2.Value = True Then 'Bg. C ja/nein
+        If Worksheets("Eingabe").CheckBox2.Value = True And ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex <> 6 Then 'Bg. C ja/nein und Auswahl auf "Falzen"
             If Worksheets("SEingabe").Range("f3") = 1 Then
                 ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 0
             End If
@@ -210,18 +210,18 @@ Sub umschlag()
             End If
         Else: ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 6
         End If
-    Case 1, 2
-        '6/8 seitiger Umschlag verkürzt
-        If Worksheets("SEingabe").Range("D3") = 1 Then 'Bg. A Inhalt
-            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 0
+    Case 1, 2, 4
+        '6/8 seitiger Umschlag verkürzt,6/8 seitiger Umschlag bündig, Otabind bündig
+        If Worksheets("SEingabe").Range("D3") = 1 And ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex <> 6 Then 'Bg. A = Inhalt und Auswahl auf "Falzen"
+            ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 0 'Bg. A auf "Falzen" 1. Maschinenauswahl
         End If
-        If Worksheets("SEingabe").Range("D4") = 1 Then 'Bg. A Umschlag Falzen Fidia
+        If Worksheets("SEingabe").Range("D4") = 1 Then 'Bg. A = Umschlag > Falzen Fidia
             ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 4
         End If
         If Worksheets("SEingabe").Range("D5") = 0 Then 'Bg. A nicht Falzen
             ThisWorkbook.Worksheets("Falzen").ComboBox1.ListIndex = 6
         End If
-        If Worksheets("Eingabe").CheckBox1.Value = True Then 'Bg. ja/nein
+        If Worksheets("Eingabe").CheckBox1.Value = True And ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex <> 6 Then 'Bg. B = Inhalt und Auswahl auf "Falzen"
             If Worksheets("SEingabe").Range("e3") = 1 Then
                 ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 0
             End If
@@ -233,7 +233,7 @@ Sub umschlag()
             End If
         Else: ThisWorkbook.Worksheets("Falzen").ComboBox2.ListIndex = 6
         End If
-        If Worksheets("Eingabe").CheckBox2.Value = True Then
+        If Worksheets("Eingabe").CheckBox2.Value = True And ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex <> 6 Then 'Bg. C = Inhalt und Auswahl auf "Falzen"
             If Worksheets("SEingabe").Range("f3") = 1 Then
                 ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 0
             End If
@@ -245,7 +245,7 @@ Sub umschlag()
             End If
         Else: ThisWorkbook.Worksheets("Falzen").ComboBox3.ListIndex = 6
         End If
-        If Worksheets("Eingabe").CheckBox3.Value = True Then
+        If Worksheets("Eingabe").CheckBox3.Value = True Then 'Bg. D ja/nein
             If Worksheets("SEingabe").Range("g3") = 1 Then
                 ThisWorkbook.Worksheets("Falzen").ComboBox4.ListIndex = 0
             End If
